@@ -43,7 +43,7 @@ public class SearchResult extends AppCompatActivity implements OnMapReadyCallbac
     RecyclerView recycler_view;
     ArrayList<SearchData> ListARRY;
     JSONObject SearchKeys;
-
+    LatLngBounds PresetLatBounds;
 AppLoader appLoader;
 
     @Override
@@ -203,7 +203,18 @@ AppLoader appLoader;
 
     @Override
     public void onCameraMove() {
-        Loger.MSG("@@ ViewPost"," "+Map.getProjection().getVisibleRegion().latLngBounds.getCenter().toString());
+        Loger.MSG("@@ ViewPost"," "+Map.getProjection().getVisibleRegion().latLngBounds.southwest.latitude);
+
+        if(Map.getCameraPosition().zoom>5 && Map.getProjection().getVisibleRegion().latLngBounds.northeast.latitude<
+                PresetLatBounds.northeast.latitude && Map.getProjection().getVisibleRegion().latLngBounds.southwest.latitude> PresetLatBounds.southwest.latitude
+                )
+        {
+            Map.getUiSettings().setScrollGesturesEnabled(true);
+        }else {
+//            Map.getUiSettings().setScrollGesturesEnabled(false);
+            Map.moveCamera(CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(),Map.getCameraPosition().zoom) );
+        }
+
 
     }
 
@@ -225,14 +236,18 @@ AppLoader appLoader;
         Map=googleMap;
         Map.setOnCameraIdleListener(this);
         Map.setOnCameraMoveListener(this);
+        Map.setMinZoomPreference((float) 4.99);
+        Map.getUiSettings().setRotateGesturesEnabled(false);
+        Map.getUiSettings().setScrollGesturesEnabled(false);
+
 
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(new LatLng(25.341635885457396,129.0904974192381));
         builder.include(new LatLng(46.958814679811375,146.3319904357195));
-        LatLngBounds camrearset=builder.build();
-        Map.setLatLngBoundsForCameraTarget(camrearset);
-        Map.animateCamera(CameraUpdateFactory.newLatLngZoom(camrearset.getCenter(),14) );
+         PresetLatBounds=builder.build();
+        Map.setLatLngBoundsForCameraTarget(PresetLatBounds);
+        Map.animateCamera(CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(),5) );
 //        int padding = 100; // offset from edges of the map in pixels
 //        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(camrearset, padding);
 //        Map.animateCamera(cu);

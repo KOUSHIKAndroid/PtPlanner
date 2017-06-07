@@ -26,8 +26,8 @@ public class AppLoader {
                 (Context.LAYOUT_INFLATER_SERVICE);
         AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
         View view=inflater.inflate(R.layout.loader_view,null);
-//        ImageView Loader=(ImageView)view.findViewById(R.id.IMGLoader);
-//        Glide.with(mContext).load(R.drawable.giphy).into(Loader);
+        ImageView Loader=(ImageView)view.findViewById(R.id.IMGLoader);
+        Glide.with(mContext).load(R.drawable.cat_loader).into(Loader);
         builder.setView(view);
         Dailog=builder.create();
         Dailog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
