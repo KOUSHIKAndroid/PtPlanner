@@ -118,6 +118,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.LL_fb:
 //                lklllll ttgrtgrt
+                //////suraj//////
                 startActivity(new Intent(SignUpActivity.this,FacebookActivity.class));
                 break;
 
