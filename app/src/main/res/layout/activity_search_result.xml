@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.happywannyan.Activities.SearchResult">
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@drawable/img_serch_top_backg"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/RL_HEADER"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/cast_expanded_controller_margin_between_status_text_and_seek_bar"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/IMG_icon_back"
+            android:layout_width="54dp"
+            android:layout_height="50dp"
+            android:padding="15dp"
+            android:src="@drawable/ic_arrow_back_white" />
+
+        <com.happywannyan.Font.SFNFTextView
+            android:id="@+id/PAGE_Titile"
+            android:layout_toRightOf="@+id/IMG_icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/page_titiel" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/colorwhite"
+        android:layout_below="@+id/RL_HEADER"
+        android:orientation="horizontal"
+        android:animateLayoutChanges="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/INC_LIST"
+            layout="@layout/content_search_result"
+            />
+        <fragment android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/fab"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/float_map" />
+
+    <ImageView
+        android:id="@+id/list"
+        android:layout_width="80dp"
+        android:visibility="gone"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/float_list" />
+
+</RelativeLayout>
