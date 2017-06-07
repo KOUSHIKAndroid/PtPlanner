@@ -111,7 +111,7 @@
                 android:layout_centerHorizontal="true"
                 android:padding="15dp"
                 android:text="@string/forgot_password"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
@@ -138,12 +138,13 @@
                     android:onClick="onClick"
                     android:orientation="vertical"
                     android:paddingLeft="5dp"
+                    android:paddingBottom="5dp"
                     android:paddingTop="10dp">
                     <com.happywannyan.Font.SFNFTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/youcanloginwith"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
                     <com.happywannyan.Font.SFNFBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -166,12 +167,13 @@
                     android:onClick="onClick"
                     android:orientation="vertical"
                     android:paddingLeft="15dp"
+                    android:paddingBottom="5dp"
                     android:paddingTop="10dp">
                     <com.happywannyan.Font.SFNFTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/donthaveanacc"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
                     <com.happywannyan.Font.SFNFBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
