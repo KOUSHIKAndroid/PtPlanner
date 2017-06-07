@@ -31,8 +31,8 @@
 
             <ImageView
                 android:id="@+id/IMG"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
+                android:layout_width="180dp"
+                android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/logo_hapyywan" />
 
@@ -141,6 +141,7 @@
                     android:onClick="onClick"
                     android:orientation="vertical"
                     android:paddingLeft="5dp"
+                    android:paddingBottom="5dp"
                     android:paddingTop="10dp">
                     <com.happywannyan.Font.SFNFTextView
                         android:layout_width="wrap_content"
@@ -167,6 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="onClick"
+                    android:paddingBottom="5dp"
                     android:orientation="vertical"
                     android:paddingLeft="15dp"
                     android:paddingTop="10dp">

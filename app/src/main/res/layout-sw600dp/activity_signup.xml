@@ -31,8 +31,8 @@
 
             <ImageView
                 android:id="@+id/IMG"
-                android:layout_width="250dp"
-                android:layout_height="200dp"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/logo_hapyywan" />
 
@@ -63,7 +63,7 @@
                 <EditText
                     android:id="@+id/EDX_Password"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:hint="@string/Password"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
@@ -111,7 +111,7 @@
 
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
-                android:paddingTop="35dp"
+                android:paddingTop="25dp"
                 android:text="@string/signuplebel"
                 android:textSize="14sp" />
             <View
