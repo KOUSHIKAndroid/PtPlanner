@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.happywannyan.Activities.Booking.BookingOne">
+    <ImageView
+        android:layout_width="match_parent"
+        android:background="@drawable/img_serch_top_backg"
+        android:layout_height="wrap_content"
+         />
+
+
+    <RelativeLayout
+        android:id="@+id/RL_HEADER"
+        android:layout_width="395dp"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/cast_expanded_controller_margin_between_status_text_and_seek_bar"
+        android:layout_height="wrap_content"
+       >
+        <ImageView
+            android:id="@+id/IMG_icon_back"
+            android:layout_width="54dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back_white" />
+
+        <com.happywannyan.Font.SFNFTextView
+            android:id="@+id/PAGE_Titile"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/Booking"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/page_titiel" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorwhite"
+        android:layout_below="@+id/RL_HEADER"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/RL_ChoseCat"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="70dp">
+            <com.happywannyan.Font.SFNFTextView
+
+                android:layout_width="wrap_content"
+                android:text="@string/ChooseService"
+                android:layout_height="wrap_content" />
+
+            <com.happywannyan.Font.SFNFTextView
+                android:layout_width="wrap_content"
+                android:text="Day care for Cats"
+                android:layout_above="@+id/H1"
+                android:paddingBottom="15dp"
+                android:textColor="@color/Black"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_arrow_black"
+                android:layout_above="@+id/H1"
+                android:paddingBottom="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/H1"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray_project"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/RL_ChoseCat"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_marginTop="20dp"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingRight="7dp">
+
+                <com.happywannyan.Font.SFNFTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/StartDate" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_marginRight="2dp"
+                    android:src="@drawable/ic_calender_balack"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:layout_height="22dp" />
+
+                <com.happywannyan.Font.SFNFTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/T2"
+                    android:paddingBottom="15dp"
+                    android:text="06-08-2017"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/h1_label" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingBottom="15dp"
+                    android:layout_above="@+id/T2"
+                    android:src="@drawable/ic_arrow_black" />
+
+                <View
+                    android:id="@+id/T2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/gray_project" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="7dp">
+
+                <com.happywannyan.Font.SFNFTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Enddate" />
+                <ImageView
+                    android:layout_width="22dp"
+                    android:src="@drawable/ic_calender_balack"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="2dp"
+                    android:layout_height="22dp" />
+
+                <com.happywannyan.Font.SFNFTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/T3"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="15dp"
+                    android:text="06-09-2017"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/h1_label" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_above="@+id/T3"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="15dp"
+                    android:src="@drawable/ic_arrow_black" />
+
+                <View
+                    android:id="@+id/T3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/gray_project" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/Card_Login"
+            android:layout_marginTop="40dp"
+            android:layout_width="210dp"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="23dp"
+            android:layout_marginBottom="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            app:cardBackgroundColor="@color/btn_red"
+            android:layout_height="45dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_height="match_parent">
+                <com.happywannyan.Font.SFNFTextView
+
+                    android:layout_width="wrap_content"
+                    android:text="@string/Login"
+                    android:textSize="18sp"
+                    android:textAllCaps="true"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorwhite"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="5dp"
+                    android:src="@drawable/ic_right_arrow_white"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
