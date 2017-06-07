@@ -147,25 +147,25 @@ public class Search_Basic extends Fragment {
             @Override
             public void onClick(View v) {
 
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                try {
-                    startActivityForResult(builder.build(getActivity()), PLACE_AUTOCOMPLETE_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-
+//                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 //                try {
-//                    Intent intent =
-//                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
-//                                    .build(getActivity());
-//                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+//                    startActivityForResult(builder.build(getActivity()), PLACE_AUTOCOMPLETE_REQUEST_CODE);
 //                } catch (GooglePlayServicesRepairableException e) {
-//                    Loger.MSG("@@ SERVICE"," "+e.getMessage());
+//                    e.printStackTrace();
 //                } catch (GooglePlayServicesNotAvailableException e) {
-//                    Loger.MSG("@@ SERVICE"," 2 "+e.getMessage());
+//                    e.printStackTrace();
 //                }
+
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(getActivity());
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    Loger.MSG("@@ SERVICE"," "+e.getMessage());
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    Loger.MSG("@@ SERVICE"," 2 "+e.getMessage());
+                }
             }
         });
 

@@ -113,7 +113,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     }
 
                 }else {
-                    new MYAlert(ForgotPassword.this).AlertOnly(getResources().getString(R.string.ForgotPassword), getResources().getString(R.string.Please_enter_both), new MYAlert.OnlyMessage() {
+                    new MYAlert(ForgotPassword.this).AlertOnly(getResources().getString(R.string.ForgotPassword), getResources().getString(R.string.Please_enter_valid_email), new MYAlert.OnlyMessage() {
                         @Override
                         public void OnOk(boolean res) {
                             if(res && EDX_email.getText().toString().trim().equals("")){
@@ -125,6 +125,11 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     });
                 }
                 break;
+
+            case R.id.LL_fb:
+                startActivity(new Intent(ForgotPassword.this,FacebookActivity.class));
+                break;
+
         }
     }
 }

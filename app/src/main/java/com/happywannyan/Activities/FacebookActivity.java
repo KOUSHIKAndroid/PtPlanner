@@ -20,6 +20,7 @@ import com.facebook.login.LoginResult;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.R;
+import com.happywannyan.Utils.App_data_holder;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
 
@@ -139,17 +140,19 @@ public class FacebookActivity extends AppCompatActivity {
             @Override
             public void OnSuccess(String Result) {
                 try {
-
+                    new App_data_holder(FacebookActivity.this).SET_SHAREDATA(App_data_holder.UserData,Result);
                     JSONObject jsonObject1=new JSONObject(Result);
                     switch (jsonObject1.getString("user_status")){
                         case "not_verified_user":
 
                             break;
                         default:
-                            startActivity(new Intent(FacebookActivity.this,BaseActivity.class));
-                            finish();
+
                             break;
                     }
+
+                    startActivity(new Intent(FacebookActivity.this,BaseActivity.class));
+                    finish();
 
                 }catch (Exception e)
                 {

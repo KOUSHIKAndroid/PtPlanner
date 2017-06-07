@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 new MYAlert(LoginActivity.this).AlertOnly(getResources().getString(R.string.LoginAlertTitle), Error, new MYAlert.OnlyMessage() {
                                     @Override
                                     public void OnOk(boolean res) {
-
+                                        new AppLoader(LoginActivity.this).Dismiss();
                                     }
                                 });
                             }
@@ -124,6 +124,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
                 }
+                break;
+
+            case R.id.LL_fb:
+                startActivity(new Intent(LoginActivity.this,FacebookActivity.class));
                 break;
         }
     }

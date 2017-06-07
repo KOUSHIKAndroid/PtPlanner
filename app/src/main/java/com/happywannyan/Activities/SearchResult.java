@@ -197,11 +197,13 @@ AppLoader appLoader;
 
     @Override
     public void onCameraIdle() {
+        Loger.MSG("@@ Zoom"," "+Map.getCameraPosition().zoom);
 
     }
 
     @Override
     public void onCameraMove() {
+        Loger.MSG("@@ ViewPost"," "+Map.getProjection().getVisibleRegion().latLngBounds.getCenter().toString());
 
     }
 
@@ -212,12 +214,28 @@ AppLoader appLoader;
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+
+
         return false;
+
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Map=googleMap;
+        Map.setOnCameraIdleListener(this);
+        Map.setOnCameraMoveListener(this);
+
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(new LatLng(25.341635885457396,129.0904974192381));
+        builder.include(new LatLng(46.958814679811375,146.3319904357195));
+        LatLngBounds camrearset=builder.build();
+        Map.setLatLngBoundsForCameraTarget(camrearset);
+        Map.animateCamera(CameraUpdateFactory.newLatLngZoom(camrearset.getCenter(),14) );
+//        int padding = 100; // offset from edges of the map in pixels
+//        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(camrearset, padding);
+//        Map.animateCamera(cu);
 
     }
 }

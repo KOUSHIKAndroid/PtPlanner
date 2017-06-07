@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.happywannyan.Activities.BaseActivity;
 import com.happywannyan.Activities.CalenderActivity;
@@ -178,25 +179,25 @@ public class Advanced_search extends Fragment {
             @Override
             public void onClick(View v) {
 
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                try {
-                    startActivityForResult(builder.build(getActivity()), PLACE_AUTOCOMPLETE_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-
+//                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 //                try {
-//                    Intent intent =
-//                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
-//                                    .build(getActivity());
-//                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+//                    startActivityForResult(builder.build(getActivity()), PLACE_AUTOCOMPLETE_REQUEST_CODE);
 //                } catch (GooglePlayServicesRepairableException e) {
-//                    Loger.MSG("@@ SERVICE"," "+e.getMessage());
+//                    e.printStackTrace();
 //                } catch (GooglePlayServicesNotAvailableException e) {
-//                    Loger.MSG("@@ SERVICE"," 2 "+e.getMessage());
+//                    e.printStackTrace();
 //                }
+
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(getActivity());
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    Loger.MSG("@@ SERVICE"," "+e.getMessage());
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    Loger.MSG("@@ SERVICE"," 2 "+e.getMessage());
+                }
             }
         });
 

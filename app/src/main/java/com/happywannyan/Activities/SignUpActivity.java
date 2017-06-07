@@ -12,10 +12,14 @@ import com.bumptech.glide.Glide;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.R;
+import com.happywannyan.Utils.AppLoader;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.MYAlert;
 import com.happywannyan.Utils.Validation;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -23,6 +27,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     ImageView IMG_Background;
     EditText EDX_email, EDX_Password;
     CardView Card_Login;
+    AppLoader appLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         EDX_email = (EditText) findViewById(R.id.EDX_email);
         EDX_Password = (EditText) findViewById(R.id.EDX_Password);
         findViewById(R.id.LL_LoginNow).setOnClickListener(this);
-
+        appLoader=new AppLoader(this);
 
         Glide.with(this).load(R.drawable.temp_03).into(IMG_Background);
     }
@@ -58,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         });
 
-                    } else if (!Validation.isPassword(EDX_Password.getText().toString()) || EDX_Password.getText().toString().trim().length() <= 6) {
+                    } else if (!Validation.isPassword(EDX_Password.getText().toString()) || EDX_Password.getText().toString().trim().length() < 6) {
                         new MYAlert(SignUpActivity.this).AlertOnly(getResources().getString(R.string.SignUp), getResources().getString(R.string.signup_password_checkingtext), new MYAlert.OnlyMessage() {
                             @Override
                             public void OnOk(boolean res) {
@@ -69,6 +74,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         });
 
                     } else {
+                        appLoader.Show();
                         ArrayList<APIPOSTDATA> apipostdataArrayList = new ArrayList<>();
                         APIPOSTDATA apipostdata = new APIPOSTDATA();
                         apipostdata.setPARAMS("user_email");
@@ -87,11 +93,36 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             @Override
                             public void OnSuccess(String Result) {
                                 Loger.MSG("@@ REG", Result);
+                                try {
+                                    appLoader.Dismiss();
+                                    JSONObject object=new JSONObject(Result);
+                                    new MYAlert(SignUpActivity.this).AlertOnly(getResources().getString(R.string.SignUp), object.getString("message"), new MYAlert.OnlyMessage() {
+                                        @Override
+                                        public void OnOk(boolean res) {
+                                            startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+                                            finish();
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
                             }
 
                             @Override
                             public void OnError(String Error) {
                                 Loger.Error("@@ REG", Error);
+                                new MYAlert(SignUpActivity.this).AlertOnly(getResources().getString(R.string.SignUp), Error, new MYAlert.OnlyMessage() {
+                                    @Override
+                                    public void OnOk(boolean res) {
+                                        appLoader.Dismiss();
+                                        EDX_email.setText("");
+                                        EDX_Password.setText("");
+//                                        startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+//                                        finish();
+                                    }
+                                });
                             }
                         });
                     }

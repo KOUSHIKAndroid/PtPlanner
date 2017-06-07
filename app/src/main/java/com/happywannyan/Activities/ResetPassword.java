@@ -47,7 +47,7 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
                     }
                 });
             }else {
-                if (!Validation.isPassword(Password.getText().toString()) || Password.getText().toString().trim().length() <= 6) {
+                if (!Validation.isPassword(Password.getText().toString()) || Password.getText().toString().trim().length() < 6) {
                     new MYAlert(ResetPassword.this).AlertOnly(getResources().getString(R.string.ResetPassword), getResources().getString(R.string.signup_password_checkingtext), new MYAlert.OnlyMessage() {
                         @Override
                         public void OnOk(boolean res) {
