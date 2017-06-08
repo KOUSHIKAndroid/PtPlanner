@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -30,6 +31,7 @@ import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.MYAlert;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,13 +53,15 @@ public class Advanced_search extends Fragment {
     LinearLayout LL_PriceRange;
     private static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     private static final int CALL_CALENDER = 12;
-    SFNFTextView TXT_Loction, TXT_DateRange;
+    SFNFTextView TXT_Loction, TXT_DateRange, TXT_highestRange;
     SFNFTextView TXT_petType;
+    SFNFTextView TXT_LoestRange;
     private String StartDate = "";
     private String EndDate = "";
-    LinearLayout LL_Calender, LL_PetSizeValue, LL_Pet_Age;
-    RadioGroup RADIO_OTHER_OPTION;
-    Place place=null;
+    LinearLayout LL_Calender, LL_PetSizeValue, LL_Pet_Age, LL_OtherOption;
+    Place place = null;
+    String MaxPrice = "", MinPrice = "";
+    String LowPrice = "", HighPrice = "";
 
     public Advanced_search() {
         // Required empty public constructor
@@ -104,9 +108,11 @@ public class Advanced_search extends Fragment {
         LL_PriceRange = (LinearLayout) view.findViewById(R.id.LL_PriceRange);
         LL_PetSizeValue = (LinearLayout) view.findViewById(R.id.LL_PetSizeValue);
         LL_Pet_Age = (LinearLayout) view.findViewById(R.id.LL_Pet_Age);
-        RADIO_OTHER_OPTION = (RadioGroup) view.findViewById(R.id.RADIO_OTHER_OPTION);
+        LL_OtherOption = (LinearLayout) view.findViewById(R.id.LL_OtherOption);
         TXT_Loction = (SFNFTextView) view.findViewById(R.id.TXT_Loction);
         TXT_DateRange = (SFNFTextView) view.findViewById(R.id.TXT_DateRange);
+        TXT_LoestRange = (SFNFTextView) view.findViewById(R.id.TXT_LoestRange);
+        TXT_highestRange = (SFNFTextView) view.findViewById(R.id.TXT_highestRange);
 
 
         TXT_petType = (SFNFTextView) view.findViewById(R.id.TXT_petType);
@@ -122,6 +128,10 @@ public class Advanced_search extends Fragment {
                         public void OnSuccess(String Result) {
                             try {
                                 Pet_size_age = new JSONObject(Result);
+                                MaxPrice = Pet_size_age.getString("max_price_default").split("\\.")[0];
+                                MinPrice = Pet_size_age.getString("min_price_default").split("\\.")[0];
+                                TXT_LoestRange.setText(MinPrice);
+                                TXT_highestRange.setText(MaxPrice);
                                 if (Pet_size_age.getJSONArray("petSizeDet").length() > 0) {
                                     for (int j = 0; j < Pet_size_age.getJSONArray("petSizeDet").length(); j++) {
                                         CheckBox Chkbox = new CheckBox(getActivity());
@@ -136,6 +146,35 @@ public class Advanced_search extends Fragment {
                                         Chkbox.setText(Pet_size_age.getJSONArray("petAgeDet").getJSONObject(i).getString("option_name"));
                                         LL_Pet_Age.addView(Chkbox);
                                     }
+
+
+                                if (Pet_size_age.getJSONArray("exp_medical_opt").length() > 0)
+                                    for (int i = 0; i < Pet_size_age.getJSONArray("exp_medical_opt").length(); i++) {
+                                        CheckBox Chkbox = new CheckBox(getActivity());
+                                        Chkbox.setText(Pet_size_age.getJSONArray("exp_medical_opt").getJSONObject(i).getString("option_name"));
+                                        LL_OtherOption.addView(Chkbox);
+                                    }
+
+                                LL_PriceRange.removeAllViewsInLayout();
+                                seekBar = new RangeSeekBar<Long>(Long.parseLong(MinPrice), Long.parseLong(MaxPrice), getContext());
+                                LL_PriceRange.addView(seekBar);
+                                seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
+                                    @Override
+                                    public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
+                                        LowPrice = minValue.toString();
+                                        HighPrice = maxValue.toString();
+
+                                        TXT_LoestRange.setText(minValue.toString());
+                                        TXT_highestRange.setText(maxValue.toString());
+                                    }
+
+                                    @Override
+                                    public void onRangeSeekBarValuesChanging(RangeSeekBar<?> bar, int minValue, int maxValue) {
+//                min.setText(minValue + "");
+//                max.setText(maxValue + "");
+                                    }
+
+                                });
                             } catch (JSONException e) {
 
                             }
@@ -189,14 +228,18 @@ public class Advanced_search extends Fragment {
 //                }
 
                 try {
+                    AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                            .setCountry("JP")
+                            .build();
                     Intent intent =
-                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).setFilter(typeFilter)
                                     .build(getActivity());
+
                     startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException e) {
-                    Loger.MSG("@@ SERVICE"," "+e.getMessage());
+                    Loger.MSG("@@ SERVICE", " " + e.getMessage());
                 } catch (GooglePlayServicesNotAvailableException e) {
-                    Loger.MSG("@@ SERVICE"," 2 "+e.getMessage());
+                    Loger.MSG("@@ SERVICE", " 2 " + e.getMessage());
                 }
             }
         });
@@ -212,11 +255,19 @@ public class Advanced_search extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
+
                     new MYAlert(getActivity()).AlertTextLsit(getString(R.string.chose_pettype), mParam1.getJSONArray("allPetDetails"), "name"
                             , new MYAlert.OnSignleListTextSelected() {
                                 @Override
                                 public void OnSelectedTEXT(JSONObject jsonObject) {
                                     Loger.MSG("@@ SelevetPet", "" + jsonObject);
+                                    try {
+                                        TXT_petType.setText(jsonObject.getString("name"));
+                                        TXT_petType.setTag(jsonObject.getString("id"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
 
                                     try {
                                         new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "pet_type_info?&pet_type_id=" + jsonObject.getString("id") + "&langid=" + AppContsnat.Language,
@@ -225,10 +276,13 @@ public class Advanced_search extends Fragment {
                                                     public void OnSuccess(String Result) {
                                                         try {
                                                             Pet_size_age = new JSONObject(Result);
-                                                            Pet_size_age = new JSONObject(Result);
-
+                                                            MaxPrice = Pet_size_age.getString("max_price_default").split("\\.")[0];
+                                                            MinPrice = Pet_size_age.getString("min_price_default").split("\\.")[0];
+                                                            TXT_LoestRange.setText(MinPrice);
+                                                            TXT_highestRange.setText(MaxPrice);
                                                             LL_PetSizeValue.removeAllViews();
                                                             LL_Pet_Age.removeAllViews();
+                                                            LL_OtherOption.removeAllViews();
 
                                                             if (Pet_size_age.getJSONArray("petSizeDet").length() > 0) {
                                                                 for (int j = 0; j < Pet_size_age.getJSONArray("petSizeDet").length(); j++) {
@@ -244,6 +298,33 @@ public class Advanced_search extends Fragment {
                                                                     Chkbox.setText(Pet_size_age.getJSONArray("petAgeDet").getJSONObject(i).getString("option_name"));
                                                                     LL_Pet_Age.addView(Chkbox);
                                                                 }
+
+                                                            if (Pet_size_age.getJSONArray("exp_medical_opt").length() > 0)
+                                                                for (int i = 0; i < Pet_size_age.getJSONArray("exp_medical_opt").length(); i++) {
+                                                                    CheckBox Chkbox = new CheckBox(getActivity());
+                                                                    Chkbox.setText(Pet_size_age.getJSONArray("exp_medical_opt").getJSONObject(i).getString("option_name"));
+                                                                    LL_OtherOption.addView(Chkbox);
+                                                                }
+
+                                                            LL_PriceRange.removeAllViewsInLayout();
+                                                            seekBar = new RangeSeekBar<Long>(Long.parseLong(MinPrice), Long.parseLong(MaxPrice), getContext());
+                                                            LL_PriceRange.addView(seekBar);
+                                                            seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
+                                                                @Override
+                                                                public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
+                                                                    LowPrice = minValue.toString();
+                                                                    HighPrice = maxValue.toString();
+                                                                    TXT_LoestRange.setText(minValue.toString());
+                                                                    TXT_highestRange.setText(maxValue.toString());
+                                                                }
+
+                                                                @Override
+                                                                public void onRangeSeekBarValuesChanging(RangeSeekBar<?> bar, int minValue, int maxValue) {
+//                min.setText(minValue + "");
+//                max.setText(maxValue + "");
+                                                                }
+
+                                                            });
                                                         } catch (JSONException e) {
 
                                                         }
@@ -288,38 +369,126 @@ public class Advanced_search extends Fragment {
                 Intent intent = new Intent(new Intent(getActivity(), SearchResult.class));
                 try {
                     JSONObject SEARCHPARAMS = new JSONObject();
+
+
+                    /*
+                     @@ Make JSONARRY for Next Page Serach
+                     */
+
+                    JSONArray Searchkeyinfor = new JSONArray();
+                    JSONObject data = new JSONObject();
+                    data.put("name", "start_date");
+                    data.put("value", StartDate);
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "end_date");
+                    data.put("value", EndDate);
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "serviceCat");
+                    data.put("value", mParam1.getString("id"));
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "pet_type");
+                    data.put("value", TXT_petType.getTag());
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "high_price");
+                    data.put("value", HighPrice);
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "low_price");
+                    data.put("value", LowPrice);
+                    Searchkeyinfor.put(data);
+
+
                     if (place != null) {
 
-                        SEARCHPARAMS.put("lat", place.getLatLng().latitude);
-                        SEARCHPARAMS.put("lng", place.getLatLng().longitude);
+                        data = new JSONObject();
+                        data.put("name", "srch_lon");
+                        data.put("value", place.getLatLng().longitude);
+                        Searchkeyinfor.put(data);
 
-                        JSONObject ViewPort = new JSONObject();
-                        ViewPort.put("southwest_LAT", place.getViewport().southwest.latitude);
-                        ViewPort.put("southwest_LNG", place.getViewport().southwest.longitude);
+                        data = new JSONObject();
+                        data.put("name", "srch_lat");
+                        data.put("value", place.getLatLng().latitude);
+                        Searchkeyinfor.put(data);
 
-                        ViewPort.put("northeast_LAT", place.getViewport().northeast.latitude);
-                        ViewPort.put("northeast_LNG", place.getViewport().northeast.longitude);
+                        data = new JSONObject();
+                        data.put("name", "ne_lng");
+                        data.put("value", place.getViewport().northeast.longitude);
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "ne_lat");
+                        data.put("value", place.getViewport().northeast.latitude);
+                        Searchkeyinfor.put(data);
+
+
+                        data = new JSONObject();
+                        data.put("name", "sw_lng");
+                        data.put("value", place.getViewport().southwest.longitude);
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "sw_lat");
+                        data.put("value", place.getViewport().southwest.latitude);
+                        Searchkeyinfor.put(data);
+
 
                         SEARCHPARAMS.put("LocationName", place.getName());
 
-                        SEARCHPARAMS.put("viewposrt", ViewPort);
                         SEARCHPARAMS.put("Address", place.getAddress());
                     } else {
-                        SEARCHPARAMS.put("lat", mParam1.getJSONObject("latlng").getString("lat"));
-                        SEARCHPARAMS.put("lng", mParam1.getJSONObject("latlng").getString("lng"));
+                        data = new JSONObject();
+                        data.put("name", "srch_lon");
+                        data.put("value", mParam1.getJSONObject("latlng").getString("lng"));
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "srch_lat");
+                        data.put("value", mParam1.getJSONObject("latlng").getString("lat"));
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "ne_lng");
+                        data.put("value", mParam1.getJSONObject("viewposrt").getString("northeast_LNG"));
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "ne_lat");
+                        data.put("value", mParam1.getJSONObject("viewposrt").getString("northeast_LAT"));
+                        Searchkeyinfor.put(data);
+
+
+                        data = new JSONObject();
+                        data.put("name", "sw_lng");
+                        data.put("value", mParam1.getJSONObject("viewposrt").getString("southwest_LNG"));
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "sw_lat");
+                        data.put("value", mParam1.getJSONObject("viewposrt").getString("northeast_LAT"));
+                        Searchkeyinfor.put(data);
+
                         SEARCHPARAMS.put("Address", mParam1.getString("Address"));
                         SEARCHPARAMS.put("LocationName", mParam1.getString("LocationName"));
-                        SEARCHPARAMS.put("viewposrt", mParam1.getJSONObject("viewposrt"));
+
                     }
 
-                    SEARCHPARAMS.put("StartDate", StartDate);
-                    SEARCHPARAMS.put("EndDate", EndDate);
+
+                    SEARCHPARAMS.put("keyinfo",Searchkeyinfor);
 
                     intent.putExtra(SearchResult.SEARCHKEY, SEARCHPARAMS.toString());
                     startActivity(intent);
 
                 } catch (JSONException e) {
-                    Loger.Error(TAG," "+e.getMessage());
+                    Loger.Error(TAG, " " + e.getMessage());
                 }
 
 
@@ -327,25 +496,6 @@ public class Advanced_search extends Fragment {
         });
 
 
-        seekBar = new RangeSeekBar<Long>(Long.parseLong("0"), Long.parseLong("20000"), getContext());
-        LL_PriceRange.addView(seekBar);
-
-
-        seekBar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
-            @Override
-            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
-//                LowPrice = minValue.toString();
-//                HighPrice = maxValue.toString();
-
-            }
-
-            @Override
-            public void onRangeSeekBarValuesChanging(RangeSeekBar<?> bar, int minValue, int maxValue) {
-//                min.setText(minValue + "");
-//                max.setText(maxValue + "");
-            }
-
-        });
     }
 
 

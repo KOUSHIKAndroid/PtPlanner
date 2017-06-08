@@ -103,4 +103,5 @@
     <string name="please_enter_code">Please enter a valid code</string>
     <string name="ResetPassword">Reset Password</string>
     <string name="signupsuccess">Sign up success please check your email </string>
+    <string name="loading">Loading...</string>
 </resources>

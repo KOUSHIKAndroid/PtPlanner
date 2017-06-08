@@ -44,7 +44,7 @@ public class SearchResult extends AppCompatActivity implements OnMapReadyCallbac
     ArrayList<SearchData> ListARRY;
     JSONObject SearchKeys;
     LatLngBounds PresetLatBounds;
-AppLoader appLoader;
+    AppLoader appLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ AppLoader appLoader;
         try {
             SearchKeys=new JSONObject(getIntent().getStringExtra(SEARCHKEY));
             ((SFNFTextView)findViewById(R.id.PAGE_Titile)).setText(SearchKeys.getString("LocationName"));
-
+            Loger.MSG("@@ SEARCH KEY",SearchKeys.toString());
 
         }catch (JSONException e){}
         catch (Exception e){}
@@ -95,10 +95,28 @@ AppLoader appLoader;
         apipostdata.setValues("10");
         PostData.add(apipostdata);
 
-        apipostdata=new APIPOSTDATA();
-        apipostdata.setPARAMS("search_location");
-        apipostdata.setValues("japan");
-        PostData.add(apipostdata);
+
+        try {
+            apipostdata=new APIPOSTDATA();
+            apipostdata.setPARAMS("search_location");
+            apipostdata.setValues(SearchKeys.getString("LocationName"));
+            PostData.add(apipostdata);
+
+            for(int i=0;i<SearchKeys.getJSONArray("keyinfo").length();i++)
+            {
+                JSONObject object=SearchKeys.getJSONArray("keyinfo").getJSONObject(i);
+                apipostdata=new APIPOSTDATA();
+                apipostdata.setPARAMS(object.getString("name"));
+                apipostdata.setValues(object.getString("value"));
+                PostData.add(apipostdata);
+            }
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         new JSONPerser().API_FOR_POST(AppContsnat.BASEURL + "search_setter", PostData, new JSONPerser.JSONRESPONSE() {
             @Override

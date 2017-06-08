@@ -279,6 +279,7 @@
                     android:textColor="@color/Black" />
 
                 <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/TXT_highestRange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -310,15 +311,15 @@
                     android:layout_height="wrap_content"
                     android:text="@string/otherOption" />
 
-                <RadioGroup
-                    android:id="@+id/RADIO_OTHER_OPTION"
+                <LinearLayout
+                    android:id="@+id/LL_OtherOption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp">
+                    android:layout_below="@+id/T3"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
-
-                </RadioGroup>
+                </LinearLayout>
 
             </LinearLayout>
 

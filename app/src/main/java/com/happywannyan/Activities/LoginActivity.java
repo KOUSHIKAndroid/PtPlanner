@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ImageView IMG_Background;
     EditText EDX_email,EDX_Password;
     CardView Card_Login;
-
+    AppLoader appLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Card_Login.setOnClickListener(this);
         EDX_email=(EditText)findViewById(R.id.EDX_email);
         EDX_Password=(EditText)findViewById(R.id.EDX_Password);
-
+        appLoader=new AppLoader(LoginActivity.this);
         findViewById(R.id.LL_SignUp).setOnClickListener(this);
 
         findViewById(R.id.FORGOT).setOnClickListener(new View.OnClickListener() {
@@ -83,13 +83,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         apipostdata.setPARAMS("password");
                         apipostdata.setValues(EDX_Password.getText().toString());
                         apipostdataArrayList.add(apipostdata);
-                        new AppLoader(LoginActivity.this).Show();
+                        appLoader.Show();
                         new JSONPerser().API_FOR_POST(AppContsnat.BASEURL + "app_login", apipostdataArrayList, new JSONPerser.JSONRESPONSE() {
                             @Override
                             public void OnSuccess(String Result) {
                                 Loger.MSG("@@ LOGIN",Result);
                                 new App_data_holder(LoginActivity.this).SET_SHAREDATA(App_data_holder.UserData,Result);
-                                new AppLoader(LoginActivity.this).Dismiss();
+                                appLoader.Dismiss();
                                 startActivity(new Intent(LoginActivity.this,BaseActivity.class));
                                 finish();
 
@@ -99,11 +99,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void OnError(String Error) {
                                 Loger.Error("@@ LOGIN",Error);
-                                new AppLoader(LoginActivity.this).Dismiss();
+                                appLoader.Dismiss();
                                 new MYAlert(LoginActivity.this).AlertOnly(getResources().getString(R.string.LoginAlertTitle), Error, new MYAlert.OnlyMessage() {
                                     @Override
                                     public void OnOk(boolean res) {
-                                        new AppLoader(LoginActivity.this).Dismiss();
+                                        appLoader.Dismiss();
                                     }
                                 });
                             }
