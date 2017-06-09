@@ -127,9 +127,20 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.LL_fb:
-                startActivity(new Intent(ForgotPassword.this,FacebookActivity.class));
+                startActivityForResult(new Intent(ForgotPassword.this,FacebookActivity.class),FacebookActivity.FacebookResponse);
                 break;
 
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==FacebookActivity.FacebookResponse && resultCode==RESULT_OK)
+        {
+            startActivity(new Intent(ForgotPassword.this,BaseActivity.class));
+            finish();
+        }
+
     }
 }

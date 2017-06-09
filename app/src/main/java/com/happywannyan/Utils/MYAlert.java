@@ -68,8 +68,6 @@ public class MYAlert {
 
         SFNFTextView TXTTitle=(SFNFTextView)LayView.findViewById(R.id.Title);
         TXTTitle.setText(Title);
-//        Button BTN_OK=(Button)LayView.findViewById(R.id.BTN_OK);
-//            BTN_OK.setVisibility(View.GONE);
         LinearLayout ListLay=(LinearLayout)LayView.findViewById(R.id.LL_ALERTList);
 
         try {
@@ -106,7 +104,7 @@ public class MYAlert {
 
 
 
-        LayView.findViewById(R.id.BTN_Cancel).setOnClickListener(new View.OnClickListener() {
+        LayView.findViewById(R.id.IMG_Back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                onlyMessage.OnOk(true);

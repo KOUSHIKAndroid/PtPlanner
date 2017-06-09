@@ -50,6 +50,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Glide.with(this).load(R.drawable.temp_03).into(IMG_Background);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==FacebookActivity.FacebookResponse && resultCode==RESULT_OK)
+        {
+            startActivity(new Intent(LoginActivity.this,BaseActivity.class));
+            finish();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -127,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.LL_fb:
-                startActivity(new Intent(LoginActivity.this,FacebookActivity.class));
+                startActivityForResult(new Intent(LoginActivity.this,FacebookActivity.class),FacebookActivity.FacebookResponse);
                 break;
         }
     }

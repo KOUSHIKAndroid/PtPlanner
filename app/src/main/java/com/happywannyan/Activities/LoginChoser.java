@@ -106,17 +106,29 @@ public class LoginChoser extends AppCompatActivity  implements View.OnClickListe
                 finish();
                 break;
             case R.id.LL_Facbook:
-                startActivity(new Intent(LoginChoser.this,FacebookActivity.class));
+                startActivityForResult(new Intent(LoginChoser.this,FacebookActivity.class),FacebookActivity.FacebookResponse);
                 break;
             case R.id.LL_SINGIN:
                 startActivity(new Intent(LoginChoser.this,LoginActivity.class));
-
+                    finish();
                 break;
 
             case R.id.LL_SIGNUP:
                 startActivity(new Intent(LoginChoser.this,SignUpActivity.class));
+                finish();
                 break;
 
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==FacebookActivity.FacebookResponse && resultCode==RESULT_OK)
+        {
+            startActivity(new Intent(LoginChoser.this,BaseActivity.class));
+            finish();
+        }
+
     }
 }

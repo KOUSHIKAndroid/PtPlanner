@@ -23,6 +23,7 @@ import com.happywannyan.R;
 import com.happywannyan.Utils.App_data_holder;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
+import com.happywannyan.Utils.MYAlert;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FacebookActivity extends AppCompatActivity {
+    public static final int FacebookResponse=11;
+
     CallbackManager callbackManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +154,10 @@ public class FacebookActivity extends AppCompatActivity {
                             break;
                     }
 
-                    startActivity(new Intent(FacebookActivity.this,BaseActivity.class));
+                    Intent intent=new Intent();
+                   setResult(RESULT_OK,intent);
+
+//                    startActivity(new Intent(FacebookActivity.this,BaseActivity.class));
                     finish();
 
                 }catch (Exception e)
@@ -163,6 +169,14 @@ public class FacebookActivity extends AppCompatActivity {
 
             @Override
             public void OnError(String Error) {
+                new MYAlert(FacebookActivity.this).AlertOnly(getResources().getString(R.string.facebook), Error, new MYAlert.OnlyMessage() {
+                    @Override
+                    public void OnOk(boolean res) {
+                        Intent intent=new Intent();
+                        setResult(RESULT_CANCELED,intent);
+                        finish();
+                    }
+                });
 
             }
         });

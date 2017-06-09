@@ -7,14 +7,16 @@
         android:layout_width="match_parent"
         android:text="sjbsh"
         android:id="@+id/TXT_item"
-        android:padding="10dp"
-        android:layout_marginLeft="30dp"
+        android:padding="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textColor="@color/Black"
         android:layout_height="wrap_content" />
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@color/gray_project"/>
 
 </LinearLayout>

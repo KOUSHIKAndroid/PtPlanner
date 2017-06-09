@@ -44,6 +44,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Glide.with(this).load(R.drawable.temp_03).into(IMG_Background);
     }
 
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        finish();
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -148,13 +156,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.LL_fb:
-//                lklllll ttgrtgrt
-                //////suraj thyrthrth//////
-                startActivity(new Intent(SignUpActivity.this,FacebookActivity.class));
+                startActivityForResult(new Intent(SignUpActivity.this,FacebookActivity.class),FacebookActivity.FacebookResponse);
                 break;
 
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==FacebookActivity.FacebookResponse && resultCode==RESULT_OK)
+        {
+            startActivity(new Intent(SignUpActivity.this,BaseActivity.class));
+            finish();
+        }
+
+    }
 
 }
