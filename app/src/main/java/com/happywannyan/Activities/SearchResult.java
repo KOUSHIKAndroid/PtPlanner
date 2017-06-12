@@ -27,6 +27,7 @@ import com.happywannyan.R;
 import com.happywannyan.Utils.AppLoader;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
+import com.happywannyan.Utils.MYAlert;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -145,7 +146,31 @@ public class SearchResult extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             @Override
+            public void OnError(String Error, String Response) {
+                appLoader.Dismiss();
+                try {
+                JSONObject jsonObject=    new JSONObject(Response);
+                    if(jsonObject.getInt("next_data")==0 && jsonObject.getInt("start_form")==0){
+                        new MYAlert(SearchResult.this).AlertOnly(getResources().getString(R.string.app_name), Error, new MYAlert.OnlyMessage() {
+                            @Override
+                            public void OnOk(boolean res) {
+
+                            }
+                        });
+                    }
+
+                }catch (Exception e)
+                {
+
+                }
+
+
+
+            }
+
+            @Override
             public void OnError(String Error) {
+
                 appLoader.Dismiss();
             }
         });

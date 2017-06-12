@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.happywannyan.Activities.SearchResult;
 import com.happywannyan.Adapter.Adapter_message;
 import com.happywannyan.Adapter.Booking_Adapter;
 import com.happywannyan.Constant.AppContsnat;
@@ -22,6 +23,7 @@ import com.happywannyan.R;
 import com.happywannyan.Utils.AppLoader;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
+import com.happywannyan.Utils.MYAlert;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -113,7 +115,8 @@ public class BookingFragment extends Fragment{
         Params.add(apipostdata);
 
         type="past_booking_list";
-        loadList("0");
+
+
 
 
         tv_up_coming.setOnClickListener(new View.OnClickListener() {
@@ -187,28 +190,7 @@ public class BookingFragment extends Fragment{
                 loadList("0");
             }
         });
-
-//        for(int i=0;i<10;i++){
-//            SetGetUpComingBooking setGetUpComingBooking=new SetGetUpComingBooking();
-//
-//            setGetUpComingBooking.setImg("http://i.imgur.com/zuG2bGQ.jpg");
-//            setGetUpComingBooking.setTitle("John Doe");
-//            setGetUpComingBooking.setName("Lee Shung Yang");
-//            setGetUpComingBooking.setStart_date("SEP 20,2017");
-//            setGetUpComingBooking.setEnd_date("SEP 27,2017");
-//            setGetUpComingBooking.setBooking_id("201705045916");
-//            setGetUpComingBooking.setService_name("Day care for cats");
-//            setGetUpComingBooking.setTotal_pets(""+i);
-//            setGetUpComingBooking.setTotal_amount("$2,100");
-//
-//            upComingBookingArrayList.add(setGetUpComingBooking);
-//
-//        }
-//
-//        Loger.MSG("upComingBookingArrayList",""+upComingBookingArrayList.size());
-//
-//        Booking_Adapter bookingAdapter =new Booking_Adapter(getActivity(),upComingBookingArrayList);
-//        rcv_upcoming_booking.setAdapter(bookingAdapter);
+        tv_up_coming.performClick();
 
     }
 
@@ -222,7 +204,7 @@ public class BookingFragment extends Fragment{
             public void OnSuccess(String Result) {
                 try {
                     JSONObject jsonObject=new JSONObject(Result);
-                    JSONArray all_booking=jsonObject.getJSONArray("past_booking_info");
+                    JSONArray all_booking=jsonObject.getJSONArray("booking_info_array");
 
                     int next_data=jsonObject.getInt("next_data");
                     Loger.MSG("next_data",""+next_data);
@@ -247,6 +229,26 @@ public class BookingFragment extends Fragment{
                 {
                     e.printStackTrace();
                     appLoader.Dismiss();
+                }
+            }
+
+            @Override
+            public void OnError(String Error, String Response) {
+                appLoader.Dismiss();
+                try {
+                    JSONObject jsonObject=    new JSONObject(Response);
+                    if(jsonObject.getInt("next_data")==0 && jsonObject.getInt("start_form")==0){
+                        new MYAlert(getActivity()).AlertOnly(getResources().getString(R.string.app_name), Error, new MYAlert.OnlyMessage() {
+                            @Override
+                            public void OnOk(boolean res) {
+
+                            }
+                        });
+                    }
+
+                }catch (Exception e)
+                {
+
                 }
             }
 

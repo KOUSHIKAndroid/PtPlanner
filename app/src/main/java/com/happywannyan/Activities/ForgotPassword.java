@@ -99,6 +99,17 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                             }
 
                             @Override
+                            public void OnError(String Error, String Response) {
+                                appLoader.Dismiss();
+                                new MYAlert(ForgotPassword.this).AlertOnly(getResources().getString(R.string.ForgotPassword), Error, new MYAlert.OnlyMessage() {
+                                    @Override
+                                    public void OnOk(boolean res) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
                             public void OnError(String Error) {
                                 Loger.Error("@@ LOGIN",Error);
                                 appLoader.Dismiss();

@@ -265,6 +265,11 @@ public class Message_Fragment extends Fragment {
             }
 
             @Override
+            public void OnError(String Error, String Response) {
+
+            }
+
+            @Override
             public void OnError(String Error) {
                 appLoader.Dismiss();
             }

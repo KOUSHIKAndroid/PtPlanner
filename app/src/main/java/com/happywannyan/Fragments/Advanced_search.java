@@ -181,6 +181,11 @@ public class Advanced_search extends Fragment {
                         }
 
                         @Override
+                        public void OnError(String Error, String Response) {
+
+                        }
+
+                        @Override
                         public void OnError(String Error) {
 
                         }
@@ -328,6 +333,11 @@ public class Advanced_search extends Fragment {
                                                         } catch (JSONException e) {
 
                                                         }
+                                                    }
+
+                                                    @Override
+                                                    public void OnError(String Error, String Response) {
+
                                                     }
 
                                                     @Override

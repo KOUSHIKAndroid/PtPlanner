@@ -23,6 +23,7 @@ public class JSONPerser {
 
         public interface  JSONRESPONSE{
             void OnSuccess( String Result);
+            void OnError(String Error,String Response);
             void OnError(String Error);
         }
 
@@ -141,7 +142,7 @@ public class JSONPerser {
                         {
                             jsonresponse.OnSuccess(respose);
                         }else {
-                            jsonresponse.OnError(new JSONObject(respose).getString("message")+"");
+                            jsonresponse.OnError(new JSONObject(respose).getString("message")+"",respose);
                         }
                     }catch (Exception e){}
 

@@ -168,6 +168,18 @@ public class FacebookActivity extends AppCompatActivity {
             }
 
             @Override
+            public void OnError(String Error, String Response) {
+                new MYAlert(FacebookActivity.this).AlertOnly(getResources().getString(R.string.facebook), Error, new MYAlert.OnlyMessage() {
+                    @Override
+                    public void OnOk(boolean res) {
+                        Intent intent=new Intent();
+                        setResult(RESULT_CANCELED,intent);
+                        finish();
+                    }
+                });
+            }
+
+            @Override
             public void OnError(String Error) {
                 new MYAlert(FacebookActivity.this).AlertOnly(getResources().getString(R.string.facebook), Error, new MYAlert.OnlyMessage() {
                     @Override

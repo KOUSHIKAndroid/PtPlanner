@@ -79,6 +79,16 @@ public class ResetPassword extends AppCompatActivity implements View.OnClickList
                         }
 
                         @Override
+                        public void OnError(String Error, String Response) {
+                            new MYAlert(ResetPassword.this).AlertOnly(getResources().getString(R.string.ResetPassword), Error, new MYAlert.OnlyMessage() {
+                                @Override
+                                public void OnOk(boolean res) {
+
+                                }
+                            });
+                        }
+
+                        @Override
                         public void OnError(String Error) {
                             new MYAlert(ResetPassword.this).AlertOnly(getResources().getString(R.string.ResetPassword), Error, new MYAlert.OnlyMessage() {
                                 @Override

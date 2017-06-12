@@ -13,6 +13,8 @@ import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.YourPets;
 import com.happywannyan.R;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 /**
@@ -37,14 +39,22 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.tv_name.setText(yourPetsArrayList.get(position).getName());
-        holder.tv_type.setText(yourPetsArrayList.get(position).getType());
-        holder.tv_year.setText(yourPetsArrayList.get(position).getYear());
-        holder.tv_month.setText(yourPetsArrayList.get(position).getMonth());
-        holder.tv_gender.setText(yourPetsArrayList.get(position).getGender());
-        holder.tv_size.setText(yourPetsArrayList.get(position).getSize());
+        YourPets data=yourPetsArrayList.get(position);
 
-        Glide.with(context).load(yourPetsArrayList.get(position).getImg()).into(holder.img_view);
+
+        holder.tv_name.setText(data.getPet_name());
+        try {
+            holder.tv_type.setText(data.getOtherinfo().getJSONObject(0).getString("show_name"));
+            holder.tv_year.setText(data.getOtherinfo().getJSONObject(1).getString("show_name"));
+            holder.tv_month.setText(data.getOtherinfo().getJSONObject(2).getString("show_name"));
+            holder.tv_gender.setText(data.getOtherinfo().getJSONObject(3).getString("show_name"));
+            holder.tv_size.setText(data.getOtherinfo().getJSONObject(4).getString("show_name"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Glide.with(context).load(data.getPet_image()).into(holder.img_view);
     }
 
     @Override

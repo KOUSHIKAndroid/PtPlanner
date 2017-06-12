@@ -119,6 +119,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             }
 
                             @Override
+                            public void OnError(String Error, String Response) {
+                                Loger.Error("@@ REG", Error);
+                                new MYAlert(SignUpActivity.this).AlertOnly(getResources().getString(R.string.SignUp), Error, new MYAlert.OnlyMessage() {
+                                    @Override
+                                    public void OnOk(boolean res) {
+                                        appLoader.Dismiss();
+                                        EDX_email.setText("");
+                                        EDX_Password.setText("");
+//                                        startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+//                                        finish();
+                                    }
+                                });
+                            }
+
+                            @Override
                             public void OnError(String Error) {
                                 Loger.Error("@@ REG", Error);
                                 new MYAlert(SignUpActivity.this).AlertOnly(getResources().getString(R.string.SignUp), Error, new MYAlert.OnlyMessage() {

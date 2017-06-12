@@ -12,8 +12,16 @@ import android.view.ViewGroup;
 
 import com.happywannyan.Activities.BaseActivity;
 import com.happywannyan.Adapter.YourPets_Adapter;
+import com.happywannyan.Constant.AppContsnat;
+import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.POJO.YourPets;
 import com.happywannyan.R;
+import com.happywannyan.Utils.AppLoader;
+import com.happywannyan.Utils.JSONPerser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,7 +34,7 @@ public class MyPets_Fragments extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    AppLoader appLoader;
     RecyclerView recyclerView;
 
     YourPets_Adapter yourPets_adapter;
@@ -50,6 +58,7 @@ public class MyPets_Fragments extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appLoader = new AppLoader(getActivity());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -68,31 +77,87 @@ public class MyPets_Fragments extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ListPets=new ArrayList<>();
-        for(int i=0;i<10;i++)
-        {
-            YourPets yourPets=new YourPets();
-            yourPets.setName("Name"+i);
-            yourPets.setFriendly(true);
-            yourPets.setMonth("june");
-            yourPets.setImg("http://s7d2.scene7.com/is/image/PetSmart/PB0101_HERO-Dog-GroomingSupplies-20160818?$sclp-banner-main_small$");
-            ListPets.add(yourPets);
-        }
-        yourPets_adapter=new YourPets_Adapter(getActivity(),ListPets);
+        ListPets = new ArrayList<>();
+
+        GET_PETDATA(0);
+
+        yourPets_adapter = new YourPets_Adapter(getActivity(), ListPets);
         recyclerView.setAdapter(yourPets_adapter);
-
-
 
 
         view.findViewById(R.id.IMG_icon_drwaer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((BaseActivity)getActivity()).Menu_Drawer();
+                ((BaseActivity) getActivity()).Menu_Drawer();
             }
         });
 
+    }
+
+    private void GET_PETDATA(final int i) {
+        appLoader.Show();
+        ArrayList<APIPOSTDATA> params = new ArrayList<>();
+        APIPOSTDATA apipostdata = new APIPOSTDATA();
+        apipostdata.setPARAMS("user_id");
+        apipostdata.setValues("8");
+        params.add(apipostdata);
+        apipostdata = new APIPOSTDATA();
+        apipostdata.setPARAMS("lang_id");
+        apipostdata.setValues("en");
+        params.add(apipostdata);
+        apipostdata = new APIPOSTDATA();
+        apipostdata.setPARAMS("start_form");
+        apipostdata.setValues("" + i);
+        params.add(apipostdata);
+        apipostdata = new APIPOSTDATA();
+        apipostdata.setPARAMS("per_page");
+        apipostdata.setValues("10");
+        params.add(apipostdata);
+        new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "app_users_petinfo?", params, new JSONPerser.JSONRESPONSE() {
+            @Override
+            public void OnSuccess(String Result) {
+                appLoader.Dismiss();
+
+                try {
+
+                    JSONObject jObject = new JSONObject(Result);
+
+                    JSONArray infoarry = jObject.getJSONArray("info_array");
+                    for (int i = 0; i < infoarry.length(); i++) {
+                        JSONObject jsonObject = infoarry.getJSONObject(i);
+                        YourPets yourPets = new YourPets();
+                        yourPets.setEdit_id(jsonObject.getString("edit_id"));
+                        yourPets.setPet_type_id(jsonObject.getString("pet_type_id"));
+                        yourPets.setPet_image(jsonObject.getString("pet_image"));
+                        yourPets.setPet_name(jsonObject.getString("pet_name"));
+                        yourPets.setOtherinfo(jsonObject.getJSONArray("other_info"));
+                        ListPets.add(yourPets);
+                    }
+                    if(i==0) {
+                        yourPets_adapter = new YourPets_Adapter(getActivity(), ListPets);
+                        recyclerView.setAdapter(yourPets_adapter);
+                    }else {
+                        yourPets_adapter.notifyDataSetChanged();
+                    }
+
+                } catch (JSONException e) {
+                }
+
+
+            }
+
+            @Override
+            public void OnError(String Error, String Response) {
+                appLoader.Dismiss();
+            }
+
+            @Override
+            public void OnError(String Error) {
+                appLoader.Dismiss();
+            }
+        });
     }
 
     public void onButtonPressed(Uri uri) {
@@ -100,8 +165,6 @@ public class MyPets_Fragments extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-
 
 
     public interface OnFragmentInteractionListener {

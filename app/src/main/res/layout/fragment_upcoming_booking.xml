@@ -56,11 +56,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/up_coming_booking"
-                android:textSize="14sp"
-                android:textColor="@color/text_dark_gray"
                 android:paddingLeft="14dp"
-                android:paddingRight="14dp"/>
+                android:paddingRight="14dp"
+                android:text="@string/up_coming_booking"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="14sp"
+                android:typeface="sans" />
 
             <View
                 android:id="@+id/view_between_upcoming_current_booking"
@@ -75,11 +76,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
                 android:text="@string/current_booking"
                 android:textColor="@color/text_dark_gray"
                 android:textSize="14sp"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"/>
+                android:typeface="sans" />
 
             <View
                 android:id="@+id/view_between_current_pending_booking"
@@ -88,16 +90,18 @@
                 android:layout_height="15dp"
                 android:background="@color/gray_project"
                 />
+
             <com.happywannyan.Font.SFNFTextView
                 android:id="@+id/tv_pending"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
                 android:text="@string/pending_booking"
                 android:textColor="@color/text_dark_gray"
                 android:textSize="14sp"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"/>
+                android:typeface="sans" />
 
             <View
                 android:id="@+id/view_between_pending_past"
@@ -112,11 +116,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
                 android:text="@string/past_booking"
                 android:textColor="@color/text_dark_gray"
                 android:textSize="14sp"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"/>
+                android:typeface="sans" />
         </LinearLayout>
 
     </HorizontalScrollView>

@@ -46,7 +46,7 @@ public class Booking_Adapter extends RecyclerView.Adapter<Booking_Adapter.MyView
 
             JSONObject object = AllBooking.get(position);
 
-            Glide.with(context).load(object.getJSONObject("pet_details").getString("pet_image")).into(holder.img_view);
+            Glide.with(context).load(object.getJSONObject("users_profile").getString("booked_user_image")).into(holder.img_view);
 
             holder.tv_title.setText(object.getJSONObject("users_profile").getString("custom_quotes"));
             holder.tv_name.setText(object.getJSONObject("users_profile").getString("booked_user_name"));
@@ -58,20 +58,26 @@ public class Booking_Adapter extends RecyclerView.Adapter<Booking_Adapter.MyView
             holder.tv_total_pets_value.setText(object.getJSONObject("booking_info").getString("booked_total_pet"));
             holder.tv_total_amount_value.setText(object.getJSONObject("booking_info").getString("booked_total_amount"));
 
-            if(position==AllBooking.size()-1 &&
-                    AllBooking.size()%10==0
-                    && AllBooking.size()>=10
-                    && nextData==1){
 
-                ///////////lazy load here called///////
-                from=from+10;
-                //message_fragment.loadList(""+from);
-                bookingFragment.loadList(String.valueOf(from));
-            }
 
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position==AllBooking.size()-1 &&
+                AllBooking.size()%10==0
+                && AllBooking.size()>=10
+                && nextData==1){
+
+            ///////////lazy load here called///////
+            from=from+10;
+            //message_fragment.loadList(""+from);
+            bookingFragment.loadList(String.valueOf(from));
+        }
+        return super.getItemViewType(position);
     }
 
     @Override
