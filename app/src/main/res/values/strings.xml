@@ -104,4 +104,6 @@
     <string name="ResetPassword">Reset Password</string>
     <string name="signupsuccess">Sign up success please check your email </string>
     <string name="loading">Loading...</string>
+    <string name="TotalPets">Total Pet\'s</string>
+    <string name="responseinoneday">Responds in 1 day</string>
 </resources>

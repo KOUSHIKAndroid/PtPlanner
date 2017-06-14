@@ -467,23 +467,23 @@ public class Advanced_search extends Fragment {
 
                         data = new JSONObject();
                         data.put("name", "ne_lng");
-                        data.put("value", mParam1.getJSONObject("viewposrt").getString("northeast_LNG"));
+                        data.put("value", mParam1.getJSONObject("viewport").getString("northeast_LNG"));
                         Searchkeyinfor.put(data);
 
                         data = new JSONObject();
                         data.put("name", "ne_lat");
-                        data.put("value", mParam1.getJSONObject("viewposrt").getString("northeast_LAT"));
+                        data.put("value", mParam1.getJSONObject("viewport").getString("northeast_LAT"));
                         Searchkeyinfor.put(data);
 
 
                         data = new JSONObject();
                         data.put("name", "sw_lng");
-                        data.put("value", mParam1.getJSONObject("viewposrt").getString("southwest_LNG"));
+                        data.put("value", mParam1.getJSONObject("viewport").getString("southwest_LNG"));
                         Searchkeyinfor.put(data);
 
                         data = new JSONObject();
                         data.put("name", "sw_lat");
-                        data.put("value", mParam1.getJSONObject("viewposrt").getString("northeast_LAT"));
+                        data.put("value", mParam1.getJSONObject("viewport").getString("southwest_LAT"));
                         Searchkeyinfor.put(data);
 
                         SEARCHPARAMS.put("Address", mParam1.getString("Address"));

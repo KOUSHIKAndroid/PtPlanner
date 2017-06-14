@@ -253,19 +253,19 @@ public class Search_Basic extends Fragment {
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         JSONObject latalng=new JSONObject();
         try {
-            latalng.put("lat",place.getLatLng().latitude);
-            latalng.put("lng",place.getLatLng().longitude);
+            latalng.put("lat",place.getLatLng().latitude+"");
+            latalng.put("lng",place.getLatLng().longitude+"");
 
             JSONObject ViewPort=new JSONObject();
-            ViewPort.put("southwest_LAT",place.getViewport().southwest.latitude);
-            ViewPort.put("southwest_LNG",place.getViewport().southwest.longitude);
+            ViewPort.put("southwest_LAT",place.getViewport().southwest.latitude+"");
+            ViewPort.put("southwest_LNG",place.getViewport().southwest.longitude+"");
 
-            ViewPort.put("northeast_LAT",place.getViewport().northeast.latitude);
-            ViewPort.put("northeast_LNG",place.getViewport().northeast.longitude);
+            ViewPort.put("northeast_LAT",place.getViewport().northeast.latitude+"");
+            ViewPort.put("northeast_LNG",place.getViewport().northeast.longitude+"");
 
             jsondata.put("LocationName",place.getName());
             jsondata.put("latlng",latalng);
-            jsondata.put("viewposrt",ViewPort);
+            jsondata.put("viewport",ViewPort);
             jsondata.put("Address",place.getAddress());
             jsondata.put("StartDate",StartDate);
             jsondata.put("EndDate",EndDate);
