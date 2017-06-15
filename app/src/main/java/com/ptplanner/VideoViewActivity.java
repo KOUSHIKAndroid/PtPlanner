@@ -20,6 +20,8 @@ import java.util.Locale;
  */
 public class VideoViewActivity extends Activity {
 
+//    fkjndfjknfdj Commect
+
     String videoLink;
     ProgressBar pBar;
     RelativeLayout closeDialog;
