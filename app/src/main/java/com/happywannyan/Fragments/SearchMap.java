@@ -3,6 +3,7 @@ package com.happywannyan.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -88,7 +89,12 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
                     ((ImageView) ((SearchResult)getActivity()). findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_minus);
 //                    ((SearchResult)getActivity()). findViewById(R.id.fab).setVisibility(View.VISIBLE);
                     ((SearchResult)getActivity()).findViewById(R.id.list).setVisibility(View.VISIBLE);
-                    ((SearchResult)getActivity()).findViewById(R.id.IMG_Tinderr).setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((SearchResult)getActivity()).findViewById(R.id.IMG_Tinderr).setVisibility(View.VISIBLE);
+                        }
+                    },200);
                     ((ImageView) ((SearchResult)getActivity()).findViewById(R.id.fab_plus)).setTag("0");
                 }else {
                     ((ImageView) ((SearchResult)getActivity()). findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_plus);
