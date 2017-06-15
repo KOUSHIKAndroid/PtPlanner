@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F7F8F9"
+                android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#22A7F0">
+
+            <LinearLayout
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/selector_default"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="@dimen/appointment_back_height"
+                    android:background="@drawable/back_white"
+                    android:clickable="false"/>
+            </LinearLayout>
+
+            <com.ptplanner.customviews.TitilliumSemiBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/frag_appointment_appointment"
+                android:textColor="#ffffff"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/prog_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+            <ScrollView
+                android:id="@+id/scrl_body"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/ll_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@drawable/appprofilebg"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/img_pic"
+                            android:layout_width="@dimen/appointment_pic_width"
+                            android:layout_height="@dimen/appointment_pic_height"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_toRightOf="@+id/img_pic"
+                            android:orientation="vertical">
+
+                            <com.ptplanner.customviews.TitilliumBold
+                                android:id="@+id/txt_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000000"
+                                android:textSize="@dimen/appointment_title_textsize"/>
+
+                            <com.ptplanner.customviews.TitilliumLight
+                                android:id="@+id/txt_name_sub"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textColor="#22A7F0"
+                                android:textSize="@dimen/appointment_title_sub_textsize"/>
+
+                            <com.ptplanner.customviews.TitilliumLight
+                                android:id="@+id/txt_clientEmail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:textColor="#22A7F0"
+                                android:textSize="@dimen/appointment_desc_textsize"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_chat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/selector_default"
+                            android:orientation="vertical"
+                            android:padding="5dp"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/img_chat"
+                                android:layout_width="@dimen/appointment_chat_width"
+                                android:layout_height="@dimen/appointment_chat_height"
+                                android:background="@drawable/appchat"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_msg_new"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/msg">
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ll_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="10dp">
+
+                        <com.ptplanner.customviews.TitilliumLight
+                            android:id="@+id/txt_desc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/appointment_desc_textsize"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_datetime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:background="#FFFFFF"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="10dp">
+
+                        <com.ptplanner.customviews.TitilliumLight
+                            android:id="@+id/txt_datetime_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/frag_appointment_dateandtime"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/appointment_datetime_title_textsize"/>
+
+                        <com.ptplanner.customviews.TitilliumLight
+                            android:id="@+id/txt_datetime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="#22A7F0"
+                            android:textSize="@dimen/appointment_datetime_textsize"/>
+
+                        <RelativeLayout
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp">
+
+                            <com.ptplanner.customviews.TitilliumLight
+                                android:id="@+id/txt_to"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:textColor="#373737"
+                                android:textSize="17sp"/>
+
+                            <com.ptplanner.customviews.TitilliumLight
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="till"
+                                android:textColor="#373737"
+                                android:textSize="17sp"/>
+
+                            <com.ptplanner.customviews.TitilliumLight
+                                android:id="@+id/txt_from"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:textColor="#373737"
+                                android:textSize="17sp"/>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="10dp">
+
+                        <com.ptplanner.customviews.TitilliumBold
+                            android:id="@+id/txt_location_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/frag_appointment_location"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/appointment_datetime_title_textsize"/>
+
+                        <com.ptplanner.customviews.TitilliumLight
+                            android:id="@+id/txt_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="#22A7F0"
+                            android:textSize="@dimen/appointment_datetime_textsize"/>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ll_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/appointment_cancel_height"
+                        android:layout_marginBottom="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="35dp"
+                        android:background="#FFFFFF"
+                        android:padding="10dp">
+
+                        <com.ptplanner.customviews.TitilliumLight
+                            android:id="@+id/cancel_Appointment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:clickable="false"
+                            android:text="@string/frag_appointment_cancelAppointment"
+                            android:textColor="#FF0000"
+                            android:textSize="20sp"/>
+
+                        <ProgressBar
+                            android:id="@+id/cancel_pbar"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

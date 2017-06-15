@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textView1"
+    android:layout_width="110dp"
+    android:layout_height="54dp"
+    android:textColor="#fefcfe"
+    android:textSize="15dp"
+    android:gravity="center"
+    android:background="@drawable/spinner_item_divider" />

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/con"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="3">
+
+        <com.ptplanner.customviews.TitilliumRegular
+            android:id="@+id/txt_timeing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:text="08:00-9:00"
+            android:textColor="#000000"
+            android:textSize="18sp"/>
+
+        <com.ptplanner.customviews.TitilliumBold
+            android:id="@+id/txt_apt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="2dp"
+            android:text="APP.1"
+            android:textColor="#000000"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_booking_status"
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/booked_button"
+            android:gravity="center"
+            android:padding="6dp">
+
+            <com.ptplanner.customviews.TitilliumSemiBold
+                android:id="@+id/txt_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="BOOKED"
+                android:textColor="#22A7F0"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="Sunday">SUN</string>
+    <string name="Monday">MON</string>
+    <string name="Tuesday">TUE</string>
+    <string name="Wednesday">WED</string>
+    <string name="Thursday">THU</string>
+    <string name="Friday">FRI</string>
+    <string name="Saturday">SAT</string>
+
+    <string name="app_name">PT-Planner</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="RememberMe">Remember Me</string>
+    <string name="ForgotPassword">Forgot Password</string>
+    <string name="BlankEmail">Email can not be blank</string>
+    <string name="InvalidEmail">Not a valid email</string>
+    <string name="BlankPassword">Password can not be blank</string>
+    <string name="NoInternet">No Internet connection</string>
+    <string name="ErrorMSG">You are not a valid user</string>
+
+
+    <string name="CalendereApp">App</string>
+
+    <!--fragment_booking resource-->
+    <string name="Book">Book</string>
+    <string name="Booked">Booked</string>
+    <string name="BookConfirm">Booking Confirmation</string>
+
+
+    <!--fragment_calendar resource-->
+    <string name="Login">Login</string>
+    <string name="Logout">Logout</string>
+    <string name="Today">TODAY</string>
+    <string name="Calendar">Kalender</string>
+    <string name="PowerChest">Power Chest</string>
+    <string name="Appointments">Appointments</string>
+    <string name="NoAppointment">No Appointment</string>
+    <string name="SingleAppointment">Appointment</string>
+    <string name="MultipointAppointments">Appointments</string>
+    <string name="RemindMe">Remind Me</string>
+    <string name="Training">Training</string>
+    <string name="Diet">Diet</string>
+    <string name="Diary">Diary</string>
+    <string name="ExerciseDone">exercises done</string>
+    <string name="Meal">meal</string>
+    <string name="Meals">meals</string>
+
+    <!--activity_landingpage resource -->
+    <string name="acivity_landingpage_calendar">Calendar</string>
+    <string name="acivity_landingpage_appointments">Appointments</string>
+    <string name="acivity_landingpage_progress">Progress</string>
+    <string name="acivity_landingpage_messages">Messages</string>
+
+    <!-- activity_forgotpassword resource -->
+    <string name="acivity_forgotpassword_enterEmail">Please enter your login email id</string>
+    <string name="acivity_forgotpassword_done">Done</string>
+    <string name="ForgotPassSugge">* Email Id Should Be a Valid PT-Planner Account Email Id, After
+        Sending The Email a Password Reset Email Will Send To Your Email Id.
+    </string>
+
+
+    <!-- dialog_logout_option resource -->
+    <string name="dialog_logout_option_yes">YES</string>
+    <string name="dialog_logout_option_no">NO</string>
+    <string name="dialog_logout_option_logout">Logout from PT-Planner Account?</string>
+
+    <!--popup_showcalendar resource -->
+    <string name="popup_showcalendar_hide">Hide</string>
+    <string name="popup_showcalendar_today">Today</string>
+
+    <!--reminder_dialog resource -->
+    <string name="reminder_dialog_remindme">REMIND ME</string>
+    <string name="reminder_dialog_cancel">CANCEL</string>
+    <string name="reminder_dialog_done">DONE</string>
+
+
+    <!-- frag_book_appointment resouce-->
+    <string name="frag_book_appointment_appointments">APPOINTMENTS</string>
+    <string name="frag_book_appointment_calendar">Calendar</string>
+    <string name="frag_book_appointment_chooseDate">CHOOSE DATE</string>
+    <string name="frag_book_appointment_choosePt">CHOOSE PT</string>
+
+    <!-- frag_training resource -->
+    <string name="frag_training_more">More</string>
+    <string name="frag_training_finishExercise">Finish Exercise</string>
+    <string name="frag_training_alertDialog">You gotta ask your personal trainer for some workouts
+        !
+    </string>
+
+    <!-- frag_diet resource -->
+    <string name="fra_diet_diet">DIET</string>
+    <string name="fra_diet_calendar">Calendar</string>
+    <string name="fra_diet_calorieDialog">Zero Calorie Diet</string>
+
+    <!--frag_diary resource -->
+    <string name="fra_diary_diary">DIARY</string>
+    <string name="fra_diary_calendar">Calendar</string>
+    <string name="fra_diary_longString">If everything is going perfect you should write that
+    </string>
+
+    <!--profile_details resource -->
+    <string name="profile_details_location">Location</string>
+    <string name="profile_details_profile">PROFILE</string>
+
+    <!--frag_progress resource -->
+    <string name="frag_progress_progress">PROGRESS</string>
+    <string name="frag_progress_allGraph">All Graph</string>
+    <string name="frag_progress_type">Type</string>
+    <string name="frag_progress_goal">Goal</string>
+    <string name="frag_progress_deadline">Deadline</string>
+    <string name="frag_progress_imageGoal">Goal</string>
+    <string name="years_old">Years Old</string>
+
+    <!--frag_allgraph resource -->
+    <string name="frag_allgraph">ALL GRAPH</string>
+
+    <!--dialog_camera_selection resource -->
+    <string name="dialog_camera_selection_cancel">Cancel</string>
+
+
+    <!--activity_grapgh_view resource -->
+    <string name="activity_graph_view_addMeasurement">Add Measurement</string>
+    <string name="activity_graph_view_goal">Goal</string>
+    <string name="activity_graph_view_deadline">Deadline</string>
+
+    <!--measurement_dialog resource -->
+    <string name="measurement_dialog_addMeasurement">ADD MEASUREMENT</string>
+    <string name="measurement_dialog_done">DONE</string>
+
+    <!--frag_messages resource -->
+    <string name="frag_messages_messages">MESSAGES</string>
+
+    <!--msg_history resource -->
+    <string name="msg_history_viewProfile">View Profile</string>
+    <string name="msg_history_writeMessage">Write a message</string>
+
+    <!--DietFragment resource -->
+    <string name="diet_fragment_zeroCalorie">Zero Calorie Diet</string>
+
+    <!--activity_camerapreview resource -->
+    <string name="activity_camerapreview_cancel">Cancel</string>
+    <string name="activity_camerapreview_done">Done</string>
+
+    <!--frag_appointment resource -->
+    <string name="frag_appointment_appointment">Appointments</string>
+    <string name="frag_appointment_dateandtime">Date and Time</string>
+    <string name="frag_appointment_location">Location</string>
+
+    <string name="frag_more_hide">Hide</string>
+    <string name="frag_more_description">Description</string>
+
+    <string name="diaryFragment_calendar">Kalender</string>
+    <string name="diaryFragment_hide">Hide</string>
+
+    <string name="message_history_viewProfile">View Profile</string>
+    <string name="message_history_writeMessage">Write a message</string>
+
+    <string name="frag_appointment_cancelAppointment">Cancel Appointment</string>
+
+
+    <string name="api_key">AIzaSyDvg8BMyNBx0uWpcNIU7Fy3P36mGSC1AVk</string>
+    <string name="project_id">751757095331</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="no_internet">No internet connection</string>
+
+    <string name="msgaccdeactivate">kontot har inaktiverats , kontakta din tränare .
+    </string>
+    <string name="please_wait">Please wait</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="privacyplicy">Privacy Policy</string>
+
+</resources>

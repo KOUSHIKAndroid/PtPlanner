@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#22A7F0"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <com.ptplanner.customviews.TitilliumSemiBold
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/frag_progress_progress"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:id="@+id/all_graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_default"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.ptplanner.customviews.TitilliumLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/frag_progress_allGraph"
+                android:textColor="#ffffff"
+                android:textSize="18sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <ProgressBar
+            android:id="@+id/prog_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+        <ScrollView
+            android:id="@+id/scrl_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:id="@+id/image_thumb"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp">
+                    </ImageView>
+
+                    <com.ptplanner.customviews.HelveticaSemiBold
+                        android:id="@+id/first_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="#282828"
+                        android:textSize="17sp"
+                        android:textStyle="bold">
+                    </com.ptplanner.customviews.HelveticaSemiBold>
+
+                    <com.ptplanner.customviews.HelveticaSemiBoldLight
+                        android:id="@+id/last_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="#282828"
+                        android:textSize="17sp">
+                    </com.ptplanner.customviews.HelveticaSemiBoldLight>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingTop="2dp"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.ptplanner.customviews.HelveticaSemiBoldLight
+                            android:id="@+id/age_years"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:textColor="#22A7F0"
+                            android:textSize="25sp">
+                        </com.ptplanner.customviews.HelveticaSemiBoldLight>
+
+                        <com.ptplanner.customviews.HelveticaSemiBoldLight
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/years_old">
+                        </com.ptplanner.customviews.HelveticaSemiBoldLight>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#E9F3F9">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.ptplanner.customviews.HelveticaSemiBoldLight
+                            android:id="@+id/height_of_client"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#22A7F0"
+                            android:textSize="25sp">
+                        </com.ptplanner.customviews.HelveticaSemiBoldLight>
+
+                        <com.ptplanner.customviews.HelveticaSemiBoldLight
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="cm">
+                        </com.ptplanner.customviews.HelveticaSemiBoldLight>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#E9F3F9">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.ptplanner.customviews.HelveticaSemiBoldLight
+                            android:id="@+id/weight_of_client"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#22A7F0"
+                            android:textSize="25sp">
+                        </com.ptplanner.customviews.HelveticaSemiBoldLight>
+
+                        <com.ptplanner.customviews.HelveticaSemiBoldLight
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="kg">
+                        </com.ptplanner.customviews.HelveticaSemiBoldLight>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="#F7F8F9">-->
+                <!--</LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="195dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="12dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ProgressBar
+                                android:id="@+id/progressBar2"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"/>
+
+                            <ImageView
+                                android:id="@+id/current_picture"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                            </ImageView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/pitureoverlay"
+                                android:gravity="center">
+
+                                <com.ptplanner.customviews.HelveticaSemiBoldLight
+                                    android:id="@+id/current_picture_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp">
+                                </com.ptplanner.customviews.HelveticaSemiBoldLight>
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="30dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ProgressBar
+                                android:id="@+id/progressBar3"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerInParent="true"/>
+
+                            <ImageView
+                                android:id="@+id/goal_picture"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                            </ImageView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/pitureoverlay"
+                                android:gravity="center">
+
+                                <com.ptplanner.customviews.HelveticaSemiBoldLight
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/frag_progress_imageGoal"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14sp">
+                                </com.ptplanner.customviews.HelveticaSemiBoldLight>
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="#F7F8F9">-->
+                <!--</LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/upload_current_img"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_default">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/iconcloudupload"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/upload_goal_img"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_default">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/iconcloudupload"
+                            />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="#F7F8F9">-->
+                <!--</LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:paddingTop="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <com.ptplanner.customviews.TitilliumSemiBold
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left|center_vertical"
+                            android:text="@string/frag_progress_type"
+                            android:textColor="#282828"
+                            android:textSize="17sp"
+                            android:textStyle="bold">
+                        </com.ptplanner.customviews.TitilliumSemiBold>
+
+                        <com.ptplanner.customviews.TitilliumSemiBold
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left|center_vertical"
+                            android:text="@string/frag_progress_goal"
+                            android:textColor="#282828"
+                            android:textSize="17sp"
+                            android:textStyle="bold">
+                        </com.ptplanner.customviews.TitilliumSemiBold>
+
+                        <com.ptplanner.customviews.TitilliumSemiBold
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/frag_progress_deadline"
+                            android:textColor="#282828"
+                            android:textSize="17sp"
+                            android:textStyle="bold">
+                        </com.ptplanner.customviews.TitilliumSemiBold>
+                    </LinearLayout>
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:background="#E9F3F9">-->
+                    <!--</LinearLayout>-->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#E9F3F9">
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Grph_list_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:paddingTop="8dp">
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</LinearLayout>

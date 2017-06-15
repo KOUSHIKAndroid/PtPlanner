@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/list_container"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/img_diet"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="7"
+            android:orientation="vertical"
+            android:paddingBottom="6dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="6dp">
+
+            <com.ptplanner.customviews.TitilliumBold
+                android:id="@+id/diet_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Fruits"
+                android:textColor="#282828"
+                android:textSize="20sp"/>
+
+            <com.ptplanner.customviews.TitilliumRegular
+                android:id="@+id/diet_sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="Fruits \n eergfreg"
+                android:textColor="#282828"
+                android:textSize="17sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/listitem_container"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#FFFFFF"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="5dp">-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/img_diet"-->
+    <!--android:layout_width="75dp"-->
+    <!--android:layout_height="74dp"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:background="@drawable/fruit">-->
+
+    <!--</ImageView>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="7dp"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_marginRight="19dp"-->
+    <!--android:layout_toRightOf="@+id/img_diet"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<com.ptplanner.customviews.TitilliumBold-->
+    <!--android:id="@+id/title"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:singleLine="true"-->
+    <!--android:text="FRUIT &amp; VEGETABLES"-->
+    <!--android:textColor="#282828"-->
+    <!--android:textSize="18sp"-->
+    <!--android:textStyle="bold"></com.ptplanner.customviews.TitilliumBold>-->
+
+    <!--<com.ptplanner.customviews.TitilliumRegular-->
+    <!--android:id="@+id/itemDetail"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:maxLines="2"-->
+    <!--android:paddingTop="4dp"-->
+    <!--android:text="Test"-->
+    <!--android:textColor="#282828"-->
+    <!--android:textSize="14sp"></com.ptplanner.customviews.TitilliumRegular>-->
+    <!--</LinearLayout>-->
+    <!--</RelativeLayout>-->
+
+</LinearLayout>

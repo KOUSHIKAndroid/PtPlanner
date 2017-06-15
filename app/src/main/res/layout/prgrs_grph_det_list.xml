@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:weightSum="3">
+
+        <com.ptplanner.customviews.TitilliumRegular
+            android:id="@+id/type_progrss_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="Bodyweight"
+            android:textColor="#282828"
+            android:textSize="17sp">
+        </com.ptplanner.customviews.TitilliumRegular>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.ptplanner.customviews.TitilliumSemiBold
+                android:id="@+id/goal_progress_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="80"
+                android:textColor="#22A7F0"
+                android:textSize="17sp">
+            </com.ptplanner.customviews.TitilliumSemiBold>
+
+            <com.ptplanner.customviews.TitilliumRegular
+                android:id="@+id/goal_progress_measure_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" kg"
+                android:textColor="#282828"
+                android:textSize="17sp">
+            </com.ptplanner.customviews.TitilliumRegular>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="10dp">
+
+            <com.ptplanner.customviews.TitilliumSemiBold
+                android:id="@+id/goal_progress_date1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:textColor="#22A7F0"
+                android:textSize="17sp">
+            </com.ptplanner.customviews.TitilliumSemiBold>
+
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="13dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/arrow">
+            </ImageView>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#E9F3F9"
+        ></LinearLayout>
+</RelativeLayout>
