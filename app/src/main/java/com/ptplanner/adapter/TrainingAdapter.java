@@ -135,7 +135,7 @@ public class TrainingAdapter extends ArrayAdapter<TrainingPerticularExerciseSets
             holder.llKG.setBackgroundColor(Color.parseColor("#00A5F4"));
 
         } else {
-
+            holder.etWeight.setEnabled(false);
             holder.llCheck.setVisibility(View.VISIBLE);
             holder.llChange.setVisibility(View.GONE);
             holder.txtSet.setTextColor(Color.parseColor("#333333"));
