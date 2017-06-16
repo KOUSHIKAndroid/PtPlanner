@@ -4,17 +4,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.happywannyan.Activities.SearchResult;
-import com.happywannyan.Activities.Tinder.TinderCard;
-import com.happywannyan.POJO.SearchData;
+import com.happywannyan.Adapter.TinderViewAdapter;
 import com.happywannyan.R;
-import com.mindorks.placeholderview.SwipeDecor;
+import com.happywannyan.Utils.cardstack.SwipeDeck;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
+
+import java.util.ArrayList;
 
 public class SearchTinder extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -25,7 +27,9 @@ public class SearchTinder extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int TotalNo = 0;
     private SwipePlaceHolderView mSwipeView;
+    SwipeDeck cardStack;
 
     public SearchTinder() {
         // Required empty public constructor
@@ -58,23 +62,128 @@ public class SearchTinder extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mSwipeView = (SwipePlaceHolderView)view.findViewById(R.id.swipeView);
+        cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
 
-        mSwipeView.getBuilder()
-                .setDisplayViewCount(3)
-                .setSwipeDecor(new SwipeDecor()
-                        .setPaddingTop(20)
-                        .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
-                        .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
+        final ArrayList<String> testData = new ArrayList<>();
+//       for(SearchData searchData:((SearchResult)getActivity()).ListARRY)
+//       {
+//           testData.add(searchData.getSearcItem().toString());
+//       }
+//        for(SearchData searchData:((SearchResult)getActivity()).ListARRY)
+//        {
+//            testData.add(searchData.getSearcItem().toString());
+//        }
+//        for(SearchData searchData:((SearchResult)getActivity()).ListARRY)
+//        {
+//            testData.add(searchData.getSearcItem().toString());
+//        }
 
-
-        for(SearchData profile : ((SearchResult)getActivity()).ListARRY){
-            mSwipeView.addView(new TinderCard(getActivity(), profile, mSwipeView));
+//        testData.add("0");
+//        testData.add("1");
+//        testData.add("2");
+//        testData.add("3");
+//        testData.add("4");
+        TotalNo = ((SearchResult) getActivity()).ListARRY.size();
+        if (TotalNo <= 1) {
+            cardStack.NUMBER_OF_CARDS = 1;
+        } else if (TotalNo < 3) {
+            cardStack.NUMBER_OF_CARDS = 2;
+        } else {
+            cardStack.NUMBER_OF_CARDS = 3;
         }
+
+
+        final TinderViewAdapter adapter = new TinderViewAdapter(((SearchResult) getActivity()).ListARRY, getActivity());
+        cardStack.setAdapter(adapter);
+        cardStack.setLeftImage(R.id.right_image);
+        cardStack.setRightImage(R.id.left_image);
+
+        cardStack.setEventCallback(new SwipeDeck.SwipeEventCallback() {
+            @Override
+            public void cardSwipedLeft(int position) {
+                Log.i("MainActivity", "card was swiped left, position in adapter: " + position);
+                TotalNo--;
+                if (TotalNo == 0) {
+                    ((ImageView) view.findViewById(R.id.IMG_Left)).setVisibility(View.GONE);
+                    ((ImageView) view.findViewById(R.id.IMG_Right)).setVisibility(View.GONE);
+                }
+                if (TotalNo <= 1) {
+                    cardStack.NUMBER_OF_CARDS = 1;
+                } else if (TotalNo < 3) {
+                    cardStack.NUMBER_OF_CARDS = 2;
+                } else {
+                    cardStack.NUMBER_OF_CARDS = 3;
+                }
+            }
+
+            @Override
+            public void cardSwipedRight(int position) {
+                Log.i("MainActivity", "card was swiped right, position in adapter: " + position);
+                TotalNo--;
+                if (TotalNo == 0) {
+                    ((ImageView) view.findViewById(R.id.IMG_Left)).setVisibility(View.GONE);
+                    ((ImageView) view.findViewById(R.id.IMG_Right)).setVisibility(View.GONE);
+                }
+                if (TotalNo <= 1) {
+                    cardStack.NUMBER_OF_CARDS = 1;
+                } else if (TotalNo < 3) {
+                    cardStack.NUMBER_OF_CARDS = 2;
+                } else {
+                    cardStack.NUMBER_OF_CARDS = 3;
+                }
+            }
+
+            @Override
+            public void cardsDepleted() {
+                Log.i("MainActivity", "no more cards");
+            }
+
+            @Override
+            public void cardActionDown() {
+
+            }
+
+            @Override
+            public void cardActionUp() {
+
+            }
+        });
+
+
+        ((ImageView) view.findViewById(R.id.IMG_Left)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardStack.swipeTopCardLeft(170);
+            }
+        });
+
+
+        ((ImageView) view.findViewById(R.id.IMG_Right)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cardStack.swipeTopCardRight(170);
+            }
+        });
+
+
+//        mSwipeView = (SwipePlaceHolderView)view.findViewById(R.id.swipeView);
+//
+//        mSwipeView.getBuilder()
+//                .setDisplayViewCount(3)
+//                .setSwipeDecor(new SwipeDecor()
+//                        .setPaddingTop(20)
+//                        .setViewGravity(Gravity.TOP)
+//                        .setRelativeScale(0.01f)
+//                        .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
+//                        .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
+//
+//
+//        for(SearchData profile : ((SearchResult)getActivity()).ListARRY){
+//            mSwipeView.addView(new TinderCard(getActivity(), profile, mSwipeView));
+//        }
 
 //        view.findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -91,26 +200,26 @@ public class SearchTinder extends Fragment {
 //        });
 
 
-        ((SearchResult)getActivity()). findViewById(R.id.fab_plus).setOnClickListener(new View.OnClickListener() {
+        ((SearchResult) getActivity()).findViewById(R.id.fab_plus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(((ImageView) ((SearchResult)getActivity()).findViewById(R.id.fab_plus)).getTag().toString().equalsIgnoreCase("1")) {
-                    ((ImageView) ((SearchResult)getActivity()). findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_minus);
-                    ((SearchResult)getActivity()).findViewById(R.id.list).setVisibility(View.VISIBLE);
+                if (((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).getTag().toString().equalsIgnoreCase("1")) {
+                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_minus);
+                    ((SearchResult) getActivity()).findViewById(R.id.list).setVisibility(View.VISIBLE);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            ((SearchResult)getActivity()). findViewById(R.id.fab).setVisibility(View.VISIBLE);
+                            ((SearchResult) getActivity()).findViewById(R.id.fab).setVisibility(View.VISIBLE);
                         }
-                    },200);
+                    }, 200);
 //                    ((SearchResult)getActivity()).findViewById(R.id.IMG_Tinderr).setVisibility(View.VISIBLE);
-                    ((ImageView) ((SearchResult)getActivity()).findViewById(R.id.fab_plus)).setTag("0");
-                }else {
-                    ((ImageView) ((SearchResult)getActivity()). findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_plus);
-                    ((SearchResult)getActivity()).findViewById(R.id.fab).setVisibility(View.GONE);
-                    ((SearchResult)getActivity()).findViewById(R.id.list).setVisibility(View.GONE);
+                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setTag("0");
+                } else {
+                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_plus);
+                    ((SearchResult) getActivity()).findViewById(R.id.fab).setVisibility(View.GONE);
+                    ((SearchResult) getActivity()).findViewById(R.id.list).setVisibility(View.GONE);
 //                    ((SearchResult)getActivity()). findViewById(R.id.IMG_Tinderr).setVisibility(View.GONE);
-                    ((ImageView) ((SearchResult)getActivity()).findViewById(R.id.fab_plus)).setTag("1");
+                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setTag("1");
                 }
             }
         });

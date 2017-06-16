@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -56,6 +58,7 @@ public class SearchResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         appLoader = new AppLoader(this);
+
 
 
         try {
@@ -133,7 +136,10 @@ public class SearchResult extends AppCompatActivity {
                         searchData.setSearcItem(jjj);
 
                         ListARRY.add(searchData);
+                        ListARRY.add(searchData);
+                        ListARRY.add(searchData);
                     }
+
 
 
                     fragmentTransaction.replace(R.id.Container_result, new SearchList());

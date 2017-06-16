@@ -1,6 +1,7 @@
 package com.happywannyan.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.happywannyan.Activities.Booking.BookingDetails;
 import com.happywannyan.Font.SFNFBoldTextView;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.Fragments.BookingFragment;
@@ -58,7 +60,12 @@ public class Booking_Adapter extends RecyclerView.Adapter<Booking_Adapter.MyView
             holder.tv_total_pets_value.setText(object.getJSONObject("booking_info").getString("booked_total_pet"));
             holder.tv_total_amount_value.setText(object.getJSONObject("booking_info").getString("booked_total_amount"));
 
-
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.startActivity(new Intent(context, BookingDetails.class));
+                }
+            });
 
         }catch (Exception e){
             e.printStackTrace();

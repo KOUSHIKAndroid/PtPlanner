@@ -1,8 +1,17 @@
 package com.happywannyan.Activities;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -17,6 +26,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.identity.intents.Address;
 import com.google.android.gms.location.places.Places;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.happywannyan.Activities.Booking.BookingOne;
@@ -33,12 +43,24 @@ import com.happywannyan.Utils.Loger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class BaseActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener {
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
+public class BaseActivity extends AppCompatActivity
+        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener, LocationListener {
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private GoogleApiClient mGoogleApiClient;
+    private LocationManager locationManager;
+    private String provider;
+    Location location;
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationManager.removeUpdates((android.location.LocationListener) this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +77,35 @@ public class BaseActivity extends AppCompatActivity
                 .build();
 
 
-        fragmentManager=getSupportFragmentManager();
-        fragmentTransaction=fragmentManager.beginTransaction();
-        Search_Basic search_basic=new Search_Basic();
-        fragmentTransaction.add(R.id.Base_fargment_layout,search_basic);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        Search_Basic search_basic = new Search_Basic();
+        fragmentTransaction.add(R.id.Base_fargment_layout, search_basic);
         fragmentTransaction.commit();
 
 
+        // Get the location manager
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Define the criteria how to select the locatioin provider -> use
+        // default
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, false);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(BaseActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+            return;
+        }else
+         location = locationManager.getLastKnownLocation(provider);
 
+        // Initialize the location fields
+        if (location != null) {
+            System.out.println("Provider " + provider + " has been selected.");
+            onLocationChanged(location);
+        } else {
+//            latituteField.setText("Location not available");
+//            longitudeField.setText("Location not available");
+        }
 
 
 
@@ -73,9 +116,9 @@ public class BaseActivity extends AppCompatActivity
          */
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        final ImageView UserImage=(ImageView)navigationView.getHeaderView(0).findViewById(R.id.imageView);
-        final SFNFTextView UserName=(SFNFTextView)navigationView.getHeaderView(0).findViewById(R.id.TXT_UserName);
-        final SFNFTextView txt_login_label=(SFNFTextView)navigationView.getHeaderView(0).findViewById(R.id.TXT_loginlabel);
+        final ImageView UserImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
+        final SFNFTextView UserName = (SFNFTextView) navigationView.getHeaderView(0).findViewById(R.id.TXT_UserName);
+        final SFNFTextView txt_login_label = (SFNFTextView) navigationView.getHeaderView(0).findViewById(R.id.TXT_loginlabel);
 
 
         navigationView.findViewById(R.id.LL_message).setOnClickListener(new View.OnClickListener() {
@@ -84,10 +127,10 @@ public class BaseActivity extends AppCompatActivity
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
 
-                fragmentManager=getSupportFragmentManager();
-                fragmentTransaction=fragmentManager.beginTransaction();
-                Message_Fragment search_basic=new Message_Fragment();
-                fragmentTransaction.add(R.id.Base_fargment_layout,search_basic);
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                Message_Fragment search_basic = new Message_Fragment();
+                fragmentTransaction.add(R.id.Base_fargment_layout, search_basic);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -96,14 +139,13 @@ public class BaseActivity extends AppCompatActivity
         new App_data_holder(BaseActivity.this).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
             @Override
             public void Avialable(boolean avilavle, JSONObject data) {
-                try{
+                try {
 
-                    Loger.MSG("@@ DADAD",""+data);
+                    Loger.MSG("@@ DADAD", "" + data);
                     Glide.with(BaseActivity.this).load(data.getJSONObject("info_array").getString("image_path")).transform(new CircleTransform(BaseActivity.this)).into(UserImage);
                     UserName.setText(data.getJSONObject("info_array").getString("firstname"));
                     txt_login_label.setVisibility(View.GONE);
-                }catch (JSONException e)
-                {
+                } catch (JSONException e) {
 
                 }
             }
@@ -119,10 +161,9 @@ public class BaseActivity extends AppCompatActivity
                 navigationView.getHeaderView(0).findViewById(R.id.RL_HEADER).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(BaseActivity.this,LoginActivity.class));
+                        startActivity(new Intent(BaseActivity.this, LoginActivity.class));
                     }
                 });
-
 
 
             }
@@ -134,7 +175,7 @@ public class BaseActivity extends AppCompatActivity
                 new App_data_holder(BaseActivity.this).LogOut_ClearAllData();
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
-                startActivity(new Intent(BaseActivity.this,LoginChoser.class));
+                startActivity(new Intent(BaseActivity.this, LoginChoser.class));
                 finish();
 
             }
@@ -146,8 +187,8 @@ public class BaseActivity extends AppCompatActivity
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
 //                startActivity(new Intent(BaseActivity.this,BookingOne.class));
-                fragmentManager=getSupportFragmentManager();
-                fragmentTransaction=fragmentManager.beginTransaction();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.Base_fargment_layout, new BookingFragment());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
@@ -170,14 +211,13 @@ public class BaseActivity extends AppCompatActivity
             public void onClick(View v) {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
-                fragmentManager=getSupportFragmentManager();
-                fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.Base_fargment_layout, MyPets_Fragments.newInstance(null,null));
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.Base_fargment_layout, MyPets_Fragments.newInstance(null, null));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
-
 
 
     }
@@ -203,8 +243,7 @@ public class BaseActivity extends AppCompatActivity
         return true;
     }
 
-    public void Menu_Drawer()
-    {
+    public void Menu_Drawer() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -219,4 +258,56 @@ public class BaseActivity extends AppCompatActivity
     }
 
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(BaseActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+            return;
+        }else
+        locationManager.requestLocationUpdates(provider, 400, 1, this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Loger.MSG("@@ LAT",""+location.getLatitude()+location.getLongitude());
+        Loger.MSG("@@ LAT",""+location.getExtras().toString());
+        Geocoder geocoder;
+        List<android.location.Address> addresses = null;
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+        String city = addresses.get(0).getLocality();
+        String state = addresses.get(0).getAdminArea();
+        String country = addresses.get(0).getCountryName();
+        String postalCode = addresses.get(0).getPostalCode();
+        String knownName = addresses.get(0).getFeatureName();
+
+        Loger.MSG("@@ ADdrsee-"," "+city+country+postalCode+knownName);
+
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
 }

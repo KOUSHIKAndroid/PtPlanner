@@ -118,7 +118,8 @@
             android:label="@string/title_activity_search_result"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.ForgotPassword" />
-        <activity android:name=".Activities.ResetPassword"></activity>
+        <activity android:name=".Activities.ResetPassword" />
+        <activity android:name=".Activities.Booking.BookingDetails"></activity>
     </application>
 
 </manifest>

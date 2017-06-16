@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,8 +25,13 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.happywannyan.Activities.SearchResult;
+import com.happywannyan.Font.SFNFBoldTextView;
+import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.R;
 import com.happywannyan.Utils.Loger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.happywannyan.Constant.ApplicationClass.TAG;
 
@@ -136,6 +143,7 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+       marker.showInfoWindow();
         return false;
     }
 
@@ -147,6 +155,33 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
         Map.setMinZoomPreference((float) 4.99);
         Map.getUiSettings().setRotateGesturesEnabled(false);
         Map.getUiSettings().setScrollGesturesEnabled(false);
+        Map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                // Getting view from the layout file info_window_layout
+                View v = getActivity().getLayoutInflater().inflate(R.layout.map_popup_time, null);
+                v.setLayoutParams(new RelativeLayout.LayoutParams(700,230));
+                LatLng latLng = marker.getPosition();
+                try {
+                    JSONObject jsonObject=new JSONObject(marker.getTitle()+"");
+                    Loger.MSG("@@ MAR",""+jsonObject);
+                    ((SFNFBoldTextView)v.findViewById(R.id.tv_name)).setText(""+jsonObject.getString("nickname"));
+                    ((SFNFTextView)v.findViewById(R.id.tv_place)).setText(""+jsonObject.getString("whole_address"));
+                    ((SFNFTextView)v.findViewById(R.id.tv_time)).setText(""+jsonObject.getString("unit"));
+                    ((RatingBar)v.findViewById(R.id.Rating)).setNumStars(Integer.parseInt(jsonObject.getString("ave_rating")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return v;
+
+            }
+        });
 
 
 
@@ -170,6 +205,7 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
 //                        .anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 
                     Marker lomarakar = Map.addMarker(markerOptions);
+                    lomarakar.setTitle(((SearchResult)getActivity()). ListARRY.get(i).getSearcItem()+"");
                     builder2.include(markerOptions.getPosition());
                     lomarakar.setTag(i);
                 }catch (Exception ee){
