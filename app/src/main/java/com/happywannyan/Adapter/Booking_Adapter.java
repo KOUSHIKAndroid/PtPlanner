@@ -1,5 +1,7 @@
 package com.happywannyan.Adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatImageView;
@@ -43,10 +45,10 @@ public class Booking_Adapter extends RecyclerView.Adapter<Booking_Adapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         try {
 
-            JSONObject object = AllBooking.get(position);
+            final JSONObject object = AllBooking.get(position);
 
             Glide.with(context).load(object.getJSONObject("users_profile").getString("booked_user_image")).into(holder.img_view);
 
@@ -63,7 +65,12 @@ public class Booking_Adapter extends RecyclerView.Adapter<Booking_Adapter.MyView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    context.startActivity(new Intent(context, BookingDetails.class));
+
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.img_view, "cardimage");
+                    Intent intent = new Intent(context, BookingDetails.class);
+                    intent.putExtra("data",""+object);
+                    context. startActivity(intent, options.toBundle());
+//                    context.startActivity(new Intent(context, BookingDetails.class));
                 }
             });
 

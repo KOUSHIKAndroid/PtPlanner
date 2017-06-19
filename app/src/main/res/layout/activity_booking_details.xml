@@ -68,6 +68,7 @@
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/img_view"
+                        android:transitionName="cardimage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY" />
@@ -156,6 +157,7 @@
                     android:weightSum="3">
 
                     <com.happywannyan.Font.SFNFBoldTextView
+                        android:id="@+id/StartDate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -166,6 +168,7 @@
 
 
                     <com.happywannyan.Font.SFNFBoldTextView
+                        android:id="@+id/Enddate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -174,6 +177,7 @@
                         android:textSize="12sp" />
 
                     <com.happywannyan.Font.SFNFBoldTextView
+                        android:id="@+id/BookingId"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -363,7 +367,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingLeft="10dp"
+                        android:paddingLeft="0dp"
                         android:text="1"
                         android:textColor="@color/Black"
                         android:textSize="16sp" />
@@ -483,7 +487,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Small(10-20kg)"
                     android:textAllCaps="true"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/Black"
                     android:layout_toRightOf="@+id/tv_size_name" />
 

@@ -29,6 +29,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.happywannyan.Activities.Booking.BookingOne;
 import com.happywannyan.Font.SFNFTextView;
@@ -39,7 +43,12 @@ import com.happywannyan.Fragments.Message_Fragment;
 import com.happywannyan.R;
 import com.happywannyan.Utils.App_data_holder;
 import com.happywannyan.Utils.CircleTransform;
+import com.happywannyan.Utils.LocationListener.LocationBaseActivity;
+import com.happywannyan.Utils.LocationListener.LocationConfiguration;
+import com.happywannyan.Utils.LocationListener.MyLocalLocationManager;
 import com.happywannyan.Utils.Loger;
+import com.happywannyan.Utils.constants.LogType;
+import com.happywannyan.Utils.constants.ProviderType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,23 +58,20 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class BaseActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener, LocationListener, GoogleApiClient.ConnectionCallbacks {
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+public class BaseActivity extends LocationBaseActivity
+        implements  NavigationView.OnNavigationItemSelectedListener, LocationListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    private LocationManager locationManager;
     private Location location;
     private String provider;
     private static final String TAG = "FusedLocationActivity";
     private static final long INTERVAL = 1000 * 10;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private static final int REQUEST_CHECK_SETTINGS = 10;
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        locationManager.removeUpdates( this);
     }
 
 
@@ -76,8 +82,7 @@ public class BaseActivity extends AppCompatActivity
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("@@@", "Refreshed token: " + refreshedToken);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-       LocationRequest();
+//       LocationRequest();
 
 
         fragmentManager = getSupportFragmentManager();
@@ -196,27 +201,11 @@ public class BaseActivity extends AppCompatActivity
             }
         });
 
-
+        MyLocalLocationManager.setLogType(LogType.GENERAL);
+        getLocation();
     }
 
-    private void LocationRequest() {
 
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-
-            return;
-        } else {
-            location = locationManager.getLastKnownLocation(provider);
-            if (location != null) {
-                System.out.println("Provider " + provider + " has been selected.");
-                onLocationChanged(location);
-            } else {
-            }
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -248,16 +237,12 @@ public class BaseActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
-                LocationRequest();
+//                LocationRequest();
                 break;
             }
         }
@@ -271,16 +256,36 @@ public class BaseActivity extends AppCompatActivity
 
             return;
         } else {
-            locationManager.requestLocationUpdates(provider, INTERVAL, 1, this);
+//            locationManager.requestLocationUpdates(provider, INTERVAL, 1, this);
 
         }
 
     }
 
     @Override
+    public LocationConfiguration getLocationConfiguration() {
+
+        return new LocationConfiguration()
+                .keepTracking(true)
+                .askForGooglePlayServices(true)
+                .setMinAccuracy(200.0f)
+                .setWaitPeriod(ProviderType.GOOGLE_PLAY_SERVICES, 5 * 1000)
+                .setWaitPeriod(ProviderType.GPS, 10 * 1000)
+                .setWaitPeriod(ProviderType.NETWORK, 5 * 1000)
+                .setGPSMessage(getResources().getString(R.string.would_you_mind_to_turn_gps_on))
+                .setRationalMessage(getResources().getString(R.string.give_the_permission));
+//        return null;
+    }
+
+    @Override
+    public void onLocationFailed(int failType) {
+
+    }
+
+    @Override
     public void onLocationChanged(Location location) {
         Loger.MSG("@@ LAT", "" + location.getLatitude() + location.getLongitude());
-        Loger.MSG("@@ LAT", "" + location.getExtras().toString());
+//        Loger.MSG("@@ LAT", "" + location.getExtras().toString());
         Geocoder geocoder;
         List<android.location.Address> addresses = null;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -309,22 +314,16 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     public void onProviderEnabled(String s) {
+        Loger.MSG("@@ Provider enable",s);
 
     }
 
     @Override
     public void onProviderDisabled(String s) {
+        Loger.MSG("@@ Provider Desable",s);
 
     }
 
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
 
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
 }

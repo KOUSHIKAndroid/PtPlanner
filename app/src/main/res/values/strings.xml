@@ -106,4 +106,8 @@
     <string name="loading">Loading...</string>
     <string name="TotalPets">Total Pet\'s</string>
     <string name="responseinoneday">Responds in 1 day</string>
+
+
+    <string name="give_the_permission">Give the permission!</string>
+    <string name="would_you_mind_to_turn_gps_on">Would you mind to turn GPS on?</string>
 </resources>
