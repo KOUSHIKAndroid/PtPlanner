@@ -1,6 +1,10 @@
 package com.happywannyan.Utils;
 
+import android.app.Activity;
 import android.text.TextUtils;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,7 +48,14 @@ public class Validation {
         return (NU_Count>0 && SP_count>0);
     }
 
-    
+    public static boolean isPlayServicesAvailable(Activity context) {
+        int resultCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            GoogleApiAvailability.getInstance().getErrorDialog((Activity) context, resultCode, 2).show();
+            return false;
+        }
+        return true;
+    }
 
 
 }

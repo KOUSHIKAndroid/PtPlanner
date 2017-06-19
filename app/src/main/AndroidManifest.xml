@@ -99,6 +99,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.CalenderActivity"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.SignUpActivity"

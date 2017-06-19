@@ -3,6 +3,7 @@ package com.happywannyan.Activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -11,9 +12,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,8 +29,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.identity.intents.Address;
-import com.google.android.gms.location.places.Places;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.happywannyan.Activities.Booking.BookingOne;
 import com.happywannyan.Font.SFNFTextView;
@@ -47,20 +48,26 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+
 public class BaseActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener, LocationListener {
+        implements GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener, LocationListener, GoogleApiClient.ConnectionCallbacks {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    private GoogleApiClient mGoogleApiClient;
     private LocationManager locationManager;
+    private Location location;
     private String provider;
-    Location location;
+    private static final String TAG = "FusedLocationActivity";
+    private static final long INTERVAL = 1000 * 10;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private static final int REQUEST_CHECK_SETTINGS = 10;
+
     @Override
     protected void onPause() {
         super.onPause();
-        locationManager.removeUpdates((android.location.LocationListener) this);
+        locationManager.removeUpdates( this);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +76,8 @@ public class BaseActivity extends AppCompatActivity
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("@@@", "Refreshed token: " + refreshedToken);
 
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .enableAutoManage(this, this)
-                .build();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+       LocationRequest();
 
 
         fragmentManager = getSupportFragmentManager();
@@ -82,32 +85,6 @@ public class BaseActivity extends AppCompatActivity
         Search_Basic search_basic = new Search_Basic();
         fragmentTransaction.add(R.id.Base_fargment_layout, search_basic);
         fragmentTransaction.commit();
-
-
-        // Get the location manager
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        // Define the criteria how to select the locatioin provider -> use
-        // default
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(BaseActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-            return;
-        }else
-         location = locationManager.getLastKnownLocation(provider);
-
-        // Initialize the location fields
-        if (location != null) {
-            System.out.println("Provider " + provider + " has been selected.");
-            onLocationChanged(location);
-        } else {
-//            latituteField.setText("Location not available");
-//            longitudeField.setText("Location not available");
-        }
-
-
 
 
         /*
@@ -222,6 +199,25 @@ public class BaseActivity extends AppCompatActivity
 
     }
 
+    private void LocationRequest() {
+
+        Criteria criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, false);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+
+            return;
+        } else {
+            location = locationManager.getLastKnownLocation(provider);
+            if (location != null) {
+                System.out.println("Provider " + provider + " has been selected.");
+                onLocationChanged(location);
+            } else {
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -257,24 +253,34 @@ public class BaseActivity extends AppCompatActivity
 
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                LocationRequest();
+                break;
+            }
+        }
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(BaseActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
+//            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+
             return;
-        }else
-        locationManager.requestLocationUpdates(provider, 400, 1, this);
+        } else {
+            locationManager.requestLocationUpdates(provider, INTERVAL, 1, this);
+
+        }
+
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Loger.MSG("@@ LAT",""+location.getLatitude()+location.getLongitude());
-        Loger.MSG("@@ LAT",""+location.getExtras().toString());
+        Loger.MSG("@@ LAT", "" + location.getLatitude() + location.getLongitude());
+        Loger.MSG("@@ LAT", "" + location.getExtras().toString());
         Geocoder geocoder;
         List<android.location.Address> addresses = null;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -285,14 +291,14 @@ public class BaseActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-        String city = addresses.get(0).getLocality();
-        String state = addresses.get(0).getAdminArea();
-        String country = addresses.get(0).getCountryName();
-        String postalCode = addresses.get(0).getPostalCode();
-        String knownName = addresses.get(0).getFeatureName();
+//        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+//        String city = addresses.get(0).getLocality();
+//        String state = addresses.get(0).getAdminArea();
+//        String country = addresses.get(0).getCountryName();
+//        String postalCode = addresses.get(0).getPostalCode();
+//        String knownName = addresses.get(0).getFeatureName();
 
-        Loger.MSG("@@ ADdrsee-"," "+city+country+postalCode+knownName);
+//        Loger.MSG("@@ ADdrsee-"," "+city+country+postalCode+knownName);
 
     }
 
@@ -308,6 +314,17 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     public void onProviderDisabled(String s) {
+
+    }
+
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
 
     }
 }
