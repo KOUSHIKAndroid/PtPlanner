@@ -32,7 +32,9 @@ import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.POJO.PetService;
 import com.happywannyan.R;
 import com.happywannyan.Utils.JSONPerser;
+import com.happywannyan.Utils.LocationListener.MyLocalLocationManager;
 import com.happywannyan.Utils.Loger;
+import com.happywannyan.Utils.constants.LogType;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -195,6 +197,14 @@ public class Search_Basic extends Fragment {
                     petService.setTick_value(false);
                 ArrayPetService.get(0).setTick_value(true);
                 adapter_petlist.notifyDataSetChanged();
+            }
+        });
+
+        view.findViewById(R.id.ImgMyLocation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyLocalLocationManager.setLogType(LogType.GENERAL);
+                ((BaseActivity)getActivity()).getLocation();
             }
         });
 

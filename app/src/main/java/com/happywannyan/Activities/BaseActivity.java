@@ -201,8 +201,7 @@ public class BaseActivity extends LocationBaseActivity
             }
         });
 
-        MyLocalLocationManager.setLogType(LogType.GENERAL);
-        getLocation();
+
     }
 
 
