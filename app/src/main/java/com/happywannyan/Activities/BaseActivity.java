@@ -59,13 +59,9 @@ import java.util.Locale;
 
 
 public class BaseActivity extends LocationBaseActivity
-        implements  NavigationView.OnNavigationItemSelectedListener, LocationListener {
+        implements  NavigationView.OnNavigationItemSelectedListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    private Location location;
-    private String provider;
-    private static final String TAG = "FusedLocationActivity";
-    private static final long INTERVAL = 1000 * 10;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
 
@@ -80,7 +76,7 @@ public class BaseActivity extends LocationBaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d("@@@", "Refreshed token: " + refreshedToken);
+        Log.d(getClass().getName(), "Refreshed token: " + refreshedToken);
 
 //       LocationRequest();
 
@@ -283,7 +279,7 @@ public class BaseActivity extends LocationBaseActivity
 
     @Override
     public void onLocationChanged(Location location) {
-        Loger.MSG("@@ LAT", "" + location.getLatitude() + location.getLongitude());
+        Loger.MSG("@@@ LAT", "" + location.getLatitude() + location.getLongitude());
 //        Loger.MSG("@@ LAT", "" + location.getExtras().toString());
         Geocoder geocoder;
         List<android.location.Address> addresses = null;

@@ -2,6 +2,8 @@ package com.happywannyan.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,6 +35,7 @@ import com.happywannyan.POJO.PetService;
 import com.happywannyan.R;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.LocationListener.MyLocalLocationManager;
+import com.happywannyan.Utils.LocationProvider;
 import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.constants.LogType;
 
@@ -45,7 +48,7 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 
 
-public class Search_Basic extends Fragment {
+public class Search_Basic extends Fragment implements LocationListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -208,10 +211,19 @@ public class Search_Basic extends Fragment {
             }
         });
 
+        if(LocationProvider.GPS(getActivity()))
+        {
+            Loger.MSG("## "+getClass().getName()," Yewsssss");
+        }
+        else {
+            Loger.MSG("## "+getClass().getName()," Noooo");
+        }
+
 
 
     }
 
+    
 
 
     @Override
@@ -289,6 +301,28 @@ public class Search_Basic extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
+
+
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Loger.MSG("@@@ LAT", "Search --" + location.getLatitude() + location.getLongitude());
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
 
     }
 
