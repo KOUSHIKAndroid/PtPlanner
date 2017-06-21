@@ -2,6 +2,7 @@ package com.happywannyan.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.net.Uri;
@@ -10,8 +11,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.identity.intents.Address;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
@@ -29,6 +33,7 @@ import com.happywannyan.Activities.BaseActivity;
 import com.happywannyan.Activities.CalenderActivity;
 import com.happywannyan.Adapter.Adapter_petlist;
 import com.happywannyan.Constant.AppContsnat;
+import com.happywannyan.Events;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.POJO.PetService;
@@ -43,12 +48,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
 
-public class Search_Basic extends Fragment implements LocationListener {
+public class Search_Basic extends Fragment implements LocationProvider.AddressListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,11 +70,11 @@ public class Search_Basic extends Fragment implements LocationListener {
     LinearLayout LL_PetServiceList;
     LinearLayout LL_defaultLabel;
     RecyclerView Rec_petlist;
-    ImageView IMG_erase_location;
+    ImageView IMG_erase_location,IMG_Location;
     ArrayList<PetService> ArrayPetService;
     Adapter_petlist adapter_petlist;
     Place place;
-    JSONObject JSONFULLDATA;
+    JSONObject JSONFULLDATA,Geo;
     private OnFragmentInteractionListener mListener;
 
     public Search_Basic() {
@@ -106,6 +114,8 @@ public class Search_Basic extends Fragment implements LocationListener {
         LL_defaultLabel=(LinearLayout)view.findViewById(R.id.LL_defaultLabel);
         LL_PetServiceList.setVisibility(View.GONE);
         Rec_petlist=(RecyclerView)view.findViewById(R.id.Rec_petlist);
+        IMG_Location=(ImageView)view.findViewById(R.id.ImgMyLocation);
+        IMG_erase_location=(ImageView) view.findViewById(R.id.IMG_erase_location);
         Rec_petlist.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "parent_service", new ArrayList<APIPOSTDATA>(), new JSONPerser.JSONRESPONSE() {
@@ -195,7 +205,9 @@ public class Search_Basic extends Fragment implements LocationListener {
             public void onClick(View v) {
                 TXT_Loction.setText("");
                 LL_PetServiceList.setVisibility(View.GONE);
+                IMG_erase_location.setVisibility(View.GONE);
                 LL_defaultLabel.setVisibility(View.VISIBLE);
+//                IMG_erase_location.setImageResource(R.drawable.ic_my_location_white);
                 for(PetService petService:ArrayPetService)
                     petService.setTick_value(false);
                 ArrayPetService.get(0).setTick_value(true);
@@ -203,22 +215,56 @@ public class Search_Basic extends Fragment implements LocationListener {
             }
         });
 
+
         view.findViewById(R.id.ImgMyLocation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyLocalLocationManager.setLogType(LogType.GENERAL);
-                ((BaseActivity)getActivity()).getLocation();
+                if(!TXT_Loction.getText().toString().trim().equals("")) {
+                    TXT_Loction.setText("");
+                    LL_PetServiceList.setVisibility(View.GONE);
+                    IMG_erase_location.setVisibility(View.GONE);
+                    LL_defaultLabel.setVisibility(View.VISIBLE);
+                    for(PetService petService:ArrayPetService)
+                        petService.setTick_value(false);
+                    ArrayPetService.get(0).setTick_value(true);
+                    adapter_petlist.notifyDataSetChanged();
+//                    ((ImageView) view.findViewById(R.id.ImgMyLocation)).setImageResource(R.drawable.ic_my_location_white);
+                }
+                else {
+                    MyLocalLocationManager.setLogType(LogType.GENERAL);
+                    ((BaseActivity)getActivity()).getLocation(new Events() {
+                        @Override
+                        public void UpdateLocation(Location location) {
+                            Loger.MSG("@@@ LAT", "--" + location.getLatitude() + location.getLongitude());
+                            new LocationProvider().OnGetAddress(getActivity(),location,Search_Basic.this);
+                        }
+                    });
+                }
+
             }
         });
 
         if(LocationProvider.GPS(getActivity()))
         {
+
             Loger.MSG("## "+getClass().getName()," Yewsssss");
+            MyLocalLocationManager.setLogType(LogType.GENERAL);
+            ((BaseActivity)getActivity()).getLocation(new Events() {
+                @Override
+                public void UpdateLocation(Location location) {
+                    Loger.MSG("@@@ LAT", "--" + location.getLatitude() + location.getLongitude());
+                    new LocationProvider().OnGetAddress(getActivity(),location,Search_Basic.this);
+
+                }
+            });
+
+
         }
         else {
             Loger.MSG("## "+getClass().getName()," Noooo");
-        }
 
+
+        }
 
 
     }
@@ -261,6 +307,7 @@ public class Search_Basic extends Fragment implements LocationListener {
                         String Location = ""+ place.getName();
                         TXT_Loction.setText(Location);
                         LL_PetServiceList.setVisibility(View.VISIBLE);
+                        IMG_erase_location.setVisibility(View.VISIBLE);
                         LL_defaultLabel.setVisibility(View.GONE);
                         break;
 
@@ -275,23 +322,41 @@ public class Search_Basic extends Fragment implements LocationListener {
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         JSONObject latalng=new JSONObject();
         try {
-            latalng.put("lat",place.getLatLng().latitude+"");
-            latalng.put("lng",place.getLatLng().longitude+"");
+            if(place!=null) {
+                latalng.put("lat", place.getLatLng().latitude + "");
+                latalng.put("lng", place.getLatLng().longitude + "");
 
-            JSONObject ViewPort=new JSONObject();
-            ViewPort.put("southwest_LAT",place.getViewport().southwest.latitude+"");
-            ViewPort.put("southwest_LNG",place.getViewport().southwest.longitude+"");
+                JSONObject ViewPort = new JSONObject();
+                ViewPort.put("southwest_LAT", place.getViewport().southwest.latitude + "");
+                ViewPort.put("southwest_LNG", place.getViewport().southwest.longitude + "");
 
-            ViewPort.put("northeast_LAT",place.getViewport().northeast.latitude+"");
-            ViewPort.put("northeast_LNG",place.getViewport().northeast.longitude+"");
+                ViewPort.put("northeast_LAT", place.getViewport().northeast.latitude + "");
+                ViewPort.put("northeast_LNG", place.getViewport().northeast.longitude + "");
 
-            jsondata.put("LocationName",place.getName());
-            jsondata.put("latlng",latalng);
-            jsondata.put("viewport",ViewPort);
-            jsondata.put("Address",place.getAddress());
-            jsondata.put("StartDate",StartDate);
-            jsondata.put("EndDate",EndDate);
-            jsondata.put("allPetDetails",JSONFULLDATA.getJSONArray("allPetDetails"));
+                jsondata.put("LocationName", place.getName());
+                jsondata.put("latlng", latalng);
+                jsondata.put("viewport", ViewPort);
+                jsondata.put("Address", place.getAddress());
+                jsondata.put("StartDate", StartDate);
+                jsondata.put("EndDate", EndDate);
+                jsondata.put("allPetDetails", JSONFULLDATA.getJSONArray("allPetDetails"));
+            }else {
+
+                JSONObject ViewPort = new JSONObject();
+                ViewPort.put("southwest_LAT",Geo.getJSONObject("viewport").getJSONObject("southwest").getString("lat")+ "");
+                ViewPort.put("southwest_LNG", Geo.getJSONObject("viewport").getJSONObject("southwest").getString("lng") + "");
+
+                ViewPort.put("northeast_LAT",Geo.getJSONObject("viewport").getJSONObject("northeast").getString("lat") + "");
+                ViewPort.put("northeast_LNG", Geo.getJSONObject("viewport").getJSONObject("northeast").getString("lat") + "");
+
+                jsondata.put("LocationName", TXT_Loction.getText());
+                jsondata.put("latlng",  Geo.getJSONObject("location"));
+                jsondata.put("viewport", ViewPort);
+                jsondata.put("Address", TXT_Loction.getText());
+                jsondata.put("StartDate", StartDate);
+                jsondata.put("EndDate", EndDate);
+                jsondata.put("allPetDetails", JSONFULLDATA.getJSONArray("allPetDetails"));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -306,25 +371,16 @@ public class Search_Basic extends Fragment implements LocationListener {
 
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        Loger.MSG("@@@ LAT", "Search --" + location.getLatitude() + location.getLongitude());
-    }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
+    public void OnAdresss(String Adreess, JSONObject geo) {
+        TXT_Loction.setText(Adreess);
+        IMG_erase_location.setVisibility(View.VISIBLE);
+        LL_PetServiceList.setVisibility(View.VISIBLE);
+        LL_defaultLabel.setVisibility(View.GONE);
+        this.Geo=geo;
     }
 
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
 
     public interface OnFragmentInteractionListener {
 

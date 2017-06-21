@@ -1,6 +1,7 @@
 package com.happywannyan.Fragments;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,12 +25,17 @@ import com.happywannyan.Activities.CalenderActivity;
 import com.happywannyan.Activities.SearchResult;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.CustomRangeBar.RangeSeekBar;
+import com.happywannyan.Events;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.APIPOSTDATA;
+import com.happywannyan.POJO.PetService;
 import com.happywannyan.R;
 import com.happywannyan.Utils.JSONPerser;
+import com.happywannyan.Utils.LocationListener.MyLocalLocationManager;
+import com.happywannyan.Utils.LocationProvider;
 import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.MYAlert;
+import com.happywannyan.Utils.constants.LogType;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +45,7 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Advanced_search extends Fragment {
+public class Advanced_search extends Fragment implements LocationProvider.AddressListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "basicdat";
@@ -62,6 +68,7 @@ public class Advanced_search extends Fragment {
     Place place = null;
     String MaxPrice = "", MinPrice = "";
     String LowPrice = "", HighPrice = "";
+    ImageView IMG_erase_location, IMG_Location;
 
     public Advanced_search() {
         // Required empty public constructor
@@ -113,7 +120,8 @@ public class Advanced_search extends Fragment {
         TXT_DateRange = (SFNFTextView) view.findViewById(R.id.TXT_DateRange);
         TXT_LoestRange = (SFNFTextView) view.findViewById(R.id.TXT_LoestRange);
         TXT_highestRange = (SFNFTextView) view.findViewById(R.id.TXT_highestRange);
-
+        IMG_Location = (ImageView) view.findViewById(R.id.ImgMyLocation);
+        IMG_erase_location = (ImageView) view.findViewById(R.id.IMG_erase_location);
 
         TXT_petType = (SFNFTextView) view.findViewById(R.id.TXT_petType);
 
@@ -209,6 +217,8 @@ public class Advanced_search extends Fragment {
             Glide.with(getActivity()).load(mParam1.getString("selected_image")).into((ImageView) view.findViewById(R.id.IMG_SERVICE));
             ((SFNFTextView) view.findViewById(R.id.TXT_SERVICENAME)).setText(mParam1.getString("name"));
             TXT_Loction.setText(mParam1.getString("LocationName"));
+            if(mParam1.getString("LocationName").trim().length()>0)
+                IMG_erase_location.setVisibility(View.VISIBLE);
             if (EndDate.length() > 0)
                 TXT_DateRange.setText(StartDate + "  to   " + EndDate);
             else
@@ -369,10 +379,29 @@ public class Advanced_search extends Fragment {
             @Override
             public void onClick(View v) {
                 TXT_Loction.setText("");
+                IMG_erase_location.setVisibility(View.GONE);
             }
         });
 
+        view.findViewById(R.id.ImgMyLocation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TXT_Loction.getText().toString().trim().equals("")) {
+                    TXT_Loction.setText("");
+                    IMG_erase_location.setVisibility(View.GONE);
+                } else {
+                    MyLocalLocationManager.setLogType(LogType.GENERAL);
+                    ((BaseActivity) getActivity()).getLocation(new Events() {
+                        @Override
+                        public void UpdateLocation(Location location) {
+                            Loger.MSG("@@@ LAT", "--" + location.getLatitude() + location.getLongitude());
+                            new LocationProvider().OnGetAddress(getActivity(), location, Advanced_search.this);
+                        }
+                    });
+                }
 
+            }
+        });
         view.findViewById(R.id.RL_Serach).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -492,7 +521,7 @@ public class Advanced_search extends Fragment {
                     }
 
 
-                    SEARCHPARAMS.put("keyinfo",Searchkeyinfor);
+                    SEARCHPARAMS.put("keyinfo", Searchkeyinfor);
 
                     intent.putExtra(SearchResult.SEARCHKEY, SEARCHPARAMS.toString());
                     startActivity(intent);
@@ -541,4 +570,12 @@ public class Advanced_search extends Fragment {
 
     }
 
+
+
+
+    @Override
+    public void OnAdresss(String Adreess, JSONObject geo) {
+        TXT_Loction.setText(Adreess);
+        IMG_erase_location.setVisibility(View.VISIBLE);
+    }
 }

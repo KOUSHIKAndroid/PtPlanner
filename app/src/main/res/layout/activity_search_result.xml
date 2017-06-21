@@ -79,6 +79,7 @@
             android:id="@+id/fab_plus"
             android:layout_width="80dp"
             android:tag="1"
+            android:visibility="gone"
             android:src="@drawable/ic_fab_plus"
             android:layout_height="80dp" />
     </LinearLayout>

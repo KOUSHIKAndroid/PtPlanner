@@ -199,30 +199,31 @@ public class SearchTinder extends Fragment {
 //            }
 //        });
 
-
-        ((SearchResult) getActivity()).findViewById(R.id.fab_plus).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).getTag().toString().equalsIgnoreCase("1")) {
-                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_minus);
-                    ((SearchResult) getActivity()).findViewById(R.id.list).setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            ((SearchResult) getActivity()).findViewById(R.id.fab).setVisibility(View.VISIBLE);
-                        }
-                    }, 200);
-//                    ((SearchResult)getActivity()).findViewById(R.id.IMG_Tinderr).setVisibility(View.VISIBLE);
-                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setTag("0");
-                } else {
-                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_plus);
-                    ((SearchResult) getActivity()).findViewById(R.id.fab).setVisibility(View.GONE);
-                    ((SearchResult) getActivity()).findViewById(R.id.list).setVisibility(View.GONE);
-//                    ((SearchResult)getActivity()). findViewById(R.id.IMG_Tinderr).setVisibility(View.GONE);
-                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setTag("1");
-                }
-            }
-        });
+        ((SearchResult) getActivity()).findViewById(R.id.list).setVisibility(View.VISIBLE);
+        ((SearchResult) getActivity()).findViewById(R.id.fab).setVisibility(View.VISIBLE);
+//        ((SearchResult) getActivity()).findViewById(R.id.fab_plus).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).getTag().toString().equalsIgnoreCase("1")) {
+//                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_minus);
+//                    ((SearchResult) getActivity()).findViewById(R.id.list).setVisibility(View.VISIBLE);
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ((SearchResult) getActivity()).findViewById(R.id.fab).setVisibility(View.VISIBLE);
+//                        }
+//                    }, 200);
+////                    ((SearchResult)getActivity()).findViewById(R.id.IMG_Tinderr).setVisibility(View.VISIBLE);
+//                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setTag("0");
+//                } else {
+//                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setImageResource(R.drawable.ic_fab_plus);
+//                    ((SearchResult) getActivity()).findViewById(R.id.fab).setVisibility(View.GONE);
+//                    ((SearchResult) getActivity()).findViewById(R.id.list).setVisibility(View.GONE);
+////                    ((SearchResult)getActivity()). findViewById(R.id.IMG_Tinderr).setVisibility(View.GONE);
+//                    ((ImageView) ((SearchResult) getActivity()).findViewById(R.id.fab_plus)).setTag("1");
+//                }
+//            }
+//        });
 
     }
 }

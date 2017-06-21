@@ -49,8 +49,9 @@
                     android:layout_centerInParent="true"
                     android:hint="@string/hint_search_addrres"
                     android:paddingLeft="40dp"
+                    android:singleLine="true"
                     android:paddingRight="40dp"
-                    android:layout_toLeftOf="@+id/ImgMyLocation"
+                    android:layout_toLeftOf="@+id/LLL"
                     android:textColor="@color/colorwhite"
                     android:textColorHint="@color/colorwhite" />
 
@@ -60,26 +61,35 @@
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_search_white" />
 
-                <ImageView
-                    android:id="@+id/IMG_erase_location"
+                <LinearLayout
+                    android:id="@+id/LLL"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="8dp"
-                    android:layout_toLeftOf="@+id/ImgMyLocation"
-                    android:src="@drawable/ic_close_white" />
-                <ImageView
-                    android:id="@+id/ImgMyLocation"
+                    android:orientation="horizontal"
+                    android:animateLayoutChanges="true"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/ic_my_location_white"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ImgMyLocation"
+                        android:layout_toLeftOf="@+id/IMG_erase_location"
+                        android:layout_width="wrap_content"
+                        android:paddingRight="15dp"
+                        android:paddingLeft="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/ic_my_location_white"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/IMG_erase_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:paddingRight="15dp"
+                        android:paddingLeft="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/ic_close_white" />
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"

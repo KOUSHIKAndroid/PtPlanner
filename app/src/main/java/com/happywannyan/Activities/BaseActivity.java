@@ -35,6 +35,7 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.happywannyan.Activities.Booking.BookingOne;
+import com.happywannyan.Events;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.Fragments.BookingFragment;
 import com.happywannyan.Fragments.MyPets_Fragments;
@@ -63,7 +64,7 @@ public class BaseActivity extends LocationBaseActivity
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-
+Events events;
 
     @Override
     protected void onPause() {
@@ -279,26 +280,8 @@ public class BaseActivity extends LocationBaseActivity
 
     @Override
     public void onLocationChanged(Location location) {
+
         Loger.MSG("@@@ LAT", "" + location.getLatitude() + location.getLongitude());
-//        Loger.MSG("@@ LAT", "" + location.getExtras().toString());
-        Geocoder geocoder;
-        List<android.location.Address> addresses = null;
-        geocoder = new Geocoder(this, Locale.getDefault());
-
-        try {
-            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-//        String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-//        String city = addresses.get(0).getLocality();
-//        String state = addresses.get(0).getAdminArea();
-//        String country = addresses.get(0).getCountryName();
-//        String postalCode = addresses.get(0).getPostalCode();
-//        String knownName = addresses.get(0).getFeatureName();
-
-//        Loger.MSG("@@ ADdrsee-"," "+city+country+postalCode+knownName);
 
     }
 

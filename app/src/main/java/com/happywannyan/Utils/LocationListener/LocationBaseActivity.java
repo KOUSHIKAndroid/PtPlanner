@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.happywannyan.Events;
+
 /**
  * Created by Yahya Bayramoglu on 10/02/16.
  */
 public abstract class LocationBaseActivity extends AppCompatActivity implements LocationListener {
-
+Events events;
     private MyLocalLocationManager locationManager;
 
     public abstract LocationConfiguration getLocationConfiguration();
@@ -24,7 +26,8 @@ public abstract class LocationBaseActivity extends AppCompatActivity implements 
         return locationManager;
     }
 
-    public void getLocation() {
+    public void getLocation(Events events) {
+        this.events=events;
         if (locationManager != null) {
             locationManager.get();
             Log.d("LocationBaseActivity","\"Couldn't get location, because network is not accessible!\"");
@@ -84,6 +87,7 @@ public abstract class LocationBaseActivity extends AppCompatActivity implements 
         @Override
         public void onLocationChanged(Location location) {
             LocationBaseActivity.this.onLocationChanged(location);
+            events.UpdateLocation(location);
         }
 
         @Override
