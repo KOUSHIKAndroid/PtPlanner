@@ -9,8 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.happywannyan.Activities.profile.ProfileDetails;
 import com.happywannyan.Activities.profile.fragmentPagerAdapter.ProfileServiceListingAdapter;
 import com.happywannyan.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -18,6 +23,9 @@ import com.happywannyan.R;
  */
 
 public class ProfileFragService extends Fragment {
+
+    JSONArray ServiceArry;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,7 +36,17 @@ public class ProfileFragService extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView list = (RecyclerView) view.findViewById(R.id.service_recycler);
+
+        try {
+            ServiceArry=new JSONObject(((ProfileDetails)getActivity()).JSONRESPONSE).getJSONObject("info_array").getJSONArray("servicelist");
+
+        }catch (JSONException e){e.printStackTrace();}
+
+
+
+
+
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        list.setAdapter(new ProfileServiceListingAdapter(getActivity()));
+        list.setAdapter(new ProfileServiceListingAdapter(getActivity(),ServiceArry));
     }
 }

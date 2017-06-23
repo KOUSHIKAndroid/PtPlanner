@@ -22,7 +22,6 @@ import com.happywannyan.Utils.Validation;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageView IMG_Background;
     EditText EDX_email,EDX_Password;
     CardView Card_Login;
     AppLoader appLoader;
@@ -30,13 +29,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-       IMG_Background=(ImageView)findViewById(R.id.IMG_background);
         Card_Login=(CardView)findViewById(R.id.Card_Login);
         Card_Login.setOnClickListener(this);
         EDX_email=(EditText)findViewById(R.id.EDX_email);
         EDX_Password=(EditText)findViewById(R.id.EDX_Password);
         appLoader=new AppLoader(LoginActivity.this);
-        findViewById(R.id.LL_SignUp).setOnClickListener(this);
 
         findViewById(R.id.FORGOT).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +44,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-        Glide.with(this).load(R.drawable.temp_03).into(IMG_Background);
     }
 
 
@@ -65,16 +61,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
+        startActivity(new Intent(LoginActivity.this,LoginChoser.class));
         finish();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.LL_SignUp:
-                startActivity(new Intent(this,SignUpActivity.class));
-                    finish();
-                break;
             case R.id.Card_Login:
 
                 if(!EDX_email.getText().toString().trim().equals("") &&
@@ -153,9 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
 
-            case R.id.LL_fb:
-                startActivityForResult(new Intent(LoginActivity.this,FacebookActivity.class),FacebookActivity.FacebookResponse);
-                break;
+
         }
     }
 }

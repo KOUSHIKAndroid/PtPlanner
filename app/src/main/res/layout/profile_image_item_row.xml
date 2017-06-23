@@ -4,9 +4,11 @@
     android:layout_height="wrap_content"
     android:background="@color/colorwhite"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="3dp">
 
     <ImageView
+        android:id="@+id/IMG"
+        android:scaleType="fitXY"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="#c3c3c3" />

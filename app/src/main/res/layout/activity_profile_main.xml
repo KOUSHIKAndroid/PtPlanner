@@ -22,7 +22,7 @@
             android:id="@+id/IMG_icon_drwaer"
             android:layout_width="54dp"
             android:layout_height="50dp"
-            android:padding="10dp"
+            android:padding="15dp"
             android:src="@drawable/ic_arrow_back_white" />
 
         <com.happywannyan.Font.SFNFTextView
@@ -67,7 +67,10 @@
                     android:layout_weight=".5">
 
                     <ImageView
+                        android:id="@+id/IMG_Profile"
                         android:layout_width="80dp"
+                        android:scaleType="fitXY"
+                        android:transitionName="cardimage"
                         android:layout_height="80dp"
                         android:background="#cccccc" />
                 </RelativeLayout>
@@ -92,6 +95,7 @@
                             android:orientation="vertical">
 
                             <com.happywannyan.Font.SFNFTextView
+                                android:id="@+id/UserName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
@@ -100,6 +104,7 @@
                                 android:textSize="16sp" />
 
                             <com.happywannyan.Font.SFNFTextView
+                                android:id="@+id/Bussinessname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
@@ -123,7 +128,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -131,19 +136,25 @@
                         android:weightSum="2">
 
                         <RatingBar
-                            android:layout_width="0dp"
+                            android:id="@+id/Rating"
+                            android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_weight="1" />
+                            android:numStars="5"
+                            android:paddingLeft="5dp"
+                            android:isIndicator="false"
+                            style="?android:attr/ratingBarStyleSmall"
+                            />
 
                         <com.happywannyan.Font.SFNFTextView
-                            android:layout_width="0dp"
+                            android:id="@+id/ReviewNo"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:gravity="right"
+                            android:layout_alignParentRight="true"
                             android:text="reviews here"
                             android:textColor="#666565"
                             android:textSize="14sp" />
-                    </LinearLayout>
+                    </RelativeLayout>
 
 
                 </LinearLayout>
@@ -161,23 +172,18 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp">
 
-                <RelativeLayout
-                    android:id="@+id/map_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/profile_circle_background_red"
-                    android:elevation="10dp">
+
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:id="@+id/map_button"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:padding="13dp"
+                        android:background="@drawable/profile_circle_background_red"
+                        android:elevation="10dp"
+                        android:layout_alignParentRight="true"
                         android:src="@drawable/profile_ic_map_white" />
 
-                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -209,6 +215,7 @@
                     </LinearLayout>
 
                     <com.happywannyan.Font.SFNFTextView
+                        android:id="@+id/Location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -301,6 +308,7 @@
                 android:weightSum="4">
 
                 <View
+                    android:id="@+id/div1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
@@ -309,6 +317,7 @@
                     android:background="@color/btn_red" />
 
                 <View
+                    android:id="@+id/div2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
@@ -317,6 +326,7 @@
                     android:background="@color/dividerline" />
 
                 <View
+                    android:id="@+id/div3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
@@ -325,6 +335,7 @@
                     android:background="@color/dividerline" />
 
                 <View
+                    android:id="@+id/div4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"

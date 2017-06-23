@@ -74,6 +74,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
     ArrayList<PetService> ArrayPetService;
     Adapter_petlist adapter_petlist;
     Place place;
+    boolean GPS=false;
     JSONObject JSONFULLDATA,Geo;
     private OnFragmentInteractionListener mListener;
 
@@ -204,6 +205,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
             @Override
             public void onClick(View v) {
                 TXT_Loction.setText("");
+                GPS=false;
                 LL_PetServiceList.setVisibility(View.GONE);
                 IMG_erase_location.setVisibility(View.GONE);
                 LL_defaultLabel.setVisibility(View.VISIBLE);
@@ -221,6 +223,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
             public void onClick(View view) {
                 if(!TXT_Loction.getText().toString().trim().equals("")) {
                     TXT_Loction.setText("");
+                    GPS=false;
                     LL_PetServiceList.setVisibility(View.GONE);
                     IMG_erase_location.setVisibility(View.GONE);
                     LL_defaultLabel.setVisibility(View.VISIBLE);
@@ -231,6 +234,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
 //                    ((ImageView) view.findViewById(R.id.ImgMyLocation)).setImageResource(R.drawable.ic_my_location_white);
                 }
                 else {
+                    GPS=true;
                     MyLocalLocationManager.setLogType(LogType.GENERAL);
                     ((BaseActivity)getActivity()).getLocation(new Events() {
                         @Override
@@ -303,7 +307,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
                          place = PlacePicker.getPlace(getActivity(), data);
                         Loger.MSG("@@ PLACE",""+place.getLatLng());
                         Loger.MSG("@@ ViewPosrt","- "+place.getViewport().toString());
-
+                        GPS=false;
                         String Location = ""+ place.getName();
                         TXT_Loction.setText(Location);
                         LL_PetServiceList.setVisibility(View.VISIBLE);
@@ -340,7 +344,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
                 jsondata.put("StartDate", StartDate);
                 jsondata.put("EndDate", EndDate);
                 jsondata.put("allPetDetails", JSONFULLDATA.getJSONArray("allPetDetails"));
-            }else {
+            }else if(GPS){
 
                 JSONObject ViewPort = new JSONObject();
                 ViewPort.put("southwest_LAT",Geo.getJSONObject("viewport").getJSONObject("southwest").getString("lat")+ "");
@@ -374,11 +378,13 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
 
     @Override
     public void OnAdresss(String Adreess, JSONObject geo) {
-        TXT_Loction.setText(Adreess);
-        IMG_erase_location.setVisibility(View.VISIBLE);
-        LL_PetServiceList.setVisibility(View.VISIBLE);
-        LL_defaultLabel.setVisibility(View.GONE);
-        this.Geo=geo;
+        if (GPS) {
+            TXT_Loction.setText(Adreess);
+            IMG_erase_location.setVisibility(View.VISIBLE);
+            LL_PetServiceList.setVisibility(View.VISIBLE);
+            LL_defaultLabel.setVisibility(View.GONE);
+            this.Geo = geo;
+        }
     }
 
 

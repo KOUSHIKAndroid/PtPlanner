@@ -69,7 +69,7 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
     String MaxPrice = "", MinPrice = "";
     String LowPrice = "", HighPrice = "";
     ImageView IMG_erase_location, IMG_Location;
-
+    boolean GPS=false;
     public Advanced_search() {
         // Required empty public constructor
     }
@@ -379,6 +379,7 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
             @Override
             public void onClick(View v) {
                 TXT_Loction.setText("");
+                GPS=false;
                 IMG_erase_location.setVisibility(View.GONE);
             }
         });
@@ -388,8 +389,10 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
             public void onClick(View view) {
                 if (!TXT_Loction.getText().toString().trim().equals("")) {
                     TXT_Loction.setText("");
+                     GPS=false;
                     IMG_erase_location.setVisibility(View.GONE);
                 } else {
+                    GPS=true;
                     MyLocalLocationManager.setLogType(LogType.GENERAL);
                     ((BaseActivity) getActivity()).getLocation(new Events() {
                         @Override
@@ -559,7 +562,7 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
                     place = PlacePicker.getPlace(getActivity(), data);
                     Loger.MSG("@@ PLACE", "" + place.getLatLng());
                     Loger.MSG("@@ PLACE", "- " + place.getName());
-
+                    GPS=false;
                     String Location = "" + place.getName();
                     TXT_Loction.setText(Location);
                     break;
@@ -575,7 +578,9 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
 
     @Override
     public void OnAdresss(String Adreess, JSONObject geo) {
-        TXT_Loction.setText(Adreess);
-        IMG_erase_location.setVisibility(View.VISIBLE);
+        if(GPS) {
+            TXT_Loction.setText(Adreess);
+            IMG_erase_location.setVisibility(View.VISIBLE);
+        }
     }
 }

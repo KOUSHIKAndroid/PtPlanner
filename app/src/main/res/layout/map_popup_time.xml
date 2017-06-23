@@ -54,6 +54,6 @@
         android:rating="4.5"
         style="@style/Base.Widget.AppCompat.RatingBar.Small"
         android:layout_height="wrap_content"
-        android:theme="@style/RatingBar"/>
+       />
 
 </RelativeLayout>

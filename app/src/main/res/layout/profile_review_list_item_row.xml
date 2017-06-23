@@ -14,6 +14,7 @@
         android:padding="20dp">
 
         <ImageView
+            android:id="@+id/IMG_Profile"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="#434343" />
@@ -31,6 +32,7 @@
                 android:orientation="vertical">
 
                 <com.happywannyan.Font.SFNFBoldTextView
+                    android:id="@+id/UserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -39,16 +41,21 @@
                     android:textSize="14sp" />
 
                 <RatingBar
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:id="@+id/Rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:numStars="5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
             <com.happywannyan.Font.SFNFTextView
+                android:id="@+id/Date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:visibility="gone"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="06/06/1024"
@@ -60,6 +67,7 @@
     </LinearLayout>
 
     <com.happywannyan.Font.SFNFTextView
+        android:id="@+id/Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"

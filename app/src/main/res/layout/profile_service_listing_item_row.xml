@@ -13,6 +13,7 @@
         android:background="@color/colorwhite"
         android:orientation="vertical">
         <com.happywannyan.Font.SFNFBoldTextView
+            android:id="@+id/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
@@ -24,6 +25,7 @@
             android:textSize="14sp" />
 
         <com.happywannyan.Font.SFNFTextView
+            android:id="@+id/Description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
@@ -33,28 +35,25 @@
             android:textColor="#333333"
             android:textSize="14sp" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
-            android:weightSum="2">
+           >
 
             <com.happywannyan.Font.SFNFTextView
-                android:layout_width="0dp"
+                android:id="@+id/PricePer"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
+                android:layout_centerVertical="true"
                 android:text="ost/per day "
                 android:textColor="@color/btn_red"
                 android:textSize="14sp" />
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+
 
                 <RelativeLayout
                     android:layout_width="160dp"
@@ -65,7 +64,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/profile_button_background_oval_red"
-                    android:elevation="10dp"
+                    android:elevation="5dp"
                     android:gravity="center_vertical">
 
                     <com.happywannyan.Font.SFNFBoldTextView
@@ -89,7 +88,6 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

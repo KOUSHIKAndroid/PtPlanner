@@ -18,16 +18,13 @@ import com.happywannyan.Utils.Validation;
 import java.util.ArrayList;
 
 public class ResetPassword extends AppCompatActivity implements View.OnClickListener{
-    ImageView IMG_Background;;
     EditText Code,Password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
-        IMG_Background=(ImageView)findViewById(R.id.IMG_background);
         Password=(EditText)findViewById(R.id.EDX_password);
         Code=(EditText)findViewById(R.id.EDX_code);
-        Glide.with(this).load(R.drawable.temp_03).into(IMG_Background);
     }
 
     @Override

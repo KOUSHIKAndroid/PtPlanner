@@ -52,7 +52,7 @@
             android:textSize="14sp" />
 
 
-        <android.support.v7.widget.AppCompatRatingBar
+        <RatingBar
             android:id="@+id/rating_bar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
@@ -61,9 +61,8 @@
             android:layout_below="@id/tv_review"
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
-            android:isIndicator="false"
             android:numStars="5"
-            android:progressTint="@color/RatingColor" />
+            />
 
         <com.happywannyan.Font.SFNFTextView
             android:id="@+id/tv_name"

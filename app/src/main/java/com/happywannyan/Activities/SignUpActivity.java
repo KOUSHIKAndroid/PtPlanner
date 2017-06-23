@@ -24,7 +24,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView IMG_Background;
     EditText EDX_email, EDX_Password;
     CardView Card_Login;
     AppLoader appLoader;
@@ -33,15 +32,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        IMG_Background = (ImageView) findViewById(R.id.IMG_background);
         Card_Login = (CardView) findViewById(R.id.Card_Login);
         Card_Login.setOnClickListener(this);
         EDX_email = (EditText) findViewById(R.id.EDX_email);
         EDX_Password = (EditText) findViewById(R.id.EDX_Password);
-        findViewById(R.id.LL_LoginNow).setOnClickListener(this);
         appLoader=new AppLoader(this);
 
-        Glide.with(this).load(R.drawable.temp_03).into(IMG_Background);
     }
 
 
@@ -166,13 +162,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
 
-            case R.id.LL_LoginNow:
-                startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
-                finish();
-                break;
-            case R.id.LL_fb:
-                startActivityForResult(new Intent(SignUpActivity.this,FacebookActivity.class),FacebookActivity.FacebookResponse);
-                break;
+//            case R.id.LL_LoginNow:
+//                startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+//                finish();
+//                break;
+//            case R.id.LL_fb:
+//                startActivityForResult(new Intent(SignUpActivity.this,FacebookActivity.class),FacebookActivity.FacebookResponse);
+//                break;
 
         }
     }

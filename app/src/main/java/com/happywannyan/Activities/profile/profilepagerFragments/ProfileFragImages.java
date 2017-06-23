@@ -9,8 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.happywannyan.Activities.profile.ProfileDetails;
 import com.happywannyan.Activities.profile.fragmentPagerAdapter.ProfileImageListingAdapter;
 import com.happywannyan.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -18,6 +23,9 @@ import com.happywannyan.R;
  */
 
 public class ProfileFragImages  extends Fragment {
+
+    JSONArray Images;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,8 +35,16 @@ public class ProfileFragImages  extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        try {
+            Images=new JSONObject(((ProfileDetails)getActivity()).JSONRESPONSE).getJSONObject("info_array").getJSONArray("imagelist");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         RecyclerView list = (RecyclerView) view.findViewById(R.id.service_recycler);
         list.setLayoutManager(new GridLayoutManager(getActivity(), 4));
-        list.setAdapter(new ProfileImageListingAdapter(getActivity()));
+        list.setAdapter(new ProfileImageListingAdapter(getActivity(),Images));
     }
 }

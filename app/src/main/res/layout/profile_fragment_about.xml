@@ -3,60 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorwhite"
-    android:orientation="vertical"
-  >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp"
+        android:orientation="vertical"
         android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+
+    <com.happywannyan.Font.SFNFTextView
+        android:id="@+id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity=""
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog "
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/dividerline" />
+
+    <com.happywannyan.Font.SFNFBoldTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/specialskill"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:id="@+id/LLSkils"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <com.happywannyan.Font.SFNFTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity=""
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog dog cat cat dog "
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/dividerline" />
-
-        <com.happywannyan.Font.SFNFBoldTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="@string/specialskill"
-            android:textColor="@color/Black"
-            android:textSize="16sp" />
-
-        <com.happywannyan.Font.SFNFTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Dynamic listing will be here ..."
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-        <com.happywannyan.Font.SFNFTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Dynamic listing will be here ..."
-            android:textColor="#333333"
-            android:textSize="14sp" />
+        </LinearLayout>
 
 
         <View
@@ -75,23 +66,13 @@
             android:textColor="@color/Black"
             android:textSize="16sp" />
 
-        <com.happywannyan.Font.SFNFTextView
+        <LinearLayout
+            android:id="@+id/LLSpclAcco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Dynamic listing will be here ..."
-            android:textColor="#333333"
-            android:textSize="14sp" />
+            android:orientation="vertical">
 
-        <com.happywannyan.Font.SFNFTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Dynamic listing will be here ..."
-            android:textColor="#333333"
-            android:textSize="14sp" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -109,23 +90,11 @@
             android:textColor="@color/Black"
             android:textSize="16sp" />
 
-        <com.happywannyan.Font.SFNFTextView
+        <LinearLayout
+            android:id="@+id/LLHightLisgt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Dynamic listing will be here ..."
-            android:textColor="#333333"
-            android:textSize="14sp" />
-
-        <com.happywannyan.Font.SFNFTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Dynamic listing will be here ..."
-            android:textColor="#333333"
-            android:textSize="14sp" />
+            android:orientation="vertical"
+            android:layout_height="wrap_content"></LinearLayout>
 
 
     </LinearLayout>

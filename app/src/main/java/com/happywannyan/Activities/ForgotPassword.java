@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ForgotPassword extends AppCompatActivity implements View.OnClickListener{
-    ImageView IMG_Background;
     EditText EDX_email,EDX_Password;
     AppLoader appLoader;
     @Override
@@ -31,10 +30,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_forgot_password);
         appLoader=new AppLoader(this);
 
-        IMG_Background=(ImageView)findViewById(R.id.IMG_background);
         EDX_email=(EditText)findViewById(R.id.EDX_email);
 
-        Glide.with(this).load(R.drawable.temp_03).into(IMG_Background);
     }
 
     @Override

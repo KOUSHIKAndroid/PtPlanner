@@ -1,6 +1,10 @@
 package com.happywannyan.Adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +16,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.happywannyan.Activities.SearchResult;
+import com.happywannyan.Activities.profile.ProfileDetails;
 import com.happywannyan.Font.SFNFBoldTextView;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.SearchData;
 import com.happywannyan.R;
+import com.happywannyan.Utils.provider.RatingColor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,6 +76,9 @@ public class TinderViewAdapter extends BaseAdapter {
             ((SFNFBoldTextView) v.findViewById(R.id.tv_Price)) .setText(object.getString("currency")+" "+object.getString("price_one"));
             ((SFNFTextView) v.findViewById(R.id.Time)) .setText(object.getString("unit"));
             ((RatingBar) v.findViewById(R.id.rating_bar)) .setNumStars(Integer.parseInt(object.getString("ave_rating")));
+            ((RatingBar) v.findViewById(R.id.rating_bar)).setIsIndicator(true);
+            LayerDrawable stars = (LayerDrawable) ((RatingBar) v.findViewById(R.id.rating_bar)).getProgressDrawable();
+            RatingColor.SETRatingColor(stars);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,6 +90,11 @@ public class TinderViewAdapter extends BaseAdapter {
             public void onClick(View v) {
 //                String item = (String)getItem(position);
 //                Log.i("MainActivity", item);
+                JSONObject object=data.get(position).getSearcItem();
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) context, (ImageView)v.findViewById(R.id.profileImageView), "cardimage");
+                Intent intent = new Intent(context, ProfileDetails.class);
+                    intent.putExtra("data",""+object);
+                context. startActivity(intent, options.toBundle());
             }
         });
 

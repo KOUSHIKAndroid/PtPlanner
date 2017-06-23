@@ -115,7 +115,7 @@ public class LoginChoser extends AppCompatActivity  implements View.OnClickListe
 
             case R.id.LL_SIGNUP:
                 startActivity(new Intent(LoginChoser.this,SignUpActivity.class));
-                finish();
+//                finish();
                 break;
 
         }

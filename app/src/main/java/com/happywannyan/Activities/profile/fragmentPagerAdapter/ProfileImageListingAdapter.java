@@ -5,8 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.happywannyan.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 
 /**
@@ -16,14 +21,15 @@ import com.happywannyan.R;
 public class ProfileImageListingAdapter extends RecyclerView.Adapter<ProfileImageListingAdapter.ViewHolder> {
 
     private Context mContext = null;
-
-    public ProfileImageListingAdapter(Context mContext) {
+JSONArray array;
+    public ProfileImageListingAdapter(Context mContext, JSONArray images) {
         this.mContext = mContext;
+        this.array=images;
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return array.length();
     }
 
     @Override
@@ -33,12 +39,19 @@ public class ProfileImageListingAdapter extends RecyclerView.Adapter<ProfileImag
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        try {
+            Glide.with(mContext).load(array.getString(position)).into(holder.imageView);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
+            imageView=(ImageView)itemView.findViewById(R.id.IMG);
         }
 
         @Override
