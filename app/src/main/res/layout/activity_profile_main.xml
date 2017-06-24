@@ -35,6 +35,20 @@
             android:text="@string/nav_profile"
             android:textColor="@color/colorwhite"
             android:textSize="@dimen/page_titiel" />
+        <ImageView
+            android:id="@+id/Menu"
+            android:layout_width="54dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_more_white" />
+        <ImageView
+            android:id="@+id/ancher"
+            android:layout_width="54dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="42dp" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -240,6 +254,7 @@
                 android:weightSum="4">
 
                 <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/TXTab1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -257,6 +272,7 @@
                     android:background="@color/Black" />
 
                 <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/TXTab2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -274,6 +290,7 @@
                     android:background="@color/text_dark_gray" />
 
                 <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/TXTab3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -291,6 +308,7 @@
                     android:background="@color/text_dark_gray" />
 
                 <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/TXTab4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -357,7 +375,7 @@
 
     <LinearLayout
         android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="25dp"

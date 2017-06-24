@@ -8,10 +8,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.happywannyan.Activities.profile.fragmentPagerAdapter.ProfileFragPagerAdapter;
@@ -47,6 +54,8 @@ public class ProfileDetails extends AppCompatActivity {
     String UserData;
     AppLoader appLoader;
    public String JSONRESPONSE;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,7 +157,19 @@ public class ProfileDetails extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.Menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                LayoutInflater layoutInflater = getLayoutInflater();
+                View popupView = layoutInflater.inflate(R.layout.profile_menu, null);
+                final PopupWindow popupWindow = new PopupWindow(popupView, ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+
+                popupWindow.setFocusable(true);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.showAsDropDown(findViewById(R.id.ancher));
+            }
+        });
 
 
         viewpager.setAdapter(pagerAdapter);
@@ -172,18 +193,30 @@ public class ProfileDetails extends AppCompatActivity {
                 ((View)findViewById(R.id.div2)).setBackgroundColor(Color.TRANSPARENT);
                 ((View)findViewById(R.id.div3)).setBackgroundColor(Color.TRANSPARENT);
                 ((View)findViewById(R.id.div4)).setBackgroundColor(Color.TRANSPARENT);
+                reservation.setVisibility(View.VISIBLE);
+                ((SFNFTextView)findViewById(R.id.TXTab1)).setTextColor(Color.parseColor("#666565"));
+                ((SFNFTextView)findViewById(R.id.TXTab2)).setTextColor(Color.parseColor("#666565"));
+                ((SFNFTextView)findViewById(R.id.TXTab3)).setTextColor(Color.parseColor("#666565"));
+                ((SFNFTextView)findViewById(R.id.TXTab4)).setTextColor(Color.parseColor("#666565"));
+
               switch (position){
                   case 0:
                       ((View)findViewById(R.id.div1)).setBackgroundColor(Color.parseColor("#bf3e49"));
+                      ((SFNFTextView)findViewById(R.id.TXTab1)).setTextColor(Color.BLACK);
+
                       break;
                   case 1:
                       ((View)findViewById(R.id.div2)).setBackgroundColor(Color.parseColor("#bf3e49"));
+                      ((SFNFTextView)findViewById(R.id.TXTab2)).setTextColor(Color.BLACK);
+                      reservation.setVisibility(View.GONE);
                       break;
                   case 2:
                       ((View)findViewById(R.id.div3)).setBackgroundColor(Color.parseColor("#bf3e49"));
+                      ((SFNFTextView)findViewById(R.id.TXTab3)).setTextColor(Color.BLACK);
                       break;
                   case 3:
                       ((View)findViewById(R.id.div4)).setBackgroundColor(Color.parseColor("#bf3e49"));
+                      ((SFNFTextView)findViewById(R.id.TXTab4)).setTextColor(Color.BLACK);
                       break;
               }
 
@@ -198,7 +231,27 @@ public class ProfileDetails extends AppCompatActivity {
             }
         });
 
-
+        ((SFNFTextView)findViewById(R.id.TXTab1)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewpager.setCurrentItem(0);
+            }
+        }); ((SFNFTextView)findViewById(R.id.TXTab2)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewpager.setCurrentItem(1);
+            }
+        }); ((SFNFTextView)findViewById(R.id.TXTab3)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewpager.setCurrentItem(2);
+            }
+        }); ((SFNFTextView)findViewById(R.id.TXTab4)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewpager.setCurrentItem(3);
+            }
+        });
     }
 
 

@@ -110,4 +110,6 @@
 
     <string name="give_the_permission">Give the permission!</string>
     <string name="would_you_mind_to_turn_gps_on">Would you mind to turn GPS on?</string>
+    <string name="wanyanmeetup">Wan-Nyan meet up</string>
+    <string name="contact">Contact</string>
 </resources>
