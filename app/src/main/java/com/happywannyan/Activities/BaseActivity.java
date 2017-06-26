@@ -1,43 +1,27 @@
 package com.happywannyan.Activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.happywannyan.Activities.Booking.BookingOne;
 import com.happywannyan.Events;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.Fragments.BookingFragment;
+import com.happywannyan.Fragments.Favourite;
 import com.happywannyan.Fragments.MyPets_Fragments;
 import com.happywannyan.Fragments.Search_Basic;
 import com.happywannyan.Fragments.Message_Fragment;
@@ -46,26 +30,20 @@ import com.happywannyan.Utils.App_data_holder;
 import com.happywannyan.Utils.CircleTransform;
 import com.happywannyan.Utils.LocationListener.LocationBaseActivity;
 import com.happywannyan.Utils.LocationListener.LocationConfiguration;
-import com.happywannyan.Utils.LocationListener.MyLocalLocationManager;
 import com.happywannyan.Utils.Loger;
-import com.happywannyan.Utils.constants.LogType;
 import com.happywannyan.Utils.constants.ProviderType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
 
 public class BaseActivity extends LocationBaseActivity
-        implements  NavigationView.OnNavigationItemSelectedListener {
+        implements  NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 Events events;
-
+    NavigationView navigationView;
     @Override
     protected void onPause() {
         super.onPause();
@@ -93,7 +71,7 @@ Events events;
         @Koushik
         Navigation Control respect of UserCredintial
          */
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         final ImageView UserImage = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageView);
         final SFNFTextView UserName = (SFNFTextView) navigationView.getHeaderView(0).findViewById(R.id.TXT_UserName);
@@ -193,6 +171,17 @@ Events events;
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.Base_fargment_layout, MyPets_Fragments.newInstance(null, null));
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        }); navigationView.findViewById(R.id.LL_Favorite).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.Base_fargment_layout, Favourite.newInstance(null, null));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -303,5 +292,9 @@ Events events;
     }
 
 
+    @Override
+    public void onClick(View view) {
 
+
+    }
 }

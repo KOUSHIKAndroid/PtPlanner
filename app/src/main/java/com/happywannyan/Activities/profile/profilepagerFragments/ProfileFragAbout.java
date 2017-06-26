@@ -1,5 +1,6 @@
 package com.happywannyan.Activities.profile.profilepagerFragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -54,24 +55,26 @@ public class ProfileFragAbout extends Fragment {
             JSONArray hightlight_feature=jsonObject.getJSONObject("info_array").getJSONArray("hightlight_feature");
 
             for(int i=0;i<Skills.length();i++){
-                SFNFTextView view1=new SFNFTextView(getActivity());
-                view1.setPadding(0,30,0,30);
-                view1.setText(Skills.getString(i));
-                LLSkils.addView(view1);
+                View item=LayoutInflater.from(getActivity()).inflate(R.layout.profile_about_items,null);
+                SFNFTextView textView=(SFNFTextView)item.findViewById(R.id.Text);
+                textView.setText(Skills.getString(i));
+                textView.setTextColor(getResources().getColor(R.color.btn_red));
+                LLSkils.addView(item);
             }
 
             for(int i=0;i<SPCLAcco.length();i++){
-                SFNFTextView view1=new SFNFTextView(getActivity());
-                view1.setPadding(0,30,0,30);
-                view1.setText(SPCLAcco.getString(i));
-                LLSpclAcco.addView(view1);
+                View item=LayoutInflater.from(getActivity()).inflate(R.layout.profile_about_items,null);
+                SFNFTextView textView=(SFNFTextView)item.findViewById(R.id.Text);
+                textView.setText(SPCLAcco.getString(i));
+                LLSpclAcco.addView(item);
             }
 
             for(int i=0;i<hightlight_feature.length();i++){
-                SFNFTextView view1=new SFNFTextView(getActivity());
-                view1.setPadding(0,30,0,30);
-                view1.setText(hightlight_feature.getString(i));
-                LLHightLisgt.addView(view1);
+                View item=LayoutInflater.from(getActivity()).inflate(R.layout.profile_about_items,null);
+                SFNFTextView textView=(SFNFTextView)item.findViewById(R.id.Text);
+                textView.setText(hightlight_feature.getString(i));
+                textView.setTextColor(getResources().getColor(R.color.btn_red));
+                LLHightLisgt.addView(item);
             }
             ((SFNFTextView)view.findViewById(R.id.Description)).setText(jsonObject.getJSONObject("info_array").getJSONObject("about_info").getString("description"));
         } catch (JSONException e) {

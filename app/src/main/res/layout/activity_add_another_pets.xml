@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.happywannyan.SitterBooking.BookingOne">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_serch_top_backg" />
+
+
+    <RelativeLayout
+        android:id="@+id/RL_HEADER"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/cast_expanded_controller_margin_between_status_text_and_seek_bar">
+
+        <ImageView
+            android:id="@+id/IMG_icon_back"
+            android:layout_width="54dp"
+            android:layout_height="50dp"
+            android:padding="15dp"
+            android:src="@drawable/ic_arrow_back_white" />
+
+        <com.happywannyan.Font.SFNFTextView
+            android:id="@+id/PAGE_Titile"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/add_another_pets"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/page_titiel" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/Body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/RL_HEADER"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/T1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Chosepettype" />
+
+                <com.happywannyan.Font.SFNFTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/T1"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="DOg"
+                    android:textColor="@color/Black" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/T1"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_arrow_black" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_project" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/T2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Name" />
+
+                <com.happywannyan.Font.SFNFTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/T2"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="DOg"
+                    android:textColor="@color/Black" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray_project" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:id="@+id/T4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Year" />
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/T4"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="DOg"
+                        android:textColor="@color/Black" />
+
+                    <ImageView
+                        android:id="@+id/I2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/T4"
+                        android:paddingTop="5dp"
+                        android:src="@drawable/ic_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/I2"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/gray_project" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:id="@+id/T3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Month" />
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/T3"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="DOg"
+                        android:textColor="@color/Black" />
+
+                    <ImageView
+                        android:id="@+id/I1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/T3"
+                        android:paddingTop="5dp"
+                        android:src="@drawable/ic_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/I1"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/gray_project" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:id="@+id/T5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Gender" />
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/T5"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="DOg"
+                        android:textColor="@color/Black" />
+
+                    <ImageView
+                        android:id="@+id/I3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/T5"
+                        android:paddingTop="5dp"
+                        android:src="@drawable/ic_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/I3"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/gray_project" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:id="@+id/T6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pet_size" />
+
+                    <com.happywannyan.Font.SFNFTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/T6"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="DOg"
+                        android:textColor="@color/Black" />
+
+                    <ImageView
+                        android:id="@+id/I4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/T6"
+                        android:paddingTop="5dp"
+                        android:src="@drawable/ic_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:layout_below="@+id/I4"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/gray_project" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

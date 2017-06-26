@@ -112,4 +112,22 @@
     <string name="would_you_mind_to_turn_gps_on">Would you mind to turn GPS on?</string>
     <string name="wanyanmeetup">Wan-Nyan meet up</string>
     <string name="contact">Contact</string>
+    <string name="nav_favoritesitter">Favorite Sitters</string>
+    <string name="ic_vector_favourite_delete">Delete</string>
+    <string name="next">Next</string>
+    <string name="FirestName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="letthesitter">Let the sitter know your prefered time (Optional)</string>
+    <string name="noofnight"># of Nights</string>
+    <string name="noofpet"># of Pets</string>
+    <string name="trust_safty"><![CDATA[Trust &amp; Safety  Fee]]></string>
+    <string name="tota_amnt">Total Amount</string>
+    <string name="cancelpolicy">Cancelation Policy</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="add_another_pets">Add Another Pets</string>
+    <string name="Chosepettype">Choose pet type</string>
+    <string name="Name">Name</string>
+    <string name="Year">Year</string>
+    <string name="Month">Month</string>
+    <string name="Gender">Gender</string>
 </resources>

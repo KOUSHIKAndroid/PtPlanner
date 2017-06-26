@@ -8,19 +8,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.happywannyan.SitterBooking.BookingOne;
 import com.happywannyan.Activities.profile.fragmentPagerAdapter.ProfileFragPagerAdapter;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Font.SFNFTextView;
@@ -228,6 +224,15 @@ public class ProfileDetails extends AppCompatActivity {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+
+
+        reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileDetails.this, BookingOne.class));
             }
         });
 

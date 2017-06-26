@@ -99,8 +99,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.CalenderActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Activities.SignUpActivity"
             android:screenOrientation="portrait" />
@@ -113,14 +113,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.FacebookActivity" />
-        <activity android:name=".Activities.Booking.BookingOne" />
+        <activity android:name=".SitterBooking.BookingOne" />
         <activity
             android:name=".Activities.SearchResult"
             android:label="@string/title_activity_search_result"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.ForgotPassword" />
         <activity android:name=".Activities.ResetPassword" />
-        <activity android:name=".Activities.Booking.BookingDetails"></activity>
+        <activity android:name=".Activities.Booking.BookingDetails" />
+        <activity android:name=".Activities.AddAnotherPets"></activity>
     </application>
 
 </manifest>

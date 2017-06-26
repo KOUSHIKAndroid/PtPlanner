@@ -1,6 +1,10 @@
 package com.happywannyan.Fragments;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,10 +29,12 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.happywannyan.Activities.SearchResult;
+import com.happywannyan.Activities.profile.ProfileDetails;
 import com.happywannyan.Font.SFNFBoldTextView;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.R;
 import com.happywannyan.Utils.Loger;
+import com.happywannyan.Utils.provider.RatingColor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -165,7 +171,7 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
             public View getInfoContents(Marker marker) {
                 // Getting view from the layout file info_window_layout
                 View v = getActivity().getLayoutInflater().inflate(R.layout.map_popup_time, null);
-                v.setLayoutParams(new RelativeLayout.LayoutParams(700,230));
+                v.setLayoutParams(new RelativeLayout.LayoutParams(700,280));
                 LatLng latLng = marker.getPosition();
                 try {
                     JSONObject jsonObject=new JSONObject(marker.getTitle()+"");
@@ -173,7 +179,20 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
                     ((SFNFBoldTextView)v.findViewById(R.id.tv_name)).setText(""+jsonObject.getString("nickname"));
                     ((SFNFTextView)v.findViewById(R.id.tv_place)).setText(""+jsonObject.getString("whole_address"));
                     ((SFNFTextView)v.findViewById(R.id.tv_time)).setText(""+jsonObject.getString("unit"));
+                    ((SFNFTextView)v.findViewById(R.id.TXT_sitter)).setText(""+jsonObject.getString("sitter_name"));
                     ((RatingBar)v.findViewById(R.id.Rating)).setNumStars(Integer.parseInt(jsonObject.getString("ave_rating")));
+                    LayerDrawable stars = (LayerDrawable)((RatingBar)v.findViewById(R.id.Rating)).getProgressDrawable();
+                    RatingColor.SETRatingColor(stars);
+
+                    v.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+//                            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)getActivity(), holder.img_view, "cardimage");
+                            Intent intent = new Intent(getActivity(), ProfileDetails.class);
+//                            intent.putExtra("data", "" + searchData.getSearcItem());
+                            startActivity(intent);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -189,8 +208,7 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
         builder.include(new LatLng(25.341635885457396,129.0904974192381));
         builder.include(new LatLng(46.958814679811375,146.3319904357195));
         PresetLatBounds=builder.build();
-        Map.setLatLngBoundsForCameraTarget(PresetLatBounds);
-        Map.animateCamera(CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(),5) );
+
 
         try {
             LatLngBounds.Builder builder2 = new LatLngBounds.Builder();
@@ -221,7 +239,8 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
 
             LatLngBounds bounds = builder2.build();
             int padding = 100; // offset from edges of the map in pixels
-            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding,100,100);
+//            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding,100,100);
+            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 15);
             Map.animateCamera(cu);
         }catch (Exception e)
         {

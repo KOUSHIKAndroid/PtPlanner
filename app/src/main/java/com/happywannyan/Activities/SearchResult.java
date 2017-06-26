@@ -136,8 +136,7 @@ public class SearchResult extends AppCompatActivity {
                         searchData.setSearcItem(jjj);
 
                         ListARRY.add(searchData);
-                        ListARRY.add(searchData);
-                        ListARRY.add(searchData);
+
                     }
 
 

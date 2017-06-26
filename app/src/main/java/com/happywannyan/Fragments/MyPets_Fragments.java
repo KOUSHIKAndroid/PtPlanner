@@ -1,5 +1,6 @@
 package com.happywannyan.Fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.happywannyan.Activities.AddAnotherPets;
 import com.happywannyan.Activities.BaseActivity;
 import com.happywannyan.Adapter.YourPets_Adapter;
 import com.happywannyan.Constant.AppContsnat;
@@ -93,6 +95,14 @@ public class MyPets_Fragments extends Fragment {
                 ((BaseActivity) getActivity()).Menu_Drawer();
             }
         });
+
+        view.findViewById(R.id.fab_plus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AddAnotherPets.class));
+            }
+        });
+
 
     }
 
