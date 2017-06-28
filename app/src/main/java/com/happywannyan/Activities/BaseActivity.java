@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Events;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.Fragments.BookingFragment;
@@ -38,7 +39,7 @@ import org.json.JSONObject;
 
 
 public class BaseActivity extends LocationBaseActivity
-        implements  NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
+        implements  NavigationView.OnNavigationItemSelectedListener {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -93,7 +94,7 @@ Events events;
             }
         });
 
-        new App_data_holder(BaseActivity.this).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
+        new AppContsnat(BaseActivity.this).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
             @Override
             public void Avialable(boolean avilavle, JSONObject data) {
                 try {
@@ -129,7 +130,7 @@ Events events;
         navigationView.findViewById(R.id.LL_Logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new App_data_holder(BaseActivity.this).LogOut_ClearAllData();
+                new AppContsnat(BaseActivity.this).LogOut_ClearAllData();
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(BaseActivity.this, LoginChoser.class));
@@ -292,9 +293,4 @@ Events events;
     }
 
 
-    @Override
-    public void onClick(View view) {
-
-
-    }
 }

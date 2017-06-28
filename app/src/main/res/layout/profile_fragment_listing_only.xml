@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorwhite"
@@ -10,5 +10,11 @@
         android:id="@+id/service_recycler">
 
     </android.support.v7.widget.RecyclerView>
+    <com.happywannyan.Font.SFNFTextView
+        android:id="@+id/No_Review"
+        android:layout_width="match_parent"
+        android:text="@string/no_reviewFound"
+        android:gravity="center"
+        android:layout_height="match_parent" />
 
-</LinearLayout>
+</RelativeLayout>

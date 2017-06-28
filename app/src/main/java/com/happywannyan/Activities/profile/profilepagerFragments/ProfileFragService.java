@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.happywannyan.Activities.profile.ProfileDetails;
 import com.happywannyan.Activities.profile.fragmentPagerAdapter.ProfileServiceListingAdapter;
+import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.R;
 
 import org.json.JSONArray;
@@ -40,13 +41,21 @@ public class ProfileFragService extends Fragment {
         try {
             ServiceArry=new JSONObject(((ProfileDetails)getActivity()).JSONRESPONSE).getJSONObject("info_array").getJSONArray("servicelist");
 
+            if(ServiceArry.length()>0){
+                view.findViewById(R.id.No_Review).setVisibility(View.GONE);
+                list.setLayoutManager(new LinearLayoutManager(getActivity()));
+                list.setAdapter(new ProfileServiceListingAdapter(getActivity(),ServiceArry));
+            }else {
+                ((SFNFTextView)view.findViewById(R.id.No_Review)).setText(getString(R.string.no_ServicesFound));
+                view.findViewById(R.id.No_Review).setVisibility(View.VISIBLE);
+            }
+
         }catch (JSONException e){e.printStackTrace();}
 
 
 
 
 
-        list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        list.setAdapter(new ProfileServiceListingAdapter(getActivity(),ServiceArry));
+
     }
 }

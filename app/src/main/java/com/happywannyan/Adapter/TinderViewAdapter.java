@@ -71,10 +71,11 @@ public class TinderViewAdapter extends BaseAdapter {
             JSONObject object=data.get(position).getSearcItem();
 //            JSONObject object=new JSONObject(data.get(position));
             Glide.with(context).load(object.getString("photo_url")).into((ImageView)v.findViewById(R.id.profileImageView));
-            ((SFNFTextView) v.findViewById(R.id.tv_title)).setText(object.getString("business_name"));
+            ((SFNFTextView) v.findViewById(R.id.tv_title)).setText(object.getString("service_name"));
             ((SFNFTextView) v.findViewById(R.id.tv_address)) .setText(object.getString("whole_address"));
             ((SFNFBoldTextView) v.findViewById(R.id.tv_Price)) .setText(object.getString("currency")+" "+object.getString("price_one"));
             ((SFNFTextView) v.findViewById(R.id.Time)) .setText(object.getString("unit"));
+            ((SFNFTextView) v.findViewById(R.id.tv_name)) .setText(object.getString("sitter_name"));
             ((RatingBar) v.findViewById(R.id.rating_bar)) .setNumStars(Integer.parseInt(object.getString("ave_rating")));
             ((RatingBar) v.findViewById(R.id.rating_bar)).setIsIndicator(true);
             LayerDrawable stars = (LayerDrawable) ((RatingBar) v.findViewById(R.id.rating_bar)).getProgressDrawable();

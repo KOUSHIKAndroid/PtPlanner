@@ -12,12 +12,12 @@ import org.json.JSONObject;
  * Created by apple on 25/05/17.
  */
 
-public class App_data_holder {
+public abstract class App_data_holder {
 //    ******* Golbal Identifire ***************
     public static final int UserData=1;
 
 
-
+public abstract Void UserDetaisl(String UserId);
 
 
     SharedPreferences AppUserData;
@@ -69,6 +69,7 @@ public class App_data_holder {
                 }else  if(USERCREDINTIAL.trim().length()>0){
                     try {
                         app_sharePrefData.Avialable(true,new JSONObject(USERCREDINTIAL));
+                        UserDetaisl(USERCREDINTIAL);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

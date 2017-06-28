@@ -2,6 +2,7 @@ package com.happywannyan.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -31,6 +32,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.happywannyan.Activities.BaseActivity;
 import com.happywannyan.Activities.CalenderActivity;
+import com.happywannyan.Activities.SearchResult;
 import com.happywannyan.Adapter.Adapter_petlist;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Events;
@@ -68,7 +70,6 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
     private String EndDate="";
     LinearLayout LL_Calender;
     LinearLayout LL_PetServiceList;
-    LinearLayout LL_defaultLabel;
     RecyclerView Rec_petlist;
     ImageView IMG_erase_location,IMG_Location;
     ArrayList<PetService> ArrayPetService;
@@ -76,7 +77,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
     Place place;
     boolean GPS=false;
     JSONObject JSONFULLDATA,Geo;
-    private OnFragmentInteractionListener mListener;
+    JSONObject SearchJSON;
 
     public Search_Basic() {
     }
@@ -112,8 +113,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
         });
         LL_Calender=(LinearLayout)view.findViewById(R.id.LL_Calender);
         LL_PetServiceList=(LinearLayout)view.findViewById(R.id.LL_PetServiceList);
-        LL_defaultLabel=(LinearLayout)view.findViewById(R.id.LL_defaultLabel);
-        LL_PetServiceList.setVisibility(View.GONE);
+        LL_PetServiceList.setVisibility(View.VISIBLE);
         Rec_petlist=(RecyclerView)view.findViewById(R.id.Rec_petlist);
         IMG_Location=(ImageView)view.findViewById(R.id.ImgMyLocation);
         IMG_erase_location=(ImageView) view.findViewById(R.id.IMG_erase_location);
@@ -165,34 +165,6 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
 
 
 
-        view.findViewById(R.id.RL_Search).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-//                try {
-//                    startActivityForResult(builder.build(getActivity()), PLACE_AUTOCOMPLETE_REQUEST_CODE);
-//                } catch (GooglePlayServicesRepairableException e) {
-//                    e.printStackTrace();
-//                } catch (GooglePlayServicesNotAvailableException e) {
-//                    e.printStackTrace();
-//                }
-
-                try {
-                    AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
-                            .setCountry("JP")
-                            .build();
-                    Intent intent =
-                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).setFilter(typeFilter)
-                                    .build(getActivity());
-                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException e) {
-                    Loger.MSG("@@ SERVICE"," "+e.getMessage());
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    Loger.MSG("@@ SERVICE"," 2 "+e.getMessage());
-                }
-            }
-        });
 
         LL_Calender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,9 +178,7 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
             public void onClick(View v) {
                 TXT_Loction.setText("");
                 GPS=false;
-                LL_PetServiceList.setVisibility(View.GONE);
                 IMG_erase_location.setVisibility(View.GONE);
-                LL_defaultLabel.setVisibility(View.VISIBLE);
 //                IMG_erase_location.setImageResource(R.drawable.ic_my_location_white);
                 for(PetService petService:ArrayPetService)
                     petService.setTick_value(false);
@@ -218,15 +188,171 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
         });
 
 
+        view.findViewById(R.id.RL_Location).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                            .setCountry("JP")
+                            .build();
+                   Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN).setFilter(typeFilter)
+                                    .build(getActivity());
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    Loger.MSG("@@ SERVICE"," "+e.getMessage());
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    Loger.MSG("@@ SERVICE"," 2 "+e.getMessage());
+                }
+            }
+        });
+
+        view.findViewById(R.id.RL_Serach1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (TXT_Loction.getText().toString().trim().equals("")) {
+                    TXT_Loction.setHintTextColor(Color.RED);
+                } else if (SearchJSON == null) {
+                    Toast.makeText(getActivity(), "Please Choose an type", Toast.LENGTH_SHORT).show();
+                } else {
+
+
+                    Intent intent = new Intent(new Intent(getActivity(), SearchResult.class));
+                    try {
+                        JSONObject SEARCHPARAMS = new JSONObject();
+
+
+                    /*
+                     @@ Make JSONARRY for Next Page Serach
+                     */
+
+                        JSONArray Searchkeyinfor = new JSONArray();
+                        JSONObject data = new JSONObject();
+                        data.put("name", "start_date");
+                        data.put("value", StartDate);
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "end_date");
+                        data.put("value", EndDate);
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "serviceCat");
+                        data.put("value", SearchJSON.getString("id"));
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "pet_type");
+                        data.put("value", "");
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "high_price");
+                        data.put("value", "");
+                        Searchkeyinfor.put(data);
+
+                        data = new JSONObject();
+                        data.put("name", "low_price");
+                        data.put("value", "");
+                        Searchkeyinfor.put(data);
+
+
+                        if (place != null) {
+
+                            data = new JSONObject();
+                            data.put("name", "srch_lon");
+                            data.put("value", place.getLatLng().longitude);
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "srch_lat");
+                            data.put("value", place.getLatLng().latitude);
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "ne_lng");
+                            data.put("value", place.getViewport().northeast.longitude);
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "ne_lat");
+                            data.put("value", place.getViewport().northeast.latitude);
+                            Searchkeyinfor.put(data);
+
+
+                            data = new JSONObject();
+                            data.put("name", "sw_lng");
+                            data.put("value", place.getViewport().southwest.longitude);
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "sw_lat");
+                            data.put("value", place.getViewport().southwest.latitude);
+                            Searchkeyinfor.put(data);
+
+
+                            SEARCHPARAMS.put("LocationName", place.getName());
+
+                            SEARCHPARAMS.put("Address", place.getAddress());
+                        } else {
+                            data = new JSONObject();
+                            data.put("name", "srch_lon");
+                            data.put("value", SearchJSON.getJSONObject("latlng").getString("lng"));
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "srch_lat");
+                            data.put("value", SearchJSON.getJSONObject("latlng").getString("lat"));
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "ne_lng");
+                            data.put("value", SearchJSON.getJSONObject("viewport").getString("northeast_LNG"));
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "ne_lat");
+                            data.put("value", SearchJSON.getJSONObject("viewport").getString("northeast_LAT"));
+                            Searchkeyinfor.put(data);
+
+
+                            data = new JSONObject();
+                            data.put("name", "sw_lng");
+                            data.put("value", SearchJSON.getJSONObject("viewport").getString("southwest_LNG"));
+                            Searchkeyinfor.put(data);
+
+                            data = new JSONObject();
+                            data.put("name", "sw_lat");
+                            data.put("value", SearchJSON.getJSONObject("viewport").getString("southwest_LAT"));
+                            Searchkeyinfor.put(data);
+
+                            SEARCHPARAMS.put("Address", SearchJSON.getString("Address"));
+                            SEARCHPARAMS.put("LocationName", SearchJSON.getString("LocationName"));
+
+                        }
+
+
+                        SEARCHPARAMS.put("keyinfo", Searchkeyinfor);
+
+                        intent.putExtra(SearchResult.SEARCHKEY, SEARCHPARAMS.toString());
+                        startActivity(intent);
+
+                    } catch (JSONException e) {
+                        Loger.Error("@@", "Error" + e.getMessage());
+                    }
+                }
+            }
+        });
+
         view.findViewById(R.id.ImgMyLocation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!TXT_Loction.getText().toString().trim().equals("")) {
                     TXT_Loction.setText("");
                     GPS=false;
-                    LL_PetServiceList.setVisibility(View.GONE);
                     IMG_erase_location.setVisibility(View.GONE);
-                    LL_defaultLabel.setVisibility(View.VISIBLE);
                     for(PetService petService:ArrayPetService)
                         petService.setTick_value(false);
                     ArrayPetService.get(0).setTick_value(true);
@@ -247,6 +373,8 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
 
             }
         });
+
+
 
         if(LocationProvider.GPS(getActivity()))
         {
@@ -312,7 +440,6 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
                         TXT_Loction.setText(Location);
                         LL_PetServiceList.setVisibility(View.VISIBLE);
                         IMG_erase_location.setVisibility(View.VISIBLE);
-                        LL_defaultLabel.setVisibility(View.GONE);
                         break;
 
                 }
@@ -322,8 +449,8 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
     }
 
     public void GotoAdvancedSearched(JSONObject jsondata) {
-        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+//        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         JSONObject latalng=new JSONObject();
         try {
             if(place!=null) {
@@ -364,11 +491,12 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        SearchJSON=jsondata;
+        Loger.MSG("@@",""+SearchJSON.toString());
 
-
-        fragmentTransaction.add(R.id.Base_fargment_layout,Advanced_search.newInstance(jsondata.toString(),null));
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+//        fragmentTransaction.add(R.id.Base_fargment_layout,Advanced_search.newInstance(jsondata.toString(),null));
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
 
 
 
@@ -382,10 +510,11 @@ public class Search_Basic extends Fragment implements LocationProvider.AddressLi
             TXT_Loction.setText(Adreess);
             IMG_erase_location.setVisibility(View.VISIBLE);
             LL_PetServiceList.setVisibility(View.VISIBLE);
-            LL_defaultLabel.setVisibility(View.GONE);
             this.Geo = geo;
         }
     }
+
+
 
 
     public interface OnFragmentInteractionListener {

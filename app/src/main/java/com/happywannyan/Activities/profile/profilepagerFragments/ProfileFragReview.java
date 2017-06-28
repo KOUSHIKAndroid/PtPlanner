@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.happywannyan.Activities.profile.ProfileDetails;
 import com.happywannyan.Activities.profile.fragmentPagerAdapter.ProfileReviewListingAdapter;
+import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.R;
 
 import org.json.JSONArray;
@@ -38,12 +39,20 @@ public class ProfileFragReview  extends Fragment {
 
         try {
             Reviews= new JSONObject(((ProfileDetails)getActivity()).JSONRESPONSE).getJSONObject("info_array").getJSONArray("review_list");
+            if(Reviews.length()>0)
+            {
+                view.findViewById(R.id.No_Review).setVisibility(View.GONE);
+                RecyclerView list = (RecyclerView) view.findViewById(R.id.service_recycler);
+                list.setLayoutManager(new LinearLayoutManager(getActivity()));
+                list.setAdapter(new ProfileReviewListingAdapter(getActivity(),Reviews));
+            }else {
+                ((SFNFTextView)view.findViewById(R.id.No_Review)).setText(getString(R.string.no_reviewFound));
+                view.findViewById(R.id.No_Review).setVisibility(View.VISIBLE);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        RecyclerView list = (RecyclerView) view.findViewById(R.id.service_recycler);
-        list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        list.setAdapter(new ProfileReviewListingAdapter(getActivity(),Reviews));
+
     }
 }

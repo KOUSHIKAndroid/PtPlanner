@@ -50,7 +50,7 @@ public class SearchResult extends AppCompatActivity {
 
     public ArrayList<SearchData> ListARRY;
     JSONObject SearchKeys;
-
+public double ne_lng,ne_lat,sw_lng,sw_lat;
     AppLoader appLoader;
 
     @Override
@@ -87,12 +87,12 @@ public class SearchResult extends AppCompatActivity {
         ArrayList<APIPOSTDATA> PostData = new ArrayList<>();
         APIPOSTDATA apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("user_id");
-        apipostdata.setValues("30");
+        apipostdata.setValues(AppContsnat.UserId);
         PostData.add(apipostdata);
 
         apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("langid");
-        apipostdata.setValues("en");
+        apipostdata.setValues(AppContsnat.Language);
         PostData.add(apipostdata);
 
         apipostdata = new APIPOSTDATA();
@@ -113,7 +113,17 @@ public class SearchResult extends AppCompatActivity {
                 apipostdata.setPARAMS(object.getString("name"));
                 apipostdata.setValues(object.getString("value"));
                 PostData.add(apipostdata);
+                if(object.getString("name").equals("ne_lng"))
+                    ne_lng=Double.parseDouble(object.getString("value"));
+                if(object.getString("name").equals("ne_lat"))
+                    ne_lat=Double.parseDouble(object.getString("value"));
+                if(object.getString("name").equals("sw_lng"))
+                    sw_lng=Double.parseDouble(object.getString("value"));
+                if(object.getString("name").equals("sw_lat"))
+                    sw_lat=Double.parseDouble(object.getString("value"));
+
             }
+
 
 
         } catch (JSONException e) {

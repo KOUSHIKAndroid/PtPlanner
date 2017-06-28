@@ -1,5 +1,7 @@
 package com.happywannyan.Activities.profile;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.LayerDrawable;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.happywannyan.SitterBooking.BookingOne;
@@ -22,6 +25,7 @@ import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.R;
+import com.happywannyan.Utils.AppCalender;
 import com.happywannyan.Utils.AppLoader;
 import com.happywannyan.Utils.App_data_holder;
 import com.happywannyan.Utils.JSONPerser;
@@ -40,7 +44,7 @@ import java.util.Locale;
  * Created by bodhidipta on 22/05/17.
  */
 
-public class ProfileDetails extends AppCompatActivity {
+public class ProfileDetails extends AppCompatActivity implements View.OnClickListener{
     private ViewPager viewpager;
     private ProfileFragPagerAdapter pagerAdapter = null;
     private LinearLayout reservation = null;
@@ -51,8 +55,7 @@ public class ProfileDetails extends AppCompatActivity {
     AppLoader appLoader;
    public String JSONRESPONSE;
 
-
-
+    PopupWindow popupWindow;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,7 @@ public class ProfileDetails extends AppCompatActivity {
         reservation = (LinearLayout) findViewById(R.id.reservation);
 
         try {
-            new App_data_holder(this).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
+            new AppContsnat(this).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
                 @Override
                 public void Avialable(boolean avilavle, JSONObject data) {
                     try {
@@ -116,8 +119,8 @@ public class ProfileDetails extends AppCompatActivity {
         ArrayList<APIPOSTDATA> Paramas = new ArrayList<>();
         APIPOSTDATA apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("sitter_user_id");
-//        apipostdata.setValues(SitterId);
-        apipostdata.setValues(""+3);
+        apipostdata.setValues(SitterId);
+//        apipostdata.setValues(""+3);
         Paramas.add(apipostdata);
         apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("user_id");
@@ -159,7 +162,7 @@ public class ProfileDetails extends AppCompatActivity {
 
                 LayoutInflater layoutInflater = getLayoutInflater();
                 View popupView = layoutInflater.inflate(R.layout.profile_menu, null);
-                final PopupWindow popupWindow = new PopupWindow(popupView, ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
+                  popupWindow = new PopupWindow(popupView, ViewPager.LayoutParams.WRAP_CONTENT, ViewPager.LayoutParams.WRAP_CONTENT);
 
                 popupWindow.setFocusable(true);
                 popupWindow.setOutsideTouchable(true);
@@ -260,4 +263,18 @@ public class ProfileDetails extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.ID_MitUp:
+                popupWindow.dismiss();
+                Intent inten=new Intent(this,MeetupWannyan.class);
+                    inten.putExtra("DATA",SitterId);
+                startActivity(inten);
+                break;
+
+
+
+        }
+    }
 }

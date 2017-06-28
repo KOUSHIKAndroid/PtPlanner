@@ -121,7 +121,8 @@
         <activity android:name=".Activities.ForgotPassword" />
         <activity android:name=".Activities.ResetPassword" />
         <activity android:name=".Activities.Booking.BookingDetails" />
-        <activity android:name=".Activities.AddAnotherPets"></activity>
+        <activity android:name=".Activities.AddAnotherPets" />
+        <activity android:name=".Activities.profile.MeetupWannyan"></activity>
     </application>
 
 </manifest>

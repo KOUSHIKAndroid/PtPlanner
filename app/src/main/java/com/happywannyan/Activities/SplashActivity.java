@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                new App_data_holder(SplashActivity.this).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
+                new AppContsnat(SplashActivity.this).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
                     @Override
                     public void Avialable(boolean avilavle, JSONObject data) {
                         startActivity( new Intent(SplashActivity.this,BaseActivity.class));

@@ -143,7 +143,7 @@ public class FacebookActivity extends AppCompatActivity {
             @Override
             public void OnSuccess(String Result) {
                 try {
-                    new App_data_holder(FacebookActivity.this).SET_SHAREDATA(App_data_holder.UserData,Result);
+                    new AppContsnat(FacebookActivity.this).SET_SHAREDATA(App_data_holder.UserData,Result);
                     JSONObject jsonObject1=new JSONObject(Result);
                     switch (jsonObject1.getString("user_status")){
                         case "not_verified_user":

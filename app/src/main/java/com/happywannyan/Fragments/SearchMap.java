@@ -176,7 +176,7 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
                 try {
                     JSONObject jsonObject=new JSONObject(marker.getTitle()+"");
                     Loger.MSG("@@ MAR",""+jsonObject);
-                    ((SFNFBoldTextView)v.findViewById(R.id.tv_name)).setText(""+jsonObject.getString("nickname"));
+                    ((SFNFBoldTextView)v.findViewById(R.id.tv_name)).setText(""+jsonObject.getString("service_name"));
                     ((SFNFTextView)v.findViewById(R.id.tv_place)).setText(""+jsonObject.getString("whole_address"));
                     ((SFNFTextView)v.findViewById(R.id.tv_time)).setText(""+jsonObject.getString("unit"));
                     ((SFNFTextView)v.findViewById(R.id.TXT_sitter)).setText(""+jsonObject.getString("sitter_name"));
@@ -205,8 +205,8 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
 
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(new LatLng(25.341635885457396,129.0904974192381));
-        builder.include(new LatLng(46.958814679811375,146.3319904357195));
+        builder.include(new LatLng(((SearchResult)getActivity()).ne_lat,((SearchResult)getActivity()).ne_lng));
+        builder.include(new LatLng(((SearchResult)getActivity()).sw_lat,((SearchResult)getActivity()).sw_lng));
         PresetLatBounds=builder.build();
 
 
@@ -240,7 +240,7 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
             LatLngBounds bounds = builder2.build();
             int padding = 100; // offset from edges of the map in pixels
 //            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding,100,100);
-            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 15);
+            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(), 15);
             Map.animateCamera(cu);
         }catch (Exception e)
         {
