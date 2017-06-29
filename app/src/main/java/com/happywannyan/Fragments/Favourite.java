@@ -13,8 +13,16 @@ import android.view.ViewGroup;
 
 import com.happywannyan.Activities.BaseActivity;
 import com.happywannyan.Adapter.FavouriteRecyclerAdapter;
+import com.happywannyan.Constant.AppContsnat;
+import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.POJO.SetGetFavourite;
 import com.happywannyan.R;
+import com.happywannyan.Utils.AppLoader;
+import com.happywannyan.Utils.JSONPerser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -27,9 +35,12 @@ public class Favourite extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    AppLoader Loader;
+
     RecyclerView rcv_favourite;
     ArrayList<SetGetFavourite> favouriteArrayList;
     FavouriteRecyclerAdapter favouriteRecyclerAdapter;
+
     public Favourite() {
         // Required empty public constructor
     }
@@ -50,6 +61,8 @@ public class Favourite extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        new AppContsnat(getActivity());
+        Loader = new AppLoader(getActivity());
     }
 
     @Override
@@ -65,32 +78,73 @@ public class Favourite extends Fragment {
         view.findViewById(R.id.IMG_icon_drwaer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((BaseActivity)getActivity()).Menu_Drawer();
+                ((BaseActivity) getActivity()).Menu_Drawer();
             }
         });
 
-        rcv_favourite= (RecyclerView) view.findViewById(R.id.recycler_view);
+        rcv_favourite = (RecyclerView) view.findViewById(R.id.recycler_view);
         rcv_favourite.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        favouriteArrayList=new ArrayList<>();
-
-        for(int i=0;i<20;i++){
-
-            SetGetFavourite setGetFavourite=new SetGetFavourite();
-            setGetFavourite.setCheckRightValue(false);
-            setGetFavourite.setName("John Doe");
-            setGetFavourite.setImg("http://www.wa11papers.com/assets/thumbnails/nature-landscape-trees-clouds-grass-forest-fog-hd%20wallpaper-meadow-foggy-wallpaper-8038-thumbnail-5d61d18a.jpg");
-            setGetFavourite.setAddress("Tuoh,Ciba,Japan");
-            setGetFavourite.setReservation("Reservation");
-            setGetFavourite.setContact("Contact");
-            setGetFavourite.setMeet_up("Wan-Nyan meet up");
-
-            favouriteArrayList.add(setGetFavourite);
-
-        }
+        favouriteArrayList = new ArrayList<>();
 
 
-        favouriteRecyclerAdapter=new FavouriteRecyclerAdapter(getActivity(),favouriteArrayList);
-        rcv_favourite.setAdapter(favouriteRecyclerAdapter);
+        CallAPIFROMDATA(0);
+
+
+    }
+
+    private void CallAPIFROMDATA(final int startpoint) {
+        ArrayList<APIPOSTDATA> Params = new ArrayList<>();
+        APIPOSTDATA apipostdata = new APIPOSTDATA();
+        apipostdata.setPARAMS("user_id");
+        apipostdata.setValues(AppContsnat.UserId);
+        Params.add(apipostdata);
+
+        apipostdata = new APIPOSTDATA();
+        apipostdata.setPARAMS("start_form");
+        apipostdata.setValues(startpoint + "");
+        Params.add(apipostdata);
+
+        apipostdata = new APIPOSTDATA();
+        apipostdata.setPARAMS("per_page");
+        apipostdata.setValues("10");
+        Params.add(apipostdata);
+        Loader.Show();
+        new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "users_favsetters_list?", Params, new JSONPerser.JSONRESPONSE() {
+            @Override
+            public void OnSuccess(String Result) {
+                try {
+                    JSONObject Object = new JSONObject(Result);
+                    JSONArray Array = Object.getJSONArray("info_array");
+
+                    for (int i = 0; i < Array.length(); i++) {
+
+                        SetGetFavourite setGetFavourite = new SetGetFavourite();
+                        setGetFavourite.setCheckRightValue(false);
+                        setGetFavourite.setDataObject(Array.getJSONObject(i));
+                        favouriteArrayList.add(setGetFavourite);
+
+                    }
+                    if (startpoint == 0) {
+                        favouriteRecyclerAdapter = new FavouriteRecyclerAdapter(getActivity(), favouriteArrayList);
+                        rcv_favourite.setAdapter(favouriteRecyclerAdapter);
+                    } else
+                        favouriteRecyclerAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Loader.Dismiss();
+            }
+
+            @Override
+            public void OnError(String Error, String Response) {
+                Loader.Dismiss();
+            }
+
+            @Override
+            public void OnError(String Error) {
+                Loader.Dismiss();
+            }
+        });
     }
 }

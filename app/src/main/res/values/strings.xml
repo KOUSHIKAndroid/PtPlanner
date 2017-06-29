@@ -148,4 +148,8 @@
     <string name="add_a_message">Add a Message</string>
     <string name="send">Send</string>
     <string name="ihavenotdateyet">I don\'t have dates yet</string>
+    <string name="pickuptime">Pick-Up Time</string>
+    <string name="dropofftime">Drop-Off Time</string>
+    <string name="pleaseselect">Please Slect</string>
+    <string name="please_enter_message">Please type message here</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.happywannyan.Activities.profile;
 
 import android.app.DialogFragment;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -116,36 +117,54 @@ public class MeetupWannyan extends AppCompatActivity implements View.OnClickList
                 apipostdata.setPARAMS("No_of_pet");
                 apipostdata.setValues(((SFNFTextView) findViewById(R.id.EDX_no_of_pets)).toString());
                 apipostdatas.add(apipostdata);
-                appLoader.Show();
-                new JSONPerser().API_FOR_POST(AppContsnat.BASEURL + "meetandgreet_request", apipostdatas, new JSONPerser.JSONRESPONSE() {
-                    @Override
-                    public void OnSuccess(String Result) {
-                        appLoader.Dismiss();
-                        Loger.MSG("@@ MSG", Result);
-                        try {
-                            new MYAlert(MeetupWannyan.this).AlertOnly(getString(R.string.sucess), new JSONObject(Result).getString("message"), new MYAlert.OnlyMessage() {
-                                @Override
-                                public void OnOk(boolean res) {
-                                    
-                                }
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                if(((SFNFTextView) findViewById(R.id.startdate)).getText().toString().trim().equals(""))
+                {
+                    ((SFNFTextView) findViewById(R.id.startdate)).setHintTextColor(Color.RED);
+                    ((SFNFTextView) findViewById(R.id.startdate)).setHint(getString(R.string.pleaseselect));
+                }else if(((SFNFTextView) findViewById(R.id.AlterDate)).getText().toString().trim().equals(""))
+                {
+                    ((SFNFTextView) findViewById(R.id.AlterDate)).setHint(getString(R.string.pleaseselect));
+                    ((SFNFTextView) findViewById(R.id.AlterDate)).setHintTextColor(Color.RED);
+                }else if(((EditText) findViewById(R.id.EDX_msg)).getText().toString().trim().equals(""))
+                {
+                    ((EditText) findViewById(R.id.EDX_msg)).setHint(getString(R.string.please_enter_message));
+                    ((EditText) findViewById(R.id.EDX_msg)).setHintTextColor(Color.RED);
+                    ((EditText) findViewById(R.id.EDX_msg)).requestFocus();
+                }else {
+
+
+                    appLoader.Show();
+                    new JSONPerser().API_FOR_POST(AppContsnat.BASEURL + "meetandgreet_request", apipostdatas, new JSONPerser.JSONRESPONSE() {
+                        @Override
+                        public void OnSuccess(String Result) {
+                            appLoader.Dismiss();
+                            Loger.MSG("@@ MSG", Result);
+                            try {
+                                new MYAlert(MeetupWannyan.this).AlertOnly(getString(R.string.sucess), new JSONObject(Result).getString("message"), new MYAlert.OnlyMessage() {
+                                    @Override
+                                    public void OnOk(boolean res) {
+
+                                    }
+                                });
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void OnError(String Error, String Response) {
-                        Loger.MSG("@@ Err", Response);
-                        appLoader.Dismiss();
-                    }
+                        @Override
+                        public void OnError(String Error, String Response) {
+                            Loger.MSG("@@ Err", Response);
+                            appLoader.Dismiss();
+                        }
 
-                    @Override
-                    public void OnError(String Error) {
-                        Loger.MSG("@@ Err", Error);
-                        appLoader.Dismiss();
-                    }
-                });
+                        @Override
+                        public void OnError(String Error) {
+                            Loger.MSG("@@ Err", Error);
+                            appLoader.Dismiss();
+                        }
+                    });
+                }
 
         }
     }

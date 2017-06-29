@@ -67,25 +67,7 @@ public class SearchTinder extends Fragment {
 
         cardStack = (SwipeDeck) view.findViewById(R.id.swipe_deck);
 
-        final ArrayList<String> testData = new ArrayList<>();
-//       for(SearchData searchData:((SearchResult)getActivity()).ListARRY)
-//       {
-//           testData.add(searchData.getSearcItem().toString());
-//       }
-//        for(SearchData searchData:((SearchResult)getActivity()).ListARRY)
-//        {
-//            testData.add(searchData.getSearcItem().toString());
-//        }
-//        for(SearchData searchData:((SearchResult)getActivity()).ListARRY)
-//        {
-//            testData.add(searchData.getSearcItem().toString());
-//        }
 
-//        testData.add("0");
-//        testData.add("1");
-//        testData.add("2");
-//        testData.add("3");
-//        testData.add("4");
         TotalNo = ((SearchResult) getActivity()).ListARRY.size();
         if (TotalNo <= 1) {
             cardStack.NUMBER_OF_CARDS = 1;
@@ -112,6 +94,7 @@ public class SearchTinder extends Fragment {
                 }
                 if (TotalNo <= 1) {
                     cardStack.NUMBER_OF_CARDS = 1;
+
                 } else if (TotalNo < 3) {
                     cardStack.NUMBER_OF_CARDS = 2;
                 } else {
@@ -129,6 +112,7 @@ public class SearchTinder extends Fragment {
                 }
                 if (TotalNo <= 1) {
                     cardStack.NUMBER_OF_CARDS = 1;
+                    adapter.notifyDataSetChanged();
                 } else if (TotalNo < 3) {
                     cardStack.NUMBER_OF_CARDS = 2;
                 } else {

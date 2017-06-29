@@ -15,9 +15,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.happywannyan.Font.SFNFTextView;
+import com.happywannyan.Fragments.Favourite;
 import com.happywannyan.POJO.SetGetFavourite;
 import com.happywannyan.R;
 import com.happywannyan.Utils.Loger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -56,13 +60,20 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         holder.LLMain.getLayoutParams().width =displayMetrics.widthPixels;
         holder.LLDelete.getLayoutParams().width =(displayMetrics.widthPixels)/3;
 
-        Glide.with(context).load(favouriteArrayList.get(position).getImg()).into(holder.img_view);
+        JSONObject object= favouriteArrayList.get(position).getDataObject();
 
-        holder.tv_title.setText(favouriteArrayList.get(position).getName());
-        holder.tv_address.setText(favouriteArrayList.get(position).getAddress());
-        holder.tv_reserve_or_not_reserve.setText(favouriteArrayList.get(position).getReservation());
-        holder.tv_meet_up.setText(favouriteArrayList.get(position).getMeet_up());
-        holder.tv_contact.setText(favouriteArrayList.get(position).getContact());
+        try {
+            Glide.with(context).load(object.getString("image")).into(holder.img_view);
+            holder.tv_title.setText(object.getString("full_name"));
+            holder.tv_address.setText(object.getString("location"));
+//            holder.tv_reserve_or_not_reserve.setText(favouriteArrayList.get(position).getReservation());
+//            holder.tv_meet_up.setText(favouriteArrayList.get(position).getMeet_up());
+//            holder.tv_contact.setText(favouriteArrayList.get(position).getContact());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
 
 
 
