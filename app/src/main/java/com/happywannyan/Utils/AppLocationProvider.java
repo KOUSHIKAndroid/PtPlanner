@@ -31,7 +31,7 @@ import okhttp3.Response;
  * Created by su on 6/20/17.
  */
 
-public class LocationProvider {
+public class AppLocationProvider {
 
    public interface AddressListener{
         void OnAdresss(String Adreess,JSONObject geo);

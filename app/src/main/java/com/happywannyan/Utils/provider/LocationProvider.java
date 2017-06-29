@@ -28,7 +28,7 @@ public abstract class LocationProvider {
     public abstract boolean requiresActivityResult();
 
     /**
-     * This method will be used to determine whether any LocationProvider
+     * This method will be used to determine whether any AppLocationProvider
      * is currently displaying dialog or something.
      */
     public abstract boolean isDialogShowing();

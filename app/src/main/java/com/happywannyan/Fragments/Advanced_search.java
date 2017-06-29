@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -28,11 +27,10 @@ import com.happywannyan.CustomRangeBar.RangeSeekBar;
 import com.happywannyan.Events;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.APIPOSTDATA;
-import com.happywannyan.POJO.PetService;
 import com.happywannyan.R;
+import com.happywannyan.Utils.AppLocationProvider;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.LocationListener.MyLocalLocationManager;
-import com.happywannyan.Utils.LocationProvider;
 import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.MYAlert;
 import com.happywannyan.Utils.constants.LogType;
@@ -45,7 +43,7 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Advanced_search extends Fragment implements LocationProvider.AddressListener {
+public class Advanced_search extends Fragment implements AppLocationProvider.AddressListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "basicdat";
@@ -398,7 +396,7 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
                         @Override
                         public void UpdateLocation(Location location) {
                             Loger.MSG("@@@ LAT", "--" + location.getLatitude() + location.getLongitude());
-                            new LocationProvider().OnGetAddress(getActivity(), location, Advanced_search.this);
+                            new AppLocationProvider().OnGetAddress(getActivity(), location, Advanced_search.this);
                         }
                     });
                 }
@@ -527,7 +525,7 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
                     SEARCHPARAMS.put("keyinfo", Searchkeyinfor);
 
                     intent.putExtra(SearchResult.SEARCHKEY, SEARCHPARAMS.toString());
-                    startActivity(intent);
+                    startActivityForResult(intent,101);
 
                 } catch (JSONException e) {
                     Loger.Error(TAG, " " + e.getMessage());
@@ -569,6 +567,9 @@ public class Advanced_search extends Fragment implements LocationProvider.Addres
 
             }
 
+        }else if(requestCode==101)
+        {
+            getActivity().onBackPressed();
         }
 
     }

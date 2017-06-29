@@ -70,7 +70,7 @@ public class MyLocalLocationManager {
 
     /**
      * Instead of using DefaultLocationProvider you can create your own,
-     * and set it to manager so it will run your LocationProvider.
+     * and set it to manager so it will run your AppLocationProvider.
      * Please refer to {@link DefaultLocationProvider}
      */
     public MyLocalLocationManager setLocationProvider(LocationProvider provider) {

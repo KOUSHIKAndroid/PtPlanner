@@ -5,14 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.happywannyan.Activities.Booking.BookingDetails">
-    <ImageView
-        android:layout_width="match_parent"
-        android:background="@drawable/img_serch_top_backg"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp" />
     <RelativeLayout
         android:id="@+id/RL_HEADER"
+        android:background="@color/colorPrimary"
         android:layout_width="395dp"
         android:orientation="horizontal"
         android:paddingTop="@dimen/cast_expanded_controller_margin_between_status_text_and_seek_bar"

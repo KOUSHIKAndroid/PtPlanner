@@ -1,5 +1,6 @@
 package com.happywannyan.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -77,6 +78,8 @@ public double ne_lng,ne_lat,sw_lng,sw_lat;
         findViewById(R.id.IMG_icon_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent();
+                setResult(RESULT_FIRST_USER,intent);
                 finish();
             }
         });
@@ -235,6 +238,14 @@ public double ne_lng,ne_lat,sw_lng,sw_lat;
             }
         });
 
+        findViewById(R.id.IMG_Filter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent();
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
 
     }
 

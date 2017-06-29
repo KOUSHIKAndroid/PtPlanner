@@ -81,6 +81,7 @@ public class Message_Fragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        new AppContsnat(getActivity());
         Params = new ArrayList<>();
         appLoader=new AppLoader(getActivity());
     }
@@ -119,7 +120,7 @@ public class Message_Fragment extends Fragment {
         Params.add(apipostdata);
         apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("user_id");
-        apipostdata.setValues("8");
+        apipostdata.setValues(AppContsnat.UserId);
         Params.add(apipostdata);
         apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("lang_id");

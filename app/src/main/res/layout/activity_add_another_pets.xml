@@ -6,15 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.happywannyan.SitterBooking.BookingOne">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/img_serch_top_backg" />
-
 
     <RelativeLayout
         android:id="@+id/RL_HEADER"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="@dimen/cast_expanded_controller_margin_between_status_text_and_seek_bar">
@@ -109,6 +105,7 @@
                     android:id="@+id/TXTName"
                     android:layout_width="match_parent"
                     android:hint="@string/Name"
+                    android:backgroundTint="@color/colorPrimary"
                     android:layout_height="wrap_content" />
             </android.support.design.widget.TextInputLayout>
 

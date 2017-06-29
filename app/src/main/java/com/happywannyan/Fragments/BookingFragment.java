@@ -67,7 +67,7 @@ public class BookingFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        new AppContsnat(getActivity());
         recyclerView= (RecyclerView) view.findViewById(R.id.rcv_upcoming_booking);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -91,7 +91,7 @@ public class BookingFragment extends Fragment{
 
         apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("user_id");
-        apipostdata.setValues("8");
+        apipostdata.setValues(AppContsnat.UserId);
         Params.add(apipostdata);
 
         apipostdata = new APIPOSTDATA();
@@ -132,7 +132,7 @@ public class BookingFragment extends Fragment{
                 view_between_pending_past.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
 
                 AllBooking = new ArrayList<>();
-                type="past_booking_list";
+                type="upcoming_booking_list";
                 loadList("0");
             }
         });
@@ -150,7 +150,7 @@ public class BookingFragment extends Fragment{
                 view_between_pending_past.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
 
                 AllBooking = new ArrayList<>();
-                type="past_booking_list";
+                type="current_booking_list";
                 loadList("0");
 
             }
@@ -168,7 +168,7 @@ public class BookingFragment extends Fragment{
                 view_between_pending_past.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Black));
 
                 AllBooking = new ArrayList<>();
-                type="past_booking_list";
+                type="pending_booking_list";
                 loadList("0");
             }
         });
@@ -193,7 +193,6 @@ public class BookingFragment extends Fragment{
         tv_up_coming.performClick();
 
     }
-
 
     public void loadList(final String start_from){
         appLoader.Show();
