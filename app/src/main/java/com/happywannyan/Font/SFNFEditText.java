@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.widget.EditText;
 
 /**
  * Created by apple on 18/05/17.
@@ -30,9 +31,14 @@ public class SFNFEditText extends AppCompatEditText {
     }
 
     public void init() {
-
-        super.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
-                "System San Francisco Display Regular.ttf"));
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "System San Francisco Display Regular.ttf");
+        setTypeface(tf);
+//        if (!isInEditMode()) {
+//            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "System San Francisco Display Regular.ttf");
+//            setTypeface(tf);
+//        }
+//        super.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
+//                "System San Francisco Display Regular.ttf"));
 
     }
 

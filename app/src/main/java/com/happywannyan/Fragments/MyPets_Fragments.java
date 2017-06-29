@@ -65,6 +65,7 @@ public class MyPets_Fragments extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        new AppContsnat(getActivity());
     }
 
     @Override
@@ -111,11 +112,11 @@ public class MyPets_Fragments extends Fragment {
         ArrayList<APIPOSTDATA> params = new ArrayList<>();
         APIPOSTDATA apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("user_id");
-        apipostdata.setValues("8");
+        apipostdata.setValues(AppContsnat.UserId);
         params.add(apipostdata);
         apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("lang_id");
-        apipostdata.setValues("en");
+        apipostdata.setValues(AppContsnat.Language);
         params.add(apipostdata);
         apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("start_form");

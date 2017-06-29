@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.happywannyan.Adapter.Adapter_petlist;
 import com.happywannyan.Constant.AppContsnat;
@@ -29,7 +30,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     AppLoader appLoader;
     JSONArray PetService;
     String PetTypeId="";
-    SFNFEditText TXTName;
+   EditText TXTName;
     JSONArray Text,InputArea,Select;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_add_another_pets);
         appLoader=new AppLoader(this);
         appLoader.Show();
-        TXTName=(SFNFEditText)findViewById(R.id.TXTName);
+        TXTName=(EditText)findViewById(R.id.TXTName);
         new AppContsnat(this);
         new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "parent_service", new ArrayList<APIPOSTDATA>(), new JSONPerser.JSONRESPONSE() {
             @Override
@@ -153,6 +154,55 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                         public void OnSelectedTEXT(JSONObject jsonObject) {
                             try {
                                 ((SFNFTextView)findViewById(R.id.TXT_Month)).setText(jsonObject.getString("option_name"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.RL_Gender:
+                try {
+                    new MYAlert(AddAnotherPets.this).AlertTextLsit(getResources().getString(R.string.Gender), other_info.getJSONObject(3).getJSONArray("input_option"), "option_name", new MYAlert.OnSignleListTextSelected() {
+                        @Override
+                        public void OnSelectedTEXT(JSONObject jsonObject) {
+                            try {
+                                ((SFNFTextView)findViewById(R.id.TXT_gender)).setText(jsonObject.getString("option_name"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case R.id.RL_petSize:
+                try {
+                    new MYAlert(AddAnotherPets.this).AlertTextLsit(getResources().getString(R.string.pet_size), other_info.getJSONObject(5).getJSONArray("input_option"), "option_name", new MYAlert.OnSignleListTextSelected() {
+                        @Override
+                        public void OnSelectedTEXT(JSONObject jsonObject) {
+                            try {
+                                ((SFNFTextView)findViewById(R.id.TXT_petsize)).setText(jsonObject.getString("option_name"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.RL_breed:
+                try {
+                    new MYAlert(AddAnotherPets.this).AlertTextLsit(getResources().getString(R.string.pet_size), other_info.getJSONObject(4).getJSONArray("input_option"), "option_name", new MYAlert.OnSignleListTextSelected() {
+                        @Override
+                        public void OnSelectedTEXT(JSONObject jsonObject) {
+                            try {
+                                ((SFNFTextView)findViewById(R.id.TXT_breed)).setText(jsonObject.getString("option_name"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

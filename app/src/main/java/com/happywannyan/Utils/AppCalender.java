@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
+import com.happywannyan.R;
 import com.happywannyan.SitterBooking.BookingFragmnetOne;
 
 import java.util.Calendar;
@@ -31,10 +32,18 @@ public class AppCalender extends DialogFragment
     public interface OnDateSelect {
         void Ondate(Calendar date,int viewid);
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AppTheme);
+    }
+
     public OnDateSelect onDateSelect;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
+
         onDateSelect=(OnDateSelect)getActivity();
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);

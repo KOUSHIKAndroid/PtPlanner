@@ -32,7 +32,7 @@ public class BookingOne extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.IMG_icon_back:
-                finish();
+                onBackPressed();
                 break;
 
 
