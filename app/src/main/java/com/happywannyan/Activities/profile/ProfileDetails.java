@@ -272,6 +272,12 @@ public class ProfileDetails extends AppCompatActivity implements View.OnClickLis
                     inten.putExtra("DATA",SitterId);
                 startActivity(inten);
                 break;
+            case R.id.Contact:
+                popupWindow.dismiss();
+                 inten=new Intent(this,ContactMsg.class);
+                    inten.putExtra("DATA",SitterId);
+                startActivity(inten);
+                break;
 
 
 

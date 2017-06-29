@@ -128,17 +128,17 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
 
     @Override
     public void onCameraMove() {
-        Loger.MSG("@@ ViewPost"," "+Map.getProjection().getVisibleRegion().latLngBounds.southwest.latitude);
-
-        if(Map.getCameraPosition().zoom>5 && Map.getProjection().getVisibleRegion().latLngBounds.northeast.latitude<
-                PresetLatBounds.northeast.latitude && Map.getProjection().getVisibleRegion().latLngBounds.southwest.latitude> PresetLatBounds.southwest.latitude
-                )
-        {
-            Map.getUiSettings().setScrollGesturesEnabled(true);
-        }else {
-//            Map.getUiSettings().setScrollGesturesEnabled(false);
-            Map.moveCamera(CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(),Map.getCameraPosition().zoom) );
-        }
+//        Loger.MSG("@@ ViewPost"," "+Map.getProjection().getVisibleRegion().latLngBounds.southwest.latitude);
+//
+//        if(Map.getCameraPosition().zoom>5 && Map.getProjection().getVisibleRegion().latLngBounds.northeast.latitude<
+//                PresetLatBounds.northeast.latitude && Map.getProjection().getVisibleRegion().latLngBounds.southwest.latitude> PresetLatBounds.southwest.latitude
+//                )
+//        {
+//            Map.getUiSettings().setScrollGesturesEnabled(true);
+//        }else {
+////            Map.getUiSettings().setScrollGesturesEnabled(false);
+//            Map.moveCamera(CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(),Map.getCameraPosition().zoom) );
+//        }
 
     }
 
@@ -160,7 +160,7 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
         Map.setOnCameraMoveListener(this);
         Map.setMinZoomPreference((float) 4.99);
         Map.getUiSettings().setRotateGesturesEnabled(false);
-        Map.getUiSettings().setScrollGesturesEnabled(false);
+        Map.getUiSettings().setScrollGesturesEnabled(true);
         Map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -184,15 +184,6 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
                     LayerDrawable stars = (LayerDrawable)((RatingBar)v.findViewById(R.id.Rating)).getProgressDrawable();
                     RatingColor.SETRatingColor(stars);
 
-                    v.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-//                            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)getActivity(), holder.img_view, "cardimage");
-                            Intent intent = new Intent(getActivity(), ProfileDetails.class);
-//                            intent.putExtra("data", "" + searchData.getSearcItem());
-                            startActivity(intent);
-                        }
-                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -201,13 +192,23 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
 
             }
         });
+        Map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                marker.hideInfoWindow();
+
+//                            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)getActivity(), holder.img_view, "cardimage");
+                Intent intent = new Intent(getActivity(), ProfileDetails.class);
+                            intent.putExtra("data", "" + ((SearchResult)getActivity()).ListARRY.get((Integer) marker.getTag()).getSearcItem());
+                startActivity(intent);
+            }
+        });
 
 
-
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        builder.include(new LatLng(((SearchResult)getActivity()).ne_lat,((SearchResult)getActivity()).ne_lng));
-        builder.include(new LatLng(((SearchResult)getActivity()).sw_lat,((SearchResult)getActivity()).sw_lng));
-        PresetLatBounds=builder.build();
+//        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//        builder.include(new LatLng(((SearchResult)getActivity()).ne_lat,((SearchResult)getActivity()).ne_lng));
+//        builder.include(new LatLng(((SearchResult)getActivity()).sw_lat,((SearchResult)getActivity()).sw_lng));
+//        PresetLatBounds=builder.build();
 
 
         try {
@@ -238,9 +239,11 @@ public class SearchMap extends Fragment implements OnMapReadyCallback, GoogleMap
             }
 
             LatLngBounds bounds = builder2.build();
-            int padding = 100; // offset from edges of the map in pixels
-//            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding,100,100);
-            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(), 15);
+            PresetLatBounds=builder2.build();
+            int padding = 200; // offset from edges of the map in pixels
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+//            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(), 15);
+//            CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(PresetLatBounds.getCenter(), 15);
             Map.animateCamera(cu);
         }catch (Exception e)
         {

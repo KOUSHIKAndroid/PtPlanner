@@ -3,9 +3,9 @@
     package="com.happywannyan">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -123,7 +123,8 @@
         <activity android:name=".Activities.ResetPassword" />
         <activity android:name=".Activities.Booking.BookingDetails" />
         <activity android:name=".Activities.AddAnotherPets" />
-        <activity android:name=".Activities.profile.MeetupWannyan"></activity>
+        <activity android:name=".Activities.profile.MeetupWannyan" />
+        <activity android:name=".Activities.profile.ContactMsg"></activity>
     </application>
 
 </manifest>

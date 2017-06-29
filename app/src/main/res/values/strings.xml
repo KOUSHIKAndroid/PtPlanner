@@ -143,4 +143,9 @@
     <string name="Enter_your_msg_bellow">Enter your message bellow</string>
     <string name="numberofpets">Number of pets</string>
     <string name="sucess">Sucess</string>
+    <string name="Title_send_a_msg">Send a Message</string>
+    <string name="Caontact_lebel1">Add details about your schedule, ask questions, or just introduce yourself!</string>
+    <string name="add_a_message">Add a Message</string>
+    <string name="send">Send</string>
+    <string name="ihavenotdateyet">I don\'t have dates yet</string>
 </resources>
