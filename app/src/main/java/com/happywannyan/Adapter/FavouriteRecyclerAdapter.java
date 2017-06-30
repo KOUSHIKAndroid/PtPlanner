@@ -1,6 +1,9 @@
 package com.happywannyan.Adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -14,10 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.happywannyan.Activities.profile.ContactMsg;
+import com.happywannyan.Activities.profile.MeetupWannyan;
+import com.happywannyan.Activities.profile.ProfileDetails;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.Fragments.Favourite;
 import com.happywannyan.POJO.SetGetFavourite;
 import com.happywannyan.R;
+import com.happywannyan.SitterBooking.BookingOne;
 import com.happywannyan.Utils.Loger;
 
 import org.json.JSONException;
@@ -45,7 +52,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
         if(!favouriteArrayList.get(position).isCheckRightValue()){
@@ -60,7 +67,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         holder.LLMain.getLayoutParams().width =displayMetrics.widthPixels;
         holder.LLDelete.getLayoutParams().width =(displayMetrics.widthPixels)/3;
 
-        JSONObject object= favouriteArrayList.get(position).getDataObject();
+        final JSONObject object= favouriteArrayList.get(position).getDataObject();
 
         try {
             Glide.with(context).load(object.getString("image")).into(holder.img_view);
@@ -69,6 +76,52 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
 //            holder.tv_reserve_or_not_reserve.setText(favouriteArrayList.get(position).getReservation());
 //            holder.tv_meet_up.setText(favouriteArrayList.get(position).getMeet_up());
 //            holder.tv_contact.setText(favouriteArrayList.get(position).getContact());
+
+            holder.LLMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) context, holder.img_view, "cardimage");
+                    Intent intent = new Intent(context, ProfileDetails.class);
+                    intent.putExtra("data", "" + object);
+                    context.startActivity(intent, options.toBundle());
+                }
+            });
+
+            holder.tv_reserve_or_not_reserve.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.startActivity(new Intent(context, BookingOne.class));
+                }
+            });
+
+            holder.tv_meet_up.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent inten=new Intent(context,MeetupWannyan.class);
+                    try {
+                        inten.putExtra("DATA",object.getString("id"));
+                        context.startActivity(inten);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+            holder.tv_contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent inten=new Intent(context,ContactMsg.class);
+                    try {
+                        inten.putExtra("DATA",object.getString("id"));
+                        context.startActivity(inten);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -172,8 +225,10 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
         SFNFTextView tv_title,tv_reserve_or_not_reserve,tv_address,tv_meet_up,tv_contact;
         LinearLayout LLMain,LLDelete;
         HorizontalScrollView horizontalScrollView;
+        View itemView;
         public MyViewHolder(View itemView) {
             super(itemView);
+
             img_view= (ImageView) itemView.findViewById(R.id.img_view);
 
             tv_title= (SFNFTextView) itemView.findViewById(R.id.tv_title);
@@ -187,6 +242,7 @@ public class FavouriteRecyclerAdapter extends RecyclerView.Adapter<FavouriteRecy
             LLDelete= (LinearLayout) itemView.findViewById(R.id.LLDelete);
 
             horizontalScrollView= (HorizontalScrollView) itemView.findViewById(R.id.scrollview);
+            this.itemView=itemView;
         }
     }
 }

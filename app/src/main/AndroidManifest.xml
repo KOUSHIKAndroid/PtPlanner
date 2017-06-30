@@ -124,7 +124,8 @@
         <activity android:name=".Activities.Booking.BookingDetails" />
         <activity android:name=".Activities.AddAnotherPets" />
         <activity android:name=".Activities.profile.MeetupWannyan" />
-        <activity android:name=".Activities.profile.ContactMsg"></activity>
+        <activity android:name=".Activities.profile.ContactMsg" />
+        <activity android:name=".Activities.Help"></activity>
     </application>
 
 </manifest>

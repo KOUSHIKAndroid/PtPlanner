@@ -76,6 +76,7 @@ public class TinderViewAdapter extends BaseAdapter {
             ((SFNFBoldTextView) v.findViewById(R.id.tv_Price)) .setText(object.getString("currency")+" "+object.getString("price_one"));
             ((SFNFTextView) v.findViewById(R.id.Time)) .setText(object.getString("unit"));
             ((SFNFTextView) v.findViewById(R.id.tv_name)) .setText(object.getString("sitter_name"));
+            ((SFNFTextView) v.findViewById(R.id.service_count)) .setText(object.getString("service_name_all"));
             ((RatingBar) v.findViewById(R.id.rating_bar)) .setNumStars(Integer.parseInt(object.getString("ave_rating")));
             ((RatingBar) v.findViewById(R.id.rating_bar)).setIsIndicator(true);
             LayerDrawable stars = (LayerDrawable) ((RatingBar) v.findViewById(R.id.rating_bar)).getProgressDrawable();

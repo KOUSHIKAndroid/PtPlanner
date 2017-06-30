@@ -71,7 +71,7 @@
     <string name="about">About</string>
     <string name="service">Service</string>
     <string name="review">Review</string>
-    <string name="images">Images</string>
+    <string name="images">Photos</string>
     <string name="specialskill">SPECIAL SKILLS</string>
     <string name="specialaccomod">SPECIAL ACCOMMODATIONS</string>
     <string name="booknow">BOOK NOW</string>
@@ -153,4 +153,5 @@
     <string name="pleaseselect">Please Slect</string>
     <string name="please_enter_message">Please type message here</string>
     <string name="select">Please Seclect</string>
+    <string name="nav_pastsitter">Past Sitter</string>
 </resources>

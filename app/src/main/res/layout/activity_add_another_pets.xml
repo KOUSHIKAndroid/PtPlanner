@@ -82,6 +82,7 @@
 
     <ScrollView
         android:id="@+id/Body"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/Hea"
@@ -314,7 +315,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/A1"
-                    android:paddingBottom="5dp"
+                    android:paddingBottom="10dp"
                     android:id="@+id/TXT_breed"
                     android:paddingTop="5dp"
                     android:hint="@string/select"
@@ -327,6 +328,14 @@
                     android:layout_below="@+id/A1"
                     android:paddingTop="5dp"
                     android:src="@drawable/ic_arrow_black" />
+                <View
+                    android:layout_below="@+id/A1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/gray_project" />
             </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -334,16 +343,17 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:id="@+id/EditDescribe"
                     android:layout_width="match_parent"
                     android:minLines="4"
                     android:maxLines="5"
-                    android:gravity="bottom"
                     android:hint="@string/describeyourcat"
                     android:layout_height="wrap_content" />
             </android.support.design.widget.TextInputLayout>
 
 
             <RelativeLayout
+                android:id="@+id/RADIO1"
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
@@ -355,6 +365,8 @@
                     android:text="@string/isyourcatspayedorneutered" />
 
                <RadioGroup
+                   android:layout_below="@+id/B1"
+                   android:id="@+id/Radio_Catspayed"
                    android:layout_width="match_parent"
                    android:orientation="horizontal"
                    android:layout_height="wrap_content">
@@ -362,12 +374,14 @@
                </RadioGroup>
             </RelativeLayout>
             <View
+                android:id="@+id/Radio_div1"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
                 android:background="@color/gray_project" />
             <RelativeLayout
+                android:id="@+id/Radio2"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -379,6 +393,8 @@
                     android:text="@string/isyourcatfriendlywithotherpets" />
 
                 <RadioGroup
+                    android:layout_below="@+id/C1"
+                    android:id="@+id/Rad_catf"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
@@ -386,6 +402,7 @@
                 </RadioGroup>
             </RelativeLayout>
             <View
+                android:id="@+id/Raddio_deiver2"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginBottom="10dp"

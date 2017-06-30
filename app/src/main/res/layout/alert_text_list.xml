@@ -21,24 +21,13 @@
         android:padding="18dp"
         android:src="@drawable/ic_cross_back"
         android:layout_height="?actionBarSize" />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_below="@+id/Title"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/LL_ALERTList"
+   <android.support.v7.widget.RecyclerView
+       android:layout_below="@+id/Title"
+       android:id="@+id/recycler_view"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
 
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
-
-    </ScrollView>
+   </android.support.v7.widget.RecyclerView>
 
     <!--<Button-->
         <!--android:layout_below="@+id/LL_ALERTList"-->

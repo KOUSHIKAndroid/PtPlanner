@@ -2,11 +2,14 @@ package com.happywannyan.Utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.happywannyan.Adapter.Adapter_AlertList;
 import com.happywannyan.Font.SFNFBoldTextView;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.R;
@@ -22,6 +25,11 @@ import org.json.JSONObject;
 public class MYAlert {
     Context mContext;
     AlertDialog Dialog;
+
+    public void dismised() {
+        Dialog.dismiss();
+    }
+
     public interface OnlyMessage{
         public void OnOk(boolean res);
     }
@@ -68,41 +76,9 @@ public class MYAlert {
 
         SFNFTextView TXTTitle=(SFNFTextView)LayView.findViewById(R.id.Title);
         TXTTitle.setText(Title);
-        LinearLayout ListLay=(LinearLayout)LayView.findViewById(R.id.LL_ALERTList);
-
-        try {
-            ListLay.removeAllViews();
-            for( int j=0;j<ListArray.length();j++)
-            {
-                View ListItem=inflater.inflate(R.layout.single_list_text,null);
-                SFNFTextView Text=(SFNFTextView)ListItem.findViewById(R.id.TXT_item);
-
-                JSONObject data2=ListArray.getJSONObject(j);
-                ListItem.setTag(data2);
-                Text.setText(data2.getString(GetPramsName));
-                ListLay.addView(ListItem);
-                ListItem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            Dialog.dismiss();
-                            onSignleListTextSelected.OnSelectedTEXT(new JSONObject(v.getTag().toString()));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-
-
-
-
-        }catch (JSONException e)
-        {
-
-        }
-
-
+        RecyclerView ListLay=(RecyclerView) LayView.findViewById(R.id.recycler_view);
+        ListLay.setLayoutManager(new LinearLayoutManager(mContext));
+        ListLay.setAdapter(new Adapter_AlertList(this,mContext,onSignleListTextSelected,Dialog,ListArray,GetPramsName));
 
         LayView.findViewById(R.id.IMG_Back).setOnClickListener(new View.OnClickListener() {
             @Override

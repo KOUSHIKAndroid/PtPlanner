@@ -83,7 +83,11 @@ public class ProfileDetails extends AppCompatActivity implements View.OnClickLis
                 }
             });
             this.PrevJSON = new JSONObject(getIntent().getStringExtra("data"));
+            if(PrevJSON.has("sitter_user_id"))
             SitterId = PrevJSON.getString("sitter_user_id");
+            else
+            SitterId = PrevJSON.getString("id");
+
             Glide.with(this).load(PrevJSON.getString("photo_url")).into((ImageView) findViewById(R.id.IMG_Profile));
             Rating.setRating(Float.parseFloat(PrevJSON.getString("ave_rating")));
             Rating.setIsIndicator(true);
@@ -140,6 +144,40 @@ public class ProfileDetails extends AppCompatActivity implements View.OnClickLis
             @Override
             public void OnSuccess(String Result) {
                 JSONRESPONSE = Result;
+                try {
+                    final JSONObject BasicInfo=new JSONObject(Result).getJSONObject("info_array").getJSONObject("basic_info");
+                    Glide.with(ProfileDetails.this).load(BasicInfo.getString("sittersimage")).into((ImageView) findViewById(R.id.IMG_Profile));
+                    Rating.setRating(Float.parseFloat(BasicInfo.getString("ave_rating")));
+                    Rating.setIsIndicator(true);
+                    LayerDrawable stars = (LayerDrawable) Rating.getProgressDrawable();
+                    RatingColor.SETRatingColor(stars);
+                    ((SFNFTextView) findViewById(R.id.UserName)).setText(BasicInfo.getString("nickname"));
+                    ((SFNFTextView) findViewById(R.id.Bussinessname)).setText(BasicInfo.getString("businessname"));
+                    ((SFNFTextView) findViewById(R.id.Location)).setText(BasicInfo.getString("place_sitter"));
+                    ((SFNFTextView) findViewById(R.id.ReviewNo)).setText(BasicInfo.getString("no_of_review") + " " + getResources().getString(R.string.review));
+                    findViewById(R.id.map_button).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+
+                            try {
+                                String uri = String.format(Locale.ENGLISH, "geo:%f,%f?z=%d&q=%f,%f", Double.parseDouble(BasicInfo.getString("lat")), Double.parseDouble(BasicInfo.getString("long")), 17, Double.parseDouble(BasicInfo.getString("lat")), Double.parseDouble(BasicInfo.getString("long")));
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                startActivity(intent);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 pagerAdapter = new ProfileFragPagerAdapter(getSupportFragmentManager());
                 viewpager.setAdapter(pagerAdapter);
                 appLoader.Dismiss();

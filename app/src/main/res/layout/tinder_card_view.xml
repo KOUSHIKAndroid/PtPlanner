@@ -142,6 +142,14 @@
                     android:layout_alignParentRight="true"
                     android:layout_height="wrap_content" />
 
+                <com.happywannyan.Font.SFNFTextView
+                    android:id="@+id/service_count"
+                    android:layout_below="@+id/Time"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
             </RelativeLayout>
 
 
