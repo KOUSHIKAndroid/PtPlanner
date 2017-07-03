@@ -460,6 +460,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                                                 String radiovalue2= ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getText().toString();
                                                 // Do something with the button
                                                 Log.i("radiovalue2",""+radiovalue2);
+                                                Log.i("radiovalue2",""+radiovalue2);
                                             }
 
                                         }
