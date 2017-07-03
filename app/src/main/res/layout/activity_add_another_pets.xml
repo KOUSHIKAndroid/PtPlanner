@@ -423,6 +423,7 @@
         android:layout_marginTop="40dp"
         app:cardBackgroundColor="@color/btn_red"
         app:cardCornerRadius="23dp"
+        android:onClick="onClick"
         app:cardElevation="3dp">
 
         <RelativeLayout
