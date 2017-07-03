@@ -287,6 +287,8 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                     }
 
                 }
+
+
                 if (j> 7 && jsonObject.getString("input_field_type").equals("5")) {
                     findViewById(R.id.Radio2).setVisibility(View.VISIBLE);
                     findViewById(R.id.Raddio_deiver2).setVisibility(View.VISIBLE);
