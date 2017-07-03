@@ -1,13 +1,17 @@
 package com.happywannyan.Activities;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.happywannyan.Adapter.Adapter_petlist;
 import com.happywannyan.Constant.AppContsnat;
@@ -37,6 +41,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     JSONArray SelectObject;
     RadioGroup Radio_Catspayed, Rad_catf;
     JSONArray Text, InputArea, Select;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +230,10 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
 
+            case R.id.Card_next:
+                checkValidationAndNext();
+                break;
+
         }
     }
 
@@ -313,7 +322,8 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
             ((SFNFTextView)findViewById(R.id.T6)).setText(SelectObject.getJSONObject(3).getString("input_name"));
             if(SelectObject.length()>3)
             {
-            ((SFNFTextView)findViewById(R.id.TXT_breed)).setText(SelectObject.getJSONObject(4).getString("input_name"));
+                ((SFNFTextView)findViewById(R.id.A1)).setText(SelectObject.getJSONObject(4).getString("input_name"));
+//                ((SFNFTextView)findViewById(R.id.TXT_breed)).setText(SelectObject.getJSONObject(4).getString("input_name"));
                 ((RelativeLayout)findViewById(R.id.RL_breed)).setVisibility(View.VISIBLE);
             }
 
@@ -362,6 +372,106 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void checkValidationAndNext(){
+
+        ((SFNFTextView) findViewById(R.id.Txt_type)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+        ((EditText)findViewById(R.id.TXTName)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+        ((SFNFTextView) findViewById(R.id.TXT_Year)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+        ((SFNFTextView) findViewById(R.id.TXT_Month)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+        ((SFNFTextView) findViewById(R.id.TXT_gender)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+        ((SFNFTextView) findViewById(R.id.TXT_petsize)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+        ((SFNFTextView) findViewById(R.id.TXT_breed)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+        ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+
+
+        if(((SFNFTextView) findViewById(R.id.Txt_type)).getText().toString().trim().equals("")){
+            ((SFNFTextView) findViewById(R.id.Txt_type)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+            Log.i("Txt_type","Txt_type");
+        }
+        else {
+            Log.i("TXTName","TXTName");
+            ((SFNFTextView) findViewById(R.id.Txt_type)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+            if(((EditText)findViewById(R.id.TXTName)).getText().toString().trim().equals("")){
+
+                ((EditText)findViewById(R.id.TXTName)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                ((EditText)findViewById(R.id.TXTName)).requestFocus();
+            }
+            else {
+                Log.i("TXT_Year","TXT_Year");
+                ((EditText)findViewById(R.id.TXTName)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+
+                if(((SFNFTextView) findViewById(R.id.TXT_Year)).getText().toString().trim().equals(""))
+                {
+                    ((SFNFTextView) findViewById(R.id.TXT_Year)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                }else {
+                    Log.i("TXT_Month","TXT_Month");
+                    ((SFNFTextView) findViewById(R.id.TXT_Year)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                    if(((SFNFTextView) findViewById(R.id.TXT_Month)).getText().toString().trim().equals(""))
+                    {
+                        ((SFNFTextView) findViewById(R.id.TXT_Month)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                    }else {
+                        Log.i("TXT_gender","TXT_gender");
+                        ((SFNFTextView) findViewById(R.id.TXT_Month)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                        if(((SFNFTextView) findViewById(R.id.TXT_gender)).getText().toString().trim().equals(""))
+                        {
+                            ((SFNFTextView) findViewById(R.id.TXT_gender)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                        }else {
+                            Log.i("TXT_breed","TXT_breed");
+                            ((SFNFTextView) findViewById(R.id.TXT_gender)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                            if(((SFNFTextView) findViewById(R.id.TXT_petsize)).getText().toString().trim().equals(""))
+                            {
+                                ((SFNFTextView) findViewById(R.id.TXT_petsize)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                            }else {
+                                Log.i("TXT_petsize","TXT_petsize");
+                                ((SFNFTextView) findViewById(R.id.TXT_petsize)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                if(((SFNFTextView) findViewById(R.id.TXT_breed)).getText().toString().trim().equals(""))
+                                {
+                                    ((SFNFTextView) findViewById(R.id.TXT_breed)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                                }else {
+                                    ((SFNFTextView) findViewById(R.id.TXT_breed)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                    if(((EditText) findViewById(R.id.EditDescribe)).getText().toString().trim().equals(""))
+                                    {
+                                        ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                                        ((EditText)findViewById(R.id.EditDescribe)).requestFocus();
+                                    }else {
+                                        ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+
+
+                                        if (Radio_Catspayed.getCheckedRadioButtonId() == -1) {
+                                            // No item selected
+                                            Log.i("radiovalue","No item selected");
+                                            Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else{
+                                            String radiovalue1= ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getText().toString();
+                                                // Do something with the button
+                                            Log.i("radiovalue1",""+radiovalue1);
+
+                                            if (Rad_catf.getCheckedRadioButtonId() == -1) {
+                                                // No item selected
+                                                Log.i("radiovalue","No item selected");
+                                                Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else {
+
+                                                String radiovalue2= ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getText().toString();
+                                                // Do something with the button
+                                                Log.i("radiovalue2",""+radiovalue2);
+                                            }
+
+                                        }
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
         }
     }
 }
