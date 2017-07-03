@@ -277,10 +277,16 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
 
                 if (jsonObject.getString("input_field_type").equals("1")) {
                     TXTName.setHint(jsonObject.getString("show_name"));
-                    TXTName.setTag(jsonObject);
+                    JSONObject object=new JSONObject();
+                    object.put("id",jsonObject.getString("option_id"));
+                    object.put("value","");
+                    TXTName.setTag(object);
                 }
                 if (jsonObject.getString("input_field_type").equals("2")) {
-                    ((EditText) findViewById(R.id.EditDescribe)).setTag(jsonObject);
+                    JSONObject object=new JSONObject();
+                    object.put("id",jsonObject.getString("option_id"));
+                    object.put("value","");
+                    ((EditText) findViewById(R.id.EditDescribe)).setTag(object);
                 }
                 if (jsonObject.getString("input_field_type").equals("5") && Radio_Catspayed.getTag().toString().equals("A")) {
                     findViewById(R.id.RADIO1).setVisibility(View.VISIBLE);
