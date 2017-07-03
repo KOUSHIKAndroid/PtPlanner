@@ -366,6 +366,7 @@
 
                <RadioGroup
                    android:layout_below="@+id/B1"
+                   android:tag="A"
                    android:id="@+id/Radio_Catspayed"
                    android:layout_width="match_parent"
                    android:orientation="horizontal"
@@ -395,6 +396,7 @@
                 <RadioGroup
                     android:layout_below="@+id/C1"
                     android:id="@+id/Rad_catf"
+                    android:tag="A"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">

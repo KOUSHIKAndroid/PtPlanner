@@ -264,6 +264,8 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
             findViewById(R.id.RADIO1).setVisibility(View.GONE);
             findViewById(R.id.Radio_div1).setVisibility(View.GONE);
             findViewById(R.id.Radio2).setVisibility(View.GONE);
+            Radio_Catspayed.setTag("A");
+            Rad_catf.setTag("A");
             findViewById(R.id.Raddio_deiver2).setVisibility(View.GONE);
             ((RelativeLayout)findViewById(R.id.RL_breed)).setVisibility(View.GONE);
             for (int j = 0; j < other_info.length(); j++) {
@@ -280,8 +282,9 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                 if (jsonObject.getString("input_field_type").equals("2")) {
                     ((EditText) findViewById(R.id.EditDescribe)).setTag(jsonObject);
                 }
-                if (j>5 && jsonObject.getString("input_field_type").equals("5")) {
+                if (jsonObject.getString("input_field_type").equals("5") && Radio_Catspayed.getTag().toString().equals("A")) {
                     findViewById(R.id.RADIO1).setVisibility(View.VISIBLE);
+                    Radio_Catspayed.setTag(jsonObject.getString("option_id"));
                     findViewById(R.id.Radio_div1).setVisibility(View.VISIBLE);
                     ((SFNFTextView) findViewById(R.id.B1)).setText(jsonObject.getString("input_name"));
                     JSONArray array = jsonObject.getJSONArray("input_option");
@@ -295,10 +298,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                         Radio_Catspayed.addView(btn);
                     }
 
-                }
-//hjghjghhjgjgjgh
-
-                if (j> 7 && jsonObject.getString("input_field_type").equals("5")) {
+                }else if (jsonObject.getString("input_field_type").equals("5") ) {
                     findViewById(R.id.Radio2).setVisibility(View.VISIBLE);
                     findViewById(R.id.Raddio_deiver2).setVisibility(View.VISIBLE);
                     ((SFNFTextView) findViewById(R.id.C1)).setText(jsonObject.getString("input_name"));
@@ -312,7 +312,6 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                         btn.setText(object.getString("option_name"));
                         Rad_catf.addView(btn);
                     }
-
                 }
 
             }
