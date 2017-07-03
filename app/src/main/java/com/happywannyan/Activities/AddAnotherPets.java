@@ -40,7 +40,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     EditText TXTName;
     JSONArray SelectObject;
     RadioGroup Radio_Catspayed, Rad_catf;
-    JSONArray Text, InputArea, Select;
+    JSONArray Text, InputArea, Select,RadioArray;
 
 
     @Override
@@ -151,6 +151,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                             try {
                                 ((SFNFTextView) findViewById(R.id.TXT_Year)).setText(jsonObject.getString("option_name"));
                                 ((SFNFTextView) findViewById(R.id.TXT_Year)).setTag(jsonObject);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -168,6 +169,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                             try {
                                 ((SFNFTextView) findViewById(R.id.TXT_Month)).setText(jsonObject.getString("option_name"));
                                 ((SFNFTextView) findViewById(R.id.TXT_Month)).setTag(jsonObject);
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -445,6 +447,10 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                                         ((EditText)findViewById(R.id.EditDescribe)).requestFocus();
                                     }else {
                                         ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                        InputArea=new JSONArray();
+                                        RadioArray=new JSONArray();
+                                        Text=new JSONArray();
+                                        Select=new JSONArray();
 
 
                                         if (Radio_Catspayed.getCheckedRadioButtonId() == -1) {
@@ -453,24 +459,131 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                                             Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
                                         }
                                         else{
-                                            String radiovalue1= ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getText().toString();
-                                                // Do something with the button
-                                            Log.i("radiovalue1",""+radiovalue1);
-
-                                            if (Rad_catf.getCheckedRadioButtonId() == -1) {
-                                                // No item selected
-                                                Log.i("radiovalue","No item selected");
-                                                Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
+                                            String radiovalue1= ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getTag().toString();
+                                            try {
+                                                RadioArray.put(new JSONObject(radiovalue1));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
                                             }
-                                            else {
 
-                                                String radiovalue2= ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getText().toString();
-                                                // Do something with the button
-                                                Log.i("radiovalue2",""+radiovalue2);
-                                                Log.i("radiovalue2",""+radiovalue2);
+
+                                        }
+
+
+
+                                        if (Rad_catf.getCheckedRadioButtonId() == -1) {
+                                            // No item selected
+                                            Log.i("radiovalue","No item selected");
+//                                            Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+
+                                            String radiovalue2= ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getTag().toString();
+                                            try {
+                                                RadioArray.put(new JSONObject(radiovalue2));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
                                             }
 
                                         }
+
+                                        try {
+                                            JSONObject textarea=new JSONObject();
+                                            textarea.put("id",new JSONObject(((EditText) findViewById(R.id.EditDescribe)).getTag().toString()).getString("id"));
+                                            textarea.put("value",((EditText) findViewById(R.id.EditDescribe)).getText());
+                                            InputArea.put(textarea);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            JSONObject textarea=new JSONObject();
+                                            textarea.put("id",new JSONObject(((EditText) findViewById(R.id.TXTName)).getTag().toString()).getString("id"));
+                                            textarea.put("value",((EditText) findViewById(R.id.TXTName)).getText());
+                                            Text.put(textarea);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+
+                                        try {
+                                            Select.put(new JSONObject( ((SFNFTextView) findViewById(R.id.TXT_gender)).getTag().toString()));
+                                            Select.put(new JSONObject( ((SFNFTextView) findViewById(R.id.TXT_petsize)).getTag().toString()));
+                                            Select.put(new JSONObject( ((SFNFTextView) findViewById(R.id.TXT_breed)).getTag().toString()));
+                                            Select.put(new JSONObject( ((SFNFTextView) findViewById(R.id.TXT_Month)).getTag().toString()));
+                                            Select.put(new JSONObject( ((SFNFTextView) findViewById(R.id.TXT_Year)).getTag().toString()));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        Loger.MSG(" Name-",Text.toString());
+                                        Loger.MSG(" TeatArea-",InputArea.toString());
+                                        Loger.MSG(" Radio-",RadioArray.toString());
+                                        Loger.MSG(" Select-",Select.toString());
+
+
+                                        ArrayList<APIPOSTDATA> Params=new ArrayList<>();
+                                        APIPOSTDATA apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("user_id");
+                                        apipostdata.setValues(AppContsnat.UserId);
+                                        Params.add(apipostdata);
+
+                                        apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("langid");
+                                        apipostdata.setValues(AppContsnat.Language);
+                                        Params.add(apipostdata);
+
+                                        apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("pettypeid");
+                                        apipostdata.setValues(AppContsnat.Language);
+                                        Params.add(apipostdata);
+
+                                        apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("text");
+                                        apipostdata.setValues(Text.toString());
+                                        Params.add(apipostdata);
+
+                                        apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("textarea");
+                                        apipostdata.setValues(InputArea.toString());
+                                        Params.add(apipostdata);
+
+                                        apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("radio");
+                                        apipostdata.setValues(RadioArray.toString());
+                                        Params.add(apipostdata);
+
+                                        apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("select");
+                                        apipostdata.setValues(Select.toString());
+                                        Params.add(apipostdata);
+                                        apipostdata=new APIPOSTDATA();
+                                        apipostdata.setPARAMS("pettypeid");
+                                        apipostdata.setValues(PetTypeId);
+                                        Params.add(apipostdata);
+
+                                        appLoader.Show();
+                                        new JSONPerser().API_FOR_POST(AppContsnat.BASEURL + "app_users_addpetinfo?", Params, new JSONPerser.JSONRESPONSE() {
+                                            @Override
+                                            public void OnSuccess(String Result) {
+                                                appLoader.Dismiss();
+                                                Loger.MSG("RES",Result);
+                                            }
+
+                                            @Override
+                                            public void OnError(String Error, String Response) {
+                                                Loger.MSG("Error",Error);
+                                                appLoader.Dismiss();
+                                            }
+
+                                            @Override
+                                            public void OnError(String Error) {
+                                                Loger.MSG("Error2",Error);
+                                                appLoader.Dismiss();
+                                            }
+                                        });
+
                                     }
                                 }
 

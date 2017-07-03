@@ -140,7 +140,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <ImageView
-            android:src="@drawable/ic_nav_favorite_white"
+            android:src="@mipmap/ic_nav_past_fav"
             android:layout_width="30dp"
             android:padding="2dp"
             android:layout_height="30dp" />
