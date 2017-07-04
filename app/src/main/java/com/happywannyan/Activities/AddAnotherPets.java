@@ -470,9 +470,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                                         }
 
 
-
                                         if (Rad_catf.getCheckedRadioButtonId() == -1) {
-                                            // No item selected
                                             Log.i("radiovalue","No item selected");
 //                                            Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
                                         }
