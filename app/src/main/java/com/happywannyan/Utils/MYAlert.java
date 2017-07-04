@@ -65,6 +65,39 @@ public class MYAlert {
 
     }
 
+    public void AlertOkCancel(String Title, String Message, final OnlyMessage onlyMessage){
+        AlertDialog.Builder alertbuilder=new AlertDialog.Builder(mContext);
+        LayoutInflater inflater = (LayoutInflater)mContext.getSystemService
+                (Context.LAYOUT_INFLATER_SERVICE);
+        View LayView=inflater.inflate(R.layout.alert_dialog_ok_cancel,null);
+        SFNFTextView TXTMessage=(SFNFTextView)LayView.findViewById(R.id.Message);
+        TXTMessage.setText(Message);
+        SFNFTextView TXTTitle=(SFNFTextView)LayView.findViewById(R.id.Title);
+        TXTTitle.setText(Title);
+        Button BTN_OK=(Button)LayView.findViewById(R.id.BTN_OK);
+        Button BTN_CANCEL=(Button)LayView.findViewById(R.id.BTN_CANCEL);
+
+        BTN_OK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onlyMessage.OnOk(true);
+                Dialog.dismiss();
+            }
+        });
+
+        BTN_CANCEL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onlyMessage.OnOk(false);
+                Dialog.dismiss();
+            }
+        });
+
+        alertbuilder.setView(LayView);
+        Dialog=alertbuilder.create();
+        Dialog.show();
+    }
+
 
 
     public void AlertTextLsit(String Title, JSONArray ListArray, String GetPramsName,final OnSignleListTextSelected onSignleListTextSelected)

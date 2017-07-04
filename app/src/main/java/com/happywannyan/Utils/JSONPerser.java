@@ -6,6 +6,7 @@ import com.happywannyan.POJO.APIPOSTDATA;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -156,5 +157,71 @@ public class JSONPerser {
     }
 
 
+    public void API_FOR_With_Photo_POST(final String URL, final ArrayList<APIPOSTDATA> apipostdata, ArrayList<File> photos, final JSONRESPONSE jsonresponse){
+
+
+        new AsyncTask<Void, Void, Void>() {
+
+            private String respose = null;
+            private Exception exception=null;
+            MultipartBody.Builder buildernew;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                buildernew = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                for(APIPOSTDATA data : apipostdata){
+                    buildernew.addFormDataPart(""+data.getPARAMS(), data.getValues());
+                }
+
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    if (!isCancelled()) {
+                        MultipartBody requestBody = buildernew.build();
+                        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(5000, TimeUnit.MILLISECONDS).build();
+                        Request request = new Request.Builder().url(URL) .method("POST", RequestBody.create(null, new byte[0]))
+                                .post(requestBody).build();
+                        Response response = client.newCall(request).execute();
+
+                        respose = response.body().string();
+
+                        Loger.MSG("response", "respose_::" + respose);
+                        Loger.MSG("response", "respose_ww_message::" + response.message());
+                        Loger.MSG("response", "respose_ww_headers::" + response.headers());
+                        Loger.MSG("response", "respose_ww_isRedirect::" + response.isRedirect());
+//                       Loger.MSG("response", "respose_ww_body::" + response.body().string());
+                    }
+                } catch (Exception e) {
+                    this.exception=e;
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                if (!isCancelled() && exception==null) {
+
+                    try{
+                        if(new JSONObject(respose).getBoolean("response"))
+                        {
+                            jsonresponse.OnSuccess(respose);
+                        }else {
+                            jsonresponse.OnError(new JSONObject(respose).getString("message")+"",respose);
+                        }
+                    }catch (Exception e){}
+
+
+
+                }else {
+                    jsonresponse.OnError(exception.getMessage()+"");
+                }
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
 
 }
