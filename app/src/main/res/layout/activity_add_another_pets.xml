@@ -98,6 +98,18 @@
             android:orientation="vertical">
 
 
+            <ImageView
+                android:layout_marginBottom="20dp"
+                android:id="@+id/img_pet"
+                android:onClick="onClick"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/gray_project"
+                />
+
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

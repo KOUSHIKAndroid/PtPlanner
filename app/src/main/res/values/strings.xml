@@ -156,4 +156,5 @@
     <string name="nav_pastsitter">Past Sitter</string>
     <string name="delete">Delete</string>
     <string name="do_you_want_to_delete">Do you want to delete ?</string>
+    <string name="add_image">Add Image</string>
 </resources>

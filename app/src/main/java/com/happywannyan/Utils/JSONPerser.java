@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -157,9 +158,9 @@ public class JSONPerser {
     }
 
 
-    public void API_FOR_With_Photo_POST(final String URL, final ArrayList<APIPOSTDATA> apipostdata, ArrayList<File> photos, final JSONRESPONSE jsonresponse){
+    public void API_FOR_With_Photo_POST(final String URL, final ArrayList<APIPOSTDATA> apipostdata, final ArrayList<File> photos, final JSONRESPONSE jsonresponse){
 
-
+        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
         new AsyncTask<Void, Void, Void>() {
 
             private String respose = null;
@@ -174,6 +175,15 @@ public class JSONPerser {
                     buildernew.addFormDataPart(""+data.getPARAMS(), data.getValues());
                 }
 
+                for (int i = 0; i < photos.size(); i++) {
+                    File f = photos.get(i);
+                    if (f.exists()) {
+                        Loger.MSG("Image path2",""+photos.get(i).getAbsolutePath());
+                        buildernew.addFormDataPart("petimg","petimg", RequestBody.create(MEDIA_TYPE_PNG, f));
+//                                  buildernew.addFormDataPart(TEMP_FILE_NAME + i, TEMP_FILE_NAME + i + FILE_EXTENSION, RequestBody.create(MEDIA_TYPE, f));
+                    }
+                }
+
             }
 
             @Override
@@ -185,6 +195,7 @@ public class JSONPerser {
                         Request request = new Request.Builder().url(URL) .method("POST", RequestBody.create(null, new byte[0]))
                                 .post(requestBody).build();
                         Response response = client.newCall(request).execute();
+
 
                         respose = response.body().string();
 
