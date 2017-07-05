@@ -73,20 +73,17 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
                         context.getResources().getString(R.string.do_you_want_to_delete), new MYAlert.OnlyMessage() {
                     @Override
                     public void OnOk(boolean res) {
-
                         if(res){
-
                             Loger.MSG("ok_alert","ok");
                             Loger.MSG("getEdit_id",""+data.getEdit_id());
                             Loger.MSG("getPet_type_id",""+data.getPet_type_id());
                             Loger.MSG("Otherinfo",""+data.getOtherinfo());
                             Loger.MSG("Pet_name",""+data.getPet_name());
 
-                            deleteYourPet(data.getPet_type_id(),position);
+                            deleteYourPet(data.getEdit_id(),position);
                         }
                         else {
                             Loger.MSG("cancel_alert","cancel");
-                            Loger.MSG("getPet_type_id",""+data.getPet_type_id());
                         }
                     }
                 });
