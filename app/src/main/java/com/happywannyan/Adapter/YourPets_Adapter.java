@@ -86,6 +86,7 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
                         }
                         else {
                             Loger.MSG("cancel_alert","cancel");
+                            Loger.MSG("getPet_type_id",""+data.getPet_type_id());
                         }
                     }
                 });
@@ -141,7 +142,7 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
 
         /////////delete here and api fire////////////////
 
-        new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "app_users_petinfo?", params, new JSONPerser.JSONRESPONSE() {
+        new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "app_users_deletePetprofile?", params, new JSONPerser.JSONRESPONSE() {
             @Override
             public void OnSuccess(String Result) {
                 appLoader.Dismiss();

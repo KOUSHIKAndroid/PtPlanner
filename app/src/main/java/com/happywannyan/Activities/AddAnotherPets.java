@@ -593,9 +593,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
 
                                     }
                                 }
-
                             }
-
                         }
                     }
                 }
