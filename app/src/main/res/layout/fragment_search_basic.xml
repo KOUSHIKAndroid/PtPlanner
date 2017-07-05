@@ -162,26 +162,26 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/RL_Serach1"
-            android:layout_width="170dp"
-            android:layout_height="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/ic_btn_red"
-            android:onClick="onClick">
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/RL_Serach1"-->
+            <!--android:layout_width="170dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:background="@drawable/ic_btn_red"-->
+            <!--android:onClick="onClick">-->
 
-            <com.happywannyan.Font.SFNFTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:paddingTop="12dp"
-                android:text="@string/search"
-                android:textColor="@color/colorwhite" />
+            <!--<com.happywannyan.Font.SFNFTextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:paddingTop="12dp"-->
+                <!--android:text="@string/search"-->
+                <!--android:textColor="@color/colorwhite" />-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
     </RelativeLayout>
 
 

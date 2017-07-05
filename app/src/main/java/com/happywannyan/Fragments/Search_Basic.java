@@ -192,144 +192,7 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
             }
         });
 
-        view.findViewById(R.id.RL_Serach1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                if (TXT_Loction.getText().toString().trim().equals("")) {
-                    TXT_Loction.setHintTextColor(Color.RED);
-                } else if (SearchJSON == null) {
-                    Toast.makeText(getActivity(), "Please Choose an type", Toast.LENGTH_SHORT).show();
-                } else {
-
-
-                    Intent intent = new Intent(new Intent(getActivity(), SearchResult.class));
-                    try {
-                        JSONObject SEARCHPARAMS = new JSONObject();
-
-
-                    /*
-                     @@ Make JSONARRY for Next Page Serach
-                     */
-
-                        JSONArray Searchkeyinfor = new JSONArray();
-                        JSONObject data = new JSONObject();
-                        data.put("name", "start_date");
-                        data.put("value", StartDate);
-                        Searchkeyinfor.put(data);
-
-                        data = new JSONObject();
-                        data.put("name", "end_date");
-                        data.put("value", EndDate);
-                        Searchkeyinfor.put(data);
-
-                        data = new JSONObject();
-                        data.put("name", "serviceCat");
-                        data.put("value", SearchJSON.getString("id"));
-                        Searchkeyinfor.put(data);
-
-                        data = new JSONObject();
-                        data.put("name", "pet_type");
-                        data.put("value", "");
-                        Searchkeyinfor.put(data);
-
-                        data = new JSONObject();
-                        data.put("name", "high_price");
-                        data.put("value", "");
-                        Searchkeyinfor.put(data);
-
-                        data = new JSONObject();
-                        data.put("name", "low_price");
-                        data.put("value", "");
-                        Searchkeyinfor.put(data);
-
-
-                        if (place != null) {
-
-                            data = new JSONObject();
-                            data.put("name", "srch_lon");
-                            data.put("value", place.getLatLng().longitude);
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "srch_lat");
-                            data.put("value", place.getLatLng().latitude);
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "ne_lng");
-                            data.put("value", place.getViewport().northeast.longitude);
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "ne_lat");
-                            data.put("value", place.getViewport().northeast.latitude);
-                            Searchkeyinfor.put(data);
-
-
-                            data = new JSONObject();
-                            data.put("name", "sw_lng");
-                            data.put("value", place.getViewport().southwest.longitude);
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "sw_lat");
-                            data.put("value", place.getViewport().southwest.latitude);
-                            Searchkeyinfor.put(data);
-
-
-                            SEARCHPARAMS.put("LocationName", place.getName());
-
-                            SEARCHPARAMS.put("Address", place.getAddress());
-                        } else {
-                            data = new JSONObject();
-                            data.put("name", "srch_lon");
-                            data.put("value", SearchJSON.getJSONObject("latlng").getString("lng"));
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "srch_lat");
-                            data.put("value", SearchJSON.getJSONObject("latlng").getString("lat"));
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "ne_lng");
-                            data.put("value", SearchJSON.getJSONObject("viewport").getString("northeast_LNG"));
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "ne_lat");
-                            data.put("value", SearchJSON.getJSONObject("viewport").getString("northeast_LAT"));
-                            Searchkeyinfor.put(data);
-
-
-                            data = new JSONObject();
-                            data.put("name", "sw_lng");
-                            data.put("value", SearchJSON.getJSONObject("viewport").getString("southwest_LNG"));
-                            Searchkeyinfor.put(data);
-
-                            data = new JSONObject();
-                            data.put("name", "sw_lat");
-                            data.put("value", SearchJSON.getJSONObject("viewport").getString("southwest_LAT"));
-                            Searchkeyinfor.put(data);
-
-                            SEARCHPARAMS.put("Address", SearchJSON.getString("Address"));
-                            SEARCHPARAMS.put("LocationName", SearchJSON.getString("LocationName"));
-
-                        }
-
-
-                        SEARCHPARAMS.put("keyinfo", Searchkeyinfor);
-
-                        intent.putExtra(SearchResult.SEARCHKEY, SEARCHPARAMS.toString());
-                        startActivityForResult(intent, 101);
-
-                    } catch (JSONException e) {
-                        Loger.Error("@@", "Error" + e.getMessage());
-                    }
-                }
-            }
-        });
 
         view.findViewById(R.id.ImgMyLocation).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -375,10 +238,7 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
 
         } else {
             Loger.MSG("## " + getClass().getName(), " Noooo");
-
-
         }
-
 
     }
 
@@ -418,6 +278,11 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
                     TXT_Loction.setText(Location);
                     LL_PetServiceList.setVisibility(View.VISIBLE);
                     IMG_erase_location.setVisibility(View.VISIBLE);
+
+                    if(SearchJSON != null){
+                        searchAndIntent();
+                    }
+
                     break;
                 case 101:
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -476,6 +341,7 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
         }
         SearchJSON = jsondata;
         Loger.MSG("@@", "" + SearchJSON.toString());
+        searchAndIntent();
     }
 
     @Override
@@ -488,6 +354,142 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
         }
     }
 
+
+    public void searchAndIntent(){
+
+        if (TXT_Loction.getText().toString().trim().equals("")) {
+            TXT_Loction.setHintTextColor(Color.RED);
+        } else if (SearchJSON == null) {
+            Toast.makeText(getActivity(), "Please Choose an type", Toast.LENGTH_SHORT).show();
+        } else {
+
+
+            Intent intent = new Intent(new Intent(getActivity(), SearchResult.class));
+            try {
+                JSONObject SEARCHPARAMS = new JSONObject();
+
+
+                    /*
+                     @@ Make JSONARRY for Next Page Serach
+                     */
+
+                JSONArray Searchkeyinfor = new JSONArray();
+                JSONObject data = new JSONObject();
+                data.put("name", "start_date");
+                data.put("value", StartDate);
+                Searchkeyinfor.put(data);
+
+                data = new JSONObject();
+                data.put("name", "end_date");
+                data.put("value", EndDate);
+                Searchkeyinfor.put(data);
+
+                data = new JSONObject();
+                data.put("name", "serviceCat");
+                data.put("value", SearchJSON.getString("id"));
+                Searchkeyinfor.put(data);
+
+                data = new JSONObject();
+                data.put("name", "pet_type");
+                data.put("value", "");
+                Searchkeyinfor.put(data);
+
+                data = new JSONObject();
+                data.put("name", "high_price");
+                data.put("value", "");
+                Searchkeyinfor.put(data);
+
+                data = new JSONObject();
+                data.put("name", "low_price");
+                data.put("value", "");
+                Searchkeyinfor.put(data);
+
+
+                if (place != null) {
+
+                    data = new JSONObject();
+                    data.put("name", "srch_lon");
+                    data.put("value", place.getLatLng().longitude);
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "srch_lat");
+                    data.put("value", place.getLatLng().latitude);
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "ne_lng");
+                    data.put("value", place.getViewport().northeast.longitude);
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "ne_lat");
+                    data.put("value", place.getViewport().northeast.latitude);
+                    Searchkeyinfor.put(data);
+
+
+                    data = new JSONObject();
+                    data.put("name", "sw_lng");
+                    data.put("value", place.getViewport().southwest.longitude);
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "sw_lat");
+                    data.put("value", place.getViewport().southwest.latitude);
+                    Searchkeyinfor.put(data);
+
+
+                    SEARCHPARAMS.put("LocationName", place.getName());
+
+                    SEARCHPARAMS.put("Address", place.getAddress());
+                } else {
+                    data = new JSONObject();
+                    data.put("name", "srch_lon");
+                    data.put("value", SearchJSON.getJSONObject("latlng").getString("lng"));
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "srch_lat");
+                    data.put("value", SearchJSON.getJSONObject("latlng").getString("lat"));
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "ne_lng");
+                    data.put("value", SearchJSON.getJSONObject("viewport").getString("northeast_LNG"));
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "ne_lat");
+                    data.put("value", SearchJSON.getJSONObject("viewport").getString("northeast_LAT"));
+                    Searchkeyinfor.put(data);
+
+
+                    data = new JSONObject();
+                    data.put("name", "sw_lng");
+                    data.put("value", SearchJSON.getJSONObject("viewport").getString("southwest_LNG"));
+                    Searchkeyinfor.put(data);
+
+                    data = new JSONObject();
+                    data.put("name", "sw_lat");
+                    data.put("value", SearchJSON.getJSONObject("viewport").getString("southwest_LAT"));
+                    Searchkeyinfor.put(data);
+
+                    SEARCHPARAMS.put("Address", SearchJSON.getString("Address"));
+                    SEARCHPARAMS.put("LocationName", SearchJSON.getString("LocationName"));
+
+                }
+
+
+                SEARCHPARAMS.put("keyinfo", Searchkeyinfor);
+
+                intent.putExtra(SearchResult.SEARCHKEY, SEARCHPARAMS.toString());
+                startActivityForResult(intent, 101);
+
+            } catch (JSONException e) {
+                Loger.Error("@@", "Error" + e.getMessage());
+            }
+        }
+    }
 
     public interface OnFragmentInteractionListener {
 
