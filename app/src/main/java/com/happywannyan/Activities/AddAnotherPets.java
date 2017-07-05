@@ -485,7 +485,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
 //                                            Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
                                         } else {
 
-                                            String radiovalue2 = ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getTag().toString();
+                                            String radiovalue2 = ((RadioButton) findViewById(Rad_catf.getCheckedRadioButtonId())).getTag().toString();
                                             try {
                                                 RadioArray.put(new JSONObject(radiovalue2));
                                             } catch (JSONException e) {
