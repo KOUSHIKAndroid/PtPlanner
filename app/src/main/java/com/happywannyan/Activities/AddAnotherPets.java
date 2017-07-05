@@ -4,7 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.APIPOSTDATA;
@@ -58,8 +62,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     private int CAMERA_CAPTURE = 200;
 
     File photofile = null;
-    Uri filePath;
-    ArrayList<File> photos;
+    private String mCurrentPhotoPath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -533,6 +536,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                                         ArrayList<APIPOSTDATA> Params = new ArrayList<>();
                                         APIPOSTDATA apipostdata = new APIPOSTDATA();
                                         apipostdata.setPARAMS("user_id");
+                                        Loger.MSG("user_id",""+AppContsnat.UserId);
                                         apipostdata.setValues(AppContsnat.UserId);
                                         Params.add(apipostdata);
 
@@ -571,7 +575,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                                         Params.add(apipostdata);
 
                                         appLoader.Show();
-                                        new JSONPerser().API_FOR_With_Photo_POST(AppContsnat.BASEURL + "app_users_addpetinfo?", Params,photos, new JSONPerser.JSONRESPONSE() {
+                                        new JSONPerser().API_FOR_With_Photo_POST(this,AppContsnat.BASEURL + "app_users_addpetinfo?", Params,mCurrentPhotoPath, new JSONPerser.JSONRESPONSE() {
                                             @Override
                                             public void OnSuccess(String Result) {
                                                 appLoader.Dismiss();
@@ -648,37 +652,50 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        photos=new ArrayList<>();
-
         super.onActivityResult(requestCode, resultCode, data);
+        ImageView img_pet = (ImageView) findViewById(R.id.img_pet);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
-            filePath = data.getData();
-            File file= new File(filePath.getPath());
-            photos.add(file);
+            Uri uri = data.getData();
+            File dataFile = new File(getRealPathFromURI(uri));
+            if (!dataFile.exists())
+                Loger.MSG("image****", "data file does not exists");
+            mCurrentPhotoPath = dataFile.getAbsolutePath();
 
-            Loger.MSG("filePath",""+filePath);
 
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                // Log.d(TAG, String.valueOf(bitmap));
-
-                ImageView imageView = (ImageView) findViewById(R.id.img_pet);
-                imageView.setImageBitmap(bitmap);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Glide.with(AddAnotherPets.this).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(img_pet) {
+                /**
+                 * {@inheritDoc}
+                 * If no {@link GlideAnimation} is given or if the animation does not set the
+                 * {@link Drawable} on the view, the drawable is set using
+                 * {@link ImageView#setImageDrawable(Drawable)}.
+                 *
+                 * @param resource  {@inheritDoc}
+                 * @param animation {@inheritDoc}
+                 */
+                @Override
+                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                    super.onResourceReady(resource, animation);
+                }
+            });
         } else if (requestCode == CAMERA_CAPTURE && resultCode == RESULT_OK && photofile != null) {
 
-            ImageView img_pet = (ImageView) findViewById(R.id.img_pet);
+            Uri filePath = Uri.fromFile(photofile);
+            Loger.MSG("image****", "" + filePath);
 
-            filePath = Uri.fromFile(photofile);
-            File file= new File(filePath.getPath());
-            photos.add(file);
+            File dataFile = new File(getRealPathFromURI(filePath));
+            if (!dataFile.exists())
+                Loger.MSG("image****", "data file does not exists");
+            mCurrentPhotoPath = dataFile.getAbsolutePath();
 
-            Loger.MSG("filePath",""+filePath);
+            Glide.with(AddAnotherPets.this).load(filePath).into(new GlideDrawableImageViewTarget(img_pet) {
+                @Override
+                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
+                    super.onResourceReady(resource, animation);
+                }
+            });
+
 
             if (!filePath.equals("") || !filePath.equals(null)) {
                 Glide.with(AddAnotherPets.this).load(filePath)
@@ -745,4 +762,16 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
         return image;
     }
 
+    //file uri to real location in filesystem
+    public String getRealPathFromURI(Uri contentURI) {
+        Cursor cursor = AddAnotherPets.this.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            // Source is Dropbox or other similar local file path
+            return contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
+    }
 }

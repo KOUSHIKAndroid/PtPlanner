@@ -1,12 +1,17 @@
 package com.happywannyan.Utils;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 
 import com.happywannyan.POJO.APIPOSTDATA;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -158,9 +163,10 @@ public class JSONPerser {
     }
 
 
-    public void API_FOR_With_Photo_POST(final String URL, final ArrayList<APIPOSTDATA> apipostdata, final ArrayList<File> photos, final JSONRESPONSE jsonresponse){
+    public void API_FOR_With_Photo_POST(final Context context, final String URL, final ArrayList<APIPOSTDATA> apipostdata, final String uri, final JSONRESPONSE jsonresponse){
 
-        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/*");
+        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+
         new AsyncTask<Void, Void, Void>() {
 
             private String respose = null;
@@ -170,20 +176,35 @@ public class JSONPerser {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+
                 buildernew = new MultipartBody.Builder().setType(MultipartBody.FORM);
                 for(APIPOSTDATA data : apipostdata){
                     buildernew.addFormDataPart(""+data.getPARAMS(), data.getValues());
                 }
 
-                for (int i = 0; i < photos.size(); i++) {
-                    File f = photos.get(i);
-                    if (f.exists()) {
-                        Loger.MSG("Image path2",""+photos.get(i).getAbsolutePath());
-                        buildernew.addFormDataPart("petimg","petimg", RequestBody.create(MEDIA_TYPE_PNG, f));
-//                                  buildernew.addFormDataPart(TEMP_FILE_NAME + i, TEMP_FILE_NAME + i + FILE_EXTENSION, RequestBody.create(MEDIA_TYPE, f));
-                    }
-                }
+                try {
+                    Bitmap bmp = ImageCompressor.with(context).compressBitmap(uri);
+                    Loger.MSG("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
+                    File upload_temp = new File(context.getCacheDir(), "" + System.currentTimeMillis() + ".png");
+                    upload_temp.createNewFile();
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                    byte[] bitmapdata = bos.toByteArray();
 
+                    FileOutputStream fos = new FileOutputStream(upload_temp);
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+
+
+                    if (upload_temp != null) {
+                        Loger.MSG("Imagepath2", "" + upload_temp.getAbsolutePath());
+                        buildernew.addFormDataPart("petimg", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -191,7 +212,7 @@ public class JSONPerser {
                 try {
                     if (!isCancelled()) {
                         MultipartBody requestBody = buildernew.build();
-                        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(5000, TimeUnit.MILLISECONDS).build();
+                        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(6000, TimeUnit.MILLISECONDS).build();
                         Request request = new Request.Builder().url(URL) .method("POST", RequestBody.create(null, new byte[0]))
                                 .post(requestBody).build();
                         Response response = client.newCall(request).execute();
