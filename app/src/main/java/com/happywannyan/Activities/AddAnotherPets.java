@@ -22,6 +22,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -34,9 +35,11 @@ import com.happywannyan.Utils.AppLoader;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.MYAlert;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -420,181 +423,185 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
         ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
 
 
-        if (((SFNFTextView) findViewById(R.id.Txt_type)).getText().toString().trim().equals("")) {
-            ((SFNFTextView) findViewById(R.id.Txt_type)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
-            Log.i("Txt_type", "Txt_type");
-        } else {
-            Log.i("TXTName", "TXTName");
-            ((SFNFTextView) findViewById(R.id.Txt_type)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
-            if (((EditText) findViewById(R.id.TXTName)).getText().toString().trim().equals("")) {
-
-                ((EditText) findViewById(R.id.TXTName)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
-                ((EditText) findViewById(R.id.TXTName)).requestFocus();
+            if (((SFNFTextView) findViewById(R.id.Txt_type)).getText().toString().trim().equals("")) {
+                ((SFNFTextView) findViewById(R.id.Txt_type)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                Log.i("Txt_type", "Txt_type");
             } else {
-                Log.i("TXT_Year", "TXT_Year");
-                ((EditText) findViewById(R.id.TXTName)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
 
-                if (((SFNFTextView) findViewById(R.id.TXT_Year)).getText().toString().trim().equals("")) {
-                    ((SFNFTextView) findViewById(R.id.TXT_Year)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                if (mCurrentPhotoPath.trim().equals("")) {
+                    Toast.makeText(this, "Select pet image", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.i("TXT_Month", "TXT_Month");
-                    ((SFNFTextView) findViewById(R.id.TXT_Year)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
-                    if (((SFNFTextView) findViewById(R.id.TXT_Month)).getText().toString().trim().equals("")) {
-                        ((SFNFTextView) findViewById(R.id.TXT_Month)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+
+                    Log.i("TXTName", "TXTName");
+                    ((SFNFTextView) findViewById(R.id.Txt_type)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                    if (((EditText) findViewById(R.id.TXTName)).getText().toString().trim().equals("")) {
+
+                        ((EditText) findViewById(R.id.TXTName)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                        ((EditText) findViewById(R.id.TXTName)).requestFocus();
                     } else {
-                        Log.i("TXT_gender", "TXT_gender");
-                        ((SFNFTextView) findViewById(R.id.TXT_Month)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
-                        if (((SFNFTextView) findViewById(R.id.TXT_gender)).getText().toString().trim().equals("")) {
-                            ((SFNFTextView) findViewById(R.id.TXT_gender)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                        Log.i("TXT_Year", "TXT_Year");
+                        ((EditText) findViewById(R.id.TXTName)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+
+                        if (((SFNFTextView) findViewById(R.id.TXT_Year)).getText().toString().trim().equals("")) {
+                            ((SFNFTextView) findViewById(R.id.TXT_Year)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
                         } else {
-                            Log.i("TXT_breed", "TXT_breed");
-                            ((SFNFTextView) findViewById(R.id.TXT_gender)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
-                            if (((SFNFTextView) findViewById(R.id.TXT_petsize)).getText().toString().trim().equals("")) {
-                                ((SFNFTextView) findViewById(R.id.TXT_petsize)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                            Log.i("TXT_Month", "TXT_Month");
+                            ((SFNFTextView) findViewById(R.id.TXT_Year)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                            if (((SFNFTextView) findViewById(R.id.TXT_Month)).getText().toString().trim().equals("")) {
+                                ((SFNFTextView) findViewById(R.id.TXT_Month)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
                             } else {
-                                Log.i("TXT_petsize", "TXT_petsize");
-                                ((SFNFTextView) findViewById(R.id.TXT_petsize)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
-                                if (((SFNFTextView) findViewById(R.id.TXT_breed)).getText().toString().trim().equals("")) {
-                                    ((SFNFTextView) findViewById(R.id.TXT_breed)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                                Log.i("TXT_gender", "TXT_gender");
+                                ((SFNFTextView) findViewById(R.id.TXT_Month)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                if (((SFNFTextView) findViewById(R.id.TXT_gender)).getText().toString().trim().equals("")) {
+                                    ((SFNFTextView) findViewById(R.id.TXT_gender)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
                                 } else {
-                                    ((SFNFTextView) findViewById(R.id.TXT_breed)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
-                                    if (((EditText) findViewById(R.id.EditDescribe)).getText().toString().trim().equals("")) {
-                                        ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
-                                        ((EditText) findViewById(R.id.EditDescribe)).requestFocus();
+                                    Log.i("TXT_breed", "TXT_breed");
+                                    ((SFNFTextView) findViewById(R.id.TXT_gender)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                    if (((SFNFTextView) findViewById(R.id.TXT_petsize)).getText().toString().trim().equals("")) {
+                                        ((SFNFTextView) findViewById(R.id.TXT_petsize)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
                                     } else {
-                                        ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
-                                        InputArea = new JSONArray();
-                                        RadioArray = new JSONArray();
-                                        Text = new JSONArray();
-                                        Select = new JSONArray();
-
-
-                                        if (Radio_Catspayed.getCheckedRadioButtonId() == -1) {
-                                            // No item selected
-                                            Log.i("radiovalue", "No item selected");
-                                            Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
+                                        Log.i("TXT_petsize", "TXT_petsize");
+                                        ((SFNFTextView) findViewById(R.id.TXT_petsize)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                        if (((SFNFTextView) findViewById(R.id.TXT_breed)).getText().toString().trim().equals("")) {
+                                            ((SFNFTextView) findViewById(R.id.TXT_breed)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
                                         } else {
-                                            String radiovalue1 = ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getTag().toString();
-                                            try {
-                                                RadioArray.put(new JSONObject(radiovalue1));
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
+                                            ((SFNFTextView) findViewById(R.id.TXT_breed)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                            if (((EditText) findViewById(R.id.EditDescribe)).getText().toString().trim().equals("")) {
+                                                ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.btn_red));
+                                                ((EditText) findViewById(R.id.EditDescribe)).requestFocus();
+                                            } else {
+                                                ((EditText) findViewById(R.id.EditDescribe)).setHintTextColor(ContextCompat.getColor(this, R.color.text_dark_gray));
+                                                InputArea = new JSONArray();
+                                                RadioArray = new JSONArray();
+                                                Text = new JSONArray();
+                                                Select = new JSONArray();
+
+
+                                                if (Radio_Catspayed.getCheckedRadioButtonId() == -1) {
+                                                    // No item selected
+                                                    Log.i("radiovalue", "No item selected");
+                                                    Toast.makeText(this, "No item selected in pet friendly", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    String radiovalue1 = ((RadioButton) findViewById(Radio_Catspayed.getCheckedRadioButtonId())).getTag().toString();
+                                                    try {
+                                                        RadioArray.put(new JSONObject(radiovalue1));
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+
+                                                    if (Rad_catf.getCheckedRadioButtonId() == -1) {
+                                                        Log.i("radiovalue", "No item selected");
+                                                        Toast.makeText(this, "No item selected in pet spayed or neutered", Toast.LENGTH_SHORT).show();
+                                                    } else {
+
+                                                        String radiovalue2 = ((RadioButton) findViewById(Rad_catf.getCheckedRadioButtonId())).getTag().toString();
+                                                        try {
+                                                            RadioArray.put(new JSONObject(radiovalue2));
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+
+                                                        try {
+                                                            JSONObject textarea = new JSONObject();
+                                                            textarea.put("id", new JSONObject(((EditText) findViewById(R.id.EditDescribe)).getTag().toString()).getString("id"));
+                                                            textarea.put("value", ((EditText) findViewById(R.id.EditDescribe)).getText());
+                                                            InputArea.put(textarea);
+
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                        try {
+                                                            JSONObject textarea = new JSONObject();
+                                                            textarea.put("id", new JSONObject(((EditText) findViewById(R.id.TXTName)).getTag().toString()).getString("id"));
+                                                            textarea.put("value", ((EditText) findViewById(R.id.TXTName)).getText());
+                                                            Text.put(textarea);
+
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+
+
+                                                        try {
+                                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_gender)).getTag().toString()));
+                                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_petsize)).getTag().toString()));
+                                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_breed)).getTag().toString()));
+                                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_Month)).getTag().toString()));
+                                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_Year)).getTag().toString()));
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+
+                                                        Loger.MSG(" Name-", Text.toString());
+                                                        Loger.MSG(" TeatArea-", InputArea.toString());
+                                                        Loger.MSG(" Radio-", RadioArray.toString());
+                                                        Loger.MSG(" Select-", Select.toString());
+
+
+                                                        ArrayList<APIPOSTDATA> Params = new ArrayList<>();
+                                                        APIPOSTDATA apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("user_id");
+                                                        Loger.MSG("user_id", "" + AppContsnat.UserId);
+                                                        apipostdata.setValues(AppContsnat.UserId);
+                                                        Params.add(apipostdata);
+
+                                                        apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("langid");
+                                                        apipostdata.setValues(AppContsnat.Language);
+                                                        Params.add(apipostdata);
+
+                                                        apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("pettypeid");
+                                                        apipostdata.setValues(AppContsnat.Language);
+                                                        Params.add(apipostdata);
+
+                                                        apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("text");
+                                                        apipostdata.setValues(Text.toString());
+                                                        Params.add(apipostdata);
+
+                                                        apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("textarea");
+                                                        apipostdata.setValues(InputArea.toString());
+                                                        Params.add(apipostdata);
+
+                                                        apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("radio");
+                                                        apipostdata.setValues(RadioArray.toString());
+                                                        Params.add(apipostdata);
+
+                                                        apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("select");
+                                                        apipostdata.setValues(Select.toString());
+                                                        Params.add(apipostdata);
+                                                        apipostdata = new APIPOSTDATA();
+                                                        apipostdata.setPARAMS("pettypeid");
+                                                        apipostdata.setValues(PetTypeId);
+                                                        Params.add(apipostdata);
+
+                                                        appLoader.Show();
+                                                        new JSONPerser().API_FOR_With_Photo_POST(this, AppContsnat.BASEURL + "app_users_addpetinfo?", Params, mCurrentPhotoPath, new JSONPerser.JSONRESPONSE() {
+                                                            @Override
+                                                            public void OnSuccess(String Result) {
+                                                                appLoader.Dismiss();
+                                                                Loger.MSG("RES", Result);
+                                                            }
+
+                                                            @Override
+                                                            public void OnError(String Error, String Response) {
+                                                                Loger.MSG("Error", Error);
+                                                                appLoader.Dismiss();
+                                                            }
+
+                                                            @Override
+                                                            public void OnError(String Error) {
+                                                                Loger.MSG("Error2", Error);
+                                                                appLoader.Dismiss();
+                                                            }
+                                                        });
+                                                    }
+                                                }
                                             }
                                         }
-
-
-                                        if (Rad_catf.getCheckedRadioButtonId() == -1) {
-                                            Log.i("radiovalue", "No item selected");
-//                                            Toast.makeText(this, "No item selected in radio button of friendly option", Toast.LENGTH_SHORT).show();
-                                        } else {
-
-                                            String radiovalue2 = ((RadioButton) findViewById(Rad_catf.getCheckedRadioButtonId())).getTag().toString();
-                                            try {
-                                                RadioArray.put(new JSONObject(radiovalue2));
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-
-                                        }
-
-                                        try {
-                                            JSONObject textarea = new JSONObject();
-                                            textarea.put("id", new JSONObject(((EditText) findViewById(R.id.EditDescribe)).getTag().toString()).getString("id"));
-                                            textarea.put("value", ((EditText) findViewById(R.id.EditDescribe)).getText());
-                                            InputArea.put(textarea);
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                        try {
-                                            JSONObject textarea = new JSONObject();
-                                            textarea.put("id", new JSONObject(((EditText) findViewById(R.id.TXTName)).getTag().toString()).getString("id"));
-                                            textarea.put("value", ((EditText) findViewById(R.id.TXTName)).getText());
-                                            Text.put(textarea);
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-
-
-                                        try {
-                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_gender)).getTag().toString()));
-                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_petsize)).getTag().toString()));
-                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_breed)).getTag().toString()));
-                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_Month)).getTag().toString()));
-                                            Select.put(new JSONObject(((SFNFTextView) findViewById(R.id.TXT_Year)).getTag().toString()));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-
-                                        Loger.MSG(" Name-", Text.toString());
-                                        Loger.MSG(" TeatArea-", InputArea.toString());
-                                        Loger.MSG(" Radio-", RadioArray.toString());
-                                        Loger.MSG(" Select-", Select.toString());
-
-
-                                        ArrayList<APIPOSTDATA> Params = new ArrayList<>();
-                                        APIPOSTDATA apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("user_id");
-                                        Loger.MSG("user_id",""+AppContsnat.UserId);
-                                        apipostdata.setValues(AppContsnat.UserId);
-                                        Params.add(apipostdata);
-
-                                        apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("langid");
-                                        apipostdata.setValues(AppContsnat.Language);
-                                        Params.add(apipostdata);
-
-                                        apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("pettypeid");
-                                        apipostdata.setValues(AppContsnat.Language);
-                                        Params.add(apipostdata);
-
-                                        apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("text");
-                                        apipostdata.setValues(Text.toString());
-                                        Params.add(apipostdata);
-
-                                        apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("textarea");
-                                        apipostdata.setValues(InputArea.toString());
-                                        Params.add(apipostdata);
-
-                                        apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("radio");
-                                        apipostdata.setValues(RadioArray.toString());
-                                        Params.add(apipostdata);
-
-                                        apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("select");
-                                        apipostdata.setValues(Select.toString());
-                                        Params.add(apipostdata);
-                                        apipostdata = new APIPOSTDATA();
-                                        apipostdata.setPARAMS("pettypeid");
-                                        apipostdata.setValues(PetTypeId);
-                                        Params.add(apipostdata);
-
-                                        appLoader.Show();
-                                        new JSONPerser().API_FOR_With_Photo_POST(this,AppContsnat.BASEURL + "app_users_addpetinfo?", Params,mCurrentPhotoPath, new JSONPerser.JSONRESPONSE() {
-                                            @Override
-                                            public void OnSuccess(String Result) {
-                                                appLoader.Dismiss();
-                                                Loger.MSG("RES", Result);
-                                            }
-
-                                            @Override
-                                            public void OnError(String Error, String Response) {
-                                                Loger.MSG("Error", Error);
-                                                appLoader.Dismiss();
-                                            }
-
-                                            @Override
-                                            public void OnError(String Error) {
-                                                Loger.MSG("Error2", Error);
-                                                appLoader.Dismiss();
-                                            }
-                                        });
-
                                     }
                                 }
                             }
@@ -602,7 +609,6 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                     }
                 }
             }
-        }
     }
 
     private void showPhotoDialog() {
@@ -707,9 +713,8 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                         .placeholder(R.drawable.ic_select_image_from_gallery)
                         .into(img_pet);
             }
-        }
-        else {
-            Toast.makeText(this,"Image Error",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Image Error", Toast.LENGTH_SHORT).show();
         }
     }
 

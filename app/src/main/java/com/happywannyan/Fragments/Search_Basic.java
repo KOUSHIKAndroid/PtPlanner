@@ -291,11 +291,8 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                     break;
-
             }
-
         }
-
     }
 
     public void GotoAdvancedSearched(JSONObject jsondata) {
