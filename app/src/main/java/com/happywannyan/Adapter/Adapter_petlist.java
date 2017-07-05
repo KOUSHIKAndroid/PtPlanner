@@ -96,9 +96,6 @@ public class Adapter_petlist extends RecyclerView.Adapter<Adapter_petlist.MyView
 
               search_basic.GotoAdvancedSearched(serviceCatListArrayList.get(position).getJsondata());
 
-
-
-
             }
         });
     }

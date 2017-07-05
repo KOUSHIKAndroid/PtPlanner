@@ -476,10 +476,7 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
         }
         SearchJSON = jsondata;
         Loger.MSG("@@", "" + SearchJSON.toString());
-
-
     }
-
 
     @Override
     public void OnAdresss(String Adreess, JSONObject geo) {
