@@ -184,7 +184,7 @@ public class JSONPerser {
                 }
 
                 for (File file: Photos)
-                {
+                {if(file!=null)
                     buildernew.addFormDataPart("petimg", file.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, file));
 
                 }

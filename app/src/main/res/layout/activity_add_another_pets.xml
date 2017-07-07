@@ -63,6 +63,7 @@
             android:textColor="@color/Black" />
 
         <ImageView
+            android:id="@+id/IMG_ARROW"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -447,7 +448,7 @@
             android:padding="5dp">
 
             <com.happywannyan.Font.SFNFTextView
-
+                android:id="@+id/TXT_Save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

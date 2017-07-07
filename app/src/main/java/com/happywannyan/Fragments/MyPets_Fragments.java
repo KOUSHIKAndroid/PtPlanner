@@ -144,7 +144,7 @@ public class MyPets_Fragments extends Fragment {
                         yourPets.setPet_type_id(jsonObject.getString("pet_type_id"));
                         yourPets.setPet_image(jsonObject.getString("pet_image"));
                         yourPets.setPet_name(jsonObject.getString("pet_name"));
-                        yourPets.setOtherinfo(jsonObject.getJSONArray("other_info"));
+                        yourPets.setOtherinfo(jsonObject);
                         ListPets.add(yourPets);
                     }
                     if(i==0) {

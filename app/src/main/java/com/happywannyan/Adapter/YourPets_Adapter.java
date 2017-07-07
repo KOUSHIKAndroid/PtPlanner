@@ -1,12 +1,14 @@
 package com.happywannyan.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import com.happywannyan.Activities.EditAnotherPets;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Font.SFNFBoldTextView;
 import com.happywannyan.Font.SFNFTextView;
@@ -53,15 +55,19 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
 
         holder.tv_name.setText(data.getPet_name());
         try {
-            holder.tv_type.setText(data.getOtherinfo().getJSONObject(0).getString("show_name"));
-            holder.tv_year.setText(data.getOtherinfo().getJSONObject(1).getString("show_name"));
-            holder.tv_month.setText(data.getOtherinfo().getJSONObject(2).getString("show_name"));
-            holder.tv_gender.setText(data.getOtherinfo().getJSONObject(3).getString("show_name"));
-            holder.tv_breed_value.setText(data.getOtherinfo().getJSONObject(4).getString("show_name"));
-            holder.tv_size.setText(data.getOtherinfo().getJSONObject(5).getString("show_name"));
-            holder.tv_spayed_or_neutered_value.setText(data.getOtherinfo().getJSONObject(7).getString("show_name"));
-            holder.tv_friendly_value.setText(data.getOtherinfo().getJSONObject(7).getString("show_name"));
+            JSONArray ObjectData=data.getOtherinfo().getJSONArray("other_info");
 
+            holder.tv_type.setText(ObjectData.getJSONObject(0).getString("show_name"));
+            holder.tv_year.setText(ObjectData.getJSONObject(1).getString("show_name"));
+            holder.tv_month.setText(ObjectData.getJSONObject(2).getString("show_name"));
+            holder.tv_gender.setText(ObjectData.getJSONObject(3).getString("show_name"));
+            holder.tv_breed_value.setText(ObjectData.getJSONObject(4).getString("show_name"));
+            holder.tv_size.setText(ObjectData.getJSONObject(5).getString("show_name"));
+            holder.tv_spayed_or_neutered_value.setText(ObjectData.getJSONObject(7).getString("show_name"));
+            if(ObjectData.length()>7)
+            holder.tv_friendly_value.setText(ObjectData.getJSONObject(8).getString("show_name"));
+            else
+                holder.tv_friendly_value.setVisibility(View.GONE);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -69,6 +75,16 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
 
 
         Glide.with(context).load(data.getPet_image()).into(holder.img_view);
+
+        holder.img_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, EditAnotherPets.class);
+                Loger.MSG("@@@",data.getOtherinfo().toString());
+                intent.putExtra("Data",data.getOtherinfo().toString());
+                context.startActivity(intent);
+            }
+        });
 
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override

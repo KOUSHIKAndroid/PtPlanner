@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 public class YourPets {
     String edit_id,pet_type_id,pet_name,pet_image;
-    JSONArray Otherinfo;
+    JSONObject Otherinfo;
 
     public String getEdit_id() {
         return edit_id;
@@ -43,11 +43,11 @@ public class YourPets {
         this.pet_image = pet_image;
     }
 
-    public JSONArray getOtherinfo() {
+    public JSONObject getOtherinfo() {
         return Otherinfo;
     }
 
-    public void setOtherinfo(JSONArray otherinfo) {
+    public void setOtherinfo(JSONObject otherinfo) {
         Otherinfo = otherinfo;
     }
 }
