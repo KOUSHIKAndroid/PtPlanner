@@ -60,6 +60,7 @@ import com.ptplanner.helper.ConnectionDetector;
 import com.ptplanner.helper.ReturnCalendarDetails;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -782,6 +783,38 @@ public class CalenderFragment extends Fragment {
                 // TODO Auto-generated method stub
                 super.onPostExecute(result);
 
+
+                try {
+                    JSONObject jOBJ = new JSONObject(urlResponse);
+
+                    if(jOBJ.getString("training_enable").equals("N")) {
+                        rlTraining.setVisibility(View.GONE);
+                        fView.findViewById(R.id.DIV_1).setVisibility(View.GONE);
+                    }else {
+                        rlTraining.setVisibility(View.VISIBLE);
+                        fView.findViewById(R.id.DIV_1).setVisibility(View.VISIBLE);
+                    }
+                    if(jOBJ.getString("meal_enable").equals("N")) {
+                        rlDiet.setVisibility(View.GONE);
+                        fView.findViewById(R.id.DIV_2).setVisibility(View.GONE);
+                    }else {
+                        rlDiet.setVisibility(View.VISIBLE);
+                        fView.findViewById(R.id.DIV_2).setVisibility(View.VISIBLE);
+                    }
+                    if(jOBJ.getString("diary_enable").equals("N")) {
+                        rlDiary.setVisibility(View.GONE);
+                        fView.findViewById(R.id.DIV_3).setVisibility(View.GONE);
+
+                    }else {
+                        rlDiary.setVisibility(View.VISIBLE);
+                        fView.findViewById(R.id.DIV_3).setVisibility(View.VISIBLE);
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 //                if(!allEventsDatatype.getTotal_appointment().equals("0") && !allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")){
                 if (!allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")) {
