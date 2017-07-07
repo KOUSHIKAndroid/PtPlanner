@@ -164,7 +164,7 @@ public class JSONPerser {
     }
 
 
-    public void API_FOR_With_Photo_POST(final Context context, final String URL, final ArrayList<APIPOSTDATA> apipostdata, final String uri, final JSONRESPONSE jsonresponse){
+    public void API_FOR_With_Photo_POST( final String URL, final ArrayList<APIPOSTDATA> apipostdata, final ArrayList<File> Photos, final JSONRESPONSE jsonresponse){
 
         final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
@@ -183,35 +183,20 @@ public class JSONPerser {
                     buildernew.addFormDataPart(""+data.getPARAMS(), data.getValues());
                 }
 
-                try {
-                    Bitmap bmp = ImageCompressor.with(context).compressBitmap(uri);
-                    Loger.MSG("*****", "%% Bitmap size:: " + (bmp.getByteCount() / 1024) + " kb");
-                    File upload_temp = new File(context.getCacheDir(), "" + System.currentTimeMillis() + ".png");
-                    upload_temp.createNewFile();
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    bmp.compress(Bitmap.CompressFormat.PNG, 0, bos);
-                    byte[] bitmapdata = bos.toByteArray();
+                for (File file: Photos)
+                {
+                    buildernew.addFormDataPart("petimg", file.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, file));
 
-                    FileOutputStream fos = new FileOutputStream(upload_temp);
-                    fos.write(bitmapdata);
-                    fos.flush();
-                    fos.close();
-
-
-                    if (upload_temp != null) {
-                        Loger.MSG("Imagepath2", "" + upload_temp.getAbsolutePath());
-                        buildernew.addFormDataPart("petimg", upload_temp.getName() + "", RequestBody.create(MEDIA_TYPE_PNG, upload_temp));
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+
+
             }
 
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
                     if (!isCancelled()) {
+
                         MultipartBody requestBody = buildernew.build();
                         OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(6000, TimeUnit.MILLISECONDS).build();
                         Request request = new Request.Builder().url(URL) .method("POST", RequestBody.create(null, new byte[0]))

@@ -1,10 +1,12 @@
 package com.happywannyan.Activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -31,6 +33,7 @@ import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.R;
 import com.happywannyan.Utils.AppLoader;
+import com.happywannyan.Utils.ImageFilePath;
 import com.happywannyan.Utils.JSONPerser;
 import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.MYAlert;
@@ -38,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,15 +59,14 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     JSONArray Text, InputArea, Select, RadioArray;
 
     AlertDialog Dialog;
-
+    ImageView img_pet;
     private static final int REQUEST_WRITE_PERMISSION1 = 3000;
     private static final int REQUEST_WRITE_PERMISSION2 = 4000;
-
+    final String BITMAP_STORAGE_URL = "IMAGE_URL";
     private int PICK_IMAGE_REQUEST = 100;
     private int CAMERA_CAPTURE = 200;
 
     File photofile = null;
-    private String mCurrentPhotoPath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +77,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
         TXTName = (EditText) findViewById(R.id.TXTName);
         Radio_Catspayed = (RadioGroup) findViewById(R.id.Radio_Catspayed);
         Rad_catf = (RadioGroup) findViewById(R.id.Rad_catf);
-
+         img_pet = (ImageView) findViewById(R.id.img_pet);
         new AppContsnat(this);
         new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "parent_service", new ArrayList<APIPOSTDATA>(), new JSONPerser.JSONRESPONSE() {
             @Override
@@ -424,7 +428,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
             Log.i("Txt_type", "Txt_type");
         } else {
 
-            if (mCurrentPhotoPath.trim().equals("")) {
+            if (photofile==null) {
                 Toast.makeText(this, "Select pet image", Toast.LENGTH_SHORT).show();
             } else {
 
@@ -588,12 +592,27 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
                                                     apipostdata.setValues(PetTypeId);
                                                     Params.add(apipostdata);
 
+                                                    ArrayList<File> PhotoFiles=new ArrayList<>();
+                                                    PhotoFiles.add(photofile);
+                                                    Loger.MSG("@@"," SIZE-"+PhotoFiles.size()+"");
+
+
+
                                                     appLoader.Show();
-                                                    new JSONPerser().API_FOR_With_Photo_POST(this, AppContsnat.BASEURL + "app_users_addpetinfo?", Params, mCurrentPhotoPath, new JSONPerser.JSONRESPONSE() {
+                                                    new JSONPerser().API_FOR_With_Photo_POST(AppContsnat.BASEURL + "app_users_addpetinfo?", Params,  PhotoFiles, new JSONPerser.JSONRESPONSE() {
                                                         @Override
                                                         public void OnSuccess(String Result) {
                                                             appLoader.Dismiss();
-                                                            Loger.MSG("RES", Result);
+                                                            try {
+                                                                new MYAlert(AddAnotherPets.this).AlertOnly(getString(R.string.add_another_pets), new JSONObject(Result).getString("message"), new MYAlert.OnlyMessage() {
+                                                                    @Override
+                                                                    public void OnOk(boolean res) {
+                                                                        onBackPressed();
+                                                                    }
+                                                                });
+                                                            } catch (JSONException e) {
+                                                                e.printStackTrace();
+                                                            }
                                                         }
 
                                                         @Override
@@ -650,7 +669,7 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION2);
+                    requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_WRITE_PERMISSION2);
                 } else {
                     openCamera();
                 }
@@ -665,69 +684,95 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     }
 
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+
+        Loger.MSG("@@ CAM SERVICEID-",getIntent().getStringExtra("SERVICEID")+"\n USERID-"+getIntent().getStringExtra("USERID"));
+        if (photofile != null) {
+            outState.putString(BITMAP_STORAGE_URL, photofile.getAbsolutePath().toString());
+            Log.i("@@", "onSaveInstanceState : " + photofile.getAbsolutePath().toString());
+        }
+    }
+
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        try {
+
+
+
+            if (photofile == null) {
+
+                photofile = new File(savedInstanceState.getString(BITMAP_STORAGE_URL));
+                Glide.with(getApplicationContext()).load(photofile).into(img_pet);
+            }
+            Log.i("@@", "onRestoreInstanceState : " + photofile.getAbsolutePath().toString());
+        }catch (NullPointerException e)
+        {}
+
+    }
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView img_pet = (ImageView) findViewById(R.id.img_pet);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
-            Uri uri = data.getData();
-            File dataFile = new File(getRealPathFromURI(uri));
-            if (!dataFile.exists())
-                Loger.MSG("image****", "data file does not exists");
-            mCurrentPhotoPath = dataFile.getAbsolutePath();
 
 
-            Glide.with(AddAnotherPets.this).load(uri).fitCenter().into(new GlideDrawableImageViewTarget(img_pet) {
-                /**
-                 * {@inheritDoc}
-                 * If no {@link GlideAnimation} is given or if the animation does not set the
-                 * {@link Drawable} on the view, the drawable is set using
-                 * {@link ImageView#setImageDrawable(Drawable)}.
-                 *
-                 * @param resource  {@inheritDoc}
-                 * @param animation {@inheritDoc}
-                 */
-                @Override
-                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                    super.onResourceReady(resource, animation);
+        if (requestCode == CAMERA_CAPTURE && resultCode == RESULT_OK && data != null ) {
+
+            if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M) {
+                Uri selectedImageURI = data.getData();
+                try {
+                    photofile = new File(ImageFilePath.getPath(getApplicationContext(), selectedImageURI));
+                    Glide.with(getApplicationContext()).load(photofile).into(img_pet);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-        } else if (requestCode == CAMERA_CAPTURE && resultCode == RESULT_OK && photofile != null) {
+            }else {
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                storeImage(photo);
+            }
 
-            Uri filePath = Uri.fromFile(photofile);
-            Loger.MSG("image****", "" + filePath);
-
-            File dataFile = new File(getRealPathFromURI(filePath));
-            if (!dataFile.exists())
-                Loger.MSG("image****", "data file does not exists");
-            mCurrentPhotoPath = dataFile.getAbsolutePath();
-
-            Glide.with(AddAnotherPets.this).load(filePath).into(new GlideDrawableImageViewTarget(img_pet) {
-                @Override
-                public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                    super.onResourceReady(resource, animation);
-                }
-            });
-
-
-            if (!filePath.equals("") || !filePath.equals(null)) {
-                Glide.with(AddAnotherPets.this).load(filePath)
-                        .placeholder(R.drawable.ic_select_image_from_gallery)
-                        .into(img_pet);
-            } else {
-
-                Glide.with(AddAnotherPets.this).load(filePath)
-                        .placeholder(R.drawable.ic_select_image_from_gallery)
-                        .into(img_pet);
+        } else if (requestCode ==PICK_IMAGE_REQUEST  && resultCode == RESULT_OK && photofile != null) {
+            Uri selectedImageURI = data.getData();
+            try {
+                photofile = new File(ImageFilePath.getPath(getApplicationContext(), selectedImageURI));
+                Glide.with(getApplicationContext()).load(photofile).into(img_pet);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             Toast.makeText(this, "Image Error", Toast.LENGTH_SHORT).show();
         }
     }
-
+    private void storeImage(Bitmap image) {
+        File pictureFile =  new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "FREEWILDER");
+        if (pictureFile == null) {
+            Loger.MSG("@@",
+                    "Error creating media file, check storage permissions: ");// e.getMessage());
+            return;
+        }
+        try {
+            Loger.MSG("@@","PIPATH"+pictureFile.getAbsolutePath());
+            String uriSting = (pictureFile.getAbsolutePath()  + System.currentTimeMillis() + ".jpg");
+            photofile=new File(uriSting);
+            FileOutputStream fos = new FileOutputStream(uriSting);
+            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
+            fos.close();
+            Glide.with(getApplicationContext()).load(photofile).into(img_pet);
+        } catch (FileNotFoundException e) {
+            Loger.MSG("@@", "File not found: " + e.getMessage());
+        } catch (IOException e) {
+            Loger.MSG("@@", "Error accessing file: " + e.getMessage());
+        }
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_WRITE_PERMISSION1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -739,13 +784,18 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
     }
 
     private void openImageGallery() {
+        try {
+            photofile = createImageFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Intent intent = new Intent();
-        // Show only images, no videos or anything else
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        // Always show the chooser (if there are multiple options available)
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
+
 
         Dialog.dismiss();
     }
@@ -755,10 +805,8 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
             photofile = createImageFile();
             Log.d("image path--", String.valueOf(photofile));
 
-
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photofile));
-            startActivityForResult(intent, CAMERA_CAPTURE);
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(takePictureIntent, CAMERA_CAPTURE);
 
         } catch (Exception e) {
             Log.v("Catch Exception", e.toString());
@@ -769,26 +817,12 @@ public class AddAnotherPets extends AppCompatActivity implements View.OnClickLis
 
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());///new approach
         String imagefilename = "IMAGE_" + timestamp + "_";///new approach
-
         File storageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-
         File image = File.createTempFile(imagefilename, ".jpg", storageDirectory);/////new approach
-
         return image;
     }
 
-    //file uri to real location in filesystem
-    public String getRealPathFromURI(Uri contentURI) {
-        Cursor cursor = AddAnotherPets.this.getContentResolver().query(contentURI, null, null, null, null);
-        if (cursor == null) {
-            // Source is Dropbox or other similar local file path
-            return contentURI.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(idx);
-        }
-    }
+
 
 
     @Override
