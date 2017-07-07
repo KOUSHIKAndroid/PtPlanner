@@ -1,6 +1,6 @@
 package com.happywannyan.Adapter;
+
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,30 +11,30 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.happywannyan.Font.SFNFTextView;
-import com.happywannyan.Fragments.Search_Basic;
+import com.happywannyan.Fragments.Advanced_search;
 import com.happywannyan.POJO.PetService;
 import com.happywannyan.R;
 import java.util.ArrayList;
 
 /**
- * Created by su on 5/22/17.
+ * Created by su on 7/6/17.
  */
 
-public class Adapter_petlist extends RecyclerView.Adapter<Adapter_petlist.MyViewHolder> {
+public class Adapter_Petlist_Dialog extends RecyclerView.Adapter<Adapter_Petlist_Dialog.MyViewHolder> {
     ArrayList<PetService> serviceCatListArrayList;
     Context context;
-    Search_Basic search_basic;
-    public Adapter_petlist(Search_Basic search_basic,Context context, ArrayList<PetService> serviceCatListArrayList){
+    Advanced_search advanced_search;
+
+    public Adapter_Petlist_Dialog(Advanced_search advanced_search,Context context, ArrayList<PetService> serviceCatListArrayList){
+        this.advanced_search=advanced_search;
         this.context=context;
         this.serviceCatListArrayList=serviceCatListArrayList;
-        this.search_basic=search_basic;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Adapter_Petlist_Dialog.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pet_details_list_row, parent, false);
-
-        return new MyViewHolder(itemView);
+        return new Adapter_Petlist_Dialog.MyViewHolder(itemView);
     }
 
     @Override
@@ -61,7 +61,8 @@ public class Adapter_petlist extends RecyclerView.Adapter<Adapter_petlist.MyView
         else {
             holder.img_tick.setImageResource(R.drawable.ic_checked_black);
 
-            holder.tv_walking.setTextColor(Color.parseColor("#000000"));
+//            holder.tv_walking.setTextColor(Color.parseColor("#000000"));
+            holder.tv_walking.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.Black, null));
 
             Glide.with(context)
                     .load(serviceCatListArrayList.get(position).getDefault_image())
@@ -86,9 +87,6 @@ public class Adapter_petlist extends RecyclerView.Adapter<Adapter_petlist.MyView
                     Log.i("value["+print+"]",""+serviceCatListArrayList.get(print).isTick_value());
                 }
                 notifyDataSetChanged();
-
-              search_basic.GotoAdvancedSearched(serviceCatListArrayList.get(position).getJsondata());
-
             }
         });
     }

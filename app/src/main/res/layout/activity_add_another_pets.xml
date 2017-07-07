@@ -268,7 +268,7 @@
                         android:background="@color/gray_project" />
                 </RelativeLayout>
                 <RelativeLayout
-                    android:id="@+id/RL_petSize"
+                    android:id="@+id/RL_petBreed"
                     android:layout_width="0dp"
                     android:onClick="onClick"
                     android:layout_marginLeft="5dp"
@@ -279,10 +279,10 @@
                         android:id="@+id/T6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/pet_size" />
+                        android:text="@string/breed" />
 
                     <com.happywannyan.Font.SFNFTextView
-                        android:id="@+id/TXT_petsize"
+                        android:id="@+id/TXT_petbreed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/T6"
@@ -311,7 +311,7 @@
                 </RelativeLayout>
             </LinearLayout>
             <RelativeLayout
-                android:id="@+id/RL_breed"
+                android:id="@+id/RL_petSize"
                 android:onClick="onClick"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -321,14 +321,15 @@
                     android:id="@+id/A1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/breed" />
+                    android:text="@string/pet_size"
+                    />
 
                 <com.happywannyan.Font.SFNFTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/A1"
                     android:paddingBottom="10dp"
-                    android:id="@+id/TXT_breed"
+                    android:id="@+id/TXT_petsize"
                     android:paddingTop="5dp"
                     android:hint="@string/select"
                     android:textColor="@color/Black" />
@@ -451,7 +452,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/next"
+                android:text="@string/save"
                 android:textAllCaps="true"
                 android:textColor="@color/colorwhite"
                 android:textSize="18sp" />

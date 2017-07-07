@@ -57,7 +57,12 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
             holder.tv_year.setText(data.getOtherinfo().getJSONObject(1).getString("show_name"));
             holder.tv_month.setText(data.getOtherinfo().getJSONObject(2).getString("show_name"));
             holder.tv_gender.setText(data.getOtherinfo().getJSONObject(3).getString("show_name"));
-            holder.tv_size.setText(data.getOtherinfo().getJSONObject(4).getString("show_name"));
+            holder.tv_breed_value.setText(data.getOtherinfo().getJSONObject(4).getString("show_name"));
+            holder.tv_size.setText(data.getOtherinfo().getJSONObject(5).getString("show_name"));
+            holder.tv_spayed_or_neutered_value.setText(data.getOtherinfo().getJSONObject(7).getString("show_name"));
+            holder.tv_friendly_value.setText(data.getOtherinfo().getJSONObject(7).getString("show_name"));
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -100,7 +105,9 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView img_view,img_edit,img_delete;
         SFNFTextView tv_name,tv_type;
-        SFNFBoldTextView tv_year,tv_month,tv_gender,tv_size;
+        SFNFBoldTextView tv_year,tv_month,tv_gender,tv_size,tv_breed_value,tv_spayed_or_neutered_value,tv_friendly_value;
+
+
         public MyViewHolder(View itemView) {
             super(itemView);
             img_view= (ImageView) itemView.findViewById(R.id.img_view);
@@ -113,6 +120,10 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
             tv_month= (SFNFBoldTextView) itemView.findViewById(R.id.tv_month);
             tv_gender= (SFNFBoldTextView) itemView.findViewById(R.id.tv_gender);
             tv_size= (SFNFBoldTextView) itemView.findViewById(R.id.tv_size);
+            tv_breed_value= (SFNFBoldTextView) itemView.findViewById(R.id.tv_breed_value);
+
+            tv_spayed_or_neutered_value= (SFNFBoldTextView) itemView.findViewById(R.id.tv_spayed_or_neutered_value);
+            tv_friendly_value= (SFNFBoldTextView) itemView.findViewById(R.id.tv_friendly_value);
         }
     }
 

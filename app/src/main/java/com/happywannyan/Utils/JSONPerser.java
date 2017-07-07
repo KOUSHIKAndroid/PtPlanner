@@ -37,6 +37,7 @@ public class JSONPerser {
 
     public void API_FOR_GET(final String URL, final ArrayList<APIPOSTDATA> apipostdata, final JSONRESPONSE jsonresponse){
 
+        Loger.MSG("URLGet",URL);
 
         new AsyncTask<Void, Void, Void>() {
 

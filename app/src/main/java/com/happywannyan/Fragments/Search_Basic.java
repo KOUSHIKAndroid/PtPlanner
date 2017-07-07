@@ -244,8 +244,7 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search_basic, container, false);
     }
 
@@ -279,10 +278,6 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
                     LL_PetServiceList.setVisibility(View.VISIBLE);
                     IMG_erase_location.setVisibility(View.VISIBLE);
 
-                    if(SearchJSON != null){
-                        searchAndIntent();
-                    }
-
                     break;
                 case 101:
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -296,6 +291,7 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
     }
 
     public void GotoAdvancedSearched(JSONObject jsondata) {
+
         JSONObject latalng = new JSONObject();
         try {
             if (place != null) {
@@ -351,7 +347,6 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
         }
     }
 
-
     public void searchAndIntent(){
 
         if (TXT_Loction.getText().toString().trim().equals("")) {
@@ -364,7 +359,6 @@ public class Search_Basic extends Fragment implements AppLocationProvider.Addres
             Intent intent = new Intent(new Intent(getActivity(), SearchResult.class));
             try {
                 JSONObject SEARCHPARAMS = new JSONObject();
-
 
                     /*
                      @@ Make JSONARRY for Next Page Serach

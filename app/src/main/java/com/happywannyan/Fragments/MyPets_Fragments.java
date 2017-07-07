@@ -20,6 +20,7 @@ import com.happywannyan.POJO.YourPets;
 import com.happywannyan.R;
 import com.happywannyan.Utils.AppLoader;
 import com.happywannyan.Utils.JSONPerser;
+import com.happywannyan.Utils.Loger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,10 +85,10 @@ public class MyPets_Fragments extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ListPets = new ArrayList<>();
 
-        GET_PETDATA(0);
+        //GET_PETDATA(0);
 
-        yourPets_adapter = new YourPets_Adapter(getActivity(), ListPets);
-        recyclerView.setAdapter(yourPets_adapter);
+        //yourPets_adapter = new YourPets_Adapter(getActivity(), ListPets);
+        //recyclerView.setAdapter(yourPets_adapter);
 
 
         view.findViewById(R.id.IMG_icon_drwaer).setOnClickListener(new View.OnClickListener() {
@@ -180,5 +181,16 @@ public class MyPets_Fragments extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Loger.MSG("DEBUG", "onResume of HomeFragment");
+        ListPets = new ArrayList<>();
+        GET_PETDATA(0);
+        yourPets_adapter = new YourPets_Adapter(getActivity(), ListPets);
+        recyclerView.setAdapter(yourPets_adapter);
     }
 }

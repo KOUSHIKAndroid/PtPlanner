@@ -32,6 +32,14 @@
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/page_titiel" />
 
+            <ImageView
+                android:id="@+id/IMG_Filter"
+                android:layout_width="54dp"
+                android:layout_height="50dp"
+                android:padding="15dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_filter" />
+
             <RelativeLayout
                 android:id="@+id/RL_Search"
                 android:layout_width="match_parent"
@@ -49,7 +57,7 @@
                     android:layout_centerInParent="true"
                     android:hint="@string/hint_search_addrres"
                     android:paddingLeft="40dp"
-                    android:singleLine="true"
+                    android:minLines="1"
                     android:paddingRight="40dp"
                     android:layout_toLeftOf="@+id/LLL"
                     android:textColor="@color/colorwhite"
