@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.happywannyan.Activities.BaseActivity;
 import com.happywannyan.Activities.SearchResult;
 import com.happywannyan.Adapter.Adapter_message;
 import com.happywannyan.Adapter.Booking_Adapter;
@@ -82,7 +83,12 @@ public class BookingFragment extends Fragment{
         view_between_current_pending_booking=view.findViewById(R.id.view_between_current_pending_booking);
         view_between_pending_past=view.findViewById(R.id.view_between_pending_past);
 
-
+        view.findViewById(R.id.IMG_icon_drwaer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseActivity) getActivity()).Menu_Drawer();
+            }
+        });
 
         APIPOSTDATA apipostdata = new APIPOSTDATA();
         apipostdata.setPARAMS("start_form");
@@ -235,8 +241,10 @@ public class BookingFragment extends Fragment{
             public void OnError(String Error, String Response) {
                 appLoader.Dismiss();
                 try {
+
                     JSONObject jsonObject=    new JSONObject(Response);
                     if(jsonObject.getInt("next_data")==0 && jsonObject.getInt("start_form")==0){
+                        recyclerView.setAdapter(null);
                         new MYAlert(getActivity()).AlertOnly(getResources().getString(R.string.app_name), Error, new MYAlert.OnlyMessage() {
                             @Override
                             public void OnOk(boolean res) {
@@ -254,6 +262,7 @@ public class BookingFragment extends Fragment{
             @Override
             public void OnError(String Error) {
                 appLoader.Dismiss();
+                recyclerView.setAdapter(null);
             }
         });
     }

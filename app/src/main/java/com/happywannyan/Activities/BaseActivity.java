@@ -24,6 +24,7 @@ import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.Fragments.BookingFragment;
 import com.happywannyan.Fragments.Favourite;
 import com.happywannyan.Fragments.MyPets_Fragments;
+import com.happywannyan.Fragments.MyProfile;
 import com.happywannyan.Fragments.Past_Sitter;
 import com.happywannyan.Fragments.Search_Basic;
 import com.happywannyan.Fragments.Message_Fragment;
@@ -148,7 +149,7 @@ Events events;
 //                startActivity(new Intent(BaseActivity.this,BookingOne.class));
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.Base_fargment_layout, new BookingFragment());
+                fragmentTransaction.replace(R.id.Base_fargment_layout, new BookingFragment());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -161,7 +162,7 @@ Events events;
 //                startActivity(new Intent(BaseActivity.this,BookingOne.class));
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.Base_fargment_layout, new Past_Sitter());
+                fragmentTransaction.replace(R.id.Base_fargment_layout, new Past_Sitter());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
@@ -184,7 +185,11 @@ Events events;
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
 
-
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.Base_fargment_layout, new MyProfile());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

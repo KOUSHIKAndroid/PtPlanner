@@ -86,7 +86,17 @@ public class JSONPerser {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 if (!isCancelled() && exception==null) {
-                    jsonresponse.OnSuccess(respose);
+
+
+                    try{
+                        if(new JSONObject(respose).getBoolean("response"))
+                        {
+                            jsonresponse.OnSuccess(respose);
+                        }else {
+                            jsonresponse.OnError(new JSONObject(respose).getString("message")+"",respose);
+                        }
+                    }catch (Exception e){}
+
 
                 }else {
                     jsonresponse.OnSuccess(exception.getMessage()+"");

@@ -169,6 +169,7 @@
                     android:gravity="center"
                     android:text="@string/adapter_your_pets_year"
                     android:textSize="12sp"
+                    android:id="@+id/tv_year_lbl"
                     android:textColor="@color/text_dark_gray"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
@@ -176,6 +177,7 @@
 
                 <com.happywannyan.Font.SFNFTextView
                     android:layout_weight="2"
+                    android:id="@+id/tv_month_lbl"
                     android:gravity="center"
                     android:text="@string/adapter_your_pets_month"
                     android:textSize="12sp"
@@ -186,6 +188,7 @@
 
                 <com.happywannyan.Font.SFNFTextView
                     android:layout_weight="1"
+                    android:id="@+id/tv_gender_lbl"
                     android:gravity="center"
                     android:text="@string/adapter_your_pets_gender"
                     android:textSize="12sp"
@@ -195,6 +198,7 @@
 
                 <com.happywannyan.Font.SFNFTextView
                     android:gravity="center"
+                    android:id="@+id/tv_size_lbl"
                     android:layout_weight="2"
                     android:text="@string/adapter_your_pets_size"
                     android:textSize="12sp"
@@ -216,7 +220,7 @@
                 android:background="@color/gray_project"/>
 
             <com.happywannyan.Font.SFNFTextView
-                android:id="@+id/tv_breed"
+                android:id="@+id/tv_breed_lbl"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_below="@id/horizontal_line_two"
@@ -231,7 +235,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_below="@id/horizontal_line_two"
-                android:layout_toRightOf="@id/tv_breed"
+                android:layout_toRightOf="@id/tv_breed_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Shetland Sheep Dog"
@@ -244,10 +248,11 @@
                 android:id="@+id/tv_spayed_or_neutered"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/tv_breed"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@id/tv_breed_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Is your dog spayed or neutered?"
+                android:text="Is your    neutered?"
                 android:textSize="12sp"
                 android:textColor="@color/text_dark_gray"/>
 
@@ -255,7 +260,8 @@
                 android:id="@+id/tv_spayed_or_neutered_value"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/tv_breed"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@id/tv_breed_lbl"
                 android:layout_toRightOf="@id/tv_spayed_or_neutered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -269,19 +275,17 @@
             <com.happywannyan.Font.SFNFTextView
                 android:id="@+id/tv_friendly"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:layout_below="@id/tv_spayed_or_neutered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Is your dog friendly with other pets?"
+                android:text="Is     other pets?"
                 android:textSize="12sp"
                 android:textColor="@color/text_dark_gray"/>
 
             <com.happywannyan.Font.SFNFBoldTextView
                 android:id="@+id/tv_friendly_value"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:layout_below="@id/tv_spayed_or_neutered"
                 android:layout_toRightOf="@id/tv_friendly"

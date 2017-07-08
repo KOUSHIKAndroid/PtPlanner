@@ -55,19 +55,49 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
 
         holder.tv_name.setText(data.getPet_name());
         try {
+            JSONArray SelectData = new JSONArray();
+            JSONArray RADIO = new JSONArray();
             JSONArray ObjectData=data.getOtherinfo().getJSONArray("other_info");
+            for(int i=0;i<ObjectData.length();i++){
+                if(ObjectData.getJSONObject(i).getString("input_field_type").equals("3"))
+                    SelectData.put(ObjectData.getJSONObject(i));
+                if(ObjectData.getJSONObject(i).getString("input_field_type").equals("5"))
+                    RADIO.put(ObjectData.getJSONObject(i));
+            }
+
+            holder.tv_year.setText(SelectData.getJSONObject(0).getString("show_name"));
+            holder.tv_year_lbl.setText(SelectData.getJSONObject(0).getString("input_name"));
+            holder.tv_month.setText(SelectData.getJSONObject(1).getString("show_name"));
+            holder.tv_month_lbl.setText(SelectData.getJSONObject(1).getString("input_name"));
+            holder.tv_gender.setText(SelectData.getJSONObject(2).getString("show_name"));
+            holder.tv_gender_lbl.setText(SelectData.getJSONObject(2).getString("input_name"));
+            holder.tv_size.setText(SelectData.getJSONObject(3).getString("show_name"));
+            holder.tv_size_lbl.setText(SelectData.getJSONObject(3).getString("input_name"));
+            if(SelectData!=null && SelectData.length()>4)
+            {
+                holder.tv_breed_value.setText(SelectData.getJSONObject(4).getString("show_name"));
+                holder.tv_breed_lbl.setText(SelectData.getJSONObject(4).getString("input_name"));
+            }else {
+                holder.tv_breed_value.setVisibility(View.GONE);
+                holder.tv_breed_lbl.setVisibility(View.GONE);
+            }
 
             holder.tv_type.setText(ObjectData.getJSONObject(0).getString("show_name"));
-            holder.tv_year.setText(ObjectData.getJSONObject(1).getString("show_name"));
-            holder.tv_month.setText(ObjectData.getJSONObject(2).getString("show_name"));
-            holder.tv_gender.setText(ObjectData.getJSONObject(3).getString("show_name"));
-            holder.tv_breed_value.setText(ObjectData.getJSONObject(4).getString("show_name"));
-            holder.tv_size.setText(ObjectData.getJSONObject(5).getString("show_name"));
-            holder.tv_spayed_or_neutered_value.setText(ObjectData.getJSONObject(7).getString("show_name"));
-            if(ObjectData.length()>7)
-            holder.tv_friendly_value.setText(ObjectData.getJSONObject(8).getString("show_name"));
-            else
+            if(RADIO!=null &&RADIO.getJSONObject(0)!=null) {
+                holder.tv_spayed_or_neutered_value.setText(RADIO.getJSONObject(0).getString("show_name"));
+                holder.tv_spayed_or_neutered.setText(RADIO.getJSONObject(0).getString("input_name"));
+            }else {
+                holder.tv_spayed_or_neutered_value.setVisibility(View.GONE);
+                holder.tv_spayed_or_neutered.setVisibility(View.GONE);
+            }
+            if(RADIO!=null && RADIO.length()>1 && RADIO.getJSONObject(1)!=null) {
+                holder.tv_friendly_value.setText(RADIO.getJSONObject(1).getString("show_name"));
+                holder.tv_friendly.setText(RADIO.getJSONObject(1).getString("input_name"));
+            }
+            else {
                 holder.tv_friendly_value.setVisibility(View.GONE);
+                holder.tv_friendly.setVisibility(View.GONE);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -120,7 +150,7 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView img_view,img_edit,img_delete;
-        SFNFTextView tv_name,tv_type;
+        SFNFTextView tv_name,tv_type,tv_year_lbl,tv_month_lbl,tv_gender_lbl,tv_size_lbl,tv_breed_lbl,tv_spayed_or_neutered,tv_friendly;
         SFNFBoldTextView tv_year,tv_month,tv_gender,tv_size,tv_breed_value,tv_spayed_or_neutered_value,tv_friendly_value;
 
 
@@ -131,6 +161,14 @@ public class YourPets_Adapter extends RecyclerView.Adapter<YourPets_Adapter.MyVi
             img_delete= (ImageView) itemView.findViewById(R.id.img_delete);
 
             tv_name= (SFNFTextView) itemView.findViewById(R.id.tv_name);
+            tv_spayed_or_neutered= (SFNFTextView) itemView.findViewById(R.id.tv_spayed_or_neutered);
+            tv_friendly= (SFNFTextView) itemView.findViewById(R.id.tv_friendly);
+            tv_year_lbl= (SFNFTextView) itemView.findViewById(R.id.tv_year_lbl);
+            tv_month_lbl= (SFNFTextView) itemView.findViewById(R.id.tv_month_lbl);
+            tv_gender_lbl= (SFNFTextView) itemView.findViewById(R.id.tv_gender_lbl);
+            tv_size_lbl= (SFNFTextView) itemView.findViewById(R.id.tv_size_lbl);
+            tv_breed_lbl= (SFNFTextView) itemView.findViewById(R.id.tv_breed_lbl);
+
             tv_type= (SFNFTextView) itemView.findViewById(R.id.tv_type);
             tv_year= (SFNFBoldTextView) itemView.findViewById(R.id.tv_year);
             tv_month= (SFNFBoldTextView) itemView.findViewById(R.id.tv_month);
