@@ -9,7 +9,14 @@ import android.view.View;
 import com.happywannyan.OnFragmentInteractionListener;
 import com.happywannyan.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class BookingOne extends AppCompatActivity implements View.OnClickListener,OnFragmentInteractionListener {
+
+    public String ServiceList;
+    public String PRESelectService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +24,16 @@ public class BookingOne extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_booking_one);
         findViewById(R.id.IMG_icon_back).setOnClickListener(this);
 
+
+        try {
+            ServiceList=getIntent().getStringExtra("LIST");
+            PRESelectService=getIntent().getStringExtra("SELECT");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.Body,BookingFragmnetOne.newInstance(null,null));
+        fragmentTransaction.add(R.id.Body,BookingFragmnetOne.newInstance(ServiceList,PRESelectService));
         fragmentTransaction.disallowAddToBackStack().commit();
 
 

@@ -273,7 +273,15 @@ public class ProfileDetails extends AppCompatActivity implements View.OnClickLis
         reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileDetails.this, BookingOne.class));
+                Intent intent=new Intent(ProfileDetails.this, BookingOne.class);
+                try {
+                    intent.putExtra("LIST",""+new JSONObject(JSONRESPONSE).getJSONObject("info_array").getJSONArray("servicelist"));
+                    intent.putExtra("SELECT","NA");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                startActivity(intent);
             }
         });
 
