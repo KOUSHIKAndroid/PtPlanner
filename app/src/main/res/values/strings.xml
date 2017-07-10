@@ -116,7 +116,9 @@
     <string name="ic_vector_favourite_delete">Delete</string>
     <string name="next">Next</string>
     <string name="FirestName">First Name</string>
+    <string name="FirestName_photo">First Name (Phonetic)</string>
     <string name="LastName">Last Name</string>
+    <string name="LastName_photo">Last Name (Phonetic)</string>
     <string name="letthesitter">Let the sitter know your prefered time (Optional)</string>
     <string name="noofnight"># of Nights</string>
     <string name="noofpet"># of Pets</string>
