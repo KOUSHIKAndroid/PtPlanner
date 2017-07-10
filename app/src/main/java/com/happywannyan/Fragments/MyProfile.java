@@ -34,6 +34,7 @@ import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.APIPOSTDATA;
 import com.happywannyan.R;
+import com.happywannyan.Utils.AppLoader;
 import com.happywannyan.Utils.CircleTransform;
 import com.happywannyan.Utils.ImageFilePath;
 import com.happywannyan.Utils.JSONPerser;
@@ -76,7 +77,9 @@ public class MyProfile extends Fragment {
     private OnFragmentInteractionListener mListener;
     JSONObject UserInfo;
     Place place;
-CheckBox Check;
+    CheckBox Check;
+    AppLoader Loader;
+
     public MyProfile() {
         // Required empty public constructor
     }
@@ -136,6 +139,8 @@ CheckBox Check;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new AppContsnat(getActivity());
+        Loader=new AppLoader(getActivity());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -151,25 +156,25 @@ CheckBox Check;
 
 
     @Override
-    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.IMG_icon_drwaer).setOnClickListener(new View.OnClickListener() {
+    public void onViewCreated(final View Mview, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(Mview, savedInstanceState);
+        Mview.findViewById(R.id.IMG_icon_drwaer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((BaseActivity) getActivity()).Menu_Drawer();
             }
         });
 
-        Check=(CheckBox)view.findViewById(R.id.Checked);
-        ProfileImg = (ImageView) view.findViewById(R.id.IMG_Profile);
+        Check = (CheckBox) Mview.findViewById(R.id.Checked);
+        ProfileImg = (ImageView) Mview.findViewById(R.id.IMG_Profile);
         ProfileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPhotoDialog();
             }
         });
-        TXT_Loction = (SFNFTextView) view.findViewById(R.id.TXT_Address);
-        view.findViewById(R.id.TXT_Address).setOnClickListener(new View.OnClickListener() {
+        TXT_Loction = (SFNFTextView) Mview.findViewById(R.id.TXT_Address);
+        TXT_Loction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -187,21 +192,22 @@ CheckBox Check;
                 }
             }
         });
-
+        Loader.Show();
         new JSONPerser().API_FOR_GET(AppContsnat.BASEURL + "app_users_about?user_id=" + AppContsnat.UserId, new ArrayList<APIPOSTDATA>(), new JSONPerser.JSONRESPONSE() {
             @Override
             public void OnSuccess(String Result) {
                 try {
+                    Loader.Dismiss();
                     JSONObject Ob = new JSONObject(Result);
                     UserInfo = Ob.getJSONObject("users_information");
                     Glide.with(getActivity()).load(UserInfo.getString("photo")).transform(new CircleTransform(getActivity())).into(ProfileImg);
-                    ((EditText) view.findViewById(R.id.EDX_FNAME)).setText(UserInfo.getString("firstname"));
-                    ((EditText) view.findViewById(R.id.EDX_Lname)).setText(UserInfo.getString("lastname"));
-                    ((EditText) view.findViewById(R.id.EDX_F_FName)).setText(UserInfo.getString("firstname_phonetic"));
-                    ((EditText) view.findViewById(R.id.EDX_F_LName)).setText(UserInfo.getString("lastname_phonetic"));
-                    ((EditText) view.findViewById(R.id.EDX_Phone)).setText(UserInfo.getString("mobilenum"));
-                    ((SFNFTextView) view.findViewById(R.id.TXT_Address)).setText(UserInfo.getString("address"));
-                    ((SFNFTextView) view.findViewById(R.id.TXT_Country_Code)).setText(UserInfo.getString("phone_code"));
+                    ((EditText) Mview.findViewById(R.id.EDX_FNAME)).setText(UserInfo.getString("firstname"));
+                    ((EditText) Mview.findViewById(R.id.EDX_Lname)).setText(UserInfo.getString("lastname"));
+                    ((EditText) Mview.findViewById(R.id.EDX_F_FName)).setText(UserInfo.getString("firstname_phonetic"));
+                    ((EditText) Mview.findViewById(R.id.EDX_F_LName)).setText(UserInfo.getString("lastname_phonetic"));
+                    ((EditText) Mview.findViewById(R.id.EDX_Phone)).setText(UserInfo.getString("mobilenum"));
+                    ((SFNFTextView) Mview.findViewById(R.id.TXT_Address)).setText(UserInfo.getString("address"));
+                    ((SFNFTextView) Mview.findViewById(R.id.TXT_Country_Code)).setText(UserInfo.getString("phone_code"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -209,21 +215,22 @@ CheckBox Check;
 
             @Override
             public void OnError(String Error, String Response) {
-
+                Loader.Dismiss();
             }
 
             @Override
             public void OnError(String Error) {
-
+                Loader.Dismiss();
             }
         });
 
 
-        view.findViewById(R.id.Card_submit).setOnClickListener(new View.OnClickListener() {
+        Mview.findViewById(R.id.Card_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(Check.isChecked()) {
+                if (Check.isChecked()) {
+                    Loader.Show();
                     try {
                         Iterator it = UserInfo.keys(); //gets all the keys
                         while (it.hasNext()) {
@@ -231,45 +238,70 @@ CheckBox Check;
                             String value = (String) UserInfo.get(key); // get value
                             switch (key) {
                                 case "firstname":
-                                    UserInfo.put(key, "" + ((EditText) view.findViewById(R.id.EDX_FNAME)).getText());
+                                    UserInfo.put(key, "" + ((EditText) Mview.findViewById(R.id.EDX_FNAME)).getText());
                                     break;
                                 case "lastname":
-                                    UserInfo.put(key, "" + ((EditText) view.findViewById(R.id.EDX_Lname)).getText());
+                                    UserInfo.put(key, "" + ((EditText) Mview.findViewById(R.id.EDX_Lname)).getText());
                                     break;
                                 case "firstname_phonetic":
-                                    UserInfo.put(key, "" + ((EditText) view.findViewById(R.id.EDX_F_FName)).getText());
+                                    UserInfo.put(key, "" + ((EditText) Mview.findViewById(R.id.EDX_F_FName)).getText());
                                     break;
                                 case "lastname_phonetic":
-                                    UserInfo.put(key, "" + ((EditText) view.findViewById(R.id.EDX_F_LName)).getText());
+                                    UserInfo.put(key, "" + ((EditText) Mview.findViewById(R.id.EDX_F_LName)).getText());
                                     break;
                                 case "address":
-                                    UserInfo.put(key, "" + ((EditText) view.findViewById(R.id.TXT_Address)).getText());
+                                    UserInfo.put(key, "" + ((SFNFTextView) Mview.findViewById(R.id.TXT_Address)).getText());
                                     break;
                                 case "lat_addr":
-                                    if (!value.equals("" + place.getLatLng().latitude))
+                                    if (place !=null  && !value.equals("" + place.getLatLng().latitude))
                                         UserInfo.put(key, "" + place.getLatLng().latitude);
                                     break;
                                 case "long_addr":
-                                    if (!value.equals("" + place.getLatLng().longitude))
+                                    if (place !=null  &&!value.equals("" + place.getLatLng().longitude))
                                         UserInfo.put(key, "" + place.getLatLng().longitude);
                                     break;
                                 case "mobilenum":
-                                    UserInfo.put(key, "" + ((EditText) view.findViewById(R.id.EDX_Phone)).getText());
+                                    UserInfo.put(key, "" + ((EditText) Mview.findViewById(R.id.EDX_Phone)).getText());
                                     break;
 
                             }
 
                         }
 
-                        ArrayList<APIPOSTDATA> Params=new ArrayList<APIPOSTDATA>();
-                        APIPOSTDATA Post=new APIPOSTDATA();
-                        Post.setPARAMS("");
+                        ArrayList<APIPOSTDATA> Params = new ArrayList<APIPOSTDATA>();
+                        APIPOSTDATA Post = new APIPOSTDATA();
+                        Post.setPARAMS("user_id");
+                        Post.setValues(AppContsnat.UserId);
+                        Post = new APIPOSTDATA();
+                        Post.setPARAMS("lang_id");
+                        Post.setValues(AppContsnat.Language);
+                        Post = new APIPOSTDATA();
+                        Post.setPARAMS("user_info");
+                        Post.setValues(UserInfo.toString());
+                        ArrayList<File>Photos=new ArrayList<File>();
+                        Photos.add(photofile);
+                        new JSONPerser().API_FOR_With_Photo_POST(AppContsnat.BASEURL + "app_users_edit", Params, Photos, new JSONPerser.JSONRESPONSE() {
+                            @Override
+                            public void OnSuccess(String Result) {
+                                Loader.Dismiss();
+                            }
+
+                            @Override
+                            public void OnError(String Error, String Response) {
+                                Loader.Dismiss();
+                            }
+
+                            @Override
+                            public void OnError(String Error) {
+                                Loader.Dismiss();
+                            }
+                        });
 
                         Loger.MSG("@@ 888", UserInfo.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
 //                    Write Alert Validation
                 }
             }
@@ -311,7 +343,7 @@ CheckBox Check;
             Uri selectedImageURI = data.getData();
             try {
                 photofile = new File(ImageFilePath.getPath(getApplicationContext(), selectedImageURI));
-                Glide.with(getApplicationContext()).load(photofile).into(ProfileImg);
+                Glide.with(getApplicationContext()).load(photofile).transform(new CircleTransform(getActivity())).into(ProfileImg);
             } catch (Exception e) {
                 e.printStackTrace();
             }
