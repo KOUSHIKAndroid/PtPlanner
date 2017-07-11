@@ -115,7 +115,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.FacebookActivity" />
-        <activity android:name=".SitterBooking.BookingOne" />
+        <activity android:name=".SitterBooking.BookingOne"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".Activities.SearchResult"
             android:label="@string/title_activity_search_result"

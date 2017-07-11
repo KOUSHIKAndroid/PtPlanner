@@ -272,12 +272,15 @@ public class MyProfile extends Fragment {
                         APIPOSTDATA Post = new APIPOSTDATA();
                         Post.setPARAMS("user_id");
                         Post.setValues(AppContsnat.UserId);
+                        Params.add(Post);
                         Post = new APIPOSTDATA();
                         Post.setPARAMS("lang_id");
                         Post.setValues(AppContsnat.Language);
+                        Params.add(Post);
                         Post = new APIPOSTDATA();
                         Post.setPARAMS("user_info");
-                        Post.setValues(UserInfo.toString());
+                        Post.setValues(new JSONObject().put("users_information",UserInfo).toString());
+                        Params.add(Post);
                         ArrayList<File>Photos=new ArrayList<File>();
                         Photos.add(photofile);
                         new JSONPerser().API_FOR_With_Photo_POST(AppContsnat.BASEURL + "app_users_edit", Params, Photos, new JSONPerser.JSONRESPONSE() {
@@ -297,7 +300,7 @@ public class MyProfile extends Fragment {
                             }
                         });
 
-                        Loger.MSG("@@ 888", UserInfo.toString());
+                        Loger.MSG("@@ 888", new JSONObject().put("users_information",UserInfo).toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

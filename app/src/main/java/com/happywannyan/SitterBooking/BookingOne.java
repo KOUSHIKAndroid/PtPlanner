@@ -71,6 +71,11 @@ public class BookingOne extends AppCompatActivity implements View.OnClickListene
                 fragmentTransaction.replace(R.id.Body,BookingFrgamnetThree.newInstance(null,null));
                 fragmentTransaction.addToBackStack(null).commit();
                 break;
+            case "foure":
+                 fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.Body,BookingFragmentFoure.newInstance(null,null));
+                fragmentTransaction.addToBackStack(null).commit();
+                break;
 
         }
     }

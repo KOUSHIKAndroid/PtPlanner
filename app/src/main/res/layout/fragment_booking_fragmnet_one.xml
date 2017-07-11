@@ -43,8 +43,9 @@
             android:background="@color/gray_project"/>
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/RL_DATECHOSER"
+        android:orientation="vertical"
         android:layout_below="@+id/RL_ChoseCat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -205,14 +206,54 @@
                 android:background="@color/gray_project" />
 
         </RelativeLayout>
-    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RL_ExtraDropDown"
+            android:layout_below="@+id/LL_S_F"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingLeft="30dp"
+            android:visibility="visible"
+            android:layout_marginTop="20dp"
+            android:paddingRight="30dp">
+
+
+
+
+            <com.happywannyan.Font.SFNFTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/T5"
+                android:id="@+id/TXT_ExtarItem"
+                android:paddingBottom="15dp"
+                android:hint="@string/slectDate"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/h1_label" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="15dp"
+                android:layout_above="@+id/T5"
+                android:src="@drawable/ic_arrow_black" />
+
+            <View
+                android:id="@+id/T5"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray_project" />
+
+        </RelativeLayout>
+    </LinearLayout>
 
     <com.happywannyan.Font.SFNFBoldTextView
         android:id="@+id/TXT_Price"
         android:layout_width="wrap_content"
         android:layout_below="@+id/RL_DATECHOSER"
         android:layout_centerHorizontal="true"
-        android:paddingTop="150dp"
+        android:paddingTop="100dp"
         android:textSize="24sp"
         android:textColor="@color/btn_red"
         android:layout_height="wrap_content" />
