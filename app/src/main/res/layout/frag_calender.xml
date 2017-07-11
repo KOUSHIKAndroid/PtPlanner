@@ -188,6 +188,24 @@
                         android:textColor="#FFFFFF"
                         android:textSize="17sp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Offline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/calbtnbg1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.ptplanner.customviews.TitilliumLight
+                        android:id="@+id/txt_Offline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/offlinemode"
+                        android:textColor="#FFFFFF"
+                        android:textSize="17sp" />
+                </LinearLayout>
             </LinearLayout>
 
 

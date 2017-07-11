@@ -36,6 +36,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.ptplanner.K_DataBase.Database;
+import com.ptplanner.K_DataBase.LocalDataResponse;
+import com.ptplanner.K_DataBase.OFFLineDataSave;
 import com.ptplanner.LandScreenActivity;
 import com.ptplanner.LoginActivity;
 import com.ptplanner.R;
@@ -57,6 +60,7 @@ import com.ptplanner.dialog.ShowCalendarPopUp;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.AppController;
 import com.ptplanner.helper.ConnectionDetector;
+import com.ptplanner.helper.PtpLoader;
 import com.ptplanner.helper.ReturnCalendarDetails;
 
 import org.json.JSONArray;
@@ -107,6 +111,7 @@ public class CalenderFragment extends Fragment {
     SharedPreferences sharedPreferences;
     ShowCalendarPopUp showCalPopup;
     String saveString = "";
+    PtpLoader Loader;
     // -- Calendar Instance
 
     //    int currentYear, currentMonth, currentDay, currentDate, firstDayPosition;
@@ -132,7 +137,7 @@ public class CalenderFragment extends Fragment {
     AlarmManager alarmManager;
     MyReceiver myReceiver;
     LandScreenActivity activity;
-    LinearLayout appointmentButton, progressButton;
+    LinearLayout appointmentButton, progressButton,Offline;
     RelativeLayout messageButton;
     Context context;
 
@@ -143,9 +148,7 @@ public class CalenderFragment extends Fragment {
     SharedPreferences userId;
     SharedPreferences dateSavePreference, dateSaveCalendarPopUP;
 
-    /*
-    New addition by bodhi for left and right navigation
-     */
+
 
     RelativeLayout navigation_left, navigation_right;
 
@@ -163,6 +166,7 @@ public class CalenderFragment extends Fragment {
         ///////////////////////////////////////////////////////////////////////////
         fView = inflater.inflate(R.layout.frag_calender, container, false);
 
+        Loader=new PtpLoader(getActivity());
 
         ////////////////////////////////////////////////
         String languageToLoad = AppConfig.LANGUAGE;
@@ -179,6 +183,7 @@ public class CalenderFragment extends Fragment {
         rlTraining = (LinearLayout) fView.findViewById(R.id.rl_training);
         rlDiet = (LinearLayout) fView.findViewById(R.id.rl_diet);
         rlDiary = (LinearLayout) fView.findViewById(R.id.rl_diary);
+        Offline = (LinearLayout) fView.findViewById(R.id.Offline);
         appointment = (RelativeLayout) fView.findViewById(R.id.appointment);
 
         progressDialog = new ProgressDialog(getActivity());
@@ -274,6 +279,29 @@ public class CalenderFragment extends Fragment {
         });
 
 
+        Offline.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Loader.Show();
+                Log.d("@@ Date-",PAGE_DATE+"jj");
+                new OFFLineDataSave(getActivity()) {
+                    @Override
+                    public void OnsaveSucess(String Response) {
+                        Log.d("@@ KDIARY",Response);
+                        Loader.Dismiss();
+
+                    }
+
+                    @Override
+                    public void OnsaveError(String Error) {
+                        Log.d("@@ KDIARY Err",Error);
+                        Loader.Dismiss();
+                    }
+                }.SaveDiary(PAGE_DATE);
+            }
+        });
+
+
         if (connectionDetector.isConnectingToInternet()) {
             try {
                 if (AppConfig.changeDate.equalsIgnoreCase("")) {
@@ -351,15 +379,38 @@ public class CalenderFragment extends Fragment {
                 etex.printStackTrace();
             }
         } else {
-            new AlertDialog.Builder(getActivity())
-                    .setMessage(getResources().getString(R.string.no_internet))
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
-            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+            /*
+            @Koushik
+            Offline Handling here?
+             */
+            final Calendar c = Calendar.getInstance();
+            AppConfig.calendar = c;
+
+            AppConfig.currentDate = c.get(Calendar.DATE);
+            AppConfig.currentDay = c.getActualMinimum(Calendar.DAY_OF_MONTH);
+            AppConfig.currentMonth = (c.get(Calendar.MONTH));
+            AppConfig.currentYear = c.get(Calendar.YEAR);
+            AppConfig.firstDayPosition = c.get(Calendar.DAY_OF_WEEK);
+
+            txtDay.setText("" + dayFormat.format(c.getTime()));
+            txtMonth.setText("" + monthFormat.format(c.getTime()));
+            date = "" + dateFormat.format(c.getTime());
+
+            Log.d("@@ OFLINE DATE- ",date);
+
+
+            Offline.setVisibility(View.GONE);
+            PAGE_OFFLINEDATASHOW(date);
+
+//            new AlertDialog.Builder(getActivity())
+//                    .setMessage(getResources().getString(R.string.no_internet))
+//                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    }).show();
+//            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
         // -- Shared Preference
@@ -408,109 +459,6 @@ public class CalenderFragment extends Fragment {
         timePicker.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
         timePicker.setCurrentMinute(now.get(Calendar.MINUTE));
 
-//        dialogRemindme.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//                // TODO Auto-generated method stub
-//                dialog.show();
-//
-//                done.setOnClickListener(new OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View arg0) {
-//                        // TODO Auto-generated method stub
-//
-//                        String month = "", day = "";
-//
-//                        mDay = datePicker.getDayOfMonth();
-//                        mMonth = datePicker.getMonth() + 1;
-//                        mYear = datePicker.getYear();
-//
-//                        mHour = timePicker.getCurrentHour();
-//                        mMinute = timePicker.getCurrentMinute();
-//
-//                        if (mDay < 10) {
-//                            day = "0" + mDay;
-//                        } else {
-//                            day = "" + mDay;
-//                        }
-//                        if (mMonth < 10) {
-//                            month = "0" + mMonth;
-//                        } else {
-//                            month = "" + mMonth;
-//                        }
-//
-//                        if (mHour > 12) {
-//                            hour = "0" + (mHour - 12);
-//                            type = "pm";
-//                        } else {
-//                            hour = "0" + mHour;
-//                            type = "am";
-//                        }
-//
-//                        String dateAndTime = mDay + "/" + mMonth + "  " + mHour + ":" + mMinute;
-//
-//                        Date convertedDate = new Date();
-//
-//
-//                        try {
-//                            convertedDate = dateFormatDialog.parse(dateAndTime);
-//                        } catch (ParseException e) {
-//                            // TODO Auto-generated catch block
-//                            e.printStackTrace();
-//                        }
-//
-//                        ////       txtRemindme.setText("" + targetDateFormat.format(convertedDate));
-//
-//                        Calendar current = Calendar.getInstance();
-//
-//                        Calendar cal = Calendar.getInstance();
-//                        cal.set(datePicker.getYear(),
-//                                datePicker.getMonth(),
-//                                datePicker.getDayOfMonth(),
-//                                timePicker.getCurrentHour(),
-//                                timePicker.getCurrentMinute(),
-//                                00);
-//
-//                        if (cal.compareTo(current) <= 0 || cal.compareTo(current) > 0) {
-//                            Toast.makeText(getActivity(), "Ogiltig Date/Tid", Toast.LENGTH_LONG).show();
-//
-//                            txtRemindme.setText(getResources().getString(R.string.reminder_dialog_remindme));
-//                        } else {
-//                            txtRemindme.setText("" + targetDateFormat.format(convertedDate));
-//                            setOneTimeAlarm(cal);
-//                        }
-//
-//
-//                        try {
-//                            Editor editor = sharedPreferences.edit();
-//                            editor.putString("dateTime", "" + targetDateFormat.format(convertedDate));
-//                            editor.commit();
-//                        } catch (Exception e) {
-//                            Log.i("Shared exc", e.toString());
-//                        }
-//
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                cancel.setOnClickListener(new OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View arg0) {
-//                        // TODO Auto-generated method stub
-//                        txtRemindme.setText(getResources().getString(R.string.reminder_dialog_remindme));
-//                        Editor editor = sharedPreferences.edit();
-//                        editor.clear();
-//                        editor.commit();
-//                        dialog.dismiss();
-//
-//                        AppController.setIsAlermSet("NO");
-//                    }
-//                });
-//            }
-//        });
 
         appointment.setOnClickListener(new OnClickListener() {
             @Override
@@ -521,11 +469,6 @@ public class CalenderFragment extends Fragment {
                     DateFormat targetFormatToday = new SimpleDateFormat("yyyy-MM-dd");
                     Date todayDate = null;
 
-//                        todayDate = originalFormatToday.parse(getArguments().getString("DateChange"));
-//                        todayDate = originalFormatToday.parse(date);
-
-//                        String formattedDate = targetFormatToday.format(todayDate);
-//                        bundle.putString("DateChange", formattedDate);
                     bundle.putString("DateChange", PAGE_DATE);
                     Log.i("@ko : Try try ", PAGE_DATE);
 
@@ -666,6 +609,256 @@ public class CalenderFragment extends Fragment {
         return fView;
     }
 
+    private void PAGE_OFFLINEDATASHOW(String date) {
+        new Database(getActivity()).GET_Caleder_Frag_Fetails(date, new LocalDataResponse() {
+            @Override
+            public void OnSuccess(String Response) {
+                JSONObject jOBJ = null;
+                try {
+                    jOBJ = new JSONObject(Response);
+
+                    Log.d("@@ OFLINE data- ",Response);
+
+                    allEventsDatatype = new AllEventsDatatype(jOBJ.getString("total_meal"),
+                            jOBJ.getString("total_appointment"),
+                            jOBJ.getString("diary_text"),
+                            jOBJ.getString("total_training_exercises"),
+                            jOBJ.getString("total_training_exercise_finished"),
+                            jOBJ.getString("total_training_programs"),
+                            jOBJ.getString("total_training_programs_finished"));
+                    allEventsDatatype.setNextBookingTime(jOBJ.getString("lowest_book_time"));
+                    JSONArray jsonArray = jOBJ.getJSONArray("all_exercises");
+
+
+                    // if(jsonArray.length() > 0) {
+                    AppConfig.allExercisesDataTypeArrayList = new ArrayList<AllExercisesDataType>();
+                    AppConfig.exerciseSetsDataypeArrayList = new ArrayList<ExerciseSetsDataype>();
+
+                    for (int j = 0; j < jsonArray.length(); j++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(j);
+                        try {
+                            JSONArray jArr = jsonObject.getJSONArray("exercise_sets");
+                            if (jArr.length() > 0) {
+                                for (int k = 0; k < jArr.length(); k++) {
+                                    JSONObject jObject = jArr.getJSONObject(k);
+                                    ExerciseSetsDataype exerciseSetsDataype = new ExerciseSetsDataype(
+                                            jObject.getString("reps"),
+                                            jObject.getString("kg")
+                                    );
+                                    AppConfig.exerciseSetsDataypeArrayList.add(exerciseSetsDataype);
+                                }
+                            }
+                        } catch (Exception ex) {
+                            Log.i("exercise_sets", ex.toString());
+                        }
+                        AllExercisesDataType allExercisesDataType = new AllExercisesDataType(
+                                jsonObject.getString("user_program_id"),
+                                jsonObject.getString("exercise_id"),
+                                jsonObject.getString("exercise_title"),
+                                jsonObject.getString("instruction"),
+                                AppConfig.exerciseSetsDataypeArrayList
+                        );
+                        AppConfig.allExercisesDataTypeArrayList.add(allExercisesDataType);
+                    }
+                    if(jOBJ.getString("training_enable").equals("N")) {
+                        rlTraining.setVisibility(View.GONE);
+                        fView.findViewById(R.id.DIV_1).setVisibility(View.GONE);
+                    }else {
+                        rlTraining.setVisibility(View.VISIBLE);
+                        fView.findViewById(R.id.DIV_1).setVisibility(View.VISIBLE);
+                    }
+                    if(jOBJ.getString("meal_enable").equals("N")) {
+                        rlDiet.setVisibility(View.GONE);
+                        fView.findViewById(R.id.DIV_2).setVisibility(View.GONE);
+                    }else {
+                        rlDiet.setVisibility(View.VISIBLE);
+                        fView.findViewById(R.id.DIV_2).setVisibility(View.VISIBLE);
+                    }
+                    if(jOBJ.getString("diary_enable").equals("N")) {
+                        rlDiary.setVisibility(View.GONE);
+                        fView.findViewById(R.id.DIV_3).setVisibility(View.GONE);
+
+                    }else {
+                        rlDiary.setVisibility(View.VISIBLE);
+                        fView.findViewById(R.id.DIV_3).setVisibility(View.VISIBLE);
+                    }
+                    if (!allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")) {
+                        dialogRemindme.setVisibility(View.VISIBLE);
+                    } else {
+                        dialogRemindme.setVisibility(View.GONE);
+
+                    }
+
+
+                    /////////////////////////////////////////////////////////
+                    appointmentButton.setClickable(true);
+                    appointmentButton.setEnabled(true);
+                    messageButton.setClickable(true);
+                    messageButton.setEnabled(true);
+                    progressButton.setClickable(true);
+                    progressButton.setEnabled(true);
+
+                    if (!allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")) {
+//                    ***************** ALERM SET FROM NEXT BOOKING  DTIME IF YES*********
+
+                        DateFormat JSONDFORMAT = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        Date JSONDATE_NEXTALERM = null;
+
+                        Calendar Temp = Calendar.getInstance();
+                        try {
+                            JSONDATE_NEXTALERM = JSONDFORMAT.parse(allEventsDatatype.getNextBookingTime());
+                            Log.i("@@ NEXT SELF CH "," "+allEventsDatatype.getNextBookingTime());
+                            Temp.setTime(JSONDATE_NEXTALERM);
+                            mDay = Temp.get(Calendar.DAY_OF_MONTH);
+                            mMonth = Temp.get(Calendar.MONTH) + 1;
+                            mYear = Temp.get(Calendar.YEAR);
+                            mHour = Temp.get(Calendar.HOUR);
+                            mMinute = Temp.get(Calendar.MINUTE);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        String dateAndTime = mDay + "/" + mMonth + "  " + mHour + ":" + mMinute;
+                        String[] MainString=allEventsDatatype.getNextBookingTime().split(" ");
+                        String[] Time=MainString[1].split(":");
+
+
+                        Date convertedDate = new Date();
+                        try {
+                            String TimeTakeTemp=Time[0]+":"+Time[1];
+
+
+
+                            Editor editor = sharedPreferences.edit();
+                            editor.putString("dateTime", "" + TimeTakeTemp);
+
+                            editor.commit();
+                            txtRemindme.setText(TimeTakeTemp);
+                        } catch (Exception e) {
+                            Log.i("Shared exc", e.toString());
+                        }
+
+                        try {
+                            convertedDate = dateFormatDialog.parse(dateAndTime);
+
+                        } catch (ParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                        Calendar current = Calendar.getInstance();
+
+                        if (Temp.compareTo(current) <= 0) {
+
+                        } else {
+                            txtRemindme.setText(sharedPreferences.getString("dateTime", ""));
+                            setOneTimeAlarm(Temp);
+                        }
+                    } else {
+                        try {
+                            txtRemindme.setText(getResources().getString(R.string.reminder_dialog_remindme));
+
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+
+
+                    if (exception.equals("") & isAdded()) {
+                        prg_appointment.setVisibility(View.GONE);
+                        prg_content.setVisibility(View.GONE);
+                        txtAppointment.setVisibility(View.VISIBLE);
+                        rlContent.setVisibility(View.VISIBLE);
+                        llList.setVisibility(View.VISIBLE);
+
+                        if (Integer.parseInt(allEventsDatatype.getTotal_appointment()) == 0) {
+                            txtAppointment.setText(getResources().getString(R.string.NoAppointment));
+                        } else if (Integer.parseInt(allEventsDatatype.getTotal_appointment()) == 1) {
+                            txtAppointment.setText(allEventsDatatype.getTotal_appointment() + "  " + getResources().getString(R.string.SingleAppointment));
+                        } else {
+                            txtAppointment.setText(allEventsDatatype.getTotal_appointment() + "  " + getResources().getString(R.string.MultipointAppointments));
+                        }
+
+                        if (Integer.parseInt(allEventsDatatype.getTotal_training_exercises()) == 0) {
+                            txtTrainingDone.setText(" - ");
+                        } else {
+                            txtTrainingDone.setText(allEventsDatatype.getTotal_training_exercise_finished() +
+                                    "/" + allEventsDatatype.getTotal_training_exercises() + " " + getResources().getString(R.string.ExerciseDone));
+                        }
+
+                        if (allEventsDatatype.getDiary_text().equalsIgnoreCase("")) {
+                            txtDiary.setText("");
+                        } else {
+                            txtDiary.setText("\"" + allEventsDatatype.getDiary_text() + "\"");
+                        }
+
+                        if (Integer.parseInt(allEventsDatatype.getTotal_meal()) == 0) {
+                            txtDiet.setText(" - ");
+                        } else if (Integer.parseInt(allEventsDatatype.getTotal_meal()) == 1) {
+                            txtDiet.setText(allEventsDatatype.getTotal_meal() + " " + getResources().getString(R.string.Meal));
+                        } else {
+                            txtDiet.setText(allEventsDatatype.getTotal_meal() + " " + getResources().getString(R.string.Meals));
+                        }
+                        try {
+                            if (AppConfig.allExercisesDataTypeArrayList.size() > 0) {
+                                new Database(getActivity()).GET_ProgramDetails(AppConfig.allExercisesDataTypeArrayList.get(0).getUser_program_id(), new LocalDataResponse() {
+                                    @Override
+                                    public void OnSuccess(String Response) {
+                                        try {
+                                            Log.d("@@ Progra,-", Response);
+                                            programName = new JSONObject(Response).getString("program_name");
+                                            if (programName.equals("")) {
+                                                powerchest.setText("Vilodag");
+                                            } else {
+                                                powerchest.setText("" + programName);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void OnNotfound(String NotFound) {
+                                        powerchest.setText("Vilodag");
+                                    }
+                                });
+                            } else {
+                                powerchest.setText("Vilodag");
+                            }
+                        } catch (Exception e) {
+                            powerchest.setText("Vilodag");
+                        }
+                    } else {
+                        Log.i("*--Excep : ", exception);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.i("jOBJ", "" + jOBJ);
+
+
+
+
+
+            }
+
+            @Override
+            public void OnNotfound(String NotFound) {
+                rlTraining.setVisibility(View.GONE);
+                fView.findViewById(R.id.DIV_1).setVisibility(View.GONE);
+                rlDiet.setVisibility(View.GONE);
+                fView.findViewById(R.id.DIV_2).setVisibility(View.GONE);
+                rlDiary.setVisibility(View.GONE);
+                fView.findViewById(R.id.DIV_3).setVisibility(View.GONE);
+                powerchest.setText("");
+            }
+        });
+    }
+
     public void setOneTimeAlarm(Calendar targetCal) {
         try {
             AppController.setIsAlermSet("YES");
@@ -723,6 +916,10 @@ public class CalenderFragment extends Fragment {
                     urlResponse = response.body().string();
                     JSONObject jOBJ = new JSONObject(urlResponse);
                     Log.i("jOBJ", "" + jOBJ);
+
+
+
+
 
                     allEventsDatatype = new AllEventsDatatype(jOBJ.getString("total_meal"),
                             jOBJ.getString("total_appointment"),
@@ -785,6 +982,22 @@ public class CalenderFragment extends Fragment {
 
 
                 try {
+
+                    new Database(getActivity()).SetCalenderPageData(date, urlResponse, new LocalDataResponse() {
+                        @Override
+                        public void OnSuccess(String Response) {
+                            Log.d("@@ SAVE RES ",Response);
+
+                        }
+
+                        @Override
+                        public void OnNotfound(String NotFound) {
+                            Log.d("@@ SAVE Error  ",NotFound);
+                        }
+                    });
+
+
+
                     JSONObject jOBJ = new JSONObject(urlResponse);
 
                     if(jOBJ.getString("training_enable").equals("N")) {
@@ -815,6 +1028,7 @@ public class CalenderFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
 
 //                if(!allEventsDatatype.getTotal_appointment().equals("0") && !allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")){
                 if (!allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")) {
@@ -987,10 +1201,22 @@ public class CalenderFragment extends Fragment {
                     Log.i("get_program_name", "" + AppConfig.HOST + "app_control/get_program_name/?user_program_id=" + programID);
                     Response response = client.newCall(request).execute();
                     urlResponsePr = response.body().string();
+                    new Database(getActivity()).SetProgramData(programID, urlResponsePr, new LocalDataResponse() {
+                        @Override
+                        public void OnSuccess(String Response) {
+
+                        }
+
+                        @Override
+                        public void OnNotfound(String NotFound) {
+
+                        }
+                    });
                     JSONObject jOBJ = new JSONObject(urlResponsePr);
                     Log.i("get_program_name_jOBJ", "" + jOBJ);
 
                     programName = jOBJ.getString("program_name");
+
                 } catch (Exception e) {
                     exceptionPr = e.toString();
                 }
@@ -1088,8 +1314,10 @@ public class CalenderFragment extends Fragment {
 
                 date = "" + dateFormat.format(c.getTime());
                 PAGE_DATE = date;
-                getAllEvents(date);
-
+                if (connectionDetector.isConnectingToInternet())
+                    getAllEvents(date);
+                else
+                    PAGE_OFFLINEDATASHOW(date);
             }
         });
         navigation_right.setOnClickListener(new OnClickListener() {
@@ -1116,7 +1344,10 @@ public class CalenderFragment extends Fragment {
 
                 date = "" + dateFormat.format(c.getTime());
                 PAGE_DATE = date;
+                if (connectionDetector.isConnectingToInternet())
                 getAllEvents(date);
+                else
+                PAGE_OFFLINEDATASHOW(date);
 
             }
         });

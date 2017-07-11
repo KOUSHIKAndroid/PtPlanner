@@ -633,6 +633,8 @@ public class TrainingFragment extends Fragment {
 
                     Response response = client.newCall(request).execute();
                     urlResponse = response.body().string();
+                    Log.d("@@ GET TRAINING--",AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
+                            userProgramId + "&client_id=" + saveString + "&exercise_id=" + excerciseId);
                     JSONObject jOBJ = new JSONObject(urlResponse);
                     Log.i("jOBJ",""+jOBJ);
 

@@ -25,6 +25,10 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.ptplanner.K_DataBase.Database;
+import com.ptplanner.K_DataBase.LocalDataResponse;
 import com.ptplanner.R;
 import com.ptplanner.customviews.TitilliumRegular;
 import com.ptplanner.customviews.TitilliumRegularEdit;
@@ -35,6 +39,7 @@ import com.ptplanner.datatype.DiaryDataType;
 import com.ptplanner.datatype.EventDataType;
 import com.ptplanner.dialog.ShowCalendarPopUp;
 import com.ptplanner.helper.AppConfig;
+import com.ptplanner.helper.CircleTransform;
 import com.ptplanner.helper.ConnectionDetector;
 import com.ptplanner.helper.ReturnCalendarDetails;
 import com.ptplanner.helper.Trns;
@@ -334,7 +339,21 @@ public class DiaryFragment extends Fragment {
             }
             //getDietList("2015-07-03");
         } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+            try {
+                changeDate = dateFormat.parse(getArguments().getString("DateChange"));
+
+//                Log.d("DAY==", getArguments().getString("DateChange"));
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(dateFormat.parse(getArguments().getString("DateChange")));
+                AppConfig.calendar = cal;
+
+                OffLineData(getArguments().getString("DateChange"));
+
+            } catch (Exception e) {
+                Log.d("Date Exception : ", e.toString());
+                OffLineData(dateFormat.format(AppConfig.calendar.getTime()));
+            }
         }
 
         params = llCoverLayout.getLayoutParams();
@@ -450,6 +469,92 @@ public class DiaryFragment extends Fragment {
         return fView;
     }
 
+    private void OffLineData(final String dateChange) {
+        pBar.setVisibility(View.VISIBLE);
+        llEditDiary.setVisibility(View.GONE);
+        llAddDiary.setVisibility(View.GONE);
+        ////////////////////////////////////////////
+        progressButton.setClickable(false);
+        progressButton.setEnabled(false);
+        appointmentButton.setClickable(false);
+        appointmentButton.setEnabled(false);
+        messageButton.setClickable(false);
+        messageButton.setEnabled(false);
+        ///////////////////////////////////////////
+        scrView.setVisibility(View.GONE);
+
+        llAddDiary.setVisibility(View.GONE);
+        llEditDiary.setVisibility(View.GONE);
+        llDone.setVisibility(View.GONE);
+        etDetails.setEnabled(false);
+
+        new Database(getActivity()).GET_Diary_Frag_Fetails(dateChange, new LocalDataResponse() {
+            @Override
+            public void OnSuccess(String Response) {
+                try {
+                    JSONObject jOBJ = new JSONObject(Response);
+                    Log.i("jOBJ",""+jOBJ);
+                    dateRespectiveDiaryDataType = new DateRespectiveDiaryDataType(
+                            jOBJ.getString("client_id"),
+                            jOBJ.getString("client_name"),
+                            jOBJ.getString("client_image"),
+                            jOBJ.getString("client_email"),
+                            jOBJ.getString("client_about"),
+                            jOBJ.getString("diary_id"),
+                            jOBJ.getString("diary_heading"),
+                            jOBJ.getString("dairy_text")
+                    );
+                    pBar.setVisibility(View.GONE);
+                    scrView.setVisibility(View.VISIBLE);
+                    ///////////////////////////////////////////////////
+                    progressButton.setClickable(true);
+                    progressButton.setEnabled(true);
+                    appointmentButton.setClickable(true);
+                    appointmentButton.setEnabled(true);
+                    messageButton.setClickable(true);
+                    messageButton.setEnabled(true);
+
+                    //////////////////////////////////////////////////
+
+//                        Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).placeholder(R.drawable.no_image_available_placeholdder)
+//                                .transform(new Trns()).resize(400, 400).centerInside().into(imgClient);
+Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).placeholder(R.drawable.no_image_available_placeholdder)
+                                .transform(new CircleTransform(getActivity())).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgClient);
+
+                        txtClientName.setText(dateRespectiveDiaryDataType.getClient_name());
+                        txtDate.setText(dateChange);
+
+//                    if (dateRespectiveDiaryDataType.getDiary_heading().equals("")) {
+//                        txtDiaryHeading.setVisibility(View.GONE);
+//                    } else {
+//                        txtDiaryHeading.setVisibility(View.GONE);
+//                        txtDiaryHeading.setText(dateRespectiveDiaryDataType.getDiary_heading());
+//                    }
+
+                        if (dateRespectiveDiaryDataType.getDairy_text().equals("")) {
+                            etDetails.setText(getResources().getString(R.string.fra_diary_longString));
+
+                        } else {
+//                        Log.i("!! Diary Text : ", dateRespectiveDiaryDataType.getDairy_text());
+                            etDetails.setText(dateRespectiveDiaryDataType.getDairy_text());
+
+                        }
+
+
+                } catch (Exception ex) {
+                    exception = ex.toString();
+                }
+            }
+
+            @Override
+            public void OnNotfound(String NotFound) {
+
+            }
+        });
+
+
+    }
+
     public void getDiaryDetails(final String dateVal) {
         AsyncTask<Void, Void, Void> dietListDetails = new AsyncTask<Void, Void, Void>() {
 
@@ -489,6 +594,8 @@ public class DiaryFragment extends Fragment {
                                     + "&date_val=" + dateVal)
                             .build();
 
+
+
                     Response response = client.newCall(request).execute();
                     urlResponse = response.body().string();
                     try {
@@ -510,8 +617,8 @@ public class DiaryFragment extends Fragment {
                     }
 
 
-//                    Log.d("Diary @@ URL : ", "http://esolz.co.in/lab6/ptplanner/app_control/get_date_respective_diary?logged_in_user=" + saveString
-//                            + "&date_val=" + dateVal);
+                    Log.d("Diary @@ URL : ", "http://esolz.co.in/lab6/ptplanner/app_control/get_date_respective_diary?logged_in_user=" + saveString
+                            + "&date_val=" + dateVal);
 
                 } catch (Exception e) {
                     exception = e.toString();

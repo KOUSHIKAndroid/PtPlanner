@@ -88,6 +88,16 @@ public class SplashActivity extends Activity {
                 AppConfig.appRegId = regid;
                 sendRegistrationIdToBackend();
             }
+        }else {
+            AppConfig.loginDatatype = new LoginDataType(
+                    loginPreferences.getString("UserId", ""),
+                    loginPreferences.getString("Username", ""),
+                    loginPreferences.getString("Password", ""));
+            if (!AppConfig.loginDatatype.getSiteUserId().equals("")) {
+                Intent intent = new Intent(SplashActivity.this, LandScreenActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
         dateSavePreference = getSharedPreferences("DateTimeDiary", Context.MODE_PRIVATE);
         dateSaveCalendarPopUP = getSharedPreferences("DateTime", Context.MODE_PRIVATE);
