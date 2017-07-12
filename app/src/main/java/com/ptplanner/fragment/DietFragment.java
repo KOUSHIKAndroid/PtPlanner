@@ -22,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.ptplanner.K_DataBase.Database;
+import com.ptplanner.K_DataBase.LocalDataResponse;
 import com.ptplanner.R;
 import com.ptplanner.adapter.DietAdapter;
 import com.ptplanner.customviews.TitilliumSemiBold;
@@ -189,6 +191,24 @@ public class DietFragment extends Fragment {
             }
             //getDietList("2015-07-03");
         } else {
+
+            try {
+                dateChange = dateFormat.parse(getArguments().getString("DateChange"));
+
+                Log.d("DAY==", getArguments().getString("DateChange"));
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(dateFormat.parse(getArguments().getString("DateChange")));
+                AppConfig.calendar = cal;
+
+                OffLineData(getArguments().getString("DateChange"));
+
+            } catch (Exception e) {
+                Log.d("Date Exception : ", e.toString());
+                date = "" + dateFormat.format(AppConfig.calendar.getTime());
+                OffLineData(date);
+            }
+
             Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
@@ -212,6 +232,80 @@ public class DietFragment extends Fragment {
         });
 
         return fView;
+    }
+
+    private void OffLineData(String dateChange) {
+        new Database(getActivity()).GET_DietData(dateChange, new LocalDataResponse() {
+            @Override
+            public void OnSuccess(String Response) {
+                try {
+                    JSONObject jOBJ = new JSONObject(Response);
+                    Log.i("@@ Diate-OBJ",""+jOBJ);
+                    JSONArray jsonArray = jOBJ.getJSONArray("meal");
+                    dietDataTypeLinkedList = new LinkedList<DietDataType>();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        DietDataType dietDataType = new DietDataType(
+                                jsonObject.getString("meal_id"),
+                                jsonObject.getString("meal_image"),
+                                jsonObject.getString("meal_description"),
+                                jsonObject.getString("meal_title"),
+                                jsonObject.getString("custom_meal_id"));
+                        dietDataTypeLinkedList.add(dietDataType);
+                    }
+                } catch (Exception ex) {
+                    exceptionError = ex.toString();
+                }
+
+                pBar.setVisibility(View.GONE);
+                ///////////////////////////////////////////////////
+                progressButton.setClickable(true);
+                progressButton.setEnabled(true);
+                appointmentButton.setClickable(true);
+                appointmentButton.setEnabled(true);
+                messageButton.setClickable(true);
+                messageButton.setEnabled(true);
+
+                //////////////////////////////////////////////////
+                if (exception.equals("")) {
+                    if (exceptionError.equals("")) {
+                        dietList.setVisibility(View.VISIBLE);
+                        dietAdapter = new DietAdapter(getActivity(), 0, dietDataTypeLinkedList, getArguments().getString("DateChange"));
+                        dietList.setAdapter(dietAdapter);
+                        txtError.setVisibility(View.GONE);
+                    } else {
+                        txtError.setVisibility(View.GONE);
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                        alertDialogBuilder
+                                .setMessage(dietDialog)
+                                .setCancelable(false)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                    }
+                }
+            }
+
+            @Override
+            public void OnNotfound(String NotFound) {
+                pBar.setVisibility(View.VISIBLE);
+
+                dietList.setVisibility(View.GONE);
+                txtError.setVisibility(View.VISIBLE);
+
+                ////////////////////////////////////////////
+                progressButton.setClickable(false);
+                progressButton.setEnabled(false);
+                appointmentButton.setClickable(false);
+                appointmentButton.setEnabled(false);
+                messageButton.setClickable(false);
+                messageButton.setEnabled(false);
+            }
+        });
     }
 
     public void getDietList(final String date) {

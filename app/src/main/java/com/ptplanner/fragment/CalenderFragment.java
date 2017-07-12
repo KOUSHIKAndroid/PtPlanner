@@ -14,6 +14,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -124,7 +126,7 @@ public class CalenderFragment extends Fragment {
     int previousDayPosition;
     TitilliumSemiBold txtMonth, txtAppointment, powerchest;
     HelveticaHeavy txtDay;
-    TitilliumLight txtTrainingDone, txtDiet, txtDiary;
+    TitilliumLight txtTrainingDone, txtDiet, txtDiary,txt_Offline;
     ProgressBar prg_appointment, prg_content;
     String urlResponse = "", exception = "", urlResponsePr = "", exceptionPr = "", programName = "", logoutExcep = "";
     ConnectionDetector connectionDetector;
@@ -193,6 +195,7 @@ public class CalenderFragment extends Fragment {
         dialogRemindme = (LinearLayout) fView.findViewById(R.id.remindme);
         dialogRemindme.setVisibility(View.GONE);
         txtRemindme = (TitilliumLight) fView.findViewById(R.id.txt_remindme);
+        txt_Offline = (TitilliumLight) fView.findViewById(R.id.txt_Offline);
         showCalender = (LinearLayout) fView.findViewById(R.id.show_cal);
         logOut = (LinearLayout) fView.findViewById(R.id.logout);
         txtDay = (HelveticaHeavy) fView.findViewById(R.id.txt_day);
@@ -288,6 +291,9 @@ public class CalenderFragment extends Fragment {
                     @Override
                     public void OnsaveSucess(String Response) {
                         Log.d("@@ KDIARY",Response);
+                        txt_Offline.setText(getString(R.string.offlineAvilable));
+                        Offline.setClickable(false);
+                       Offline.setBackgroundColor(Color.parseColor("#00000000"));
                         Loader.Dismiss();
 
                     }
@@ -295,6 +301,9 @@ public class CalenderFragment extends Fragment {
                     @Override
                     public void OnsaveError(String Error) {
                         Log.d("@@ KDIARY Err",Error);
+                        Offline.setClickable(true);
+                        txt_Offline.setText(getString(R.string.offlinemode));
+                        Offline.setBackground(getResources().getDrawable(R.drawable.calbtnbg1));
                         Loader.Dismiss();
                     }
                 }.SaveDiary(PAGE_DATE);
@@ -375,6 +384,10 @@ public class CalenderFragment extends Fragment {
                         }
                     }
                 }
+
+
+
+
             } catch (Exception etex) {
                 etex.printStackTrace();
             }
@@ -880,6 +893,28 @@ public class CalenderFragment extends Fragment {
             protected void onPreExecute() {
                 // TODO Auto-generated method stub
                 super.onPreExecute();
+
+                new Database(getActivity()).GET_Diary_Frag_Fetails(date, new LocalDataResponse() {
+                    @Override
+                    public void OnSuccess(String Response) {
+                        Log.d("@@@ DATAT-",Response+"hsbdh");
+                        txt_Offline.setText(getString(R.string.offlineAvilable));
+                        Offline.setClickable(false);
+                        Offline.setBackgroundColor(Color.parseColor("#00000000"));
+                    }
+
+                    @Override
+                    public void OnNotfound(String NotFound) {
+                        Log.d("@@@ DATAT-",NotFound);
+                        Offline.setClickable(true);
+                        txt_Offline.setText(getString(R.string.offlinemode));
+                        Offline.setBackground(getResources().getDrawable(R.drawable.calbtnbg1));
+                    }
+                });
+
+
+
+
                 messageButton.setClickable(false);
                 messageButton.setEnabled(false);
                 progressButton.setClickable(false);

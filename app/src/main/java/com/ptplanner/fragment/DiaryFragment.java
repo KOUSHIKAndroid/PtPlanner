@@ -507,12 +507,12 @@ public class DiaryFragment extends Fragment {
                     pBar.setVisibility(View.GONE);
                     scrView.setVisibility(View.VISIBLE);
                     ///////////////////////////////////////////////////
-                    progressButton.setClickable(true);
-                    progressButton.setEnabled(true);
-                    appointmentButton.setClickable(true);
-                    appointmentButton.setEnabled(true);
-                    messageButton.setClickable(true);
-                    messageButton.setEnabled(true);
+//                    progressButton.setClickable(true);
+//                    progressButton.setEnabled(true);
+//                    appointmentButton.setClickable(true);
+//                    appointmentButton.setEnabled(true);
+//                    messageButton.setClickable(true);
+//                    messageButton.setEnabled(true);
 
                     //////////////////////////////////////////////////
 

@@ -111,7 +111,8 @@ public class LoginActivity extends Activity {
 //        etPass.setText("123456");
 
         loginPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
-
+        AppConfig.isRemember = true;
+        AppConfig.strRemember = "Y";
         btnLogin.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -145,22 +146,22 @@ public class LoginActivity extends Activity {
             }
         });
 
-        llRememberMe.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                if (AppConfig.isRemember) {
-                    AppConfig.isRemember = false;
-                    imgChkbox.setBackgroundResource(R.drawable.check);
-                    AppConfig.strRemember = "Y";
-                } else {
-                    AppConfig.isRemember = true;
-                    imgChkbox.setBackgroundResource(R.drawable.uncheck);
-                    AppConfig.strRemember = "N";
-                }
-            }
-        });
+//        llRememberMe.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                // TODO Auto-generated method stub
+//                if (AppConfig.isRemember) {
+//                    AppConfig.isRemember = false;
+//                    imgChkbox.setBackgroundResource(R.drawable.check);
+//                    AppConfig.strRemember = "Y";
+//                } else {
+//                    AppConfig.isRemember = true;
+//                    imgChkbox.setBackgroundResource(R.drawable.uncheck);
+//                    AppConfig.strRemember = "N";
+//                }
+//            }
+//        });
 
         llForgotPass.setOnClickListener(new OnClickListener() {
 

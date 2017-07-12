@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ptplanner.R;
 import com.ptplanner.customviews.TitilliumBold;
 import com.ptplanner.customviews.TitilliumRegular;
@@ -59,13 +62,13 @@ public class DietAdapter extends ArrayAdapter<DietDataType> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-          Picasso.with(context).load(data.get(position).getMeal_image()).fit().centerCrop().into(holder.imgDiet);
+//          Picasso.with(context).load(data.get(position).getMeal_image()).fit().centerCrop().into(holder.imgDiet);
 
-//        Glide.with(context)
-//                .load(data.get(position).getMeal_image())
-//                .fitCenter()
-//                .error(R.drawable.placeholdericon)
-//                .into(holder.imgDiet);
+        Glide.with(context)
+                .load(data.get(position).getMeal_image())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.placeholdericon)
+                .into(holder.imgDiet);
 
         holder.dietTitle.setText(data.get(position).getMeal_title());
         holder.dietSubTitle.setText(data.get(position).getMeal_description());
