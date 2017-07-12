@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+
 import com.happywannyan.Adapter.Adapter_message;
 import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.Font.SFNFTextView;
@@ -47,6 +49,7 @@ public class Message_Fragment extends Fragment {
     SFNFTextView tv_all_message,tv_unread_message,tv_unResponded_message,tv_reservation_message;
     View view_between_all_unread_message,view_between_unread_unResponded_message,view_unResponded_reservation_message;
 
+    HorizontalScrollView scrollView_horizontal;
     ArrayList<APIPOSTDATA> Params ;
     Adapter_message adapter_message;
     String type;
@@ -104,7 +107,7 @@ public class Message_Fragment extends Fragment {
         tv_unread_message= (SFNFTextView) view.findViewById(R.id.tv_unread_message);
         tv_unResponded_message= (SFNFTextView) view.findViewById(R.id.tv_unResponded_message);
         tv_reservation_message= (SFNFTextView) view.findViewById(R.id.tv_reservation_message);
-
+        scrollView_horizontal=(HorizontalScrollView)view.findViewById(R.id.scrollView_horizontal);
         view_between_all_unread_message=view.findViewById(R.id.view_between_all_unread_message);
         view_between_unread_unResponded_message=view.findViewById(R.id.view_between_unread_unResponded_message);
         view_unResponded_reservation_message=view.findViewById(R.id.view_unResponded_reservation_message);
@@ -168,12 +171,12 @@ public class Message_Fragment extends Fragment {
                 tv_unread_message.setTextColor(ContextCompat.getColor(getActivity(), R.color.Black));
                 tv_unResponded_message.setTextColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
                 tv_reservation_message.setTextColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
-
-                view_between_all_unread_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Black));
+                scrollView_horizontal.fullScroll(HorizontalScrollView.FOCUS_RIGHT);
+                view_between_all_unread_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
                 view_between_unread_unResponded_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Black));
                 view_unResponded_reservation_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
                 AllMessage = new ArrayList<>();
-                type="unread_message_list";
+                type="generalinquiry_message_list";
                 loadList("0");
             }
         });
@@ -192,7 +195,7 @@ public class Message_Fragment extends Fragment {
                 view_unResponded_reservation_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Black));
 
                 AllMessage = new ArrayList<>();
-                type="unrespond_message_list";
+                type="meetgreet_message_list";
                 loadList("0");
             }
         });
@@ -204,8 +207,8 @@ public class Message_Fragment extends Fragment {
                 tv_unread_message.setTextColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
                 tv_unResponded_message.setTextColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
                 tv_reservation_message.setTextColor(ContextCompat.getColor(getActivity(), R.color.Black));
-
-                view_between_all_unread_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
+                scrollView_horizontal.fullScroll(HorizontalScrollView.FOCUS_LEFT);
+                view_between_all_unread_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Black));
                 view_between_unread_unResponded_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.text_dark_gray));
                 view_unResponded_reservation_message.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Black));
 

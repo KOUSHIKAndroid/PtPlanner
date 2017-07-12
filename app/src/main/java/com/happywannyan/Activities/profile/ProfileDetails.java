@@ -276,6 +276,7 @@ public class ProfileDetails extends AppCompatActivity implements View.OnClickLis
                 Intent intent=new Intent(ProfileDetails.this, BookingOne.class);
                 try {
                     intent.putExtra("LIST",""+new JSONObject(JSONRESPONSE).getJSONObject("info_array").getJSONArray("servicelist"));
+                    intent.putExtra("ItemDetails",""+PrevJSON);
                     intent.putExtra("SELECT","NA");
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -5,12 +5,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import com.happywannyan.OnFragmentInteractionListener;
 import com.happywannyan.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class BookingFragmentTwo extends Fragment {
@@ -22,6 +29,8 @@ public class BookingFragmentTwo extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    LinearLayout LL_MYPETS;
 
     private OnFragmentInteractionListener mListener;
 
@@ -52,6 +61,7 @@ public class BookingFragmentTwo extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+            Log.d("@@ PARA<MS",mParam1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -66,6 +76,27 @@ public class BookingFragmentTwo extends Fragment {
             }
         });
 
+        LL_MYPETS=(LinearLayout)view.findViewById(R.id.LL_MYPETS);
+        
+        SetPetList();
+
+    }
+
+    private void SetPetList() {
+        try {
+            JSONObject MainJ=new JSONObject(mParam1).getJSONObject("info_array");
+            JSONArray Array=MainJ.getJSONArray("pet_section");
+            for(int i=0;i<Array.length();i++)
+            {
+                CheckBox chk=new CheckBox(getActivity());
+                chk.setText(Array.getJSONObject(i).getString("name"));
+                chk.setTag(Array.getJSONObject(i).getString("id"));
+                LL_MYPETS.addView(chk);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

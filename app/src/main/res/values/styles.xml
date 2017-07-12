@@ -21,6 +21,11 @@
         <item name="android:textColor">@color/colorwhite</item>
     </style>
 
+    <style name="DatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+
     <!--<style name="RatingBar" parent="Theme.AppCompat">-->
         <!--<item name="colorControlNormal">#FABC00</item>-->
         <!--<item name="colorControlActivated">#FABC00</item>-->
