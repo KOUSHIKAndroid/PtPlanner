@@ -97,4 +97,6 @@ public class AppConfig {
 
     public static String bookAppDateChange = "";
 
+    public static String OfflineDate="";
+
 }

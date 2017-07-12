@@ -176,9 +176,9 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
                     );
 
 
-//                    Log.d("Diet URL : ", AppConfig.HOST + "app_control/get_custom_meal_details?custom_meal_id=" + getArguments().getString("CustomMealID")
-//                            + "&client_id=" + saveString
-//                            + "&meal_id=" + getArguments().getString("MealID"));
+                    Log.d("Diet URL : ", AppConfig.HOST + "app_control/get_custom_meal_details?custom_meal_id=" + getArguments().getString("CustomMealID")
+                            + "&client_id=" + saveString
+                            + "&meal_id=" + getArguments().getString("MealID"));
 
                 } catch (Exception e) {
                     exception = e.toString();

@@ -1,9 +1,11 @@
 package com.ptplanner.K_DataBase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -14,7 +16,10 @@ import com.ptplanner.helper.Trns;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -25,9 +30,9 @@ import okhttp3.Response;
  */
 
 public abstract class OFFLineDataSave {
-    Context mContext;
+    Activity mContext;
 
-    public OFFLineDataSave(Context mContext) {
+    public OFFLineDataSave(Activity mContext) {
         this.mContext = mContext;
     }
 
@@ -129,19 +134,7 @@ public abstract class OFFLineDataSave {
                     Log.d("Diate @@ URL : ",AppConfig.HOST + "app_control/date_respective_client_meal?logged_in_user=" + AppConfig.loginDatatype.getSiteUserId()
                             + "&date_val=" + Date);
 
-//
-//                    JSONObject obj=new JSONObject(response.body().string());
-//                    JSONArray meal=obj.getJSONArray("meal");
-//
-//                    for(int i=0;i<meal.length();i++)
-//                    {
-//                        Log.d("@@@888",meal.getJSONObject(i).getString("meal_image"));
-////                        Glide.with(mContext)
-////                                .load(meal.getJSONObject(i).getString("meal_image"))
-////                                .diskCacheStrategy(DiskCacheStrategy.ALL);
-//
-//
-//                    }
+
 
 
 
@@ -168,6 +161,34 @@ public abstract class OFFLineDataSave {
                     OnsaveError(result);
                 }else {
                     Log.d("@@@888",result);
+
+
+                    try {
+                        JSONObject obj = new JSONObject(result);
+                        JSONArray meal=obj.getJSONArray("meal");
+
+                        for(int i=0;i<meal.length();i++)
+                        {
+                            Log.d("@@@888",meal.getJSONObject(i).getString("meal_image"));
+
+                            View view=mContext.getLayoutInflater().inflate(R.layout.diet_item,null);
+
+                            ImageView imageView=(ImageView)view.findViewById(R.id.img_diet);
+                        Glide.with(mContext)
+                                .load(meal.getJSONObject(i).getString("meal_image"))
+                                .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+//                        Glide.with(mContext)
+//                                .load(meal.getJSONObject(i).getString("meal_image"))
+//                                .asBitmap()
+//                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                                .into(400, 400)
+//                                .get();
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     new Database(mContext).SetDiate_PageData(Date, result, new LocalDataResponse() {
                         @Override
                         public void OnSuccess(String Response) {

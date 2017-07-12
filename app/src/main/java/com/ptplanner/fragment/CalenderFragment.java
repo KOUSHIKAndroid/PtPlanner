@@ -396,24 +396,92 @@ public class CalenderFragment extends Fragment {
             @Koushik
             Offline Handling here?
              */
-            final Calendar c = Calendar.getInstance();
-            AppConfig.calendar = c;
-
-            AppConfig.currentDate = c.get(Calendar.DATE);
-            AppConfig.currentDay = c.getActualMinimum(Calendar.DAY_OF_MONTH);
-            AppConfig.currentMonth = (c.get(Calendar.MONTH));
-            AppConfig.currentYear = c.get(Calendar.YEAR);
-            AppConfig.firstDayPosition = c.get(Calendar.DAY_OF_WEEK);
-
-            txtDay.setText("" + dayFormat.format(c.getTime()));
-            txtMonth.setText("" + monthFormat.format(c.getTime()));
-            date = "" + dateFormat.format(c.getTime());
-
-            Log.d("@@ OFLINE DATE- ",date);
 
 
             Offline.setVisibility(View.GONE);
-            PAGE_OFFLINEDATASHOW(date);
+            try {
+                if (AppConfig.changeDate.equalsIgnoreCase("")) {
+                    try {
+                        Log.i("SoutrikToday : ", "Calender inside try");
+
+                        dateChange = dateFormat.parse(getArguments().getString("DateChange"));
+
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(dateFormat.parse(getArguments().getString("DateChange")));
+                        AppConfig.calendar = cal;
+
+                        PAGE_OFFLINEDATASHOW(getArguments().getString("DateChange"));
+                        PAGE_DATE = "" + getArguments().getString("DateChange");
+                        txtDay.setText("" + dayFormat.format(dateChange));
+                        txtMonth.setText("" + monthFormat.format(dateChange));
+
+                    } catch (Exception e) {
+
+                        if (dateChange == null) {
+
+
+                            final Calendar c = Calendar.getInstance();
+                            AppConfig.calendar = c;
+
+                            AppConfig.currentDate = c.get(Calendar.DATE);
+                            AppConfig.currentDay = c.getActualMinimum(Calendar.DAY_OF_MONTH);
+                            AppConfig.currentMonth = (c.get(Calendar.MONTH));
+                            AppConfig.currentYear = c.get(Calendar.YEAR);
+                            AppConfig.firstDayPosition = c.get(Calendar.DAY_OF_WEEK);
+
+                            txtDay.setText("" + dayFormat.format(c.getTime()));
+                            txtMonth.setText("" + monthFormat.format(c.getTime()));
+                            date = "" + dateFormat.format(c.getTime());
+                            PAGE_DATE = date;
+                            PAGE_OFFLINEDATASHOW(date);
+                        }
+                    }
+                } else {
+                    try {
+                        dateChange = dateFormat.parse(AppConfig.changeDate);
+
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(dateFormat.parse(AppConfig.changeDate));
+                        AppConfig.calendar = cal;
+
+                        PAGE_OFFLINEDATASHOW(date);
+                        PAGE_DATE = AppConfig.changeDate;
+                        txtDay.setText("" + dayFormat.format(dateChange));
+                        txtMonth.setText("" + monthFormat.format(dateChange));
+                    } catch (Exception eex) {
+                        eex.printStackTrace();
+                        try {
+                            final Calendar c = Calendar.getInstance();
+                            AppConfig.calendar = c;
+
+                            AppConfig.currentDate = c.get(Calendar.DATE);
+                            AppConfig.currentDay = c.getActualMinimum(Calendar.DAY_OF_MONTH);
+                            AppConfig.currentMonth = (c.get(Calendar.MONTH));
+                            AppConfig.currentYear = c.get(Calendar.YEAR);
+                            AppConfig.firstDayPosition = c.get(Calendar.DAY_OF_WEEK);
+
+                            txtDay.setText("" + dayFormat.format(c.getTime()));
+                            txtMonth.setText("" + monthFormat.format(c.getTime()));
+                            date = "" + dateFormat.format(c.getTime());
+                            PAGE_DATE = date;
+                            PAGE_OFFLINEDATASHOW(date);
+                        } catch (Exception ew) {
+                            ew.printStackTrace();
+                        }
+                    }
+                }
+
+
+
+
+            } catch (Exception etex) {
+                etex.printStackTrace();
+            }
+
+
+
+
+
 
 //            new AlertDialog.Builder(getActivity())
 //                    .setMessage(getResources().getString(R.string.no_internet))
@@ -623,6 +691,7 @@ public class CalenderFragment extends Fragment {
     }
 
     private void PAGE_OFFLINEDATASHOW(String date) {
+        AppConfig.OfflineDate=date;
         new Database(getActivity()).GET_Caleder_Frag_Fetails(date, new LocalDataResponse() {
             @Override
             public void OnSuccess(String Response) {
@@ -886,7 +955,7 @@ public class CalenderFragment extends Fragment {
 
     public void getAllEvents(final String date) {
 
-
+        AppConfig.OfflineDate=date;
         AsyncTask<Void, Void, Void> allEvents = new AsyncTask<Void, Void, Void>() {
 
             @Override

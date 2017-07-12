@@ -191,23 +191,7 @@ public class DietFragment extends Fragment {
             }
             //getDietList("2015-07-03");
         } else {
-
-            try {
-                dateChange = dateFormat.parse(getArguments().getString("DateChange"));
-
-                Log.d("DAY==", getArguments().getString("DateChange"));
-
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(dateFormat.parse(getArguments().getString("DateChange")));
-                AppConfig.calendar = cal;
-
-                OffLineData(getArguments().getString("DateChange"));
-
-            } catch (Exception e) {
-                Log.d("Date Exception : ", e.toString());
-                date = "" + dateFormat.format(AppConfig.calendar.getTime());
-                OffLineData(date);
-            }
+            OffLineData(AppConfig.OfflineDate);
 
             Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
@@ -217,17 +201,17 @@ public class DietFragment extends Fragment {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-
-                Bundle bundle = new Bundle();
-                bundle.putString("DateChange", getArguments().getString("DateChange"));
-
-                fragmentTransaction = fragmentManager.beginTransaction();
-                CalenderFragment cal_fragment = new CalenderFragment();
-                cal_fragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.fragment_container, cal_fragment);
-//                int count = fragmentManager.getBackStackEntryCount();
-//                fragmentTransaction.addToBackStack(String.valueOf(count));
-                fragmentTransaction.commit();
+getActivity().onBackPressed();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("DateChange", getArguments().getString("DateChange"));
+//
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                CalenderFragment cal_fragment = new CalenderFragment();
+//                cal_fragment.setArguments(bundle);
+//                fragmentTransaction.replace(R.id.fragment_container, cal_fragment);
+////                int count = fragmentManager.getBackStackEntryCount();
+////                fragmentTransaction.addToBackStack(String.valueOf(count));
+//                fragmentTransaction.commit();
             }
         });
 
@@ -235,6 +219,7 @@ public class DietFragment extends Fragment {
     }
 
     private void OffLineData(String dateChange) {
+        Log.d("@@ DATE--",dateChange);
         new Database(getActivity()).GET_DietData(dateChange, new LocalDataResponse() {
             @Override
             public void OnSuccess(String Response) {

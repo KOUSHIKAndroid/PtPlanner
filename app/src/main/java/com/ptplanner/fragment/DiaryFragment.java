@@ -339,21 +339,8 @@ public class DiaryFragment extends Fragment {
             }
             //getDietList("2015-07-03");
         } else {
-            try {
-                changeDate = dateFormat.parse(getArguments().getString("DateChange"));
+            OffLineData(AppConfig.OfflineDate);
 
-//                Log.d("DAY==", getArguments().getString("DateChange"));
-
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(dateFormat.parse(getArguments().getString("DateChange")));
-                AppConfig.calendar = cal;
-
-                OffLineData(getArguments().getString("DateChange"));
-
-            } catch (Exception e) {
-                Log.d("Date Exception : ", e.toString());
-                OffLineData(dateFormat.format(AppConfig.calendar.getTime()));
-            }
         }
 
         params = llCoverLayout.getLayoutParams();
@@ -451,18 +438,19 @@ public class DiaryFragment extends Fragment {
 //                SharedPreferences.Editor editor = dateSavePreference.edit();
 //                editor.clear();
 //                editor.commit();
+                getActivity().onBackPressed();
 
-
-                Bundle bundle = new Bundle();
-                bundle.putString("DateChange", getArguments().getString("DateChange"));
-
-                fragmentTransaction = fragmentManager.beginTransaction();
-                CalenderFragment cal_fragment = new CalenderFragment();
-                cal_fragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.fragment_container, cal_fragment);
-//                int count = fragmentManager.getBackStackEntryCount();
-//                fragmentTransaction.addToBackStack(String.valueOf(count));
-                fragmentTransaction.commit();
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putString("DateChange", getArguments().getString("DateChange"));
+//
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                CalenderFragment cal_fragment = new CalenderFragment();
+//                cal_fragment.setArguments(bundle);
+//                fragmentTransaction.replace(R.id.fragment_container, cal_fragment);
+////                int count = fragmentManager.getBackStackEntryCount();
+////                fragmentTransaction.addToBackStack(String.valueOf(count));
+//                fragmentTransaction.commit();
             }
         });
 
