@@ -89,12 +89,14 @@ public class SearchTinder extends Fragment {
                 Log.i("MainActivity", "card was swiped left, position in adapter: " + position);
                 TotalNo--;
                 if (TotalNo == 0) {
-                    ((ImageView) view.findViewById(R.id.IMG_Left)).setVisibility(View.GONE);
-                    ((ImageView) view.findViewById(R.id.IMG_Right)).setVisibility(View.GONE);
+//                    ((ImageView) view.findViewById(R.id.IMG_Left)).setVisibility(View.GONE);
+//                    ((ImageView) view.findViewById(R.id.IMG_Right)).setVisibility(View.GONE);
+                    cardStack.setAdapter(adapter);
+                    TotalNo = ((SearchResult) getActivity()).ListARRY.size();
                 }
                 if (TotalNo <= 1) {
                     cardStack.NUMBER_OF_CARDS = 1;
-
+                    adapter.notifyDataSetChanged();
                 } else if (TotalNo < 3) {
                     cardStack.NUMBER_OF_CARDS = 2;
                 } else {
@@ -107,8 +109,10 @@ public class SearchTinder extends Fragment {
                 Log.i("MainActivity", "card was swiped right, position in adapter: " + position);
                 TotalNo--;
                 if (TotalNo == 0) {
-                    ((ImageView) view.findViewById(R.id.IMG_Left)).setVisibility(View.GONE);
-                    ((ImageView) view.findViewById(R.id.IMG_Right)).setVisibility(View.GONE);
+//                    ((ImageView) view.findViewById(R.id.IMG_Left)).setVisibility(View.GONE);
+//                    ((ImageView) view.findViewById(R.id.IMG_Right)).setVisibility(View.GONE);
+                    cardStack.setAdapter(adapter);
+                    TotalNo = ((SearchResult) getActivity()).ListARRY.size();
                 }
                 if (TotalNo <= 1) {
                     cardStack.NUMBER_OF_CARDS = 1;

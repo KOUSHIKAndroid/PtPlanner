@@ -32,18 +32,19 @@
             android:textColor="@color/colorwhite"
             android:textSize="@dimen/page_titiel" />
         <ImageView
+            android:id="@+id/ancher"
+            android:layout_width="54dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_height="42dp" />
+        <ImageView
             android:id="@+id/Menu"
             android:layout_width="54dp"
             android:layout_height="50dp"
             android:padding="10dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_more_white" />
-        <ImageView
-            android:id="@+id/ancher"
-            android:layout_width="54dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_height="42dp" />
+
 
     </RelativeLayout>
 

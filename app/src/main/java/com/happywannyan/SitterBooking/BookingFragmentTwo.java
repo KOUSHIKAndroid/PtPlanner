@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.happywannyan.Constant.AppContsnat;
 import com.happywannyan.OnFragmentInteractionListener;
 import com.happywannyan.R;
+import com.happywannyan.Utils.App_data_holder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +62,7 @@ public class BookingFragmentTwo extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new AppContsnat(getActivity());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             Log.d("@@ PARA<MS",mParam1);
@@ -67,7 +71,7 @@ public class BookingFragmentTwo extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.Card_next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +80,28 @@ public class BookingFragmentTwo extends Fragment {
             }
         });
 
+        new AppContsnat(getActivity()).GET_SHAREDATA(App_data_holder.UserData, new App_data_holder.App_sharePrefData() {
+            @Override
+            public void Avialable(boolean avilavle, JSONObject data) {
+                try {
+                    ((EditText)view.findViewById(R.id.EDX_Fname)).setText(data.getJSONObject("info_array").getString("firstname"));
+                    ((EditText)view.findViewById(R.id.EDX_Lname)).setText(data.getJSONObject("info_array").getString("lastname"));
+
+                } catch (JSONException e) {
+
+                }
+            }
+
+            @Override
+            public void NotAvilable(String Error) {
+
+
+
+            }
+        });
+
         LL_MYPETS=(LinearLayout)view.findViewById(R.id.LL_MYPETS);
+
         
         SetPetList();
 
