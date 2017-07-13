@@ -1,5 +1,7 @@
 package com.ptplanner.datatype;
 
+import org.json.JSONObject;
+
 /**
  * Created by su on 23/6/15.
  */
@@ -10,12 +12,24 @@ public class DietDataType {
     String meal_description;
     String meal_image;
 
+    JSONObject JSONBOJECT;
+
+
     public DietDataType(String meal_id, String meal_image, String meal_description, String meal_title, String custom_meal_id) {
         this.meal_id = meal_id;
         this.meal_image = meal_image;
         this.meal_description = meal_description;
         this.meal_title = meal_title;
         this.custom_meal_id = custom_meal_id;
+    }
+
+
+    public JSONObject getJSONBOJECT() {
+        return JSONBOJECT;
+    }
+
+    public void setJSONBOJECT(JSONObject JSONBOJECT) {
+        this.JSONBOJECT = JSONBOJECT;
     }
 
     public String getMeal_id() {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,11 +83,10 @@ public class DietAdapter extends ArrayAdapter<DietDataType> {
                 bundle.putString("CustomMealID", data.get(position).getCustom_meal_id());
                 bundle.putString("MealID", data.get(position).getMeal_id());
                 bundle.putString("DateChange", saveDate);
-
                 fragmentTransaction = fragmentManager.beginTransaction();
-                DietListDetailsFragment dietList_fragment = new DietListDetailsFragment();
-                dietList_fragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.fragment_container, dietList_fragment);
+//                DietListDetailsFragment dietList_fragment =  DietListDetailsFragment.newInstance(data.get(position).getJSONBOJECT()+"",null);
+//                dietList_fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.fragment_container, DietListDetailsFragment.newInstance(data.get(position).getJSONBOJECT()+"",null));
 //                int count = fragmentManager.getBackStackEntryCount();
 //                fragmentTransaction.addToBackStack(String.valueOf(count));
                 fragmentTransaction.commit();

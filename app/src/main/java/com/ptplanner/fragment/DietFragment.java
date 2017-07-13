@@ -236,6 +236,7 @@ getActivity().onBackPressed();
                                 jsonObject.getString("meal_description"),
                                 jsonObject.getString("meal_title"),
                                 jsonObject.getString("custom_meal_id"));
+                        dietDataType.setJSONBOJECT(jsonObject);
                         dietDataTypeLinkedList.add(dietDataType);
                     }
                 } catch (Exception ex) {
@@ -367,6 +368,7 @@ getActivity().onBackPressed();
                                     jsonObject.getString("meal_description"),
                                     jsonObject.getString("meal_title"),
                                     jsonObject.getString("custom_meal_id"));
+                            dietDataType.setJSONBOJECT(jsonObject);
                             dietDataTypeLinkedList.add(dietDataType);
                         }
                     } catch (Exception ex) {

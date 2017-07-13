@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ptplanner.R;
 import com.ptplanner.customviews.TitilliumBold;
 import com.ptplanner.customviews.TitilliumRegular;
@@ -63,6 +65,30 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
 
     String saveString;
     SharedPreferences userId;
+    private String mParam1;
+    private String mParam2;
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    public static DietListDetailsFragment newInstance(String param1, String param2) {
+        DietListDetailsFragment fragment = new DietListDetailsFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+            Log.d("@@@@ AKA ",mParam1);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,8 +123,9 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
         saveString = userId.getString("UserId", "");
 
         if (cd.isConnectingToInternet()) {
-            getDietDetails();
+            getDietDetails(mParam1);
         } else {
+            getDietDetails(mParam1);
             Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
@@ -124,7 +151,7 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
         return fView;
     }
 
-    public void getDietDetails() {
+    public void getDietDetails(final String mParam1) {
 
         AsyncTask<Void, Void, Void> dietListDetails = new AsyncTask<Void, Void, Void>() {
 
@@ -133,6 +160,7 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
                 // TODO Auto-generated method stub
                 super.onPreExecute();
                 pBar.setVisibility(View.VISIBLE);
+                urlResponse=mParam1;
                 llContainer.setVisibility(View.GONE);
             }
 
@@ -141,17 +169,16 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
                 // TODO Auto-generated method stub
                 try {
                     exception = "";
-                    urlResponse = "";
-
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(AppConfig.HOST + "app_control/get_custom_meal_details?custom_meal_id=" + getArguments().getString("CustomMealID")
-                                    + "&client_id=" + saveString
-                                    + "&meal_id=" + getArguments().getString("MealID"))
-                            .build();
-
-                    Response response = client.newCall(request).execute();
-                    urlResponse = response.body().string();
+//
+//                    OkHttpClient client = new OkHttpClient();
+//                    Request request = new Request.Builder()
+//                            .url(AppConfig.HOST + "app_control/get_custom_meal_details?custom_meal_id=" + getArguments().getString("CustomMealID")
+//                                    + "&client_id=" + saveString
+//                                    + "&meal_id=" + getArguments().getString("MealID"))
+//                            .build();
+//
+//                    Response response = client.newCall(request).execute();
+//                    urlResponse = response.body().string();
 
 
 
@@ -199,7 +226,7 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
                     description.setText(dietDetailDataType.getMeal_description());
                     Glide.with(getActivity())
                             .load(dietDetailDataType.getMeal_image())
-                            .centerCrop()
+                            .centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL)
                             .fitCenter()
                             .into(mealimage);
 

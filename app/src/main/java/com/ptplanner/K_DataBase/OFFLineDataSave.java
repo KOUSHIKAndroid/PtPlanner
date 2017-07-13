@@ -172,11 +172,16 @@ public abstract class OFFLineDataSave {
                             Log.d("@@@888",meal.getJSONObject(i).getString("meal_image"));
 
                             View view=mContext.getLayoutInflater().inflate(R.layout.diet_item,null);
+//                            View view2=mContext.getLayoutInflater().inflate(R.layout.frag_dietlist_details,null);
 
                             ImageView imageView=(ImageView)view.findViewById(R.id.img_diet);
-                        Glide.with(mContext)
+//                            ImageView imageView2=(ImageView)view2.findViewById(R.id.meal_image);
+                             Glide.with(mContext)
                                 .load(meal.getJSONObject(i).getString("meal_image"))
                                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+//                            Glide.with(mContext)
+//                                .load(meal.getJSONObject(i).getString("meal_image"))
+//                                .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView2);
 //                        Glide.with(mContext)
 //                                .load(meal.getJSONObject(i).getString("meal_image"))
 //                                .asBitmap()
