@@ -1,13 +1,19 @@
 package com.happywannyan.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.happywannyan.Adapter.Calendar_Adapter;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.SetGetCalender;
@@ -19,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class CalenderActivity extends AppCompatActivity {
+public class CalenderActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     public static Calendar APPcalendar;
@@ -37,7 +43,7 @@ public class CalenderActivity extends AppCompatActivity {
 
 
     SFNFTextView tv_month_year_header;
-    SFNFTextView tv_date_limit, tv_no_of_nights;
+    SFNFTextView tv_date_limit;
     SFNFTextView TXT_OK;
     int day = 1;
     RecyclerView recyclerView;
@@ -47,6 +53,7 @@ public class CalenderActivity extends AppCompatActivity {
     int StartSelcteedYear = 0;
     public boolean samepage = true;
 
+    ImageView IMG_Tutorial;
     public int StartSelcetdDayposition = 0;
 
 
@@ -54,6 +61,7 @@ public class CalenderActivity extends AppCompatActivity {
     public boolean secondclick = false;
 
 
+    SharedPreferences SharePrefernce;
     int EndSelectedMonth = 0;
     int EndSelcteedYear = 0;
     int EndSelcetdDayPosition = 0;
@@ -72,11 +80,25 @@ public class CalenderActivity extends AppCompatActivity {
         currentDay = APPcalendar.getActualMinimum(Calendar.DAY_OF_MONTH);
         currentMonth = APPcalendar.get(Calendar.MONTH);
         currentYear = APPcalendar.get(Calendar.YEAR);
+        SharePrefernce= PreferenceManager.getDefaultSharedPreferences(this);
+        if(SharePrefernce.getString("SHULD","N").equals("Y"))
+        {
+            findViewById(R.id.RL_Tutorial).setVisibility(View.GONE);
+        }else {
+            findViewById(R.id.RL_Tutorial).setVisibility(View.VISIBLE);
+        }
+        IMG_Tutorial=(ImageView)findViewById(R.id.IMG_Tutorial);
+        IMG_Tutorial.setImageResource(R.drawable.calender_tutorail);
+
+        // Get the background, which has been compiled to an AnimationDrawable object.
+        AnimationDrawable frameAnimation = (AnimationDrawable) IMG_Tutorial.getDrawable();
+
+        // Start the animation (looped playback by default).
+        frameAnimation.start();
 
 
         tv_month_year_header = (SFNFTextView) findViewById(R.id.tv_month_year_header);
         tv_date_limit = (SFNFTextView) findViewById(R.id.tv_date_limit);
-        tv_no_of_nights = (SFNFTextView) findViewById(R.id.tv_no_of_nights);
         TXT_OK = (SFNFTextView) findViewById(R.id.TXT_OK);
         ArrayCalender = new ArrayList<>();
 
@@ -115,7 +137,6 @@ public class CalenderActivity extends AppCompatActivity {
         findViewById(R.id.img_previous_date).setVisibility(View.GONE);
         ////set time interval and no of nights in bottom layout
         tv_date_limit.setText(monthName);
-        tv_no_of_nights.setText("0" + " " + "Nights");
 
         TXT_OK.setOnClickListener(new View.OnClickListener() {
 
@@ -217,7 +238,6 @@ public class CalenderActivity extends AppCompatActivity {
 
                 ////set time interval and no of nights in bottom layout
                 tv_date_limit.setText(monthName);
-                tv_no_of_nights.setText("0" + " " + "Nights");
 
                 Calendar tat = Calendar.getInstance();
                 if (tat.get(Calendar.MONTH) == monthValue
@@ -282,7 +302,6 @@ public class CalenderActivity extends AppCompatActivity {
 
                 ////set time interval and no of nights in bottom layout
                 tv_date_limit.setText(monthName);
-                tv_no_of_nights.setText("0" + " " + "Nights");
             }
         });
 
@@ -451,7 +470,6 @@ public class CalenderActivity extends AppCompatActivity {
 
     public void setLimitAndNoOfNight(String dayinterval, int noOfNights) {
         tv_date_limit.setText(monthName + " " + dayinterval);
-        tv_no_of_nights.setText(noOfNights + " " + "Nights");
     }
 
     public void SetSTARTDATE(int position) {
@@ -474,5 +492,44 @@ public class CalenderActivity extends AppCompatActivity {
 
 
 //        super.onBackPressed();
+    }
+
+    public void ViewLabel() {
+        String StartDate = "";
+        String EndDate = "";
+        for (SuperCalender calender : ArrayCalender) {
+            for (SetGetCalender data : calender.getMonthBoject()) {
+                if (data.isStartdate()) {
+                    StartDate = data.getDay() + "-" + (calender.getMonth() + 1) + "-" + calender.getYear();
+//                            break;
+                }
+                if (data.isEnddate()) {
+                    EndDate = data.getDay() + "-" + (calender.getMonth() + 1) + "-" + calender.getYear();
+                    break;
+                }
+            }
+        }
+
+        if(EndDate.equals(""))
+        tv_date_limit.setText(StartDate);
+        else
+            tv_date_limit.setText(StartDate+ "  to  "+EndDate);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.BTN_Dismiss:
+                findViewById(R.id.RL_Tutorial).setVisibility(View.GONE);
+                break;
+            case R.id.IMG_TUTO:
+                findViewById(R.id.RL_Tutorial).setVisibility(View.VISIBLE);
+                break;
+            case R.id.BTN_Nver:
+                SharedPreferences.Editor editor=SharePrefernce.edit();
+                editor.putString("SHULD","Y").commit();
+                findViewById(R.id.RL_Tutorial).setVisibility(View.GONE);
+                break;
+        }
     }
 }

@@ -21,6 +21,7 @@ import com.happywannyan.Font.SFNFBoldTextView;
 import com.happywannyan.Font.SFNFTextView;
 import com.happywannyan.POJO.SearchData;
 import com.happywannyan.R;
+import com.happywannyan.Utils.Loger;
 import com.happywannyan.Utils.provider.RatingColor;
 
 import org.json.JSONException;
@@ -69,14 +70,16 @@ public class TinderViewAdapter extends BaseAdapter {
 //        ((SFNFTextView) v.findViewById(R.id.tv_address)) .setText(data.get(position));
         try {
             JSONObject object=data.get(position).getSearcItem();
+            Loger.MSG("@@Tinder-",object+"");
 //            JSONObject object=new JSONObject(data.get(position));
             Glide.with(context).load(object.getString("photo_url")).into((ImageView)v.findViewById(R.id.profileImageView));
-            ((SFNFTextView) v.findViewById(R.id.tv_title)).setText(object.getString("service_name"));
+            ((SFNFTextView) v.findViewById(R.id.tv_title)).setText(object.getString("nickname"));
             ((SFNFTextView) v.findViewById(R.id.tv_address)) .setText(object.getString("whole_address"));
             ((SFNFBoldTextView) v.findViewById(R.id.tv_Price)) .setText(object.getString("currency")+" "+object.getString("price_one"));
             ((SFNFTextView) v.findViewById(R.id.Time)) .setText(object.getString("unit"));
-            ((SFNFTextView) v.findViewById(R.id.tv_name)) .setText(object.getString("sitter_name"));
+            ((SFNFTextView) v.findViewById(R.id.tv_name)) .setText(object.getString("business_name"));
             ((SFNFTextView) v.findViewById(R.id.service_count)) .setText(object.getString("service_name_all"));
+            ((SFNFTextView) v.findViewById(R.id.tv_review)) .setText(object.getString("num_rvw") + " " + context.getResources().getString(R.string.review));
             ((RatingBar) v.findViewById(R.id.rating_bar)) .setNumStars(Integer.parseInt(object.getString("ave_rating")));
             ((RatingBar) v.findViewById(R.id.rating_bar)).setIsIndicator(true);
             LayerDrawable stars = (LayerDrawable) ((RatingBar) v.findViewById(R.id.rating_bar)).getProgressDrawable();

@@ -21,7 +21,7 @@
     <string name="action_settings">Settings</string>
     <string name="nav_messages">Messages</string>
     <string name="nav_yourpet">Your Pet</string>
-    <string name="nav_booking">Booking</string>
+    <string name="nav_booking">Bookings</string>
     <string name="nav_payment">Payment</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_help">Help</string>
@@ -70,7 +70,7 @@
     <string name="location">LOCATION</string>
     <string name="about">About</string>
     <string name="service">Service</string>
-    <string name="review">Review</string>
+    <string name="review">Reviews</string>
     <string name="images">Photos</string>
     <string name="specialskill">SPECIAL SKILLS</string>
     <string name="specialaccomod">SPECIAL ACCOMMODATIONS</string>
@@ -155,7 +155,7 @@
     <string name="pleaseselect">Please Slect</string>
     <string name="please_enter_message">Please type message here</string>
     <string name="select">Please Seclect</string>
-    <string name="nav_pastsitter">Past Sitter</string>
+    <string name="nav_pastsitter">Past Sitters</string>
     <string name="delete">Delete</string>
     <string name="do_you_want_to_delete">Do you want to delete ?</string>
     <string name="add_image">Add Image</string>
@@ -166,4 +166,7 @@
     <string name="generalequerys">General Inquiries</string>
     <string name="meetgreet">Meet Greet</string>
     <string name="mypets">My Pets</string>
+    <string name="calender_tips">Select Start Date and End Date by your finger across calender</string>
+    <string name="Dismiss">Dismiss</string>
+    <string name="nevershowstng">Never show this message again</string>
 </resources>

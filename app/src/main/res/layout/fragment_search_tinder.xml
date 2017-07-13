@@ -32,19 +32,19 @@
 
         <ImageView
             android:id="@+id/IMG_Left"
-            android:layout_width="40dp"
-            android:layout_height="45dp"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="6dp"
             android:src="@drawable/ic_swipe_left" />
 
         <ImageView
             android:id="@+id/IMG_Right"
-            android:layout_width="40dp"
-            android:layout_height="45dp"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="6dp"
             android:src="@drawable/ic_swipe_right" />
 
 

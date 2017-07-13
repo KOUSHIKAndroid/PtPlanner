@@ -141,6 +141,20 @@ Events events;
             }
         });
 
+
+        navigationView.findViewById(R.id.LL_Search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                Search_Basic search_basic = new Search_Basic();
+                fragmentTransaction.replace(R.id.Base_fargment_layout, search_basic);
+                fragmentTransaction.commit();
+            }
+        });
+
         navigationView.findViewById(R.id.LL_Booking).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

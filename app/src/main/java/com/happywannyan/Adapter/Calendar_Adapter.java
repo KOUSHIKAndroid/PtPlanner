@@ -242,6 +242,9 @@ public class Calendar_Adapter extends RecyclerView.Adapter<Calendar_Adapter.MyVi
         }
 
         notifyDataSetChanged();
+
+
+        ((CalenderActivity)context).ViewLabel();
     }
 
     @Override
