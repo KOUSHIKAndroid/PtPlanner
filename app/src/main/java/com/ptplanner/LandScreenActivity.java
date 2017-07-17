@@ -136,6 +136,9 @@ public class LandScreenActivity extends AppCompatActivity implements NavigationV
 
         super.onCreate(savedInstanceState);
 
+
+
+
 //@@ KOUSHIIK
         mRegistrationBroadcastReceiver = new LandBroadcastReceiver();
         sharedPreferences = getSharedPreferences("DateTime", Context.MODE_PRIVATE);

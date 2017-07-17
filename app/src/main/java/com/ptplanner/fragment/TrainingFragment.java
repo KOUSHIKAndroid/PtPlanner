@@ -2,8 +2,11 @@ package com.ptplanner.fragment;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -12,6 +15,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.TextUtils;
@@ -29,6 +33,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ptplanner.Khelper.Internet;
+import com.ptplanner.Khelper.Internet_Informer;
+import com.ptplanner.LandScreenActivity;
 import com.ptplanner.R;
 import com.ptplanner.adapter.TrainingAdapter;
 import com.ptplanner.adapter.TrainingViewPagerAdapter;
@@ -99,11 +107,21 @@ public class TrainingFragment extends Fragment {
     ImageView img_leftarrow;
     String checkValue = "";
 
+
+
+
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         dialogString = getResources().getString(R.string.frag_training_alertDialog);
 //        fView = inflater.inflate(R.layout.frag_training, container, false);
+
+
+
 
 
         ////////////////////////////////////////////////
@@ -817,4 +835,5 @@ public class TrainingFragment extends Fragment {
 
         }
     };
+
 }

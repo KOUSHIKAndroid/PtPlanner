@@ -20,7 +20,7 @@ android {
         config {
             keyAlias 'Pt-Planner'
             keyPassword 'esolz123'
-            storeFile file('/home/su/Documents/Pt-Planner/NewSignAPK/pt_planner.jks')
+            storeFile file('/Users/apple/Documents/PtPlanner/SignedAPK/pt_planner.jks')
             storePassword 'esolz123'
         }
     }

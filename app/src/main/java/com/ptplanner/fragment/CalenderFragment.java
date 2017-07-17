@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -41,6 +42,8 @@ import android.widget.Toast;
 import com.ptplanner.K_DataBase.Database;
 import com.ptplanner.K_DataBase.LocalDataResponse;
 import com.ptplanner.K_DataBase.OFFLineDataSave;
+import com.ptplanner.Khelper.Internet;
+import com.ptplanner.Khelper.Internet_Informer;
 import com.ptplanner.LandScreenActivity;
 import com.ptplanner.LoginActivity;
 import com.ptplanner.R;
@@ -84,7 +87,7 @@ import okhttp3.Response;
 
 
 //@SuppressLint("NewApi")
-public class CalenderFragment extends Fragment {
+public class CalenderFragment extends Fragment implements Internet_Informer{
 
     JSONArray jArrAppointment, jArrProgram, jArrMeal, jArrDiary, jarrayAvailableDate;
     CalendarEventDataType calEventData;
@@ -154,12 +157,58 @@ public class CalenderFragment extends Fragment {
 
     RelativeLayout navigation_left, navigation_right;
 
+
+
+    public class INTERNETRECIEVER extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("@@ Conection "," Calll");
+            boolean Connection = intent.getExtras().getBoolean("NET");
+            if(Connection)
+            {
+                Offline.setVisibility(View.VISIBLE);
+                new Database(getActivity()).GET_Diary_Frag_Fetails(PAGE_DATE, new LocalDataResponse() {
+                    @Override
+                    public void OnSuccess(String Response) {
+                        Log.d("@@@ DATAT-",Response+"hsbdh");
+                        txt_Offline.setText(getString(R.string.offlineAvilable));
+                        Offline.setClickable(false);
+                        Offline.setBackgroundColor(Color.parseColor("#00000000"));
+
+//                        Offline.setClickable(true);
+//                        txt_Offline.setText(getString(R.string.offlinemode));
+//                        Offline.setBackground(getResources().getDrawable(R.drawable.calbtnbg1));
+                    }
+
+                    @Override
+                    public void OnNotfound(String NotFound) {
+                        Log.d("@@@ DATAT-",NotFound);
+                        Offline.setClickable(true);
+                        txt_Offline.setText(getString(R.string.offlinemode));
+                        Offline.setBackground(getResources().getDrawable(R.drawable.calbtnbg1));
+                    }
+                });
+                Log.d("@@ Conection "," Connected");
+            }else {
+                Offline.setVisibility(View.GONE);
+                Log.d("@@ Conection "," Disconnected");
+            }
+
+        }
+    }
+
+    private BroadcastReceiver receiver ;
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         appointment_string = getResources().getString(R.string.Appointments);
         activity = (LandScreenActivity) getActivity();
 
+        receiver=new INTERNETRECIEVER();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("INTERNET");
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(receiver, filter);
         //////////////////////////////////////////////////////////////////////////
 
         appointmentButton = (LinearLayout) getActivity().findViewById(R.id.blockappoinmentbutton);
@@ -970,6 +1019,10 @@ public class CalenderFragment extends Fragment {
                         txt_Offline.setText(getString(R.string.offlineAvilable));
                         Offline.setClickable(false);
                         Offline.setBackgroundColor(Color.parseColor("#00000000"));
+
+//                        Offline.setClickable(true);
+//                        txt_Offline.setText(getString(R.string.offlinemode));
+//                        Offline.setBackground(getResources().getDrawable(R.drawable.calbtnbg1));
                     }
 
                     @Override
@@ -1348,6 +1401,18 @@ public class CalenderFragment extends Fragment {
         };
         allEvents.execute();
 
+    }
+
+    @Override
+    public void OnAvilable(boolean Res) {
+
+        Log.d("@@ AVilabale"," Yes");
+
+    }
+
+    @Override
+    public void OnUnAvilable(boolean Res) {
+        Log.d("@@ AVilabale"," No");
     }
 
 
