@@ -39,6 +39,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ptplanner.K_DataBase.Database;
 import com.ptplanner.K_DataBase.LocalDataResponse;
 import com.ptplanner.K_DataBase.OFFLineDataSave;
@@ -167,7 +169,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
             boolean Connection = intent.getExtras().getBoolean("NET");
             if(Connection)
             {
-                Offline.setVisibility(View.VISIBLE);
+//                Offline.setVisibility(View.VISIBLE);
                 new Database(getActivity()).GET_Diary_Frag_Fetails(PAGE_DATE, new LocalDataResponse() {
                     @Override
                     public void OnSuccess(String Response) {
@@ -741,6 +743,8 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
 
     private void PAGE_OFFLINEDATASHOW(String date) {
         AppConfig.OfflineDate=date;
+
+
         new Database(getActivity()).GET_Caleder_Frag_Fetails(date, new LocalDataResponse() {
             @Override
             public void OnSuccess(String Response) {
@@ -789,6 +793,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
                                 jsonObject.getString("instruction"),
                                 AppConfig.exerciseSetsDataypeArrayList
                         );
+                        allExercisesDataType.setTraingingPageData(jsonObject.getJSONObject("exercise_inDetails").toString());
                         AppConfig.allExercisesDataTypeArrayList.add(allExercisesDataType);
                     }
                     if(jOBJ.getString("training_enable").equals("N")) {
@@ -1012,6 +1017,17 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
                 // TODO Auto-generated method stub
                 super.onPreExecute();
 
+
+
+                final Calendar c = Calendar.getInstance();
+                String CurrentDate = "" + dateFormat.format(c.getTime());
+                if(CurrentDate.equals(date))
+                {
+                    Offline.setVisibility(View.VISIBLE);
+                }else {
+                    Offline.setVisibility(View.INVISIBLE);
+                }
+
                 new Database(getActivity()).GET_Diary_Frag_Fetails(date, new LocalDataResponse() {
                     @Override
                     public void OnSuccess(String Response) {
@@ -1033,6 +1049,14 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
                         Offline.setBackground(getResources().getDrawable(R.drawable.calbtnbg1));
                     }
                 });
+
+
+
+
+
+
+
+
 
 
 
@@ -1117,6 +1141,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
                                 jsonObject.getString("instruction"),
                                 AppConfig.exerciseSetsDataypeArrayList
                         );
+                        allExercisesDataType.setTraingingPageData(jsonObject.getJSONObject("exercise_inDetails").toString());
                         AppConfig.allExercisesDataTypeArrayList.add(allExercisesDataType);
                     }
 //
@@ -1140,6 +1165,22 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
 
                 try {
 
+                    JSONObject jOBJ = new JSONObject(urlResponse);
+                    JSONArray jsonArray = jOBJ.getJSONArray("all_exercises");
+
+                    for (int j = 0; j < jsonArray.length(); j++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(j);
+                        View   itemview = getActivity().getLayoutInflater().inflate(R.layout.training_viewpager_adapter, null);
+                        ImageView  imgExercise = (ImageView) itemview.findViewById(R.id.img_exercise);
+                        Glide.with(getActivity())
+                                .load(jsonObject.getJSONObject("exercise_inDetails").getString("exercise_image")).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.drawable.no_progress_images)
+                                .into(imgExercise);
+                    }
+
+
+
+
                     new Database(getActivity()).SetCalenderPageData(date, urlResponse, new LocalDataResponse() {
                         @Override
                         public void OnSuccess(String Response) {
@@ -1155,7 +1196,6 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
 
 
 
-                    JSONObject jOBJ = new JSONObject(urlResponse);
 
                     if(jOBJ.getString("training_enable").equals("N")) {
                         rlTraining.setVisibility(View.GONE);

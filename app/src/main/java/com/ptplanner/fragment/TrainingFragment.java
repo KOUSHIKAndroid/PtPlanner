@@ -2,11 +2,8 @@ package com.ptplanner.fragment;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -15,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.TextUtils;
@@ -34,9 +30,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ptplanner.Khelper.Internet;
-import com.ptplanner.Khelper.Internet_Informer;
-import com.ptplanner.LandScreenActivity;
 import com.ptplanner.R;
 import com.ptplanner.adapter.TrainingAdapter;
 import com.ptplanner.adapter.TrainingViewPagerAdapter;
@@ -84,6 +77,7 @@ public class TrainingFragment extends Fragment {
     ArrayList<String> exerciseTitleArr;
     ArrayList<String> exerciseIDArr;
     ArrayList<String> userProgramIdArr;
+    ArrayList<String> ProgramDetailsArray;
 
     ArrayList<String> setREPS, setKG;
     TrainingViewPagerAdapter trainingViewPagerAdapter;
@@ -170,6 +164,7 @@ public class TrainingFragment extends Fragment {
         exerciseTitleArr = new ArrayList<String>();
         exerciseIDArr = new ArrayList<String>();
         userProgramIdArr = new ArrayList<String>();
+        ProgramDetailsArray = new ArrayList<String>();
 
 
 
@@ -195,6 +190,7 @@ public class TrainingFragment extends Fragment {
 
             for (int k = 0; k < AppConfig.allExercisesDataTypeArrayList.size(); k++) {
                 userProgramIdArr.add(AppConfig.allExercisesDataTypeArrayList.get(k).getUser_program_id());
+                ProgramDetailsArray.add(AppConfig.allExercisesDataTypeArrayList.get(k).getTraingingPageData());
             }
         }catch (Exception e)
         {
@@ -204,48 +200,10 @@ public class TrainingFragment extends Fragment {
 
 
         if (cd.isConnectingToInternet()) {
-            try {
-                try {
-                    txtRight.setText(exerciseTitleArr.get(1));
-//                    txtExerciseTitle.setText(exerciseTitleArr.get(0));
-                    rlRightClick.setVisibility(View.VISIBLE);
-                    rlLeftClick.setVisibility(View.GONE);
-                    checkValue = "";
-                    rlLeftClick.setClickable(true);
-                    rlLeftClick.setEnabled(true);
-                    img_leftarrow.setVisibility(View.VISIBLE);
-                } catch (Exception e) {
-                    rlRightClick.setVisibility(View.GONE);
-                    rlLeftClick.setVisibility(View.VISIBLE);
-                    rlLeftClick.setClickable(false);
-                    rlLeftClick.setEnabled(false);
-                    checkValue = "CHECK";
-                    img_leftarrow.setVisibility(View.INVISIBLE);
-                }
-                getExerCiseDetails(userProgramIdArr.get(0), exerciseIDArr.get(0));
-
-            } catch (Exception e) {
-
-                more.setClickable(false);
-                llFinish.setVisibility(View.GONE);
-
-                rlRightClick.setVisibility(View.GONE);
-                rlLeftClick.setVisibility(View.GONE);
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                alertDialogBuilder
-                        .setMessage(dialogString)
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-            }
+           Call_APIDATA();
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+            Call_APIDATA();
         }
         try {
 
@@ -281,15 +239,15 @@ public class TrainingFragment extends Fragment {
                             txtLeft.setText(exerciseTitleArr.get(t - 1));
                             rlRightClick.setVisibility(View.VISIBLE);
                         }
-                        if (cd.isConnectingToInternet()) {
+//                        if (cd.isConnectingToInternet()) {
                             try {
-                                getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t));
+                                getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t), ProgramDetailsArray.get(t));
                             } catch (Exception e) {
                                 Log.i("Excep Training : ", "No Data........");
                             }
-                        } else {
-                            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
-                        }
+//                        } else {
+//                            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+//                        }
                         //Toast.makeText(getActivity(), exerciseIDArr.get(t), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -314,15 +272,15 @@ public class TrainingFragment extends Fragment {
                         txtLeft.setText(exerciseTitleArr.get(t - 1));
                         rlRightClick.setVisibility(View.VISIBLE);
                     }
-                    if (cd.isConnectingToInternet()) {
+//                    if (cd.isConnectingToInternet()) {
                         try {
-                            getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t));
+                            getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t), ProgramDetailsArray.get(t));
                         } catch (Exception e) {
                             Log.i("Excep Training : ", "No Data........");
                         }
-                    } else {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
-                    }
+//                    } else {
+//                        Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+//                    }
                     //Toast.makeText(getActivity(), exerciseIDArr.get(t), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -397,6 +355,48 @@ public class TrainingFragment extends Fragment {
         return fView;
     }
 
+    private void Call_APIDATA() {
+        try {
+            try {
+                txtRight.setText(exerciseTitleArr.get(1));
+//                    txtExerciseTitle.setText(exerciseTitleArr.get(0));
+                rlRightClick.setVisibility(View.VISIBLE);
+                rlLeftClick.setVisibility(View.GONE);
+                checkValue = "";
+                rlLeftClick.setClickable(true);
+                rlLeftClick.setEnabled(true);
+                img_leftarrow.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+                rlRightClick.setVisibility(View.GONE);
+                rlLeftClick.setVisibility(View.VISIBLE);
+                rlLeftClick.setClickable(false);
+                rlLeftClick.setEnabled(false);
+                checkValue = "CHECK";
+                img_leftarrow.setVisibility(View.INVISIBLE);
+            }
+            getExerCiseDetails(userProgramIdArr.get(0), exerciseIDArr.get(0),ProgramDetailsArray.get(0));
+
+        } catch (Exception e) {
+
+            more.setClickable(false);
+            llFinish.setVisibility(View.GONE);
+
+            rlRightClick.setVisibility(View.GONE);
+            rlLeftClick.setVisibility(View.GONE);
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            alertDialogBuilder
+                    .setMessage(dialogString)
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    }
 
 
     public void editExcercise(final String userProgramId, final String excerciseId,
@@ -604,7 +604,7 @@ public class TrainingFragment extends Fragment {
 
     }
 
-    public void getExerCiseDetails(final String userProgramId, final String excerciseId) {
+    public void getExerCiseDetails(final String userProgramId, final String excerciseId, final String DetailsData) {
 
         AsyncTask<Void, Void, Void> excerciseDetails = new AsyncTask<Void, Void, Void>() {
 
@@ -629,6 +629,7 @@ public class TrainingFragment extends Fragment {
                 appointmentButton.setEnabled(false);
                 messageButton.setClickable(false);
                 messageButton.setEnabled(false);
+                urlResponse=DetailsData;
 
                 ////////////////////////////////////////////////////////////////////
 
@@ -640,17 +641,17 @@ public class TrainingFragment extends Fragment {
                 // TODO Auto-generated method stub
                 try {
                     exception = "";
-                    urlResponse = "";
+//                    urlResponse = "";
 
 
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
-                                    userProgramId + "&client_id=" + saveString + "&exercise_id=" + excerciseId)
-                            .build();
-
-                    Response response = client.newCall(request).execute();
-                    urlResponse = response.body().string();
+//                    OkHttpClient client = new OkHttpClient();
+//                    Request request = new Request.Builder()
+//                            .url(AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
+//                                    userProgramId + "&client_id=" + saveString + "&exercise_id=" + excerciseId)
+//                            .build();
+//
+//                    Response response = client.newCall(request).execute();
+//                    urlResponse = response.body().string();
                     Log.d("@@ GET TRAINING--",AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
                             userProgramId + "&client_id=" + saveString + "&exercise_id=" + excerciseId);
                     JSONObject jOBJ = new JSONObject(urlResponse);

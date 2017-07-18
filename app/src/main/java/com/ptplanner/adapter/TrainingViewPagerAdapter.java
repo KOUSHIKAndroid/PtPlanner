@@ -20,6 +20,7 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.ptplanner.R;
 import com.ptplanner.VideoViewActivity;
+import com.ptplanner.helper.ConnectionDetector;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -63,7 +64,7 @@ public class TrainingViewPagerAdapter extends PagerAdapter {
 
         Log.d("@@ KOUSHIK","-"+imgURL +videoUrl);
 
-        if (position == 0 && (videoUrl.equalsIgnoreCase("") || videoUrl==null)) {
+        if ((position == 0 && (videoUrl.equalsIgnoreCase("") || videoUrl==null)) || new ConnectionDetector(context).isConnectingToInternet()==false ) {
             Log.d("@@ KOUSHIK","1-"+imgURL +videoUrl);
 
             itemview = inflater.inflate(R.layout.training_viewpager_adapter, container, false);

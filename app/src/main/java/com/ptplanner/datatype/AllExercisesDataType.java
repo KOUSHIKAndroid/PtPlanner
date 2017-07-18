@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 public class AllExercisesDataType {
     String user_program_id, exercise_id, exercise_title, instruction;
+
+    String TraingingPageData;
     ArrayList<ExerciseSetsDataype> exerciseSetsDataypeArrayList;
 
     public AllExercisesDataType(String user_program_id, String exercise_id, String exercise_title,
@@ -16,6 +18,15 @@ public class AllExercisesDataType {
         this.exercise_title = exercise_title;
         this.instruction = instruction;
         this.exerciseSetsDataypeArrayList = exerciseSetsDataypeArrayList;
+    }
+
+
+    public String getTraingingPageData() {
+        return TraingingPageData;
+    }
+
+    public void setTraingingPageData(String traingingPageData) {
+        TraingingPageData = traingingPageData;
     }
 
     public String getUser_program_id() {

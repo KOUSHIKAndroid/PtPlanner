@@ -179,15 +179,9 @@ public abstract class OFFLineDataSave {
                              Glide.with(mContext)
                                 .load(meal.getJSONObject(i).getString("meal_image"))
                                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
-//                            Glide.with(mContext)
-//                                .load(meal.getJSONObject(i).getString("meal_image"))
-//                                .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView2);
-//                        Glide.with(mContext)
-//                                .load(meal.getJSONObject(i).getString("meal_image"))
-//                                .asBitmap()
-//                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                                .into(400, 400)
-//                                .get();
+
+
+
 
                         }
                     } catch (JSONException e) {
