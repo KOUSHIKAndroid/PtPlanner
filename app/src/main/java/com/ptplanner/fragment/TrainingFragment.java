@@ -339,16 +339,18 @@ public class TrainingFragment extends Fragment {
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 }
 
-                Bundle bundle = new Bundle();
-                bundle.putString("DateChange", getArguments().getString("DateChange"));
 
-                fragmentTransaction = fragmentManager.beginTransaction();
-                CalenderFragment cal_fragment = new CalenderFragment();
-                cal_fragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.fragment_container, cal_fragment);
-//                int count = fragmentManager.getBackStackEntryCount();
-//                fragmentTransaction.addToBackStack(String.valueOf(count));
-                fragmentTransaction.commit();
+                getActivity().onBackPressed();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("DateChange", getArguments().getString("DateChange"));
+//
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                CalenderFragment cal_fragment = new CalenderFragment();
+//                cal_fragment.setArguments(bundle);
+//                fragmentTransaction.replace(R.id.fragment_container, cal_fragment);
+////                int count = fragmentManager.getBackStackEntryCount();
+////                fragmentTransaction.addToBackStack(String.valueOf(count));
+//                fragmentTransaction.commit();
             }
         });
 

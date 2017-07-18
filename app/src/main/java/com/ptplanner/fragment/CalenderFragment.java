@@ -743,6 +743,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer{
 
     private void PAGE_OFFLINEDATASHOW(String date) {
         AppConfig.OfflineDate=date;
+        Offline.setVisibility(View.GONE);
 
 
         new Database(getActivity()).GET_Caleder_Frag_Fetails(date, new LocalDataResponse() {
