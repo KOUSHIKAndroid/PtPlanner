@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#22A7F0"
+    android:padding="6dp">
+
+    <com.ptplanner.customviews.TitilliumBold
+        android:id="@+id/selecttion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/dialog_logout_option_logout"
+        android:textColor="#ffffff"
+        android:textSize="18sp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selecttion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/ll_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/chat_footer"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <com.ptplanner.customviews.HelveticaSemiBoldLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="@string/dialog_logout_option_no"
+                android:textColor="#22A7F0"
+                android:textSize="17sp">
+            </com.ptplanner.customviews.HelveticaSemiBoldLight>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_yes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/chat_footer"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <com.ptplanner.customviews.HelveticaSemiBoldLight
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="@string/Logout"
+                android:textColor="#22A7F0"
+                android:textSize="17sp">
+            </com.ptplanner.customviews.HelveticaSemiBoldLight>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="Sunday">Sön</string>
+    <string name="Monday">Mån</string>
+    <string name="Tuesday">Tis</string>
+    <string name="Wednesday">Ons</string>
+    <string name="Thursday">Tor</string>
+    <string name="Friday">Fre</string>
+    <string name="Saturday">Lör</string>
+
+
+    <string name="Email">E-post</string>
+    <string name="Password">Lösenord</string>
+    <string name="RememberMe">Kom ihåg mig</string>
+    <string name="ForgotPassword">Glömt lösenord</string>
+    <string name="BlankEmail">E-post kan inte lämnas tomt</string>
+    <string name="InvalidEmail">Inte en giltig e-post</string>
+    <string name="BlankPassword">Lösenord kan inte lämnas tomt</string>
+    <string name="NoInternet">Ingen internetanslutning</string>
+    <string name="ErrorMSG">Du har inget giltigt konto</string>
+
+
+    <string name="CalendereApp">Tid</string>
+
+    <!--fragment_booking resource-->
+    <string name="Book">Boka</string>
+    <string name="Booked">Bokad</string>
+    <string name="BookConfirm">Bokningsbekräftelse</string>
+
+    <!--fragment_calendar resource-->
+    <string name="Login">Logga in</string>
+    <string name="Logout">Logga ut</string>
+    <string name="Today">Idag</string>
+    <string name="Calendar">Kalender</string>
+    <string name="PowerChest">Power Chest</string>
+    <string name="Appointments">Bokningar</string>
+    <string name="NoAppointment">Inga bokningar</string>
+    <string name="SingleAppointment">Bokning</string>
+    <string name="MultipointAppointments">Bokningar</string>
+    <string name="RemindMe">Påminn mig</string>
+    <string name="Training">Träning</string>
+    <string name="Diet">Kost</string>
+    <string name="Diary">Dagbok</string>
+    <string name="ExerciseDone">Övningar utförda</string>
+    <string name="Meal">Måltider</string>
+    <string name="Meals">Måltider</string>
+
+    <!--activity_landingpage resource -->
+    <string name="acivity_landingpage_calendar">Kalender</string>
+    <string name="acivity_landingpage_appointments">Bokningar</string>
+    <string name="acivity_landingpage_progress">Framsteg</string>
+    <string name="acivity_landingpage_messages">Meddelanden</string>
+
+    <!-- activity_forgotpassword resource -->
+    <string name="acivity_forgotpassword_enterEmail">Fyll dina inloggningsuppgifter</string>
+    <string name="acivity_forgotpassword_done">Klart</string>
+    <string name="ForgotPassSugge">* E-postadressen måste vara giltig hos PT-Planner, därefter
+        skickas en länk där du kan återställa ditt lösenord
+    </string>
+
+    <!-- dialog_logout_option resource -->
+    <string name="dialog_logout_option_yes">Ja</string>
+    <string name="dialog_logout_option_no">Nej</string>
+    <string name="dialog_logout_option_logout">Logga ut från PT-Planner?</string>
+
+    <!--popup_showcalendar resource -->
+    <string name="popup_showcalendar_hide">Göm</string>
+    <string name="popup_showcalendar_today">Idag</string>
+
+    <!--reminder_dialog resource -->
+    <string name="reminder_dialog_remindme">Påminn mig</string>
+    <string name="reminder_dialog_cancel">Avbryt</string>
+    <string name="reminder_dialog_done">Klart</string>
+
+    <!-- frag_book_appointment resouce-->
+    <string name="frag_book_appointment_appointments">Bokningar</string>
+    <string name="frag_book_appointment_calendar">Kalender</string>
+    <string name="frag_book_appointment_chooseDate">Välj datum</string>
+    <string name="frag_book_appointment_choosePt">Välj tränare</string>
+
+    <!-- frag_training resource -->
+    <string name="frag_training_more">Mer</string>
+    <string name="frag_training_finishExercise">Slutförd övning</string>
+    <string name="frag_training_alertDialog">Fråga din tränare om övningar!</string>
+
+    <!-- frag_diet resource -->
+    <string name="fra_diet_diet">Kost</string>
+    <string name="fra_diet_calendar">Kalender</string>
+    <string name="fra_diet_calorieDialog">Fråga din tränare om ett kostschema!</string>
+
+    <!--frag_diary resource -->
+    <string name="fra_diary_diary">Dagbok</string>
+    <string name="fra_diary_calendar">Kalender</string>
+    <string name="fra_diary_longString">Om allt går bra,skriv det!</string>
+
+    <!--profile_details resource -->
+    <string name="profile_details_location">Plats</string>
+    <string name="profile_details_profile">Profil</string>
+
+    <!--frag_progress resource -->
+    <string name="frag_progress_progress">Framsteg</string>
+
+    <string name="frag_progress_allGraph">Alla grafer</string>
+    <string name="frag_progress_type">Typ</string>
+    <string name="frag_progress_goal">Mål</string>
+    <string name="frag_progress_deadline">Måldatum</string>
+    <string name="frag_progress_imageGoal">Mål</string>
+    <string name="years_old">år</string>År
+
+    <!--frag_allgraph resourcs -->
+    <string name="frag_allgraph">Alla grafer</string>
+
+    <!--dialog_camera_selection resourcs -->
+    <string name="dialog_camera_selection_cancel">Avbryt</string>
+
+    <!--activity_grapgh_view resource -->
+    <string name="activity_graph_view_addMeasurement">Lägg till mätpunkt</string>
+    <string name="activity_graph_view_goal">Mål</string>
+    <string name="activity_graph_view_deadline">Måldatum</string>
+
+
+    <!--measurement_dialog resource -->
+    <string name="measurement_dialog_addMeasurement">Lägg till mätpunkt</string>
+    <string name="measurement_dialog_done">Klart</string>
+
+    <!--frag_messages resource -->
+    <string name="frag_messages_messages">Meddelanden</string>
+
+    <!--msg_history resource -->
+    <string name="msg_history_viewProfile">Visa profil</string>
+    <string name="msg_history_writeMessage">Skriv ett meddelande</string>
+
+    <!--DietFragment resource -->
+    <string name="diet_fragment_zeroCalorie">Nollkaloridiet</string>
+
+
+    <!--activity_camerapreview resource -->
+    <string name="activity_camerapreview_cancel">Avbryt</string>
+    <string name="activity_camerapreview_done">Klart</string>
+
+    <!--frag_appointment resource -->
+    <string name="frag_appointment_appointment">Bokningar</string>
+    <string name="frag_appointment_dateandtime">Datum och tid</string>
+    <string name="frag_appointment_location">Plats</string>
+
+
+    <string name="frag_more_hide">Göm</string>
+    <string name="frag_more_description">Beskrivning</string>
+
+    <string name="diaryFragment_calendar">Kalender</string>
+    <string name="diaryFragment_hide">Göm</string>
+
+    <string name="message_history_viewProfile">Visa profil</string>
+    <string name="message_history_writeMessage">Skriv ett meddelande</string>
+
+    <string name="frag_appointment_cancelAppointment">Avboka tid</string> <!--Avbryt bokning-->
+
+    <string name="app_name">PT-Planner</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="api_key">AIzaSyDvg8BMyNBx0uWpcNIU7Fy3P36mGSC1AVk</string>
+    <string name="project_id">751757095331</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="no_internet">Ingen internetuppkoppling</string>
+
+
+    <!--  Acc Deactivate Message -->
+    <string name="msgaccdeactivate">kontot har inaktiverats , kontakta din tränare .
+    </string>
+
+    <string name="please_wait">Vänta</string>
+    <string name="privacyplicy">Sekretesspolicy</string>
+
+
+</resources>
