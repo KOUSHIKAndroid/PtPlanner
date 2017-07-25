@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<group android:checkableBehavior="single">-->
+        <!--&lt;!&ndash;<item&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/nav_camera"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:icon="@drawable/ic_menu_camera"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:title="Import" />&ndash;&gt;-->
+        <!--<item-->
+            <!--android:id="@+id/nav_camera"-->
+            <!--android:title="Import" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_gallery"-->
+            <!--android:title="Gallery" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_slideshow"-->
+            <!--android:title="Slideshow" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_manage"-->
+            <!--android:title="Tools" />-->
+    <!--</group>-->
+
+    <group android:id="@+id/grp1"  >
+        <item
+            android:id="@+id/navigation_item_1"
+            android:checked="true"
+            android:title="@string/Logout" />
+    </group>
+
+    <group android:id="@+id/grp2"  >
+        <item
+            android:id="@+id/navigation_item_2"
+            android:title="@string/privacyplicy" />
+    </group>
+
+    <group android:id="@+id/grp22"  >
+        <item
+            android:id="@+id/navigation"
+             />
+    </group>
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

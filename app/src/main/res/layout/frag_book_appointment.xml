@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#22A7F0"
+        android:paddingLeft="8dp"
+        android:paddingRight="10dp">
+
+
+        <com.ptplanner.customviews.TitilliumRegular
+            android:id="@+id/tv_spinner_no_value"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:text="Ingen tid"
+            android:textSize="18sp"
+            android:textColor="#ffffff"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:background="@android:color/transparent"
+            />
+        <ProgressBar
+            android:padding="15dp"
+            android:id="@+id/pbr_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:indeterminateTint="#ffffff"
+            />
+
+        <LinearLayout
+            android:id="@+id/show_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_default"
+            android:padding="5dp">
+
+            <com.ptplanner.customviews.TitilliumRegular
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/frag_book_appointment_calendar"
+                android:textColor="#ffffff"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <com.ptplanner.customviews.TitilliumSemiBold
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/frag_book_appointment_appointments"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+            android:weightSum="5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:background="@drawable/pt_new"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp">
+
+                        <com.ptplanner.customviews.TitilliumRegular
+                            android:id="@+id/textView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/frag_book_appointment_chooseDate"
+                            android:textColor="#ffffff"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/prev_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/selector_default"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/arrow21"
+                            android:clickable="false"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <com.ptplanner.customviews.HelveticaHeavy
+                        android:id="@+id/tv_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="14"
+                        android:textColor="#ffffff"
+                        android:textSize="63sp"
+                        android:textStyle="bold"/>
+
+                    <com.ptplanner.customviews.TitilliumSemiBold
+                        android:id="@+id/tv_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_number"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text=" APRIL"
+                        android:textColor="#ffffff"
+                        android:textSize="22sp"/>
+
+                    <com.ptplanner.customviews.TitilliumSemiBold
+                        android:id="@+id/tv_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/tv_number"
+                        android:layout_centerHorizontal="true"
+                        android:text=" FRIDAY"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+                    <RelativeLayout
+                        android:id="@+id/next_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/selector_default"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/arrow12"
+                            android:clickable="false"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:weightSum="8">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="2">
+
+                    <com.ptplanner.customviews.TitilliumRegular
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/frag_book_appointment_choosePt"
+                        android:textColor="#B2C4CF"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="6"
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/viewpager_pbar"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"/>
+
+                    <LinearLayout
+                        android:id="@+id/pterror"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="6dp"
+                            android:background="@drawable/no_image_available"/>
+
+                        <com.ptplanner.customviews.TitilliumRegular
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Inga tränare tillgängliga"
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                    </LinearLayout>
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/trainer_viewpager"
+                        android:layout_marginLeft="55dp"
+                        android:layout_marginRight="55dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+                    </android.support.v4.view.ViewPager>
+
+                    <LinearLayout
+                        android:id="@+id/vp_back"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:id="@+id/img_back"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:background="@drawable/arrow21"
+                            android:clickable="false"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/vp_next"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <ImageView
+                            android:id="@+id/img_next"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:background="@drawable/arrow12"
+                            android:clickable="false"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="#22A7F0"-->
+            <!--android:orientation="vertical">-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"-->
+            <!--android:orientation="vertical">-->
+        <!--</LinearLayout>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+           >
+
+            <ProgressBar
+                android:id="@+id/pbar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"/>
+
+            <ListView
+                android:id="@+id/book_app_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@drawable/line"
+                android:dividerHeight="1dp"
+                android:scrollbars="none">
+            </ListView>
+
+            <com.ptplanner.customviews.TitilliumSemiBold
+                android:id="@+id/no_slot_found"
+                android:textColor="#22A7F0"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="Inga fler bokningsbara tider idag"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
