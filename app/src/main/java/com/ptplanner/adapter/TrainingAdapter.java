@@ -111,6 +111,10 @@ public class TrainingAdapter extends ArrayAdapter<TrainingPerticularExerciseSets
 
         }
 
+
+
+
+
         if (trainingPerticularExerciseSetsDatatypeArrayList.get(position).getIsEditable()) {
             holder.llCheck.setVisibility(View.GONE);
             holder.llChange.setVisibility(View.VISIBLE);
@@ -165,6 +169,12 @@ public class TrainingAdapter extends ArrayAdapter<TrainingPerticularExerciseSets
 
             }
         });
+
+        if(new ConnectionDetector(context).isConnectingToInternet()==false)
+        {
+            holder.llCheck.setVisibility(View.INVISIBLE);
+            holder.llCheck.setClickable(false);
+        }
 
         holder.llCheck.setOnClickListener(new View.OnClickListener() {
             @Override
