@@ -3,21 +3,66 @@
 
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/74b6d0e7f16c0a0e5f208b49d0f22a4e8acf1bb5/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/ade976bdd68f19e286ef7554fcfdd8c4ced82837/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="4b17463c814bdc562fb0392fa3494063623a0904">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1eddc2fefc1121e20f5cada5cdba1ca62e51d25d/classes.dex" />
+        sha1="dd39827d2067497e60e21da48a7926000b6d4b0c">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_18cf493f3db4bf3412763950e46efb5fff159784/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/2b3c546d094464708a2357736d72874520ae2145/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/a6f737f635669c7213b16a87fba73d694b12955a/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="6bb5d347ebc0c6ef3c83a905222a688da5d2f7b4">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e466edfcc4ee1545bce182542c483b26648aef8f/classes.dex" />
+        sha1="f23ad0f8e58713ff4b55f61c0bbde3830378347c">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ea43566f734218dc57f11201a2a0abed7b15a12a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/7fc42d5a0d30f08241bac95cd42f9bd9de917dd1/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c6e1f361e9d61aece9dac39b77fcc98a337a144d">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ea473fa9b39f232569a33576a9ab6104f8c3879f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/f8850ebb51e692067b82e0f8ab41fb6e0acec057/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="028f8255cb977b29cdffbfcf05caa0459686120c">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_df7bdb110a020211336bf31a2461bbb9170384e7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/fe18d6213265cdd49da561f9f29df02e010b4007/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e96c6974cf924e7ee3b230e6847d5731423388c9">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3a0b6b5c287a2bde506dc40012e63d03c1c2d751/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/1de375be921913865c700c9f66a97588781ea167/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4c829ff0ccfecb28a999ee46d9e75948dfc777a4">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_766f8808aa506926474b22b36dd9265345603e97/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/2d4f829689227e306efd01e78fb10f0da70ea2a4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ffc15e965a9e8c28f24455eedd4cac215c45d1fc">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_141ba1c6662c10688ee648c246a1dbe61295a699/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -30,75 +75,75 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/19b1e9659e815f9de97e46432bab435576ab5125/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/990a8cb56ff8613e8f744d0fb828b351fdff2472/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="433f4d6aa5f21f19552afe0e6c5eff0fedba73ad">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_98194727ee01939abff09bcd4e82eb360dc450df/classes.dex" />
+        sha1="771267c5b0c7a5b348d3205dcfa1f871af7e0177">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8e397cf0a4a0408f8e83f36ba6f0af4a58b77b91/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/328b911dd2228d3e7d8efd52bb28b79994ed5361/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/fa776701b18bb7ee6adb1abc8cdbdab67e84189b/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="9cca2818594cc5348806d6662133491e7ea0fa8d">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5f11495a2a05f642b2e146796e690a09d25b9a7c/classes.dex" />
+        sha1="b1df8fa3d372a27e4e969ce00b00689ee1eed031">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_040f8189aa86b27341b17f2f58b473b0ea5b0f7b/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/492510bc28876369a782b3e299098ecea2880f95/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/f557cb10117c995bfb54d0240223f63c332851aa/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="27777b3cad3c20b1acab19f6e37fe3e03371bf6e">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_31e0a0422f020ffe8afeb403aafef56e025c1eb4/classes.dex" />
+        sha1="f6cf557be4dbd0282ea2388633e5378634423226">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3d38f977df2d85085c3100b796ececd79b2646a3/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/557da5273a41c1b9bbb306a0d02e2d8c80bbc726/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/67cb1c754bb112fdc9ee5f3ea72c79c238ee7d40/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="4385ccc0a88b33d182a836eadb47be55c8eb1107">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e9b09be54f3116cae7ac8d2e33c299f9e5b4319a/classes.dex" />
+        sha1="8308ed003522a2ee8958311afcc4cfd0470377cd">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0cd4c7adc0a35b59a4551af694515022a439056f/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/5023576c75ee12bf5eac38e63efb8a644db08353/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/3eedbee6f1678020b982de9323e820da30cecbbe/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="57c2eceb8548de84509d1ebc293fedec53231f6c">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b1c526ed9926b21184887fa042202fe06a82662b/classes.dex" />
+        sha1="486371f97baad8e607f332f20fee1d3dd00a731a">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_132efe410bd54003598cd12522ba98e16e44b06d/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/55d7cecb3c144ae0a59e5aa06dbcede57d4162f2/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/35190b36dcc008a2647a79644a748bfdeb60f760/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="ae80d328a8548b4610ead6c624bab8c6a6984f5b">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a7322bc50da4f42b387e9aeb95379a4ce9c192e9/classes.dex" />
+        sha1="2d5d113b0352ab60946fc44c518cf68fd26cbb79">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c86d04d41de44e710b2ef2b06bec1be54c0ed52c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/05bce630877fcac2a6253a05a3ec35e60bc82d39/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/122f901509c0c095b5ba1c6d7ccb30d1d603f07b/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="44a694d4095be84c2888764b1f7256b385c030ad">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6d88dbb125ae20eb9570159653b9c7f31cb12912/classes.dex" />
+        sha1="d0460bf07cc3657e0be518ca01c174493951c6b8">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2d0ae7f8e0b77d133beab107041115832469ef3c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/9920f1623dce7cd6351da6ba4b576051f85321d0/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/b4499dab4b16a6df6b82b484a27b6ee00c9e3a81/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="ffc15e965a9e8c28f24455eedd4cac215c45d1fc">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2eae6972874e393d779b7b665b436af75369bc9e/classes.dex" />
+        sha1="df1cb17511aabbb63264a0024949d1e42502a512">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c1b3e72467365c164bccf8c7148864bbbf8d3e74/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -111,30 +156,48 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/865eca8bd2e6c30493b138f5bc6850b1b03b8b00/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/1731d4e4c2ddea20254b1b04f17e1f10e4c63337/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="09cf6aa1390f95157e8295d02be7868f568825fc">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2b16704cf298aafd98ece8c41af264e8aab5b89a/classes.dex" />
+        sha1="8f128aeeb7e31271b28a7adb9dac1f3a6ed9f5e7">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d9601db37e7cd2fbfd8eefc0fe97481273cde875/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/a3e6ca61ac738473c01ee5bae28b0a2808eb9fbe/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/cf07615893c2a37c8b522e68cdb8721b85d1c256/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="d0460bf07cc3657e0be518ca01c174493951c6b8">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f47759061afb6d2b12bba5634daf86d15f2022bf/classes.dex" />
+        sha1="b955cb3a1ad6f1b6ff728ce1e0cd592c1717b440">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_df2388a171248e6cf022a296bb518f4bd977d63d/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/cacf1951ebe7da0bd831a94f6663ba559966a700/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/229f12fa1e57f350b297165ad118dc42339954c3/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_99e930ba847831ca16365b7806708e4ac08dd5d7/classes.dex" />
+        sha1="433f4d6aa5f21f19552afe0e6c5eff0fedba73ad">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c9ef4d02ecab51d35352162eace9b5561a63ffb4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/2634f39bf408a3af45b7f796c1a534d5f573fd94/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4b17463c814bdc562fb0392fa3494063623a0904">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_03afe78cbbee6ef152d57bf42d8d5cc5cedd1faf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/e6090a6f1cf40fbe47c87528ebfac4f2fa01505b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="27777b3cad3c20b1acab19f6e37fe3e03371bf6e">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0fd92de5449858a2a80fef2b94f2ac8a5e0a8782/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -147,111 +210,93 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/a450508e55c5a3fd4bb62949d0f9b82570c4b9ed/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/5cdddc1cf50faa048e8efc7f6cb5334649cfdef3/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="92c871a22463a247e8a77a9f3fd231c278788c4a">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_528cfea827df3be4486c71f2538e02ff1fdbdc6d/classes.dex" />
+        sha1="57c2eceb8548de84509d1ebc293fedec53231f6c">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_28c499911d0f8a04343c8d8b17e3c5dc3b154eb4/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/92bffb3fb048a31c6c1ac8019fc86f9970a77e03/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/5080312f82e0e9e788609139fcd51ef503b1567c/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="dd39827d2067497e60e21da48a7926000b6d4b0c">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_659ca389786c56db0058a48459d48ecb8cfefafd/classes.dex" />
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c25954a2ff18d5d91bfd68a90091c52899a6556a/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/80020bce229cfdb6a479e74e19b0b991b06bd590/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/d1dc227addd5e229692b4b89dec10bdac4009ecf/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="c14f0c89f28cf782e42581ab0aba5f63af39b3d2">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3870e9c0eaaee5c1c0f8e3a132060aa14bd1c4e6/classes.dex" />
+        sha1="8010ae6ed32828a145b25ec97bc07b7a83c6318f">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_05c363c7fc26dfb337c88e672471d9f4c97c4bf5/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/d534e7adbb6c7f68be02b019a404a3c375e657e3/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/0b17a52f4ad826192305edd7583ad18ac5c24fa3/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="c6e1f361e9d61aece9dac39b77fcc98a337a144d">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_83a40a8ff08065415b650929580332ab6250822b/classes.dex" />
+        sha1="1d193729baf37df3d902a423291423a0df7e3779">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_83afff9802c9babef83b29c528b9a10e0b393b15/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/6bb6437216810b93a9397154701aad02588d14e3/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/612e01b6c61610604794053c50486399041a14cc/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0b103550a2b221266f67f40c61890b86e561c3fc/classes.dex" />
+        sha1="f3e51e9c5233b8897f61e08a6a27bc36283c2724">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c9feec336169c4c7b6dabe8e85ffdb5b36d0c921/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/a653f6c5287579159c887fbf5257f76f30a46967/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/146e0ca3a8a17b5b6b7d2b4fad865b71597436a5/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="4c829ff0ccfecb28a999ee46d9e75948dfc777a4">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e2e67c197ff898e50de923580abc38921e7c6940/classes.dex" />
+        sha1="9cca2818594cc5348806d6662133491e7ea0fa8d">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b25f70e7c4e9a7a3bf29110c159cb4c84f38c461/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/bc438c9fc8515fbf9bf77fe56fe9a0e6332c22c7/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e96c6974cf924e7ee3b230e6847d5731423388c9">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_035cd0cf9e88b6fa3b67b67f499a2ef31cdbc8a9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/80552f3e55c72cf04a0dbac295d63f86d6429532/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="39907d5c8f5902fffef30160ca7447c93b82405c">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b0cd363a32730812f45c190ef83528590af37f60/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/76a45b87c2e138d06869a2e5bfd48a60186fe5a1/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="028f8255cb977b29cdffbfcf05caa0459686120c">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_bc434e14aa432ae97e11bd08ea8949977c909faa/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/cde35e37bd93ac232ff064e2e700032d125b19d5/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/d71ffa77826f69d9a7dde66b6f440caf6238c37d/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="7a64bf6dc775198eed9db9468a133adf7dfe6562">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3ce36ccad8ad2f144dcd7402347ce4e0dff72d69/classes.dex" />
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_12b5c82130d0d53f569bd822b68af14510ad0d4c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/7878e3042c0ac3e0ed06de101304da8753786579/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/f57e41bc11163ebb19d9e2ba97ba23827115f516/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="486371f97baad8e607f332f20fee1d3dd00a731a">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5a793b75824b4efb05960305e288b02d64b43920/classes.dex" />
+        sha1="e2185aff89caeb337b1ffc36d5e525d8318e7cfe">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d58b796c59726b98a4defa7b11bff1fda3de0f20/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/8593651eefa5e71bdd1db672ab767f5b43774df7/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/fd4e583dfa59a5239b17ca45665b13010bfcdcb5/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="45305e6af414dab5aba6c3225081c2f15c3bdd1e">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cfc840dead10461d6b97b228795668be847f1be1/classes.dex" />
+        sha1="de29a39f9260f88151b1ef453140e71c76b6c415">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f46c2e57e105ef68b13ee8a167d25540573c40df/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/859ffcf63d500f7968608185b2ee7d654e980bc6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ba6aa5e69ef31dee57208125323cee958fc67565">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_98e9670fc8991aeecd0c00185f62509f70303590/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -264,24 +309,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/55c2bb06f590499713a76ee07b61ee8fd7ea8bd5/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="df1cb17511aabbb63264a0024949d1e42502a512">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_81f82483e3094a5d1e7eea21df0924c7e1ba26b7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/a4e7ac32255f98021967bc819cc7d6249811d634/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b1df8fa3d372a27e4e969ce00b00689ee1eed031">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8aa7516dd1392635d286b5ce3e1fb6ada9281c21/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/apple/Documents/PtPlanner/app/libs/pusher-java-client-0.3.3-jar-with-dependencies.jar"
         jumboMode="false"
         optimize="true"
@@ -291,120 +318,93 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/19b28d954075e77ea12204f7e0ab2209a7fd77a0/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/0f01c47e19a2096be57771cb02225fcf2f2ff6ac/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="8f128aeeb7e31271b28a7adb9dac1f3a6ed9f5e7">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_20a29d8455605f35c286b1a781b0d9ae5b876537/classes.dex" />
+        sha1="09cf6aa1390f95157e8295d02be7868f568825fc">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e07eae58e86d135355755f1731215f6a77270360/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/5ef8cb9980746ec2af2874187f4c6e3ae6d06456/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b955cb3a1ad6f1b6ff728ce1e0cd592c1717b440">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_224735aae2e205ba17494f34967954d7aebcb38f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/e1e0ea3c9e78a48b8da6eecb431b7c587b27070f/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4415c38c624b2164d245a1e2b29b2932a70afdd2/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/d7d444503ae49dcb2c1e5080f32e4a510193eb91/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="1d193729baf37df3d902a423291423a0df7e3779">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_296fc328fc3b546261574a0305cfb02603f73a88/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/ff8947c8561c37bbeb90c97c38d0b7bb0cf59674/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="de29a39f9260f88151b1ef453140e71c76b6c415">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b9c791964bdfabc1518de75d8241e68c91465424/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/a6964cfeb47ddeb1acf629869a83452159dfa1ee/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="971509bbe30bb7b971fc1c49d7b23d0d818830ac">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8210a6b6bafe252264407c9e0eb89919d47ab29f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/f37d57e68a518aea50e33fcf29a3e720351ecd07/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/c7d60386175bdf697d6fb914e5e171924510566b/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="6116e0e7069de7fc259aac8e08b84f32c2038231">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_783e3e8dbb2885d7e337abcdefb7bf72b68b87d9/classes.dex" />
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a5fa90103a725ada267d143371824fe6c7003607/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/e3ab90566c1dbf4c23c8233634ba52e865f6eabd/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/55dcf01674f5e76d0d8878078a6b30e210098ef0/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="a48dc0b148059764d32500be558702d5ff932058">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7258ed943ef84271b330078edc9d95e4ea8033ac/classes.dex" />
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f4cd06af7f90ab807c9448cd703c5c3fea142c69/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/040a18e1e1f8b0dc58d4995cdd80c716262a2d0c/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/83f3680ee092548cb210d3d742d5ba1750f64d01/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="92c871a22463a247e8a77a9f3fd231c278788c4a">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_78b9a85ae069fb9db796571a1d0367afd4833019/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/2aa32c86eaf1ffc2f0cbbe8bcdc9a7fb07effe8d/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="1e11c68fec92a17c84dd8d1dd80e74c4e67b12e2">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b28aca18311d8f812e43c69c9fd18410ce504208/classes.dex" />
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6a4e9be4c3cea5032990e91f2094200a1395e88b/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/a11377200fcfc902704a6fed87c1bb469b2c5641/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/6c958c91cab0f3150ee0e416efd2b811c0436cd5/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="f6cf557be4dbd0282ea2388633e5378634423226">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1ab4c599763495f50b730647e2e31ceafadb8b35/classes.dex" />
+        sha1="ae80d328a8548b4610ead6c624bab8c6a6984f5b">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_15a04b8afc6df1f64b128d2df857c7721266d352/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/2ea32fc70f49cd08d74983ac1f8a550ddc9f6ab5/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/eacc1384f2ce8176e00576819f239ecadafe90c4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44a694d4095be84c2888764b1f7256b385c030ad">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e9bd8e0892ca5937a07be66eb29638095edf16f7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/28a43a7fb5bea30da1e5bfa833712579d4baa7b2/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="eb0d830e3eabb9deb9ec44869cf7ac7ea1ad794c">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5c7dfa8a901aa5bb8ea5babd56a519eafad34a52/classes.dex" />
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e061a66f94aee4e5b7f0e6de811dc60d3da844d8/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/0494fc2e2bc2791297357990a339ca207fae1ec3/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/66a017884ddb5d93c9153ed8a0f5313b6ff8b094/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="771267c5b0c7a5b348d3205dcfa1f871af7e0177">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a6316bcb6c33c7ea1c91c78f571519084088c7de/classes.dex" />
+        sha1="c14f0c89f28cf782e42581ab0aba5f63af39b3d2">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4822aa933189c841d35130aca8d313f34d0480dc/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/26521df0a3a3e7300211b11b76a8e2016dde7dbc/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/4535fd94b705c5d7287b29e502881b2a4e900d8f/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="e2185aff89caeb337b1ffc36d5e525d8318e7cfe">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4e7b5fa6825a5826c94b46996ef52cfd43dc4587/classes.dex" />
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_17efa33d89b016de29c31a65905bdcb6486a3d8b/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -417,30 +417,57 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/92d13f1b9b437c3b34285ee0659c7545d214de97/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/ac4495ff44637d1b8f2d8d97ee5b467d0b0af30a/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="408a599ac77cd17fe8e8919326bec617b3d005bd">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_87b5c35f269e765a5cb00c078a4f19d5df33656d/classes.dex" />
+        sha1="6bb5d347ebc0c6ef3c83a905222a688da5d2f7b4">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3c75b4ef8df70d14b07b3295316ee48137a0e12a/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/54ed8e2be050c66a8eddd3ebd7a0e5529b9ba0c0/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/d1082c935d0d06ae344ce359a090013d8238243d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_82cbf49f3e09982cc785552c68d77d7c1a448bc7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/59aede21f9ca5b5d3d7c870011dc6b5ce4d8edbe/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="e871881b36b32e6bfd271a830c6eeb54ff0fc185">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8247de3f034d0f50d5729184674a7379cdbe5f46/classes.dex" />
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8a763a8a9da1dee218528912bd98b6795086c936/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/5df00c0901851ff41d9037084425fe5144320589/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/d90f53b21444b570a5b5dbbd4b5de2044e2300b6/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="f23ad0f8e58713ff4b55f61c0bbde3830378347c">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_eef1c44c9cd16b029777a3af47391c2095014492/classes.dex" />
+        sha1="45305e6af414dab5aba6c3225081c2f15c3bdd1e">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_862e3c5ead8e2722d01fd065c9d0fd0c0eb0ec44/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/eee8d669a4c76ec1a452ba423185435bbb57d545/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="408a599ac77cd17fe8e8919326bec617b3d005bd">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e312bd08b94507c13d1b0e6b1e2378d68e314c3b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/.android/build-cache/76d9c30db93d0aa7b69893a4a36954889ffdd8bf/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="39907d5c8f5902fffef30160ca7447c93b82405c">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_857d83b3989c7cfc8b7183b3693e18e558a30018/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -453,39 +480,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/4d15e7bc585eb229a82069c7bab77df50dce31e0/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/c97aa868bde8a3131a56b57c78541096b24857c8/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="f3e51e9c5233b8897f61e08a6a27bc36283c2724">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_038ffcbcb92c3f0068e1e296cf911f544eeb6c8e/classes.dex" />
+        sha1="971509bbe30bb7b971fc1c49d7b23d0d818830ac">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_88197ebafe5eefa591634e5775e1fc6826982b9c/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/.android/build-cache/785eaa16bc2195333ea9892564db70e7cf7788d4/output/jars/classes.jar"
+        jar="/Users/apple/.android/build-cache/b3f8cd4cedc493ad5b160813624af22c75213d9e/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="ba6aa5e69ef31dee57208125323cee958fc67565">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f6db7a384fd77e07f1fc87874ce7fca0b731be4b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/b13427ba72f79270230c038296dbaf41336fc5c4/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2d5d113b0352ab60946fc44c518cf68fd26cbb79">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b6c57fed0577c2ed5c2a4d1bf471b64e3fcdf2e0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/f271abc113b49fe8d669a93285e3cb24b8abbbd8/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="8308ed003522a2ee8958311afcc4cfd0470377cd">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_943f4aeb51cc446f3df22969140ad2aad16015da/classes.dex" />
+        sha1="4385ccc0a88b33d182a836eadb47be55c8eb1107">
+        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fdbcc2ca6afa30d43ae9ed68fb8ce32a211ea24e/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -495,15 +504,6 @@
         revision="25.0.2"
         sha1="48351e2c1faa39b0a991e3375bd69660de74a312">
         <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/json_3b83407ab92b9fe05c4aaa90f0474308562d5feb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/.android/build-cache/80ab6d0831b93543b4b02fa2f7ff08785a59a1c0/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="8010ae6ed32828a145b25ec97bc07b7a83c6318f">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_220174cabb2349ad501a144e49e44f3e9bbbbefd/classes.dex" />
     </item>
 
 </items>

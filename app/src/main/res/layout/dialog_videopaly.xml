@@ -26,6 +26,7 @@
             android:id="@+id/ll_extra"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:orientation="vertical"
             android:layout_alignParentTop="true"
             android:background="#000000"></LinearLayout>
 
@@ -33,6 +34,7 @@
             android:id="@+id/play_video"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:orientation="vertical"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:background="@android:color/transparent"></LinearLayout>
