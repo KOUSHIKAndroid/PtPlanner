@@ -38,15 +38,16 @@ import com.ptplanner.fragment.DietFragment;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.ConnectionDetector;
 import com.ptplanner.helper.ReturnCalendarDetails;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -66,7 +67,7 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
     String dateChange = "";
     SimpleDateFormat simpleDateFormat;
     ProgressDialog progressDialog;
-    Calendar SelctedCalender=null;
+    Calendar SelctedCalender = null;
 
     // -- Calendar Instance
 //    Calendar calendar;
@@ -122,7 +123,7 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
         btnPre = (LinearLayout) popupView.findViewById(R.id.btn_pre);
         btnNext = (LinearLayout) popupView.findViewById(R.id.btn_next);
 
-        progressDialog=new ProgressDialog(context);
+        progressDialog = new ProgressDialog(context);
         progressDialog.setTitle(context.getResources().getString(R.string.please_wait));
         progressDialog.setCancelable(false);
 
@@ -131,7 +132,7 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
         dateSavePreferenceDiary = context.getSharedPreferences("DateTimeDiary", Context.MODE_PRIVATE);
 
         getLayouts();
-        if(new ConnectionDetector(context).isConnectingToInternet()) {
+        if (new ConnectionDetector(context).isConnectingToInternet()) {
             ///////////////////edit by suraj//////////////////
             // -- Show Calendar
             if (AppConfig.appointmentArrayList.size() <= 0) {
@@ -146,9 +147,8 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
                 AppConfig.availableDateArrayList.clear();
             }
             ///////////////////by suraj//////////////////
-        }
-        else{
-            Toast.makeText(context,context.getResources().getString(R.string.no_internet),Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(context, context.getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
 
@@ -340,35 +340,31 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
         @Koushik
         Add Flow Date Start
          */
-        
-        int Pre_day = 0,Pre_month = 0,Pre_Year = 0;
 
-        Log.d("@@@ Type-- " ,  dateSavePreference.getString("ClickDatePreferenceType",""));
-        Log.d("@@@ Date-- " ,  dateSavePreference.getString("ClickDatePreference",""));
-        Log.d("@@@ Date2-- " ,  dateSavePreferenceDiary.getString("ClickDatePreference",""));
+        int Pre_day = 0, Pre_month = 0, Pre_Year = 0;
+
+        Log.d("@@@ Type-- ", dateSavePreference.getString("ClickDatePreferenceType", ""));
+        Log.d("@@@ Date-- ", dateSavePreference.getString("ClickDatePreference", ""));
+        Log.d("@@@ Date2-- ", dateSavePreferenceDiary.getString("ClickDatePreference", ""));
         try {
 
             SelctedCalender = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
-            SelctedCalender.setTime(sdf.parse(dateSavePreference.getString("ClickDatePreference","")));
+            SelctedCalender.setTime(sdf.parse(dateSavePreference.getString("ClickDatePreference", "")));
 
-        if(SelctedCalender!=null){
-            Pre_day=SelctedCalender.get(Calendar.DATE);
-            Pre_month=SelctedCalender.get(Calendar.MONTH);
-            Pre_Year=SelctedCalender.get(Calendar.YEAR);
-        }
-        }catch (Exception e)
-        {
-            Log.e("@@@ Error ",""+e.getMessage());
+            if (SelctedCalender != null) {
+                Pre_day = SelctedCalender.get(Calendar.DATE);
+                Pre_month = SelctedCalender.get(Calendar.MONTH);
+                Pre_Year = SelctedCalender.get(Calendar.YEAR);
+            }
+        } catch (Exception e) {
+            Log.e("@@@ Error ", "" + e.getMessage());
         }
 /*
         @Koushik
         Add Flow Date End
          */
-        
-        
-        
-        
+
 
         drawEvent(indexOfDayOne);
 
@@ -409,7 +405,7 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
 
 //@@ KOUSHIK Add Fllow date
 
-            if (SelctedCalender!=null && curyear == Pre_Year) {
+            if (SelctedCalender != null && curyear == Pre_Year) {
                 if (currentMonth == (Pre_month + 1)) {
                     if (textViewArray[(Pre_day + indexOfDayOne) - 1].getText().toString().equals("" + Pre_day)) {
                         textViewArray[(Pre_day + indexOfDayOne) - 1].setTextColor(Color.parseColor("#0080FF"));
@@ -422,16 +418,13 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
             }
 
 
-
-
-
             if (toYearShared != 0 && toMonthShared != 0 && todayShared != 0) {
                 if (curyear == toYearShared) {
                     if (currentMonth == toMonthShared) {
 //                        textViewArray[(todayShared + indexOfDayOne) - 1].setTextColor(Color.parseColor("#22d23a"));
 //                        if (dateSavePreference.getString("ClickDatePreferenceType", "").equals("program")
 //                                || dateSavePreference.getString("ClickDatePreferenceType", "").equals("diet")) {
-                            llArray[(todayShared + indexOfDayOne) - 1].setBackgroundResource(R.drawable.selected_day);
+                        llArray[(todayShared + indexOfDayOne) - 1].setBackgroundResource(R.drawable.selected_day);
 //                        } else {
 //                            textViewArray[(todayShared + indexOfDayOne) - 1].setBackgroundResource(0);
 //                            SharedPreferences.Editor editor = dateSavePreference.edit();
@@ -882,7 +875,7 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
         /**
          * App config selected_date_from_calender  used by bodhi
          */
-        AppConfig.selected_date_from_calender=formattedDate;
+        AppConfig.selected_date_from_calender = formattedDate;
 
 
         bundle = new Bundle();
@@ -944,7 +937,6 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
                         e.printStackTrace();
                     }
                     String formattedMonth = targetFormat.format(date);
-//                    Log.i("!!CAL ", " formattedMonth " + formattedMonth);
                     if (formattedMonth.equalsIgnoreCase(txt_currentdatemonth.getText()
                             .toString())) {
                         eventDataType = new EventDataType(
@@ -953,25 +945,28 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
                         arrDay.add(eventDataType);
                     }
                 }
+            }
 
-                for (int j = 0; j < AppConfig.appointmentArrayList.size(); j++) {
-                    if (AppConfig.appointmentArrayList.get(j).getYear().equals(txt_currentyear.getText().toString())) {
-                        DateFormat originalFormat = new SimpleDateFormat("MM");
-                        DateFormat targetFormat = new SimpleDateFormat("MMMM");
-                        try {
-                            date = originalFormat.parse(AppConfig.appointmentArrayList.get(j).getMonth());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        String formattedMonth = targetFormat.format(date);
-                        if (formattedMonth.equalsIgnoreCase(txt_currentdatemonth.getText().toString())) {
-                            eventDataType = new EventDataType(
-                                    AppConfig.appointmentArrayList.get(j).getDay(),
-                                    TYPE, true);
-                            arrDay.add(eventDataType);
-                        }
+            for (int j = 0; j < AppConfig.appointmentArrayList.size(); j++) {
+
+                if (AppConfig.appointmentArrayList.get(j).getYear().equals(txt_currentyear.getText().toString())) {
+                    DateFormat originalFormat = new SimpleDateFormat("MM");
+                    DateFormat targetFormat = new SimpleDateFormat("MMMM");
+                    try {
+                        date = originalFormat.parse(AppConfig.appointmentArrayList.get(j).getMonth());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    String formattedMonth = targetFormat.format(date);
+                    if (formattedMonth.equalsIgnoreCase(txt_currentdatemonth.getText().toString())) {
+                        eventDataType = new EventDataType(
+                                AppConfig.appointmentArrayList.get(j).getDay(),
+                                TYPE, true);
+                        arrDay.add(eventDataType);
+                        Log.d("##", AppConfig.appointmentArrayList.get(j).getDay());
                     }
                 }
+//                }   // Comment out 1 Aug 2017 by Koushik for client Appointment issue
             }
         } else if (TYPE.equals("appointment")) {
             for (int i = 0; i < AppConfig.appointmentArrayList.size(); i++) {
@@ -1173,9 +1168,9 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
                     Response response = client.newCall(request).execute();
                     urlResponse = response.body().string();
                     JSONObject jOBJ = new JSONObject(urlResponse);
-                    Log.i("jOBJ",""+jOBJ);
+                    Log.i("jOBJ", "" + jOBJ);
 
-                    Log.i("mark_calender_Url",""+AppConfig.HOST + "app_control/mark_calender?client_id=" + AppConfig.loginDatatype.getSiteUserId());
+                    Log.i("mark_calender_Url", "" + AppConfig.HOST + "app_control/mark_calender?client_id=" + AppConfig.loginDatatype.getSiteUserId());
 
 
                     jArrProgram = jOBJ.getJSONArray("program_date");
@@ -1250,8 +1245,7 @@ public class ShowCalendarPopUp extends PopupWindow implements OnClickListener {
                     } else {
                         System.out.println("@@ Exception: " + exception);
                     }
-                }catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
             }

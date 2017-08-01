@@ -1656,6 +1656,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                     jarrayAvailableDate = jOBJ.getJSONArray("available_date");
 
                     calEventData = new CalendarEventDataType();
+                    if(jArrProgram!=null && jArrProgram.length()>0)
                     for (int i = 0; i < jArrProgram.length(); i++) {
                         calEventData.setProgram_date(jArrProgram.getString(i));
 
@@ -1665,6 +1666,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 
                         AppConfig.programArrayList.add(programDateDataType);
                     }
+                    if(jArrMeal!=null && jArrMeal.length()>0)
                     for (int j = 0; j < jArrMeal.length(); j++) {
                         calEventData.setMeal_date(jArrMeal.getString(j));
 
@@ -1675,6 +1677,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                         AppConfig.mealArrayList.add(mealDateDataType);
 
                     }
+                    if(jArrAppointment!=null && jArrAppointment.length()>0)
                     for (int l = 0; l < jArrAppointment.length(); l++) {
 
                         String[] appDate = jArrAppointment.getString(l).split(" ");
@@ -1689,6 +1692,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                         AppConfig.appointmentArrayList.add(appointDataType);
                     }
                     //////////////////////////////////////////////////////////////////////////////
+                    if(jarrayAvailableDate!=null && jarrayAvailableDate.length()>0)
                     for (int m = 0; m < jarrayAvailableDate.length(); m++) {
 
                         String[] appDate = jarrayAvailableDate.getString(m).split(" ");
