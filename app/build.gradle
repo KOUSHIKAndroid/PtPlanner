@@ -30,8 +30,8 @@ android {
         applicationId "com.pt.planner"
         minSdkVersion 21
         targetSdkVersion 22
-        versionCode 15
-        versionName "2.3.1"
+        versionCode 16
+        versionName "2.3.2"
         multiDexEnabled true
     }
     buildTypes {
