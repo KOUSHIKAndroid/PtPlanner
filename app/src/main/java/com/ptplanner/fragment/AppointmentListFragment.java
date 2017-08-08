@@ -92,7 +92,7 @@ public class AppointmentListFragment extends Fragment {
 
             }
         } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
         back.setOnClickListener(new View.OnClickListener() {
 

@@ -7,13 +7,16 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,10 +38,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ptplanner.K_DataBase.Database;
 import com.ptplanner.K_DataBase.LocalDataResponse;
 import com.ptplanner.K_DataBase.OFFLineDataSave;
@@ -63,13 +63,19 @@ import com.ptplanner.dialog.ShowCalendarPopUp;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.AppController;
 import com.ptplanner.helper.ConnectionDetector;
+import com.ptplanner.helper.K_App_Forground;
 import com.ptplanner.helper.PtpLoader;
 import com.ptplanner.helper.ReturnCalendarDetails;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -78,6 +84,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
+import java.util.concurrent.ExecutionException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -288,7 +295,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                     getAllEvent();
                     ///////////////////by suraj//////////////////
                 } else {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
                 }
             }
             //------getting date
@@ -624,7 +631,10 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 TrainingFragment trn_fragment = new TrainingFragment();
                 trn_fragment.setArguments(bundleTraining);
-                fragmentTransaction.replace(R.id.fragment_container, trn_fragment);
+                if (new ConnectionDetector(getActivity()).isConnectingToInternet())
+                    fragmentTransaction.replace(R.id.fragment_container, trn_fragment);
+                else
+                    fragmentTransaction.add(R.id.fragment_container, trn_fragment);
                 int count = fragmentManager.getBackStackEntryCount();
                 fragmentTransaction.addToBackStack(String.valueOf(count));
                 fragmentTransaction.commit();
@@ -1004,6 +1014,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 
     public void getAllEvents(final String date) {
 
+
         AppConfig.OfflineDate = date;
         AsyncTask<Void, Void, Void> allEvents = new AsyncTask<Void, Void, Void>() {
 
@@ -1170,15 +1181,44 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 
                     JSONObject jOBJ = new JSONObject(urlResponse);
                     JSONArray jsonArray = jOBJ.getJSONArray("all_exercises");
-
                     for (int j = 0; j < jsonArray.length(); j++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(j);
-                        View itemview = getActivity().getLayoutInflater().inflate(R.layout.training_viewpager_adapter, null);
-                        ImageView imgExercise = (ImageView) itemview.findViewById(R.id.img_exercise);
-                        Glide.with(getActivity())
-                                .load(jsonObject.getJSONObject("exercise_inDetails").getString("exercise_image")).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .error(R.drawable.no_progress_images)
-                                .into(imgExercise);
+                        final JSONObject jsonObject = jsonArray.getJSONObject(j);
+                        Picasso.with(getActivity()).load(jsonObject.getJSONObject("exercise_inDetails").getString("exercise_image")).into(new Target() {
+                            @Override
+                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                try {
+                                    String ID = jsonObject.getJSONObject("exercise_inDetails").getString("exercise_image");
+                                    String Path = saveToInternalStorage(bitmap, jsonObject.getJSONObject("exercise_inDetails").getString("exercise_id"));
+                                    Log.d("@@ OFFLINEPATH-", Path);
+                                    LocalDatabase.SetIMAGES(ID, Path, new LocalDataResponse() {
+                                        @Override
+                                        public void OnSuccess(String Response) {
+                                            Log.d("@@ OFFLINEPATH-", Response);
+                                        }
+
+                                        @Override
+                                        public void OnNotfound(String NotFound) {
+
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            @Override
+                            public void onBitmapFailed(Drawable errorDrawable) {
+
+                            }
+
+                            @Override
+                            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                            }
+                        });
+
+
                     }
 
 
@@ -1222,7 +1262,14 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
                 }
+//                catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                }
 
 
 //                if(!allEventsDatatype.getTotal_appointment().equals("0") && !allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")){
@@ -1370,7 +1417,21 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                 }
             }
         };
-        allEvents.execute();
+
+        boolean foregroud = false;
+        try {
+            Log.d("@@ APP STATE-", " CAll");
+            foregroud = new K_App_Forground().execute(getActivity()).get();
+            Log.d("@@ APP STATE-", " " + foregroud);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Log.d("@@ APP STATE-Ex ", " " + e.getMessage());
+        } catch (ExecutionException e) {
+            Log.d("@@ APP STATE-Ex 2", " " + e.getMessage());
+        }
+        if (foregroud)
+            allEvents.execute();
     }
 
     public void getProgramName(final String programID) {
@@ -1437,6 +1498,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
             }
 
         };
+
         allEvents.execute();
 
     }
@@ -1585,6 +1647,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
     public void onPause() {
         super.onPause();
         try {
+            getActivity().unregisterReceiver(myReceiver);
             AppController.setIsAppRunning("YES");
 //            AppController.setIsNotificationState("NO");
         } catch (Exception e) {
@@ -1656,56 +1719,56 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                     jarrayAvailableDate = jOBJ.getJSONArray("available_date");
 
                     calEventData = new CalendarEventDataType();
-                    if(jArrProgram!=null && jArrProgram.length()>0)
-                    for (int i = 0; i < jArrProgram.length(); i++) {
-                        calEventData.setProgram_date(jArrProgram.getString(i));
+                    if (jArrProgram != null && jArrProgram.length() > 0)
+                        for (int i = 0; i < jArrProgram.length(); i++) {
+                            calEventData.setProgram_date(jArrProgram.getString(i));
 
-                        ProgramData = jArrProgram.getString(i).split("-");
-                        programDateDataType = new ProgramDateDataType(
-                                ProgramData[2], ProgramData[1], ProgramData[0]);
+                            ProgramData = jArrProgram.getString(i).split("-");
+                            programDateDataType = new ProgramDateDataType(
+                                    ProgramData[2], ProgramData[1], ProgramData[0]);
 
-                        AppConfig.programArrayList.add(programDateDataType);
-                    }
-                    if(jArrMeal!=null && jArrMeal.length()>0)
-                    for (int j = 0; j < jArrMeal.length(); j++) {
-                        calEventData.setMeal_date(jArrMeal.getString(j));
+                            AppConfig.programArrayList.add(programDateDataType);
+                        }
+                    if (jArrMeal != null && jArrMeal.length() > 0)
+                        for (int j = 0; j < jArrMeal.length(); j++) {
+                            calEventData.setMeal_date(jArrMeal.getString(j));
 
-                        MealData = jArrMeal.getString(j).split("-");
-                        mealDateDataType = new MealDateDataType(MealData[2],
-                                MealData[1], MealData[0]);
+                            MealData = jArrMeal.getString(j).split("-");
+                            mealDateDataType = new MealDateDataType(MealData[2],
+                                    MealData[1], MealData[0]);
 
-                        AppConfig.mealArrayList.add(mealDateDataType);
+                            AppConfig.mealArrayList.add(mealDateDataType);
 
-                    }
-                    if(jArrAppointment!=null && jArrAppointment.length()>0)
-                    for (int l = 0; l < jArrAppointment.length(); l++) {
+                        }
+                    if (jArrAppointment != null && jArrAppointment.length() > 0)
+                        for (int l = 0; l < jArrAppointment.length(); l++) {
 
-                        String[] appDate = jArrAppointment.getString(l).split(" ");
+                            String[] appDate = jArrAppointment.getString(l).split(" ");
 
-                        calEventData.setAppointment_date(appDate[0]);
+                            calEventData.setAppointment_date(appDate[0]);
 
-                        AppointmentData = appDate[0].split("-");
-                        appointDataType = new AppointDataType(
-                                AppointmentData[2], AppointmentData[1],
-                                AppointmentData[0]);
+                            AppointmentData = appDate[0].split("-");
+                            appointDataType = new AppointDataType(
+                                    AppointmentData[2], AppointmentData[1],
+                                    AppointmentData[0]);
 
-                        AppConfig.appointmentArrayList.add(appointDataType);
-                    }
+                            AppConfig.appointmentArrayList.add(appointDataType);
+                        }
                     //////////////////////////////////////////////////////////////////////////////
-                    if(jarrayAvailableDate!=null && jarrayAvailableDate.length()>0)
-                    for (int m = 0; m < jarrayAvailableDate.length(); m++) {
+                    if (jarrayAvailableDate != null && jarrayAvailableDate.length() > 0)
+                        for (int m = 0; m < jarrayAvailableDate.length(); m++) {
 
-                        String[] appDate = jarrayAvailableDate.getString(m).split(" ");
+                            String[] appDate = jarrayAvailableDate.getString(m).split(" ");
 
-                        calEventData.setAvailable_date_date(appDate[0]);
+                            calEventData.setAvailable_date_date(appDate[0]);
 
-                        AvailableAppointmentDate = appDate[0].split("-");
-                        availableDate = new AvailableDateDataType(
-                                AvailableAppointmentDate[2], AvailableAppointmentDate[1],
-                                AvailableAppointmentDate[0]);
+                            AvailableAppointmentDate = appDate[0].split("-");
+                            availableDate = new AvailableDateDataType(
+                                    AvailableAppointmentDate[2], AvailableAppointmentDate[1],
+                                    AvailableAppointmentDate[0]);
 
-                        AppConfig.availableDateArrayList.add(availableDate);
-                    }
+                            AppConfig.availableDateArrayList.add(availableDate);
+                        }
 //            //////////////////////////////////////////////////////////////////////////////////
                 } catch (Exception e) {
                     exception = e.toString();
@@ -1745,5 +1808,30 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
             }
         };
         event.execute();
+    }
+
+
+    private String saveToInternalStorage(Bitmap bitmapImage, String FileName) {
+        ContextWrapper cw = new ContextWrapper(getActivity());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir(".PTP", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory, FileName + ".jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return mypath.getAbsolutePath();
     }
 }

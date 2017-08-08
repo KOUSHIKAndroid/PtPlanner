@@ -25,6 +25,7 @@ public class Database extends SQLiteOpenHelper {
     private static String TABLEDIARY="CREATE TABLE TABLEDIARY (Date TEXT PRIMARY KEY, data TEXT)";
     private static String TABLEDIATE="CREATE TABLE TABLEDIATE (Date TEXT PRIMARY KEY, data TEXT)";
     private static String TABLEProgramID="CREATE TABLE TABLEProgramID (ID TEXT PRIMARY KEY, data TEXT)";
+    private static String IMAGETABLEEXERCICE="CREATE TABLE IMAGETABLEEXERCICE (ID TEXT, PATH TEXT)";
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -39,6 +40,7 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TABLEDIARY);
         sqLiteDatabase.execSQL(TABLEDIATE);
         sqLiteDatabase.execSQL(TABLEProgramID);
+        sqLiteDatabase.execSQL(IMAGETABLEEXERCICE);
 
     }
 
@@ -118,6 +120,65 @@ public class Database extends SQLiteOpenHelper {
             Localdataresponse.OnNotfound(e.getMessage());
         }
     }
+
+
+
+    public void SetIMAGES(String ID,String PATH, LocalDataResponse localdataresponse){
+        this.Localdataresponse=localdataresponse;
+
+        try {
+            SQLiteDatabase dbb = getWritableDatabase();
+            String countQuery = "SELECT  * FROM IMAGETABLEEXERCICE WHERE ID='" + ID + "'";
+            Cursor cursor = dbb.rawQuery(countQuery, null);
+            if (cursor.getCount() >= 1 && cursor.moveToFirst()) {
+
+                ContentValues values = new ContentValues();
+                values.put("PATH", PATH);
+                dbb.update("IMAGETABLEEXERCICE", values, "ID='" + ID + "'", null);
+                dbb.close();
+                Localdataresponse.OnSuccess("UPDATE");
+
+            } else {
+                ContentValues values = new ContentValues();
+                values.put("ID", ID);
+                values.put("PATH", PATH + "");
+                dbb.insert("IMAGETABLEEXERCICE", null, values);
+                dbb.close(); // Closing data
+                Localdataresponse.OnSuccess("INSERT");
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            Localdataresponse.OnNotfound(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Localdataresponse.OnNotfound(e.getMessage());
+        }
+    }
+
+    public void GET_IMAGEPATH(String ID, LocalDataResponse response)
+    {
+        this.Localdataresponse=response;
+        String JSONOBJECT = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String countQuery = "SELECT  * FROM IMAGETABLEEXERCICE WHERE ID='" + ID + "'";
+        Cursor cursor2 = db.rawQuery(countQuery, null);
+        if (cursor2.moveToFirst()) {
+            do {
+                try {
+                    JSONOBJECT = cursor2.getString(cursor2.getColumnIndex("PATH"));
+                    Localdataresponse.OnSuccess(JSONOBJECT);
+                } catch (Exception e) {
+                    Localdataresponse.OnNotfound(e.getMessage());
+                    e.printStackTrace();
+                }
+            } while (cursor2.moveToNext());
+        }else {
+            Localdataresponse.OnNotfound("Nodata");
+        }
+        db.close();
+
+    }
+
 
 
     public void SetProgramData(String ID,String DATA, LocalDataResponse localdataresponse){
