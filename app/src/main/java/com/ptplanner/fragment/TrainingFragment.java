@@ -42,6 +42,7 @@ import com.ptplanner.dialog.ShowMorePopUp;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.ConnectionDetector;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -100,6 +101,8 @@ public class TrainingFragment extends Fragment {
 
     ImageView img_leftarrow;
     String checkValue = "";
+
+    int GolbalArrayPositionExerciese=0;
 
 
 
@@ -202,7 +205,7 @@ public class TrainingFragment extends Fragment {
         if (cd.isConnectingToInternet()) {
            Call_APIDATA();
         } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
             Call_APIDATA();
         }
         try {
@@ -241,6 +244,7 @@ public class TrainingFragment extends Fragment {
                         }
 //                        if (cd.isConnectingToInternet()) {
                             try {
+                                GolbalArrayPositionExerciese=t;
                                 getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t), ProgramDetailsArray.get(t));
                             } catch (Exception e) {
                                 Log.i("Excep Training : ", "No Data........");
@@ -274,6 +278,7 @@ public class TrainingFragment extends Fragment {
                     }
 //                    if (cd.isConnectingToInternet()) {
                         try {
+                            GolbalArrayPositionExerciese=t;
                             getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t), ProgramDetailsArray.get(t));
                         } catch (Exception e) {
                             Log.i("Excep Training : ", "No Data........");
@@ -323,7 +328,7 @@ public class TrainingFragment extends Fragment {
                     Log.d("Exercises", user_program_id);
 
                 } else {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -348,8 +353,8 @@ public class TrainingFragment extends Fragment {
 //                CalenderFragment cal_fragment = new CalenderFragment();
 //                cal_fragment.setArguments(bundle);
 //                fragmentTransaction.replace(R.id.fragment_container, cal_fragment);
-////                int count = fragmentManager.getBackStackEntryCount();
-////                fragmentTransaction.addToBackStack(String.valueOf(count));
+//    //            int count = fragmentManager.getBackStackEntryCount();
+//    //            fragmentTransaction.addToBackStack(String.valueOf(count));
 //                fragmentTransaction.commit();
             }
         });
@@ -481,6 +486,57 @@ public class TrainingFragment extends Fragment {
                     if (statusFinish.equals("success")) {
                         trainingPerticularExerciseSetsDatatypeArrayList.get(position).setIsEditable(false);
                         trainingAdapter.notifyDataSetChanged();
+
+                        JSONObject jOBJ = null;
+                        try {
+                            jOBJ = new JSONObject(urlResponse);
+                            Log.i("jOBJ",""+jOBJ);
+                            jOBJ.remove("exercise_sets");
+                            Log.i("jOBJ","After Remove -"+jOBJ);
+
+                            JSONArray exercise_sets=new JSONArray();
+
+                            for(TrainingPerticularExerciseSetsDatatype data:trainingPerticularExerciseSetsDatatypeArrayList)
+                            {
+                                JSONObject boj=new JSONObject();
+                                boj.put("reps",data.getREPS()+"");
+                                boj.put("kg",data.getKg()+"");
+                                exercise_sets.put(boj);
+                            }
+
+                            jOBJ.put("exercise_sets",exercise_sets);
+
+                            Log.i("jOBJ","After Add -"+jOBJ);
+
+                            urlResponse=jOBJ.toString();
+                            ProgramDetailsArray.set(GolbalArrayPositionExerciese,urlResponse);
+
+
+
+//                            try {
+//                                JSONArray jsonArray = jOBJ.getJSONArray("exercise_sets");
+//                                for (int i = 0; i < jsonArray.length(); i++) {
+//                                    try {
+//                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+//                                        trainingPerticularExerciseSetsDatatype = new TrainingPerticularExerciseSetsDatatype(
+//                                                jsonObject.getString("reps"),
+//                                                jsonObject.getString("kg"),
+//                                                false
+//                                        );
+//                                        trainingPerticularExerciseSetsDatatypeArrayList.add(trainingPerticularExerciseSetsDatatype);
+//                                    } catch (Exception e) {
+//                                        Log.d("Inner Exception : ", e.toString());
+//                                    }
+//                                }
+//                            } catch (Exception exce) {
+//                                Log.d("exercise_sets tra : ", exce.toString());
+//                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
 
 //                        Toast.makeText(getActivity(), "Update successfull....", Toast.LENGTH_LONG).show();
                     } else {
@@ -659,6 +715,7 @@ public class TrainingFragment extends Fragment {
                     JSONObject jOBJ = new JSONObject(urlResponse);
                     Log.i("jOBJ",""+jOBJ);
 
+
                     particularExerciseDetailsDataTypeArrayList = new ArrayList<ParticularExerciseDetailsDataType>();
                     trainingPerticularExerciseSetsDatatypeArrayList = new ArrayList<TrainingPerticularExerciseSetsDatatype>();
                     try {
@@ -778,6 +835,18 @@ public class TrainingFragment extends Fragment {
                     } catch (Exception ee) {
                         txtExerciseTitle.setText("");
                     }
+
+
+                    if(new ConnectionDetector(getActivity()).isConnectingToInternet())
+                    {
+                        llFinish.setVisibility(View.VISIBLE);
+
+                    }else {
+                        llFinish.setVisibility(View.GONE);
+
+                    }
+
+
 
                 } else {
                     Log.d("@  Exception ", exception);

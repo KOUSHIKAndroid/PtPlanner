@@ -216,7 +216,7 @@ public class SplashActivity extends Activity {
             protected Void doInBackground(Void... voids) {
                 try {
                     if (!isCancelled()) {
-                        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(2000, TimeUnit.MILLISECONDS).build();
+                        OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(6000, TimeUnit.MILLISECONDS).build();
                         Request request = new Request.Builder().url(url).build();
                         Response response = client.newCall(request).execute();
                         respose = response.body().string();

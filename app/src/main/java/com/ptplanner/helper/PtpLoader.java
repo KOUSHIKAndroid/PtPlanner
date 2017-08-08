@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.ptplanner.R;
 
+import io.fabric.sdk.android.services.common.Crash;
+
 /**
  * Created by su on 7/11/17.
  */
@@ -36,9 +38,20 @@ public class PtpLoader {
 
 
     public void Show(){
-        Dailog.show();
+        try {
+            Dailog.show();
+        }catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+
     }
     public void Dismiss(){
-        Dailog.dismiss();
+        try {
+            Dailog.dismiss();
+        }catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

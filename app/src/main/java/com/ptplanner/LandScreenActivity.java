@@ -514,7 +514,6 @@ public class LandScreenActivity extends AppCompatActivity implements NavigationV
 
             //@Override
             public void onError(String message, String code, Exception e) {
-                 Log.i("@@ ---->>On Error : : ", "message :" + message + "\n code :" + code + "\n Exception :" + e.toString());
             }
 
             //@Override

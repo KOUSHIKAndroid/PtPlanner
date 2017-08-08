@@ -193,7 +193,7 @@ public class DietFragment extends Fragment {
         } else {
             OffLineData(AppConfig.OfflineDate);
 
-            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
         back.setOnClickListener(new OnClickListener() {

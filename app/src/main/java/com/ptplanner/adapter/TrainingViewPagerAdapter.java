@@ -18,6 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+import com.ptplanner.K_DataBase.Database;
+import com.ptplanner.K_DataBase.LocalDataResponse;
 import com.ptplanner.R;
 import com.ptplanner.VideoViewActivity;
 import com.ptplanner.helper.ConnectionDetector;
@@ -38,7 +40,7 @@ public class TrainingViewPagerAdapter extends PagerAdapter {
     LinearLayout playVideo;
     ProgressBar pBar;
     LinearLayout llExtra;
-    VideoView VIDEOVIEW;
+    String Path="";
 
     public TrainingViewPagerAdapter(Context context, int i, String imgURL, String videoUrl) {
         this.context = context;
@@ -62,21 +64,34 @@ public class TrainingViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
-        Log.d("@@ KOUSHIK","-"+imgURL +videoUrl);
+        Log.d("@@ KOUSHIK","-"+imgURL+ "\n"+videoUrl);
 
         if ((position == 0 && (videoUrl.equalsIgnoreCase("") || videoUrl==null)) || new ConnectionDetector(context).isConnectingToInternet()==false ) {
-            Log.d("@@ KOUSHIK","1-"+imgURL +videoUrl);
+            Log.d("@@ KOUSHIK","1-"+imgURL + "\n"+videoUrl);
 
             itemview = inflater.inflate(R.layout.training_viewpager_adapter, container, false);
             imgExercise = (ImageView) itemview.findViewById(R.id.img_exercise);
 
 
-            Glide.with(context)
-                    .load(imgURL)
-//                    .placeholder(R.drawable.no_progress_images)
-//                    .fitCenter()
-                    .error(R.drawable.no_progress_images)
-                    .into(imgExercise);
+            new Database(context).GET_IMAGEPATH(imgURL, new LocalDataResponse() {
+                @Override
+                public void OnSuccess(String Response) {
+                    Glide.with(context)
+                            .load(Response)
+                            .error(R.drawable.no_progress_images)
+                            .into(imgExercise);
+                }
+
+                @Override
+                public void OnNotfound(String NotFound) {
+                    Glide.with(context)
+                            .load("")
+                            .error(R.drawable.no_progress_images)
+                            .into(imgExercise);
+
+                }
+            });
+
 //            Picasso.with(context)
 //                    .load(imgURL).error(R.drawable.no_progress_images)
 //                    .into(imgExercise);

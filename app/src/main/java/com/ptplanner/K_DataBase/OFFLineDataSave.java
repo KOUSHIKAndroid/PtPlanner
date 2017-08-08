@@ -2,6 +2,9 @@ package com.ptplanner.K_DataBase;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -14,11 +17,15 @@ import com.ptplanner.datatype.DateRespectiveDiaryDataType;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.Trns;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import okhttp3.OkHttpClient;
@@ -204,4 +211,8 @@ public abstract class OFFLineDataSave {
             }
         }.execute();
     }
+
+
+
+
 }
