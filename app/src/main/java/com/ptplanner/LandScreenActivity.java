@@ -129,7 +129,7 @@ public class LandScreenActivity extends AppCompatActivity implements NavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
-
+        AppConfig.APPBackGround=false;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -595,6 +595,7 @@ public class LandScreenActivity extends AppCompatActivity implements NavigationV
     @Override
     public void onResume() {
         super.onResume();
+        AppConfig.APPBackGround=false;
         AppController.setIsNotificationState("NO");
         AppController.setIsNotificationStateChat("NO");
         loginPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
@@ -687,6 +688,7 @@ public class LandScreenActivity extends AppCompatActivity implements NavigationV
     @Override
     public void onPause() {
         super.onPause();
+        AppConfig.APPBackGround=true;
         AppController.setIsNotificationState("YES");
         AppController.setIsNotificationStateChat("YES");
 
@@ -698,6 +700,7 @@ public class LandScreenActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public void onStop() {
+        AppConfig.APPBackGround=true;
         super.onStop();
         mPusher.disconnect();
         AppController.setIsNotificationState("YES");

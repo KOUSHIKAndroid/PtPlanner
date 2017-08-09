@@ -144,7 +144,7 @@ public class ShowCalendarPopUpBookApp extends PopupWindow implements OnClickList
             ///////////////////by suraj//////////////////
         }
         else{
-            Toast.makeText(context,context.getResources().getString(R.string.no_internet),Toast.LENGTH_LONG).show();
+//            Toast.makeText(context,context.getResources().getString(R.string.no_internet),Toast.LENGTH_LONG).show();
         }
 
 

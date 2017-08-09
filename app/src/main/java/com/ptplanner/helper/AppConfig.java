@@ -99,4 +99,7 @@ public class AppConfig {
 
     public static String OfflineDate="";
 
+
+    public static boolean APPBackGround=true;
+
 }

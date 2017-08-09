@@ -126,7 +126,7 @@ public class DietListDetailsFragment extends Fragment implements ScrollViewListe
             getDietDetails(mParam1);
         } else {
             getDietDetails(mParam1);
-            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
 
         backDiet.setOnClickListener(new OnClickListener() {

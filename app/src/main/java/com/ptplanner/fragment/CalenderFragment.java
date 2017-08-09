@@ -63,7 +63,6 @@ import com.ptplanner.dialog.ShowCalendarPopUp;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.AppController;
 import com.ptplanner.helper.ConnectionDetector;
-import com.ptplanner.helper.K_App_Forground;
 import com.ptplanner.helper.PtpLoader;
 import com.ptplanner.helper.ReturnCalendarDetails;
 import com.squareup.picasso.Picasso;
@@ -1418,19 +1417,6 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
             }
         };
 
-        boolean foregroud = false;
-        try {
-            Log.d("@@ APP STATE-", " CAll");
-            foregroud = new K_App_Forground().execute(getActivity()).get();
-            Log.d("@@ APP STATE-", " " + foregroud);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            Log.d("@@ APP STATE-Ex ", " " + e.getMessage());
-        } catch (ExecutionException e) {
-            Log.d("@@ APP STATE-Ex 2", " " + e.getMessage());
-        }
-        if (foregroud)
             allEvents.execute();
     }
 

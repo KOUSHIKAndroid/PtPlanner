@@ -166,7 +166,7 @@ public class DietFragment extends Fragment {
                 }
 
                 else{
-                    Toast.makeText(getActivity(),getResources().getString(R.string.no_internet),Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(),getResources().getString(R.string.no_internet),Toast.LENGTH_LONG).show();
                 }
             }
             //------getting date

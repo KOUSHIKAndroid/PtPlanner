@@ -39,6 +39,7 @@ public class PtpLoader {
 
     public void Show(){
         try {
+            if(!AppConfig.APPBackGround)
             Dailog.show();
         }catch (NullPointerException e)
         {
@@ -48,6 +49,7 @@ public class PtpLoader {
     }
     public void Dismiss(){
         try {
+            if(!AppConfig.APPBackGround)
             Dailog.dismiss();
         }catch (NullPointerException e)
         {

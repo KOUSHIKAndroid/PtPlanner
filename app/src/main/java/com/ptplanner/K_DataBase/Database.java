@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by su on 7/11/17.
@@ -13,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
     //version number to upgrade database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "Ptp.db";
@@ -41,12 +42,14 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TABLEDIATE);
         sqLiteDatabase.execSQL(TABLEProgramID);
         sqLiteDatabase.execSQL(IMAGETABLEEXERCICE);
-
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newversion) {
 
+
+        if(newversion>oldVersion)
+        sqLiteDatabase.execSQL(IMAGETABLEEXERCICE);
     }
 
 
