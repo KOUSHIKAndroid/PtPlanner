@@ -47,9 +47,16 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newversion) {
 
+        try {
+            if(oldVersion<newversion)
+                sqLiteDatabase.execSQL(IMAGETABLEEXERCICE);
 
-        if(newversion>oldVersion)
-        sqLiteDatabase.execSQL(IMAGETABLEEXERCICE);
+        }catch (Exception e)
+        {
+
+        }
+
+
     }
 
 
