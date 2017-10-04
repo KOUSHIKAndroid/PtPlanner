@@ -16,14 +16,14 @@ repositories {
 
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'Pt-Planner'
-            keyPassword 'esolz123'
-            storeFile file('/Users/apple/Documents/PtPlanner/SignedAPK/pt_planner.jks')
-            storePassword 'esolz123'
-        }
-    }
+//    signingConfigs {
+//        config {
+//            keyAlias 'Pt-Planner'
+//            keyPassword 'esolz123'
+//            storeFile file('/Users/apple/Documents/PtPlanner/SignedAPK/pt_planner.jks')
+//            storePassword 'esolz123'
+//        }
+//    }
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
     defaultConfig {
@@ -38,10 +38,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
         }
         debug {
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
         }
     }
     repositories {

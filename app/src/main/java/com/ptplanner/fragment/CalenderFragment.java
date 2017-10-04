@@ -109,11 +109,11 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
     DatePicker datePicker;
     TimePicker timePicker;
     LinearLayout cancel, done;
-    TitilliumLight txtRemindme;
+    TitilliumLight txtRemindme,txtRemindmeNextSuggested;
     int mYear, mMonth, mDay, mHour, mMinute;
     String type, hour, min, appointment_string;
     View fView;
-    LinearLayout dialogRemindme;
+    LinearLayout dialogRemindme,dialogRemindme_nextDate;
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     Bundle bundle;
@@ -226,7 +226,12 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 
         dialogRemindme = (LinearLayout) fView.findViewById(R.id.remindme);
         dialogRemindme.setVisibility(View.GONE);
+
+        dialogRemindme_nextDate = (LinearLayout) fView.findViewById(R.id.remindme_nextDate);
+
         txtRemindme = (TitilliumLight) fView.findViewById(R.id.txt_remindme);
+        txtRemindmeNextSuggested = (TitilliumLight) fView.findViewById(R.id.txt_remindme_nextDate);
+
         txt_Offline = (TitilliumLight) fView.findViewById(R.id.txt_Offline);
         showCalender = (LinearLayout) fView.findViewById(R.id.show_cal);
         logOut = (LinearLayout) fView.findViewById(R.id.logout);
@@ -761,6 +766,8 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                                 jOBJ.getString("total_training_programs"),
                                 jOBJ.getString("total_training_programs_finished"));
                         allEventsDatatype.setNextBookingTime(jOBJ.getString("lowest_book_time"));
+                        allEventsDatatype.setLowest_book_time(jOBJ.getString("next_book_time"));
+
                         JSONArray jsonArray = jOBJ.getJSONArray("all_exercises");
 
 
@@ -819,9 +826,17 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                         }
                         if (!allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")) {
                             dialogRemindme.setVisibility(View.VISIBLE);
+                            dialogRemindme_nextDate.setVisibility(View.GONE);
                         } else {
                             dialogRemindme.setVisibility(View.GONE);
+                            dialogRemindme_nextDate.setVisibility(View.VISIBLE);
 
+                            if(!allEventsDatatype.getLowest_book_time().equals("")) {
+                                dialogRemindme_nextDate.setVisibility(View.VISIBLE);
+                                txtRemindmeNextSuggested.setText(allEventsDatatype.getLowest_book_time());
+                            }else {
+                                dialogRemindme_nextDate.setVisibility(View.GONE);
+                            }
                         }
 
 
@@ -892,7 +907,6 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                         } else {
                             try {
                                 txtRemindme.setText(getResources().getString(R.string.reminder_dialog_remindme));
-
                             } catch (Exception e) {
 
                             }
@@ -1101,6 +1115,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                             jOBJ.getString("total_training_programs"),
                             jOBJ.getString("total_training_programs_finished"));
                     allEventsDatatype.setNextBookingTime(jOBJ.getString("lowest_book_time"));
+                    allEventsDatatype.setLowest_book_time(jOBJ.getString("next_book_time"));
                     JSONArray jsonArray = jOBJ.getJSONArray("all_exercises");
 
 
@@ -1274,9 +1289,16 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 //                if(!allEventsDatatype.getTotal_appointment().equals("0") && !allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")){
                 if (!allEventsDatatype.getNextBookingTime().equalsIgnoreCase("")) {
                     dialogRemindme.setVisibility(View.VISIBLE);
+                    dialogRemindme_nextDate.setVisibility(View.GONE);
                 } else {
                     dialogRemindme.setVisibility(View.GONE);
 
+                    if(!allEventsDatatype.getLowest_book_time().equals("")) {
+                        dialogRemindme_nextDate.setVisibility(View.VISIBLE);
+                        txtRemindmeNextSuggested.setText(allEventsDatatype.getLowest_book_time());
+                    }else {
+                        dialogRemindme_nextDate.setVisibility(View.GONE);
+                    }
                 }
 
 

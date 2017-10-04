@@ -3,75 +3,696 @@
 
     <item
         is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/httpmime-4.3.6.jar"
+        jar="/home/su/.android/build-cache/077314beeda238e7f352e0a5b4746a397baa5c56/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="cf8bacbf0d476c7f2221f861269365b66447f7ec">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/httpmime-4.3.6_aec8d481541a40735710f4cfb880326aae1fe485/classes.dex" />
+        sha1="eb0d830e3eabb9deb9ec44869cf7ac7ea1ad794c">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3341a4ada4f5dfd92a2febae1705819217c0d479/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/volley.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d4aaa36e04ee71a83444f8367c97a46fda662d2c">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/volley_9b88cfb4c2e6a095f9760e2bdb49bdc87d9f3eec/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/httpclient-4.5.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a1e6cbb3cc2c5f210dd1310ff9fcb2c09c0d1438">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/httpclient-4.5_be498259b762791ff84ad716cb18c9aedcd46d49/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/httpcore-4.4.1.jar"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/httpcore-4.4.1.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="f5aa318bda4c6c8d688c9d00b90681dcd82ce636">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/httpcore-4.4.1_0afee1c5d285f462d6524da7e2289c66a808db71/classes.dex" />
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/httpcore-4.4.1_5eca6e78eadf6670b4a517fbb9d2c9a9a3fecec2/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/GraphView-3.0.jar"
+        jar="/home/su/.android/build-cache/365072ec1f6de964b6551cde6a79e88e0417a8ff/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a5c32dc68beeb82744fed34f8fc455d44fa90d7b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/93bc2599ba638b148781bdc7e667006322a55cff/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f3e51e9c5233b8897f61e08a6a27bc36283c2724">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7f23b78e3c3ae640e8689268833d48c9e7bb3e90/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/7eba5852ce82dfb3c6e839d98f138a0e1c124522/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d0460bf07cc3657e0be518ca01c174493951c6b8">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a652ad419596ed9fbe6ca4ca3d9f9f5b0dd059f1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/4fa0d0ab98aac47512b9518cc02d891c606cfa39/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a48dc0b148059764d32500be558702d5ff932058">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d1c12ec21fe5f15a12879e9ef7108c4b5f33f83e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/0c46ccb786e4675d00f43c8a9d1ffe7f2ae1e46d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="27777b3cad3c20b1acab19f6e37fe3e03371bf6e">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f43a3b6c34407b6375b3df2093325c2e9b58b87e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/38a13c65453622e81797e8e7c25781fec4c6e8b9/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e871881b36b32e6bfd271a830c6eeb54ff0fc185">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b99712f7d0f4246bb424ef6dab5019d31a41bd5c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/e9fdb4d74c99888fa5b800c3d3df2c6e6f5d46e8/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_02733715dc869dca7e0f0f6881699342bc2d3ab5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/b186474b9c4fc26f83f521f9621b2ea542901e4a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45305e6af414dab5aba6c3225081c2f15c3bdd1e">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f9d09cc90c694ab18f681f54b488c2bde99e03b2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/718c4299fdb543e85e02578eabcf3b85ad45adbb/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7a64bf6dc775198eed9db9468a133adf7dfe6562">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d8c554e7baf7b3e957e823fb6ffe3d923c521c85/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/207ae3d2e1c6c131a578469d0e1f0ea81a70849b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="92c871a22463a247e8a77a9f3fd231c278788c4a">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7043ec332c078c4da79f8d880d4fa9fa89f2a115/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/25d909f933965e77233e2c171fbe301ce02c64c9/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="486371f97baad8e607f332f20fee1d3dd00a731a">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8f41d1356ffb8fdc0a6a88663d6c3893bd585043/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/9a25d4ef59e8da63fd7d2b7022058cee751e605e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_268d30658701753889665db5a5814ec1ce9e0615/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/6f124485a1959f61a4b3d4a5d319a38a4af53d0d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e7a77aa7e23fe296fedf143fca0c1f0e87657dd5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/cec3e0154dac5f87dbe7fa20570c497810fd72d1/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fe79ad8a6c9bb49e477c42ce297bdd6abef6f0db/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/339b968c9be6106afc721184e4565f22e273716f/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9cca2818594cc5348806d6662133491e7ea0fa8d">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8d26c98385af83e6dc4c7624fec47387a0892492/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/94288e218b1896aaaaea2d81bcfde6577caa7fb0/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="646439081688c43e04ec4aa7ba6915ddfdcc337f">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_49257b0697fadb843f355e02ab4fcd3552823fb6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/957b3d53deab5c7ce5f482ec05d4a287c33beccf/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4f65867cd10484c17cc6eb8e0d0b25592f5381d5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/bb1319b8bf760cf602eb6af995cc148f9748f133/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ae80d328a8548b4610ead6c624bab8c6a6984f5b">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_48a8de04c9dedbd14576ebedc05ba128941bfebc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/GraphView-3.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="e187192858ff7a5ff7864d6f6a754427e6cb3a87">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/GraphView-3.0_666fd19e901169a39e3b36d68be15870ed60a899/classes.dex" />
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/GraphView-3.0_aad8faa4b711da8f2b39e0505492a98571cb917f/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/pusher-java-client-0.3.3-jar-with-dependencies.jar"
+        jar="/home/su/.android/build-cache/569870462fe59cdc6d96608594a9db3ec77b0e9a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_24d35a42e0b294e43a30480b4e29e5e8ec226237/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/1f5d3cc82bb066e4425fe296ff7f6297c900cc85/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_04f29473dc95bcf94a17199cc781cbeeb0133791/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/68c5a24a8d90d9aaf6072e4b7ea0fa690bff4ac3/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4b17463c814bdc562fb0392fa3494063623a0904">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9de3d7043deb2c086ea8b27577b5ac875807a2c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/81c812dd505db8e79c1c78521f6fe7bc2ca98f6d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="771267c5b0c7a5b348d3205dcfa1f871af7e0177">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_785da59ba92ed5c758abbec009613885e882ce69/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/3aa7821d8fa61f06a0ac93289e18e67b1c52c9d9/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cb8cde51f0b2d88180fb3d52b928f7ab41033880/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/volley.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4aaa36e04ee71a83444f8367c97a46fda662d2c">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/volley_654d7d7692fbea8131ee9a6d61394c07262383e8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/68f33a75a8f4ea054cfb18a5934da0ea2398063b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0269ad1d10f0be8b98706240d897312f55ee411c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/23214789b6a285f0696b221b6ecc1f57b6119114/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b5322610ffe8571586015293a0b9a03695569ad7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/4194512d593fc2ab4be5b40e0a90cf4a576bdc50/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8308ed003522a2ee8958311afcc4cfd0470377cd">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_609f5cd6bbdad638d7489da783f1d41e04e4124f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/d14a5dad437828809f435f794d49376453f4d318/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f6cf557be4dbd0282ea2388633e5378634423226">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4f76bcc062fe297a1dadad0142982560b6d90c8f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/0a184631e010b389ecf89859ebf6e7a9cf9d8e10/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="39907d5c8f5902fffef30160ca7447c93b82405c">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6a1ccf6a6a193a179be21f52c4520fbb7c9c0fa3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/309fc3efb83891ad117dd7d4f5122e5e15d65465/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8010ae6ed32828a145b25ec97bc07b7a83c6318f">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_24c30548c3adb49b90c337b0c37efa0bf0dd61dd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/9dd1017b9214ef4957a5e955c655ebbeca270029/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_643b9faca614ebb92ff7c15cb9b3c30faf2dcfcf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/6f3986605fcfbae93e9bd319f86b6515d156d0d6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4385ccc0a88b33d182a836eadb47be55c8eb1107">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_48abbb1f9cfe7634e449f9b6c89916840e70f40c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/1997338075e79f8705c835dbbc3ae870fabee500/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1d193729baf37df3d902a423291423a0df7e3779">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6a88d9ea1d581582e695dd183f7acbb66d606531/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/a6ab05cae747737dcb45fac2255d093a4fe4da94/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="028f8255cb977b29cdffbfcf05caa0459686120c">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a19cf277d7be39d5ecf34ef34022f84d5b98a2c7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/f8bdb9b9626cbe8c237197f8d02fbb48cfc1ef77/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b955cb3a1ad6f1b6ff728ce1e0cd592c1717b440">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2dae834dbc46a1b392b2b0386ca1be7df04fddbc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/pusher-java-client-0.3.3-jar-with-dependencies.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="a8a8c78e38c7e2557dafd73b80915d41508a55ee">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/pusher-java-client-0.3.3-jar-with-dependencies_fa860a042c709f83ca0820af16d802c39befc0f6/classes.dex" />
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/pusher-java-client-0.3.3-jar-with-dependencies_8ad608193e2615c33c97622ab92d20bcef2be292/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/apache-mime4j-0.6.jar"
+        jar="/home/su/.android/build-cache/6de21388eed34ec5c773293cfa4788c00f247ec5/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="945007627e8d12275d755081a9e609c018e1210d">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/apache-mime4j-0.6_17d85e4053d198e423364ad25e1c39b3aa427580/classes.dex" />
+        sha1="433f4d6aa5f21f19552afe0e6c5eff0fedba73ad">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_48b127f547c7a5c9f00d6377eba2b08a023067d1/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/apple/Documents/PtPlanner/app/libs/json.jar"
+        jar="/home/su/.android/build-cache/de2494402597ed602f9d3e36f7ee59e35a4c7889/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2185aff89caeb337b1ffc36d5e525d8318e7cfe">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_feba1e9bc7b51094a82ce7a44f3eddbef7011a0e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/53910d88f357352617ab15c767f1aeb80856f06e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="461929440e66685425a298693507f6fb27b0a872">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d141f45934ce489e8c96ea36d952db89747c17f3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/ee45a51d85f858a2b0b946cdff05603a57b6a1c7/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4c829ff0ccfecb28a999ee46d9e75948dfc777a4">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ad15f620e415cbe09f2117b1f5fbb7cda977c55b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/64edc2d8c59303c9d3cb1cc05b6c1edff6abd975/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e96c6974cf924e7ee3b230e6847d5731423388c9">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_299041d5e10cde59a87429b7b315484202f3f010/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/08ba66e21aaa1a6ae4ca3c464e8e70c72735f8f6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2cabefc895ddffa3915dfabd72388f461712a1f9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/be86b449b31dd6bf54236f84d37b15cbe37d6787/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9ebc8a77c4b5f304d44907352badad07e5ca3580/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/ab32dcb99a43e75bebe7f304cd2ed90c0dac90b3/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="57c2eceb8548de84509d1ebc293fedec53231f6c">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f14bde527541eb9bf0096c520c54d73a8b72cdaa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/httpclient-4.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a1e6cbb3cc2c5f210dd1310ff9fcb2c09c0d1438">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/httpclient-4.5_87ce41da7e23d0d83fd533c17b2117283e2cb957/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/2aeaf32574a13d7153f474725460a9cf8dc8feeb/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="09cf6aa1390f95157e8295d02be7868f568825fc">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_709fcf8021132596ff7cdc82b3f2d67dc0190cf3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/b06d15ad1fa6066df7d0f3b8c0223ae6d1314d81/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6bb5d347ebc0c6ef3c83a905222a688da5d2f7b4">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cc031b078728c3aca7783175db6a66694a7e48e3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/5320546fe1e78a73780a2bb889ede255e5dfe62a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f23ad0f8e58713ff4b55f61c0bbde3830378347c">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3934ba1d92d25aeef4bba07a4a7ae9e9bfefb2bb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.9.0_6eff5f226706c73d2e91e1e14f117bd76991021c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.4.1_29827b6bb35752354f19106c2c862c729c2dc0d0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/d8c2a514f2e4e96185c7ab8eaccdf93012aa1bd4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c14f0c89f28cf782e42581ab0aba5f63af39b3d2">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_be4213eb5c93920e8b19bd29ebca3830e9359586/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/json.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="48351e2c1faa39b0a991e3375bd69660de74a312">
-        <dex dex="/Users/apple/Documents/PtPlanner/app/build/intermediates/transforms/dex/release/folders/1000/2/json_3b83407ab92b9fe05c4aaa90f0474308562d5feb/classes.dex" />
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/json_972a16b4f76ee6a1c82fd0826b87f676ea503c6a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/837f11fc7c7ffdaf7b5fb4ed4ac67d2dd8631c0b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="44a694d4095be84c2888764b1f7256b385c030ad">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_12aa618576dd28bb4954229f1c641f46471f8141/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/d0ef34d9205253162a4ea504e9acc01eea5ca517/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="df1cb17511aabbb63264a0024949d1e42502a512">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0c89c9b405b07ed52c88bafc245e2e50192166f7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/7d3d3dec3f8f4a9daf49f3d2cc6b7bc1d8365811/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6116e0e7069de7fc259aac8e08b84f32c2038231">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8d5b0290e3457fad2259e9cc18bd2ae7d868418f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/d7c5c1dc0978b366f26beaf75ea8f6cb7fec9270/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2fc097008c7d9e65ab39c7141313dc9822064164/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/03a3999a55dbd7a3e37942a27d268735cd6dd0a2/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ffc15e965a9e8c28f24455eedd4cac215c45d1fc">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8f892761850bf4ea9154c3b47802da2c02975a60/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/a37e9fe92b58ebcaac7d2aa348c0f2d52b8a72f4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="de29a39f9260f88151b1ef453140e71c76b6c415">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f8a08c65d6b690652bccda8f3e218194081b140c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_4ce475983fadc1d9eaba398f893e5a51235f9090/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/6c442f2e5730c7ffbdd69090c496b7ab87bfbcf5/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="408a599ac77cd17fe8e8919326bec617b3d005bd">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_458ec29e6717aa70ff81ccf64c86e7be7db58122/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/ccbf15355bb2370c7bd0ea57372eeb4dc36a551b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2d5d113b0352ab60946fc44c518cf68fd26cbb79">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ce2e761809261f9bd07629e6b282cb852e29a471/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/69be0befaecb9fe72ad9348b575068a5f480e40c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="971509bbe30bb7b971fc1c49d7b23d0d818830ac">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d5fd3388d168c6c4cb85a978ff733cd85f491edb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/6e498f25f050310dcd418b2e1f35a8d9d87ead6a/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="dd39827d2067497e60e21da48a7926000b6d4b0c">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7ba6f4ddfbc7efed93bf892363285c8950180e39/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/e1455e6b7d88c984af0c3cbc9ed47fa095865c4c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7045152f3bd1870740b9bcb1cddff495e189774e">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7529ee6d77a132ac0ffaa7c67320215372e31861/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/131892f6d8b2a85d8410d11dfe033450b8c36c23/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8f128aeeb7e31271b28a7adb9dac1f3a6ed9f5e7">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_43272a76bcce6ab9b159d67b86c91acfc2d2046b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/dd0a4145fcae79a9f011ce88994463012fb43250/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e006c9b6f0aaed9d8c7934b74039738390fe3468">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e5b3f6bccb41ba059f1c9c8d0ac3eb5125125e93/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/36132c093e55737169b6ec96e7dc2fbdec890e05/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7f2420506110902f033406b25697cf97ee8c38b2">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_744914c13b303b070c21772ff08da6eb61e87ab9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/httpmime-4.3.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cf8bacbf0d476c7f2221f861269365b66447f7ec">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/httpmime-4.3.6_afdcdf72ba92e2b2cc3b88d2918792e235507adc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/3b0b495c91289edd80ef79dda28772579d455fb0/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c6e1f361e9d61aece9dac39b77fcc98a337a144d">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7038460def78f0f3803fecf72973affcaa327f4c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/989defc77573193c0ae0c4028373e24abb156e9e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1e11c68fec92a17c84dd8d1dd80e74c4e67b12e2">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9388471eb1ab7559dd148d6aaff89adc627cf2d3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/cbd945fdd2e076ceeeff6d099937e020efbace13/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b1df8fa3d372a27e4e969ce00b00689ee1eed031">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e6509f1669a629f3b2351393d9ad294e54ae6b95/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/libs/apache-mime4j-0.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="945007627e8d12275d755081a9e609c018e1210d">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/2/apache-mime4j-0.6_a04baa168b991e491fa89f18cb25a7d059bed0d1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/c9c9959745ed126a1e97e1899ab527fa03928186/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ba6aa5e69ef31dee57208125323cee958fc67565">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_405714b9ec2ba8c378ae81e7ae58371930ee20e0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/su/.android/build-cache/586fa9cfbf140c7fc877e08259d19f5e68fc3de6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="204f607419af8247cc1b2a61f50663c65f841c12">
+        <dex dex="/home/su/Documents/Suraj WorkSpace/LiveProjects/PtPlanner/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5467e37558a9ffcbc9a01f587396c022111da524/classes.dex" />
     </item>
 
 </items>

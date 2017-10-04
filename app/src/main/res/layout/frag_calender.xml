@@ -172,6 +172,24 @@
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/remindme_nextDate"
+                    android:layout_width="220dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/calbtnbg1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.ptplanner.customviews.TitilliumLight
+                        android:id="@+id/txt_remindme_nextDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/RemindMe"
+                        android:textColor="#FFFFFF"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/remindme"
                     android:layout_width="150dp"
                     android:layout_height="35dp"

@@ -5,7 +5,7 @@ package com.ptplanner.datatype;
  */
 public class AllEventsDatatype {
     String total_meal, total_appointment, diary_text, total_training_exercises, total_training_exercise_finished, total_training_programs, total_training_programs_finished;
-    String NextBookingTime;
+    String NextBookingTime,lowest_book_time;
     public AllEventsDatatype(String total_meal, String total_appointment, String diary_text, String total_training_exercises, String total_training_exercise_finished, String total_training_programs, String total_training_programs_finished) {
         this.total_meal = total_meal;
         this.total_appointment = total_appointment;
@@ -14,6 +14,14 @@ public class AllEventsDatatype {
         this.total_training_exercise_finished = total_training_exercise_finished;
         this.total_training_programs = total_training_programs;
         this.total_training_programs_finished = total_training_programs_finished;
+    }
+
+    public String getLowest_book_time() {
+        return lowest_book_time;
+    }
+
+    public void setLowest_book_time(String lowest_book_time) {
+        this.lowest_book_time = lowest_book_time;
     }
 
     public String getNextBookingTime() {
