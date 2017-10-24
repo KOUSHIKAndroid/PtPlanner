@@ -169,7 +169,6 @@ public abstract class OFFLineDataSave {
                 }else {
                     Log.d("@@@888",result);
 
-
                     try {
                         JSONObject obj = new JSONObject(result);
                         JSONArray meal=obj.getJSONArray("meal");
