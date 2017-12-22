@@ -33,13 +33,22 @@ import com.ptplanner.fragment.AppointmantFragment;
 import com.ptplanner.fragment.BookAppointmentFragment;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.ConnectionDetector;
+import com.ptplanner.helper.NetworkUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 ;import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -227,84 +236,134 @@ public class BookAppointAdapter extends ArrayAdapter<TimeSlotsDataType> {
     }
 
     public void addBooking(final String trainerId, final String date, final String slotStart, final String slotEnd, final int position) {
-        Log.i("@@add_booking_url",""+AppConfig.HOST + "app_control/add_booking?trainer_id=" + trainerId
-                + "&client_id=" + AppConfig.loginDatatype.getSiteUserId()
-                + "&booking_date=" + date
-                + "&slot_start=" + slotStart
-                + "&slot_end=" + slotEnd);
 
-        AsyncTask<Void, Void, Void> booking = new AsyncTask<Void, Void, Void>() {
+        if (NetworkUtil.getInstance().isNetworkAvailable(context)) {
 
-            @Override
-            protected void onPreExecute() {
-                // TODO Auto-generated method stub
-                super.onPreExecute();
+            Log.i("@@add_booking_url", "" + AppConfig.HOST + "app_control/add_booking?trainer_id=" + trainerId
+                    + "&client_id=" + AppConfig.loginDatatype.getSiteUserId()
+                    + "&booking_date=" + date
+                    + "&slot_start=" + slotStart
+                    + "&slot_end=" + slotEnd);
 
-                SharedPreferences loginPreferences = ((LandScreenActivity)context).getSharedPreferences("Login", Context.MODE_PRIVATE);
-                AppConfig.loginDatatype = new LoginDataType(
-                        loginPreferences.getString("UserId", ""),
-                        loginPreferences.getString("Username", ""),
-                        loginPreferences.getString("Password", ""));
-                progressDialog = new ProgressDialog(context);
-                progressDialog.setMessage("Uppdatera...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
-            }
+            AsyncTask<Void, Void, Void> booking = new AsyncTask<Void, Void, Void>() {
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                // TODO Auto-generated method stub
-                try {
-                    exception = "";
-                    urlResponse = "";
+                @Override
+                protected void onPreExecute() {
+                    // TODO Auto-generated method stub
+                    super.onPreExecute();
 
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(AppConfig.HOST + "app_control/add_booking?trainer_id=" + trainerId
-                                    + "&client_id=" + AppConfig.loginDatatype.getSiteUserId()
-                                    + "&booking_date=" + date
-                                    + "&slot_start=" + slotStart
-                                    + "&slot_end=" + slotEnd)
-                            .build();
+                    SharedPreferences loginPreferences = ((LandScreenActivity) context).getSharedPreferences("Login", Context.MODE_PRIVATE);
+                    AppConfig.loginDatatype = new LoginDataType(
+                            loginPreferences.getString("UserId", ""),
+                            loginPreferences.getString("Username", ""),
+                            loginPreferences.getString("Password", ""));
+                    progressDialog = new ProgressDialog(context);
+                    progressDialog.setMessage("Uppdatera...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                }
 
-                    Response response = client.newCall(request).execute();
-                    urlResponse = response.body().string();
-                    JSONObject jOBJ = new JSONObject(urlResponse);
+                @Override
+                protected Void doInBackground(Void... params) {
+                    // TODO Auto-generated method stub
+                    try {
+                        exception = "";
+                        urlResponse = "";
+
+                        URL url;
+                        HttpURLConnection urlConnection = null;
+
+                        url = new URL(AppConfig.HOST + "app_control/add_booking?trainer_id=" + trainerId
+                                + "&client_id=" + AppConfig.loginDatatype.getSiteUserId()
+                                + "&booking_date=" + date
+                                + "&slot_start=" + slotStart
+                                + "&slot_end=" + slotEnd);
+
+                        urlConnection = (HttpURLConnection) url.openConnection();
+
+                        int responseCode = urlConnection.getResponseCode();
+
+                        if (responseCode == HttpURLConnection.HTTP_OK) {
+                            urlResponse = readStream(urlConnection.getInputStream());
+                            Log.v("CatalogClient", urlResponse);
+                        }
+
+//                    OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).connectTimeout(10000, TimeUnit.MILLISECONDS).build();
+//
+//                    Request request = new Request.Builder()
+//                            .url(AppConfig.HOST + "app_control/add_booking?trainer_id=" + trainerId
+//                                    + "&client_id=" + AppConfig.loginDatatype.getSiteUserId()
+//                                    + "&booking_date=" + date
+//                                    + "&slot_start=" + slotStart
+//                                    + "&slot_end=" + slotEnd)
+//                            .build();
+//
+//                    Response response = client.newCall(request).execute();
+//                    urlResponse = response.body().string();
+                        JSONObject jOBJ = new JSONObject(urlResponse);
 //                    Log.i("@@KOUSHIK_jOBJ",""+jOBJ);
-                    Log.i("@@KOUSHIK_String",""+urlResponse);
-                    Log.i("add_booking_url",""+AppConfig.HOST + "app_control/add_booking?trainer_id=" + trainerId
-                            + "&client_id=" + AppConfig.loginDatatype.getSiteUserId()
-                            + "&booking_date=" + date
-                            + "&slot_start=" + slotStart
-                            + "&slot_end=" + slotEnd);
+                        Log.i("@@KOUSHIK_String", "" + urlResponse);
+                        Log.i("add_booking_url", "" + AppConfig.HOST + "app_control/add_booking?trainer_id=" + trainerId
+                                + "&client_id=" + AppConfig.loginDatatype.getSiteUserId()
+                                + "&booking_date=" + date
+                                + "&slot_start=" + slotStart
+                                + "&slot_end=" + slotEnd);
 
-                } catch (JSONException e) {
-                    exception = e.toString();
-                }catch (Exception e)
-                {
-                    exception = e.toString();
+                    } catch (JSONException e) {
+                        exception = e.toString();
+                    } catch (Exception e) {
+                        exception = e.toString();
+                    }
+
+                    return null;
                 }
 
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                // TODO Auto-generated method stub
-                super.onPostExecute(result);
-                 Log.i("GET EXCEPTION : ", exception);
-                if (exception.equals("")) {
-                    timeSlotsDataTypeArrayList.get(position).setStatusDependent("B");
-                    notifyDataSetChanged();
-                } else {
-                    //Toast.makeText(context, "Server not responding....", Toast.LENGTH_LONG).show();
+                @Override
+                protected void onPostExecute(Void result) {
+                    // TODO Auto-generated method stub
+                    super.onPostExecute(result);
+                    Log.i("GET EXCEPTION : ", exception);
+                    if (exception.equals("")) {
+                        timeSlotsDataTypeArrayList.get(position).setStatusDependent("B");
+                        notifyDataSetChanged();
+                    } else {
+                        //Toast.makeText(context, "Server not responding....", Toast.LENGTH_LONG).show();
+                    }
+                    progressDialog.dismiss();
                 }
-                progressDialog.dismiss();
+
+            };
+            booking.execute();
+        }else {
+            Toast.makeText(context,"Please check your Internet Connection",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+    // Converting InputStream to String
+
+    private String readStream(InputStream in) {
+        BufferedReader reader = null;
+        StringBuffer response = new StringBuffer();
+        try {
+            reader = new BufferedReader(new InputStreamReader(in));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
             }
-
-        };
-        booking.execute();
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return response.toString();
     }
 
 }
