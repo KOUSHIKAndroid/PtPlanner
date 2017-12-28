@@ -83,8 +83,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
-import java.util.concurrent.ExecutionException;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -109,11 +107,11 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
     DatePicker datePicker;
     TimePicker timePicker;
     LinearLayout cancel, done;
-    TitilliumLight txtRemindme,txtRemindmeNextSuggested;
+    TitilliumLight txtRemindme, txtRemindmeNextSuggested;
     int mYear, mMonth, mDay, mHour, mMinute;
     String type, hour, min, appointment_string;
     View fView;
-    LinearLayout dialogRemindme,dialogRemindme_nextDate;
+    LinearLayout dialogRemindme, dialogRemindme_nextDate;
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     Bundle bundle;
@@ -175,7 +173,6 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 //                Offline.setVisibility(View.GONE);
                 Log.d("@@ Conection ", " Disconnected");
             }
-
         }
     }
 
@@ -421,8 +418,6 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                         }
                     }
                 }
-
-
             } catch (Exception etex) {
                 etex.printStackTrace();
             }
@@ -608,12 +603,11 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                         int count = fragmentManager.getBackStackEntryCount();
                         fragmentTransaction.addToBackStack(String.valueOf(count));
                         fragmentTransaction.commit();
-                    } else {
-
                     }
                 } catch (NullPointerException e) {
-
+                    e.printStackTrace();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -624,24 +618,53 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
 
             @Override
             public void onClick(View arg0) {
-
-                Bundle bundleTraining = new Bundle();
                 try {
-                    bundleTraining.putString("DateChange", getArguments().getString("DateChange"));
-                } catch (Exception e) {
-                    bundleTraining.putString("DateChange", date);
+
+                    fragmentTransaction = fragmentManager.beginTransaction();
+
+                    if (new ConnectionDetector(getActivity()).isConnectingToInternet())
+                    {
+                        try {
+                            Log.i("TryDate","-->"+getArguments().getString("DateChange"));
+                            fragmentTransaction.replace(R.id.fragment_container, TrainingFragmentList.getInstance(urlResponse, getArguments().getString("DateChange")));
+                        } catch (Exception e) {
+                            Log.i("ExceptionDate","-->"+AppConfig.changeDate);
+                            fragmentTransaction.replace(R.id.fragment_container, TrainingFragmentList.getInstance(urlResponse, date));
+                        }
+                    }
+                    else{
+                        try {
+                            fragmentTransaction.replace(R.id.fragment_container, TrainingFragmentList.getInstance(urlResponse,getArguments().getString("DateChange")));
+                        } catch (Exception e) {
+                            fragmentTransaction.replace(R.id.fragment_container, TrainingFragmentList.getInstance(urlResponse,date));
+                        }
+                    }
+                    int count = fragmentManager.getBackStackEntryCount();
+                    fragmentTransaction.addToBackStack(String.valueOf(count));
+                    fragmentTransaction.commit();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
 
-                fragmentTransaction = fragmentManager.beginTransaction();
-                TrainingFragment trn_fragment = new TrainingFragment();
-                trn_fragment.setArguments(bundleTraining);
-                if (new ConnectionDetector(getActivity()).isConnectingToInternet())
-                    fragmentTransaction.replace(R.id.fragment_container, trn_fragment);
-                else
-                    fragmentTransaction.add(R.id.fragment_container, trn_fragment);
-                int count = fragmentManager.getBackStackEntryCount();
-                fragmentTransaction.addToBackStack(String.valueOf(count));
-                fragmentTransaction.commit();
+
+//                Bundle bundleTraining = new Bundle();
+//                try {
+//                    bundleTraining.putString("DateChange", getArguments().getString("DateChange"));
+//                } catch (Exception e) {
+//                    bundleTraining.putString("DateChange", date);
+//                }
+
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                TrainingFragment trn_fragment = new TrainingFragment();
+//                trn_fragment.setArguments(bundleTraining);
+//                if (new ConnectionDetector(getActivity()).isConnectingToInternet())
+//                    fragmentTransaction.replace(R.id.fragment_container, trn_fragment);
+//                else
+//                    fragmentTransaction.add(R.id.fragment_container, trn_fragment);
+//                int count = fragmentManager.getBackStackEntryCount();
+//                fragmentTransaction.addToBackStack(String.valueOf(count));
+//                fragmentTransaction.commit();
             }
         });
 
@@ -831,10 +854,10 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                             dialogRemindme.setVisibility(View.GONE);
                             dialogRemindme_nextDate.setVisibility(View.VISIBLE);
 
-                            if(!allEventsDatatype.getLowest_book_time().equals("")) {
+                            if (!allEventsDatatype.getLowest_book_time().equals("")) {
                                 dialogRemindme_nextDate.setVisibility(View.VISIBLE);
                                 txtRemindmeNextSuggested.setText(allEventsDatatype.getLowest_book_time());
-                            }else {
+                            } else {
                                 dialogRemindme_nextDate.setVisibility(View.GONE);
                             }
                         }
@@ -908,9 +931,8 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                             try {
                                 txtRemindme.setText(getResources().getString(R.string.reminder_dialog_remindme));
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
-
                         }
 
 
@@ -1026,7 +1048,6 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
     }
 
     public void getAllEvents(final String date) {
-
 
         AppConfig.OfflineDate = date;
         AsyncTask<Void, Void, Void> allEvents = new AsyncTask<Void, Void, Void>() {
@@ -1240,7 +1261,6 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                         @Override
                         public void OnSuccess(String Response) {
                             Log.d("@@ SAVE RES ", Response);
-
                         }
 
                         @Override
@@ -1293,10 +1313,10 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                 } else {
                     dialogRemindme.setVisibility(View.GONE);
 
-                    if(!allEventsDatatype.getLowest_book_time().equals("")) {
+                    if (!allEventsDatatype.getLowest_book_time().equals("")) {
                         dialogRemindme_nextDate.setVisibility(View.VISIBLE);
                         txtRemindmeNextSuggested.setText(allEventsDatatype.getLowest_book_time());
-                    }else {
+                    } else {
                         dialogRemindme_nextDate.setVisibility(View.GONE);
                     }
                 }
@@ -1381,11 +1401,9 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                 } else {
                     try {
                         txtRemindme.setText(getResources().getString(R.string.reminder_dialog_remindme));
-
                     } catch (Exception e) {
-
+                        e.printStackTrace();
                     }
-
                 }
 
 
@@ -1439,7 +1457,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
             }
         };
 
-            allEvents.execute();
+        allEvents.execute();
     }
 
     public void getProgramName(final String programID) {
@@ -1504,11 +1522,8 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
                     Log.i("*--Excep : ", exception);
                 }
             }
-
         };
-
         allEvents.execute();
-
     }
 
     @Override
@@ -1530,6 +1545,7 @@ public class CalenderFragment extends Fragment implements Internet_Informer {
             txtRemindme.setText(getResources().getString(R.string.reminder_dialog_remindme));
             Editor editor = sharedPreferences.edit();
             editor.clear();
+            editor.apply();
             editor.commit();
             dialog.dismiss();
 

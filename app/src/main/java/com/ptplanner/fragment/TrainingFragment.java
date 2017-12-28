@@ -84,12 +84,11 @@ public class TrainingFragment extends Fragment {
     TrainingViewPagerAdapter trainingViewPagerAdapter;
     String dialogString;
 
-    int t = 0;
+    int temp = 0;
 
     private LinearLayout dotsLayout;
     private int dotsCount = 0;
     private TextView[] dots;
-    int count = 0;
 
     String user_program_id = "";
 
@@ -106,18 +105,11 @@ public class TrainingFragment extends Fragment {
 
 
 
-
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         dialogString = getResources().getString(R.string.frag_training_alertDialog);
 //        fView = inflater.inflate(R.layout.frag_training, container, false);
-
-
 
 
 
@@ -170,7 +162,7 @@ public class TrainingFragment extends Fragment {
         ProgramDetailsArray = new ArrayList<String>();
 
 
-
+        temp=Integer.parseInt(getArguments().getString("position"));
 
 
         loginPreferences = this.getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
@@ -208,11 +200,6 @@ public class TrainingFragment extends Fragment {
 //            Toast.makeText(getActivity(), getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
             Call_APIDATA();
         }
-        try {
-
-        } catch (Exception e) {
-            Log.i("Excep Training : ", "No Data........");
-        }
 
         rlLeftClick.setOnClickListener(new OnClickListener() {
             @Override
@@ -226,26 +213,28 @@ public class TrainingFragment extends Fragment {
                 }
 
                 if (exerciseTitleArr.size() > 0) {
-                    if (t > 0 && t < exerciseTitleArr.size()) {
-                        t--;
-                        if (t == 0) {
+                    if (temp > 0 && temp < exerciseTitleArr.size()) {
+                        temp--;
+                        if (temp == 0) {
                             rlLeftClick.setVisibility(View.GONE);
-                            txtRight.setText(exerciseTitleArr.get(t + 1));
+                            txtRight.setText(exerciseTitleArr.get(temp + 1));
                             rlRightClick.setVisibility(View.VISIBLE);
-                        } else if (t == (exerciseTitleArr.size() - 1)) {
+                        } else if (temp == (exerciseTitleArr.size() - 1)) {
                             rlLeftClick.setVisibility(View.VISIBLE);
-                            txtLeft.setText(exerciseTitleArr.get(t - 1));
+                            txtLeft.setText(exerciseTitleArr.get(temp - 1));
                             rlRightClick.setVisibility(View.GONE);
                         } else {
                             rlLeftClick.setVisibility(View.VISIBLE);
-                            txtRight.setText(exerciseTitleArr.get(t + 1));
-                            txtLeft.setText(exerciseTitleArr.get(t - 1));
+                            txtRight.setText(exerciseTitleArr.get(temp + 1));
+                            txtLeft.setText(exerciseTitleArr.get(temp - 1));
                             rlRightClick.setVisibility(View.VISIBLE);
                         }
 //                        if (cd.isConnectingToInternet()) {
                             try {
-                                GolbalArrayPositionExerciese=t;
-                                getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t), ProgramDetailsArray.get(t));
+                                GolbalArrayPositionExerciese=temp;
+                                getExerCiseDetails(userProgramIdArr.get(temp), exerciseIDArr.get(temp)
+//                                        , ProgramDetailsArray.get(temp)
+                                );
                             } catch (Exception e) {
                                 Log.i("Excep Training : ", "No Data........");
                             }
@@ -260,26 +249,28 @@ public class TrainingFragment extends Fragment {
         rlRightClick.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (t < exerciseTitleArr.size()) {
-                    t++;
-                    if (t == 0) {
+                if (temp < exerciseTitleArr.size()) {
+                    temp++;
+                    if (temp == 0) {
                         rlLeftClick.setVisibility(View.GONE);
-                        txtRight.setText(exerciseTitleArr.get(t + 1));
+                        txtRight.setText(exerciseTitleArr.get(temp + 1));
                         rlRightClick.setVisibility(View.VISIBLE);
-                    } else if (t == (exerciseTitleArr.size() - 1)) {
+                    } else if (temp == (exerciseTitleArr.size() - 1)) {
                         rlLeftClick.setVisibility(View.VISIBLE);
-                        txtLeft.setText(exerciseTitleArr.get(t - 1));
+                        txtLeft.setText(exerciseTitleArr.get(temp - 1));
                         rlRightClick.setVisibility(View.GONE);
                     } else {
                         rlLeftClick.setVisibility(View.VISIBLE);
-                        txtRight.setText(exerciseTitleArr.get(t + 1));
-                        txtLeft.setText(exerciseTitleArr.get(t - 1));
+                        txtRight.setText(exerciseTitleArr.get(temp + 1));
+                        txtLeft.setText(exerciseTitleArr.get(temp - 1));
                         rlRightClick.setVisibility(View.VISIBLE);
                     }
 //                    if (cd.isConnectingToInternet()) {
                         try {
-                            GolbalArrayPositionExerciese=t;
-                            getExerCiseDetails(userProgramIdArr.get(t), exerciseIDArr.get(t), ProgramDetailsArray.get(t));
+                            GolbalArrayPositionExerciese=temp;
+                            getExerCiseDetails(userProgramIdArr.get(temp), exerciseIDArr.get(temp)
+//                                    , ProgramDetailsArray.get(temp)
+                            );
                         } catch (Exception e) {
                             Log.i("Excep Training : ", "No Data........");
                         }
@@ -364,24 +355,106 @@ public class TrainingFragment extends Fragment {
 
     private void Call_APIDATA() {
         try {
-            try {
-                txtRight.setText(exerciseTitleArr.get(1));
+            if (Integer.parseInt(getArguments().getString("position"))==0)
+            {
+                Log.i("firstCondition-->","Yes");
+
+                try {
+                    txtRight.setText(exerciseTitleArr.get(Integer.parseInt(getArguments().getString("position")) + 1));
 //                    txtExerciseTitle.setText(exerciseTitleArr.get(0));
-                rlRightClick.setVisibility(View.VISIBLE);
-                rlLeftClick.setVisibility(View.GONE);
-                checkValue = "";
-                rlLeftClick.setClickable(true);
-                rlLeftClick.setEnabled(true);
-                img_leftarrow.setVisibility(View.VISIBLE);
-            } catch (Exception e) {
-                rlRightClick.setVisibility(View.GONE);
-                rlLeftClick.setVisibility(View.VISIBLE);
-                rlLeftClick.setClickable(false);
-                rlLeftClick.setEnabled(false);
-                checkValue = "CHECK";
-                img_leftarrow.setVisibility(View.INVISIBLE);
+                    rlRightClick.setVisibility(View.VISIBLE);
+                    rlLeftClick.setVisibility(View.GONE);
+                    checkValue = "";
+                    rlLeftClick.setClickable(true);
+                    rlLeftClick.setEnabled(true);
+                    img_leftarrow.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    rlRightClick.setVisibility(View.GONE);
+                    rlLeftClick.setVisibility(View.VISIBLE);
+                    rlLeftClick.setClickable(false);
+                    rlLeftClick.setEnabled(false);
+                    checkValue = "CHECK";
+                    img_leftarrow.setVisibility(View.INVISIBLE);
+                }
             }
-            getExerCiseDetails(userProgramIdArr.get(0), exerciseIDArr.get(0),ProgramDetailsArray.get(0));
+            else if(Integer.parseInt(getArguments().getString("position"))==exerciseTitleArr.size()-1
+                    && exerciseTitleArr.size()==1
+                    ){
+                Log.i("secondCondition-->","Yes");
+
+                try {
+//                    txtExerciseTitle.setText(exerciseTitleArr.get(0));
+                    txtLeft.setText(exerciseTitleArr.get(Integer.parseInt(getArguments().getString("position")) - 1));
+
+                    rlRightClick.setVisibility(View.GONE);
+                    rlLeftClick.setVisibility(View.GONE);
+
+                    rlLeftClick.setClickable(false);
+                    rlLeftClick.setEnabled(false);
+
+                    rlRightClick.setClickable(false);
+                    rlRightClick.setEnabled(false);
+
+                    img_leftarrow.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            else if(Integer.parseInt(getArguments().getString("position"))==exerciseTitleArr.size()-1
+                    && exerciseTitleArr.size()>1
+                    ){
+                Log.i("fourthCondition-->","Yes");
+
+                try {
+//                    txtExerciseTitle.setText(exerciseTitleArr.get(0));
+                    txtLeft.setText(exerciseTitleArr.get(Integer.parseInt(getArguments().getString("position")) - 1));
+
+                    rlRightClick.setVisibility(View.GONE);
+                    rlLeftClick.setVisibility(View.VISIBLE);
+
+                    rlLeftClick.setClickable(true);
+                    rlLeftClick.setEnabled(true);
+
+                    rlRightClick.setClickable(true);
+                    rlRightClick.setEnabled(true);
+
+                    img_leftarrow.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
+            else if(Integer.parseInt(getArguments().getString("position"))>0
+                    && Integer.parseInt(getArguments().getString("position"))<exerciseTitleArr.size()-1){
+                Log.i("thirdCondition-->","Yes");
+                try {
+                    txtRight.setText(exerciseTitleArr.get(Integer.parseInt(getArguments().getString("position"))+1));
+                    txtLeft.setText(exerciseTitleArr.get(Integer.parseInt(getArguments().getString("position")) -1));
+//                    txtExerciseTitle.setText(exerciseTitleArr.get(0));
+                    rlRightClick.setVisibility(View.VISIBLE);
+                    rlLeftClick.setVisibility(View.VISIBLE);
+
+                    checkValue = "";
+
+                    rlRightClick.setClickable(true);
+                    rlRightClick.setEnabled(true);
+
+                    rlLeftClick.setClickable(true);
+                    rlLeftClick.setEnabled(true);
+
+                    img_leftarrow.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+
+            }
+            getExerCiseDetails(userProgramIdArr.get(Integer.parseInt(getArguments().getString("position"))), exerciseIDArr.get(Integer.parseInt(getArguments().getString("position")))
+//                    ,ProgramDetailsArray.get(Integer.parseInt(getArguments().getString("position")))
+            );
 
         } catch (Exception e) {
 
@@ -406,10 +479,7 @@ public class TrainingFragment extends Fragment {
     }
 
 
-    public void editExcercise(final String userProgramId, final String excerciseId,
-                              final int position) {
-
-
+    public void editExcercise(final String userProgramId, final String excerciseId, final int position) {
 
         AsyncTask<Void, Void, Void> excerciseEdit=  new AsyncTask<Void, Void, Void>() {
 
@@ -547,14 +617,12 @@ public class TrainingFragment extends Fragment {
                     Log.d("@  Exception Finish ", exceptionFinish);
                 }
             }
-
         };
 
             excerciseEdit.execute();
 
 
     }
-
 
     public void finishExercise(final String userProgramId, final String excerciseId) {
 
@@ -638,7 +706,7 @@ public class TrainingFragment extends Fragment {
                         if (checkValue.equalsIgnoreCase("CHECK")) {
                             back.performClick();
                         } else {
-                            if (t == (exerciseTitleArr.size() - 1)) {
+                            if (temp == (exerciseTitleArr.size() - 1)) {
                                 // rlLeftClick.performClick();
 //                            Intent intent = new Intent(getActivity(), LandScreenActivity.class);
 //                            startActivity(intent);
@@ -648,8 +716,6 @@ public class TrainingFragment extends Fragment {
                             }
                         }
                         perParticularExerciseDetailsDataType.setFinished("TRUE");
-                        count++;
-
                     }
                 } else {
                     Log.d("@  Exception Finish ", exceptionFinish);
@@ -659,10 +725,12 @@ public class TrainingFragment extends Fragment {
 
         };
         finishExcercise.execute();
-
     }
 
-    public void getExerCiseDetails(final String userProgramId, final String excerciseId, final String DetailsData) {
+    public void getExerCiseDetails(final String userProgramId, final String excerciseId
+//            , final String DetailsData
+    )
+    {
 
         AsyncTask<Void, Void, Void> excerciseDetails = new AsyncTask<Void, Void, Void>() {
 
@@ -687,7 +755,7 @@ public class TrainingFragment extends Fragment {
                 appointmentButton.setEnabled(false);
                 messageButton.setClickable(false);
                 messageButton.setEnabled(false);
-                urlResponse=DetailsData;
+//                urlResponse=DetailsData;
 
                 ////////////////////////////////////////////////////////////////////
 
@@ -699,18 +767,19 @@ public class TrainingFragment extends Fragment {
                 // TODO Auto-generated method stub
                 try {
                     exception = "";
-//                    urlResponse = "";
+                    urlResponse = "";
 
 
-//                    OkHttpClient client = new OkHttpClient();
-//                    Request request = new Request.Builder()
-//                            .url(AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
-//                                    userProgramId + "&client_id=" + saveString + "&exercise_id=" + excerciseId)
-//                            .build();
-//
-//                    Response response = client.newCall(request).execute();
-//                    urlResponse = response.body().string();
-                    Log.d("@@ GET TRAINING--",AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url(AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
+                                    userProgramId + "&client_id=" + saveString + "&exercise_id=" + excerciseId)
+                            .build();
+
+                    Response response = client.newCall(request).execute();
+                    urlResponse = response.body().string();
+
+                    Log.d("@@ GET TRAINING-->",AppConfig.HOST + "app_control/get_particular_exercise_details?user_program_id=" +
                             userProgramId + "&client_id=" + saveString + "&exercise_id=" + excerciseId);
                     JSONObject jOBJ = new JSONObject(urlResponse);
                     Log.i("jOBJ",""+jOBJ);
@@ -747,7 +816,6 @@ public class TrainingFragment extends Fragment {
                             trainingPerticularExerciseSetsDatatypeArrayList
                     );
                     particularExerciseDetailsDataTypeArrayList.add(perParticularExerciseDetailsDataType);
-
 
                 } catch (Exception e) {
                     exception = e.toString();
@@ -856,14 +924,13 @@ public class TrainingFragment extends Fragment {
 
         };
         excerciseDetails.execute();
-
     }
 
-    private void setUiPageViewController(int ii) {
+    private void setUiPageViewController(int position) {
         try{
             dotsLayout = (LinearLayout) getActivity().findViewById(R.id.viewPagerCountDots);
-            dotsCount = ii;
-            dots = new TextView[ii];
+            dotsCount = position;
+            dots = new TextView[position];
 
 
             for (int i = 0; i < dotsCount; i++) {
@@ -877,12 +944,9 @@ public class TrainingFragment extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
-
     private void setViewPagerItemsWithAdapter() {
-
         viewpagerExcercise.setCurrentItem(0);
         viewpagerExcercise.addOnPageChangeListener(viewPagerPageChangeListener);
     }

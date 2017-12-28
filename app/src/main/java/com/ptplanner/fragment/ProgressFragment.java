@@ -142,7 +142,6 @@ public class ProgressFragment extends Fragment implements GoogleApiClient.Connec
                             MY_PERMISSIONS_REQUEST_READ_CONTACTS);
                 }
                 return;
-            } else {
             }
         }catch (NullPointerException e)
         {
