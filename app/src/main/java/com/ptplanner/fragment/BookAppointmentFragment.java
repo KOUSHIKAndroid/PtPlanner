@@ -110,7 +110,7 @@ public class BookAppointmentFragment extends Fragment {
     //    int currentYear, currentMonth, currentDay, currentDate, firstDayPosition,
 //            currentMonthLength, previousDayPosition, nextDayPosition;
     String[] positionPre = {};
-    SimpleDateFormat sdfDate, sdfDay, sdfNo, sdfMonth;
+    public SimpleDateFormat sdfDate, sdfDay, sdfNo, sdfMonth;
     String dateCurrent;
 
     // -- UI Element

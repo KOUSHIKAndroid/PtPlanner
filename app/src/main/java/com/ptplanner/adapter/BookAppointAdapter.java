@@ -324,8 +324,8 @@ public class BookAppointAdapter extends ArrayAdapter<TimeSlotsDataType> {
                     super.onPostExecute(result);
                     Log.i("GET EXCEPTION : ", exception);
                     if (exception.equals("")) {
-                        timeSlotsDataTypeArrayList.get(position).setStatusDependent("B");
-                        notifyDataSetChanged();
+//                        timeSlotsDataTypeArrayList.get(position).setStatusDependent("B");
+                        bookAppointmentFragment.getAllTrainer(bookAppointmentFragment.sdfDate.format(AppConfig.calendarBookApp.getTime()));
                     } else {
                         //Toast.makeText(context, "Server not responding....", Toast.LENGTH_LONG).show();
                     }
