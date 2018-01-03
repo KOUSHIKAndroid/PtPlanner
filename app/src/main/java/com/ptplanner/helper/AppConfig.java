@@ -21,8 +21,8 @@ import java.util.Locale;
 
 public class AppConfig {
 
-    public static String HOST = "http://esolz.co.in/lab6/ptplanner/";
-//     public static String HOST = "https://pt-planner.com/";
+//    public static String HOST = "http://esolz.co.in/lab6/ptplanner/";
+     public static String HOST = "https://pt-planner.com/";
 
      public static String selected_date_from_calender = "";
 
