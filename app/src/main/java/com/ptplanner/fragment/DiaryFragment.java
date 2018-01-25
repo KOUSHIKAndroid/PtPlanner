@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ptplanner.K_DataBase.Database;
 import com.ptplanner.K_DataBase.LocalDataResponse;
 import com.ptplanner.R;
+import com.ptplanner.adapter.DairyImageAdapter;
 import com.ptplanner.customviews.TitilliumRegular;
 import com.ptplanner.customviews.TitilliumRegularEdit;
 import com.ptplanner.customviews.TitilliumSemiBold;
@@ -41,11 +44,15 @@ import com.ptplanner.dialog.ShowCalendarPopUp;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.CircleTransform;
 import com.ptplanner.helper.ConnectionDetector;
+import com.ptplanner.helper.DividerItemDecoration;
+import com.ptplanner.helper.ItemOffsetDecoration;
 import com.ptplanner.helper.ReturnCalendarDetails;
 import com.ptplanner.helper.Trns;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -54,6 +61,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Logger;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -65,7 +74,7 @@ public class DiaryFragment extends Fragment {
     LinearLayout back, showCalender;
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
-
+    DairyImageAdapter dairyImageAdapter;
     // -- Calendar Instance
     Calendar calendar;
     int currentYear, currentDay, currentDate, firstDayPosition, previousDayPosition;
@@ -119,6 +128,8 @@ public class DiaryFragment extends Fragment {
     Date changeDate;
     LinearLayout appointmentButton, progressButton;
     RelativeLayout messageButton;
+    RecyclerView rcv;
+    JSONArray dairyImagesArray;
 
     String saveString;
     SharedPreferences userId;
@@ -163,6 +174,17 @@ public class DiaryFragment extends Fragment {
 
         back = (LinearLayout) fView.findViewById(R.id.back);
         showCalender = (LinearLayout) fView.findViewById(R.id.show_cal);
+
+        rcv = (RecyclerView) fView.findViewById(R.id.rcv);
+        rcv.setLayoutManager(new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+//                return super.canScrollVertically();
+                return false;
+            }
+        });
+
+        rcv.addItemDecoration(new DividerItemDecoration(10));
 
         llMiddle = (LinearLayout) fView.findViewById(R.id.middle);
         llCoverLayout = (LinearLayout) fView.findViewById(R.id.coverlayout);
@@ -481,7 +503,7 @@ public class DiaryFragment extends Fragment {
             public void OnSuccess(String Response) {
                 try {
                     JSONObject jOBJ = new JSONObject(Response);
-                    Log.i("jOBJ",""+jOBJ);
+                    Log.i("jOBJ", "" + jOBJ);
                     dateRespectiveDiaryDataType = new DateRespectiveDiaryDataType(
                             jOBJ.getString("client_id"),
                             jOBJ.getString("client_name"),
@@ -490,7 +512,8 @@ public class DiaryFragment extends Fragment {
                             jOBJ.getString("client_about"),
                             jOBJ.getString("diary_id"),
                             jOBJ.getString("diary_heading"),
-                            jOBJ.getString("dairy_text")
+                            jOBJ.getString("dairy_text"),
+                            jOBJ.getJSONArray("dairy_images")
                     );
                     pBar.setVisibility(View.GONE);
                     scrView.setVisibility(View.VISIBLE);
@@ -506,11 +529,11 @@ public class DiaryFragment extends Fragment {
 
 //                        Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).placeholder(R.drawable.no_image_available_placeholdder)
 //                                .transform(new Trns()).resize(400, 400).centerInside().into(imgClient);
-Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).placeholder(R.drawable.no_image_available_placeholdder)
-                                .transform(new CircleTransform(getActivity())).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgClient);
+                    Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).placeholder(R.drawable.no_image_available_placeholdder)
+                            .transform(new CircleTransform(getActivity())).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgClient);
 
-                        txtClientName.setText(dateRespectiveDiaryDataType.getClient_name());
-                        txtDate.setText(dateChange);
+                    txtClientName.setText(dateRespectiveDiaryDataType.getClient_name());
+                    txtDate.setText(dateChange);
 
 //                    if (dateRespectiveDiaryDataType.getDiary_heading().equals("")) {
 //                        txtDiaryHeading.setVisibility(View.GONE);
@@ -519,14 +542,27 @@ Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).pl
 //                        txtDiaryHeading.setText(dateRespectiveDiaryDataType.getDiary_heading());
 //                    }
 
-                        if (dateRespectiveDiaryDataType.getDairy_text().equals("")) {
-                            etDetails.setText(getResources().getString(R.string.fra_diary_longString));
+                    if (dateRespectiveDiaryDataType.getDairy_text().equals("")) {
+                        etDetails.setText(getResources().getString(R.string.fra_diary_longString));
 
-                        } else {
+                    } else {
 //                        Log.i("!! Diary Text : ", dateRespectiveDiaryDataType.getDairy_text());
-                            etDetails.setText(dateRespectiveDiaryDataType.getDairy_text());
+                        etDetails.setText(dateRespectiveDiaryDataType.getDairy_text());
 
+                    }
+
+                    dairyImagesArray=dateRespectiveDiaryDataType.getDairy_images();
+                    Log.i("dairyImagesArray",""+dairyImagesArray);
+
+                    if (dairyImagesArray.length()>0){
+
+                        if (dairyImageAdapter==null) {
+                            dairyImageAdapter= new DairyImageAdapter(getActivity(),dairyImagesArray);
+                            rcv.setAdapter(dairyImageAdapter);
+                        }else {
+                            dairyImageAdapter.notifyDataSetChanged();
                         }
+                    }
 
 
                 } catch (Exception ex) {
@@ -583,12 +619,11 @@ Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).pl
                             .build();
 
 
-
                     Response response = client.newCall(request).execute();
                     urlResponse = response.body().string();
                     try {
                         JSONObject jOBJ = new JSONObject(urlResponse);
-                        Log.i("jOBJ",""+jOBJ);
+                        Log.i("jOBJ", "" + jOBJ);
                         dateRespectiveDiaryDataType = new DateRespectiveDiaryDataType(
                                 jOBJ.getString("client_id"),
                                 jOBJ.getString("client_name"),
@@ -597,7 +632,8 @@ Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).pl
                                 jOBJ.getString("client_about"),
                                 jOBJ.getString("diary_id"),
                                 jOBJ.getString("diary_heading"),
-                                jOBJ.getString("dairy_text")
+                                jOBJ.getString("dairy_text"),
+                                jOBJ.getJSONArray("dairy_images")
                         );
 
                     } catch (Exception ex) {
@@ -652,6 +688,19 @@ Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).pl
                         etDetails.setText(dateRespectiveDiaryDataType.getDairy_text());
                         llEditDiary.setVisibility(View.VISIBLE);
                         llAddDiary.setVisibility(View.GONE);
+                    }
+
+                    dairyImagesArray=dateRespectiveDiaryDataType.getDairy_images();
+                    Log.i("dairyImagesArray",""+dairyImagesArray);
+
+                    if (dairyImagesArray.length()>0){
+
+                        if (dairyImageAdapter==null) {
+                            dairyImageAdapter= new DairyImageAdapter(getActivity(),dairyImagesArray);
+                            rcv.setAdapter(dairyImageAdapter);
+                        }else {
+                            dairyImageAdapter.notifyDataSetChanged();
+                        }
                     }
 
                 } else {
@@ -1157,9 +1206,9 @@ Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).pl
                     Response response = client.newCall(request).execute();
                     urlResponse = response.body().string();
                     JSONObject jOBJ = new JSONObject(urlResponse);
-                    Log.i("jOBJ",""+jOBJ);
+                    Log.i("jOBJ", "" + jOBJ);
 
-                    Log.i("add_date_resc_diary_Url",AppConfig.HOST + "app_control/add_date_respective_diary?logged_in_user=" + saveString + "&date_val=" + dateVAl + "&diary_heading=&diary_text=" + diaryValue);
+                    Log.i("add_date_resc_diary_Url", AppConfig.HOST + "app_control/add_date_respective_diary?logged_in_user=" + saveString + "&date_val=" + dateVAl + "&diary_heading=&diary_text=" + diaryValue);
 
                 } catch (Exception e) {
                     exception = e.toString();
@@ -1212,9 +1261,9 @@ Glide.with(getActivity()).load(dateRespectiveDiaryDataType.getClient_image()).pl
                     Response response = client.newCall(request).execute();
                     urlResponse = response.body().string();
                     JSONObject jOBJ = new JSONObject(urlResponse);
-                    Log.i("jOBJ",""+jOBJ);
+                    Log.i("jOBJ", "" + jOBJ);
 
-                    Log.i("mark_calender_Url",""+AppConfig.HOST
+                    Log.i("mark_calender_Url", "" + AppConfig.HOST
                             + "app_control/mark_calender?client_id="
                             + saveString);
                     JSONArray jArrDiary = jOBJ.getJSONArray("diary_date");

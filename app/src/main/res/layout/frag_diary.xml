@@ -2123,11 +2123,12 @@
                 android:id="@+id/scrollView1maincon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fillViewport="true"
                 android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="#FFFFFF"
                     android:orientation="vertical">
 
@@ -2168,6 +2169,26 @@
                             android:textSize="16sp"/>
 
                         <LinearLayout
+                            android:layout_toLeftOf="@id/ll_editdiary"
+                            android:id="@+id/ll_attach"
+                            android:layout_marginRight="20dp"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/selector_default"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="2dp">
+
+                            <ImageView
+                                android:id="@+id/img_attach"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:clickable="false"
+                                android:src="@drawable/ic_attachment"/>
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:id="@+id/ll_editdiary"
                             android:layout_width="50dp"
                             android:layout_height="match_parent"
@@ -2205,6 +2226,8 @@
                                 android:clickable="false"
                                 android:src="@drawable/plusround"/>
                         </LinearLayout>
+
+
                     </RelativeLayout>
 
                     <LinearLayout
@@ -2236,7 +2259,7 @@
                             <LinearLayout
                                 android:id="@+id/ll_done"
                                 android:layout_width="50dp"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="4dp"
@@ -2251,22 +2274,30 @@
                                     android:clickable="false"
                                     android:src="@drawable/img_done"/>
                             </LinearLayout>
+
                         </RelativeLayout>
 
 
                         <com.ptplanner.customviews.TitilliumRegularEdit
                             android:id="@+id/et_details"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="#FFFFFF"
                             android:clickable="false"
                             android:gravity="left"
-
                             android:imeOptions="actionDone"
                             android:inputType="textMultiLine"
                             android:textColor="#808080"
-                            android:textSize="20sp"/>
+                            android:textSize="14sp"/>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/rcv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
                     </LinearLayout>
+
                 </LinearLayout>
             </ScrollView>
 

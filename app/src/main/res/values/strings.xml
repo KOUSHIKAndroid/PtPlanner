@@ -174,12 +174,12 @@
     <string name="msgaccdeactivate">kontot har inaktiverats , kontakta din tränare .
     </string>
     <string name="please_wait">Please wait</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="privacyplicy">Privacy Policy</string>
-    <string name="offlinemode">Offline Mode</string>
-    <string name="offlineAvilable">Available offline</string>
+    <string name="offlinemode" translatable="false">Offline Mode</string>
+    <string name="offlineAvilable" translatable="false">Available offline</string>
 
 </resources>

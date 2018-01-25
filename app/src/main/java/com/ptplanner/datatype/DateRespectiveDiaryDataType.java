@@ -1,13 +1,16 @@
 package com.ptplanner.datatype;
 
+import org.json.JSONArray;
+
 /**
  * Created by ltp on 06/08/15.
  */
 public class DateRespectiveDiaryDataType {
     String client_id, client_name, client_image, client_email, client_about, diary_id, diary_heading, dairy_text;
+    JSONArray dairy_images;
 
     public DateRespectiveDiaryDataType(String client_id, String client_name, String client_image, String client_email,
-                                       String client_about, String diary_id, String diary_heading, String dairy_text) {
+                                       String client_about, String diary_id, String diary_heading, String dairy_text,JSONArray dairy_images) {
         this.client_id = client_id;
         this.client_name = client_name;
         this.client_image = client_image;
@@ -16,6 +19,7 @@ public class DateRespectiveDiaryDataType {
         this.diary_id = diary_id;
         this.diary_heading = diary_heading;
         this.dairy_text = dairy_text;
+        this.dairy_images=dairy_images;
     }
 
     public String getClient_id() {
@@ -76,6 +80,14 @@ public class DateRespectiveDiaryDataType {
 
     public String getDairy_text() {
         return dairy_text;
+    }
+
+    public JSONArray getDairy_images() {
+        return dairy_images;
+    }
+
+    public void setDairy_images(JSONArray dairy_images) {
+        this.dairy_images = dairy_images;
     }
 
     public void setDairy_text(String dairy_text) {

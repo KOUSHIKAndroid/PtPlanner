@@ -30,6 +30,7 @@ import com.ptplanner.datatype.AllExercisesDataType;
 import com.ptplanner.datatype.ExerciseSetsDataype;
 import com.ptplanner.helper.AppConfig;
 import com.ptplanner.helper.ConnectionDetector;
+import com.ptplanner.helper.ItemOffsetDecoration;
 
 
 import org.json.JSONArray;
@@ -210,26 +211,6 @@ public class TrainingFragmentList extends Fragment {
         void callBackMe(int position,JSONObject jsonObject);
     }
 
-
-    public class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
-
-        private int mItemOffset;
-
-        public ItemOffsetDecoration(int itemOffset) {
-            mItemOffset = itemOffset;
-        }
-
-        public ItemOffsetDecoration(@NonNull Context context, @DimenRes int itemOffsetId) {
-            this(context.getResources().getDimensionPixelSize(itemOffsetId));
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                                   RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-            outRect.set(mItemOffset, mItemOffset, mItemOffset, mItemOffset);
-        }
-    }
 
 
 //    public void getAllEvents() {
